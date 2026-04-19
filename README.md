@@ -8,14 +8,17 @@ Este repositorio centraliza mis laboratorios, cursos y experimentos prácticos c
 
 | Proyecto | Descripción |
 | :--- | :--- |
-| [**Platzi Cursor General MCP**](./platzi-curos-general-mcp) | Implementación de protocolos MCP (Model Context Protocol) para extender las capacidades de Cursor. |
 | [**Calcular Latitud y Longitud**](./calcular_latitud_longitud) | Script o herramienta para procesamiento de datos geoespaciales mediante IA. |
 | [**n8n + Ngrok**](./n8n-ngrok) | Instarlar n8n en local y tener acceso a internet de forma segura mediante túneles de Ngrok. |
 | [**MCP Server Demo**](./mcp-server-demo) | Servidor de ejemplo para conectar herramientas externas a modelos de lenguaje (LLMs). |
 | [**Claude UI Gen**](./claude-uigen) | Experimentos de generación de interfaces de usuario utilizando la API de Anthropic/Claude. |
+| [**Claude Hooks**](./claude-hooks) | Experimento para manejar Hooks de la API de Anthropic/Claude. |
 | [**Platzi Cursor Project**](./platzi-cursor-project) | Aplicaciones prácticas desarrolladas siguiendo el flujo de trabajo de "AI-First Development". |
+| [**Platzi Webapp con Windsurf**](./platzi-webapp-windsurf) | Implementación de una webapp utilizando windsurf. |
+| [**Platzi Cursor General MCP**](./platzi-curos-general-mcp) | Implementación de protocolos MCP (Model Context Protocol) para extender las capacidades de Cursor. |
 | [**IA Tools: Deploy to Vercel**](./platzi-ia-tools-deploy-to-vercel) | Proyectos de IA listos para producción con despliegue automatizado en Vercel. |
 | [**OCR Lectura Token**](./ocr_lectura_token_autenticacion) | Implementación de reconocimiento óptico de caracteres para extracción de tokens de autenticación. |
+
 
 ---
 
