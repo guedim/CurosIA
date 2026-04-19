@@ -1,0 +1,86 @@
+# ==============================================================================
+# SEGURIDAD Y CREDENCIALES (CRÍTICO)
+# ==============================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+*.cert
+*.p12
+credentials.json
+secrets.json
+.vault/
+
+# ==============================================================================
+# INTELIGENCIA ARTIFICIAL Y DATA SCIENCE
+# ==============================================================================
+# Modelos pesados (evitar errores de Git LFS o bloqueos de Push)
+models/
+*.pth
+*.onnx
+*.bin
+*.joblib
+*.pb
+*.h5
+*.ckpt
+*.tflite
+
+# Datasets y Bases de Datos Vectoriales
+data/
+*.csv
+*.jsonl
+*.parquet
+.chroma/
+.pinecone/
+.qdrant/
+vector_db/
+
+# ==============================================================================
+# LENGUAJES Y ENTORNOS (PYTHON & NODE.JS)
+# ==============================================================================
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.tox/
+
+# Node.js
+node_modules/
+dist/
+build/
+.next/
+.vercel/
+npm-debug.log*
+yarn-error.log*
+
+# ==============================================================================
+# INFRAESTRUCTURA Y SISTEMA (UBUNTU / DOCKER)
+# ==============================================================================
+# Docker
+.docker-ignore
+*.tar.gz
+
+# Logs y Temporales de Linux
+*.log
+logs/
+tmp/
+.DS_Store
+Thumbs.db
+
+# ==============================================================================
+# CONFIGURACIÓN DE EDITORES (VS CODE)
+# ==============================================================================
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.sublime-project
+*.sublime-workspace
