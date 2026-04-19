@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+
+/*
+ * Platzi FC - Design tokens
+ * Tailwind 4 CSS-first config via @theme.
+ * Ajusta los valores cuando tengas la guía visual definitiva.
+ */
+@theme {
+  /* Colores del club (placeholders sensatos) */
+  --color-brand-50: oklch(0.97 0.02 150);
+  --color-brand-100: oklch(0.93 0.05 150);
+  --color-brand-200: oklch(0.86 0.1 150);
+  --color-brand-300: oklch(0.75 0.15 150);
+  --color-brand-400: oklch(0.64 0.18 150);
+  --color-brand-500: oklch(0.55 0.2 150);
+  --color-brand-600: oklch(0.46 0.18 150);
+  --color-brand-700: oklch(0.38 0.15 150);
+  --color-brand-800: oklch(0.3 0.12 150);
+  --color-brand-900: oklch(0.22 0.08 150);
+  --color-brand-950: oklch(0.15 0.05 150);
+
+  /* Acento secundario */
+  --color-accent-500: oklch(0.7 0.18 60);
+
+  /* Tipografía */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-inter), system-ui, sans-serif;
+
+  /* Radios */
+  --radius-card: 0.75rem;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+}
+
+/* Base */
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply text-brand-950 bg-white antialiased;
+  font-family: var(--font-sans);
+}
+
+/* Accesibilidad: reduce-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip-to-content (accesibilidad WCAG) */
+.skip-link {
+  @apply bg-brand-600 absolute left-4 top-4 z-50 -translate-y-32 rounded-md px-4 py-2 text-white focus:translate-y-0;
+  transition: transform 0.2s;
+}

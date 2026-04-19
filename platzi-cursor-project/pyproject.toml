@@ -1,0 +1,13 @@
+[project]
+name = "cursor-ai"
+version = "0.1.0"
+description = "CursorAI course"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.129.0",
+    "pydantic-settings>=2.12.0",
+    "uvicorn>=0.40.0",
+    "email-validator>=2.0.0",
+]
+

@@ -1,0 +1,281 @@
+# =============================================================================
+# Platzi FC - .gitignore
+# Monorepo: pnpm + Turborepo + Next.js + Supabase + Sanity + Resend
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Dependencias
+# -----------------------------------------------------------------------------
+node_modules/
+.pnpm-store/
+.pnp
+.pnp.*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.log
+.yarn/install-state.gz
+jspm_packages/
+
+# -----------------------------------------------------------------------------
+# Archivos de entorno y secretos (NUNCA commitear)
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+.envrc
+
+# Credenciales y llaves
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+*.keystore
+*.jks
+secrets/
+secret.*
+credentials.*
+*.secret
+*.secrets
+service-account*.json
+gcp-*.json
+aws-credentials*
+.aws/
+
+# Tokens y archivos de autenticación
+.netrc
+.npmrc.local
+auth.json
+.auth
+token.txt
+tokens.txt
+*.token
+
+# -----------------------------------------------------------------------------
+# Archivos de configuración locales / personales
+# -----------------------------------------------------------------------------
+*.local
+*.local.*
+config.local.*
+settings.local.*
+.local/
+
+# Claude Code local
+.claude/settings.local.json
+.claude/*.local.*
+.claude/cache/
+.claude/logs/
+.claude/tmp/
+
+# MCP config (contiene project refs, URLs, posibles tokens)
+# Commitea sólo la plantilla sin datos sensibles
+.mcp.json
+.mcp.local.json
+.mcp.*.json
+!.mcp.example.json
+!.mcp.sample.json
+!.mcp.template.json
+
+# -----------------------------------------------------------------------------
+# Build outputs / artefactos
+# -----------------------------------------------------------------------------
+.next/
+out/
+dist/
+build/
+.output/
+.nuxt/
+.vercel/
+.netlify/
+.serverless/
+.fusebox/
+.dynamodb/
+.webpack/
+.rollup.cache/
+.parcel-cache/
+.cache/
+.temp/
+.tmp/
+tmp/
+
+# -----------------------------------------------------------------------------
+# Turborepo
+# -----------------------------------------------------------------------------
+.turbo/
+.turbo-*
+
+# -----------------------------------------------------------------------------
+# TypeScript
+# -----------------------------------------------------------------------------
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# -----------------------------------------------------------------------------
+# Logs
+# -----------------------------------------------------------------------------
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# -----------------------------------------------------------------------------
+# Testing / Cobertura
+# -----------------------------------------------------------------------------
+coverage/
+*.lcov
+.nyc_output/
+.jest/
+.vitest/
+junit.xml
+test-results/
+playwright-report/
+playwright/.cache/
+playwright/.auth/
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
+e2e-results/
+
+# -----------------------------------------------------------------------------
+# Bases de datos locales y dumps
+# -----------------------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.db
+*.db-journal
+*.sql.gz
+*.dump
+*.bak
+dump.rdb
+# Nota: schema.sql se mantiene versionado; excluye sólo dumps reales
+db-dumps/
+backups/
+
+# -----------------------------------------------------------------------------
+# Supabase
+# -----------------------------------------------------------------------------
+.supabase/
+supabase/.branches/
+supabase/.temp/
+supabase/.env
+supabase/seed.local.sql
+supabase/migrations/*.local.sql
+
+# -----------------------------------------------------------------------------
+# Sanity
+# -----------------------------------------------------------------------------
+.sanity/
+sanity-export*.tar.gz
+.sanity-runtime/
+
+# -----------------------------------------------------------------------------
+# Next.js / herramientas relacionadas
+# -----------------------------------------------------------------------------
+.swc/
+.contentlayer/
+.open-next/
+
+# -----------------------------------------------------------------------------
+# IDE / Editores
+# -----------------------------------------------------------------------------
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.vscode-test/
+.history/
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+*.swp
+*.swo
+*.swn
+*~
+.project
+.classpath
+.settings/
+.metals/
+.bloop/
+
+# Cursor / AI editors
+.cursor/
+.cursor-tutor/
+.windsurf/
+
+# -----------------------------------------------------------------------------
+# Sistema Operativo
+# -----------------------------------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# -----------------------------------------------------------------------------
+# Archivos temporales / misceláneos
+# -----------------------------------------------------------------------------
+*.pid
+*.seed
+*.pid.lock
+*.orig
+*.rej
+.eslintcache
+.stylelintcache
+.prettiercache
+
+# Archivos comprimidos (usualmente no se versionan)
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# -----------------------------------------------------------------------------
+# Lighthouse CI (reportes efímeros locales)
+# -----------------------------------------------------------------------------
+.lighthouseci/
+lhci-reports/
+
+# -----------------------------------------------------------------------------
+# Notas / borradores locales (no publicar por accidente)
+# -----------------------------------------------------------------------------
+NOTES.local.md
+TODO.local.md
+scratch/
+drafts/

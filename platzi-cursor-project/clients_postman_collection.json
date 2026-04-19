@@ -1,0 +1,279 @@
+{
+  "info": {
+    "name": "Clientes API",
+    "description": "Colección para probar la API de clientes (CRUD).\n\n**Base URL:** `{{baseUrl}}` (por defecto http://localhost:8000)\n\n**Requisitos:**\n- El servidor debe estar en ejecución: `uv run python -m app.main` o `uv run uvicorn app.main:app --reload`\n- Para crear/actualizar: `nombres` (string), `teléfono` (10 dígitos), `email` (email válido)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8000" },
+    { "key": "clienteId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Listar clientes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/clientes",
+        "description": "Obtiene la lista de todos los clientes.\n\n- **Método:** GET\n- **Cuerpo:** No requiere.\n- **Respuesta 200:** Array de objetos Cliente (id, nombres, teléfono, email)."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+              "pm.test('Response is array', function () {",
+              "    const body = pm.response.json();",
+              "    pm.expect(Array.isArray(body)).to.be.true;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crear cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"María García López\",\n  \"teléfono\": \"5512345678\",\n  \"email\": \"maria.garcia@example.com\"\n}"
+        },
+        "url": "{{baseUrl}}/api/clientes",
+        "description": "Crea un nuevo cliente. El **id** se asigna automáticamente.\n\n- **Método:** POST\n- **Cuerpo (JSON):**\n  - `nombres` (string): Nombre completo.\n  - `teléfono` (string): Exactamente 10 dígitos.\n  - `email` (string): Email válido.\n- **Respuesta 201:** Cliente creado con id.\n- **Errores 422:** Validación fallida (teléfono no 10 dígitos, email inválido, etc.)."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+              "pm.test('Response has id, nombres, teléfono, email', function () {",
+              "    const body = pm.response.json();",
+              "    pm.expect(body).to.have.property('id');",
+              "    pm.expect(body).to.have.property('nombres');",
+              "    pm.expect(body).to.have.property('teléfono');",
+              "    pm.expect(body).to.have.property('email');",
+              "    if (body.id) pm.collectionVariables.set('clienteId', body.id);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Obtener cliente por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/api/clientes/{{clienteId}}",
+        "description": "Obtiene un cliente por su **id**.\n\n- **Método:** GET\n- **Path:** `/api/clientes/{cliente_id}` (usa la variable `clienteId`).\n- **Respuesta 200:** Objeto Cliente.\n- **Respuesta 404:** Cliente no encontrado."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200 or 404', function () {",
+              "    const code = pm.response.code;",
+              "    pm.expect([200, 404]).to.include(code);",
+              "});",
+              "if (pm.response.code === 200) {",
+              "    pm.test('Response has required fields', function () {",
+              "        const body = pm.response.json();",
+              "        pm.expect(body).to.have.property('id');",
+              "        pm.expect(body).to.have.property('nombres');",
+              "        pm.expect(body).to.have.property('teléfono');",
+              "        pm.expect(body).to.have.property('email');",
+              "    });",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Actualizar cliente",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombres\": \"María García López (actualizado)\",\n  \"teléfono\": \"5598765432\",\n  \"email\": \"maria.nueva@example.com\"\n}"
+        },
+        "url": "{{baseUrl}}/api/clientes/{{clienteId}}",
+        "description": "Reemplaza por completo un cliente existente.\n\n- **Método:** PUT\n- **Path:** `/api/clientes/{cliente_id}`\n- **Cuerpo (JSON):** Mismos campos que crear (nombres, teléfono, email).\n- **Respuesta 200:** Cliente actualizado.\n- **Respuesta 404:** Cliente no encontrado.\n- **Respuesta 422:** Error de validación."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 200 or 404', function () {",
+              "    const code = pm.response.code;",
+              "    pm.expect([200, 404]).to.include(code);",
+              "});",
+              "if (pm.response.code === 200) {",
+              "    pm.test('Response id matches path', function () {",
+              "        const body = pm.response.json();",
+              "        const id = parseInt(pm.collectionVariables.get('clienteId'), 10);",
+              "        pm.expect(body.id).to.eql(id);",
+              "    });",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Eliminar cliente",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/api/clientes/{{clienteId}}",
+        "description": "Elimina un cliente por **id**.\n\n- **Método:** DELETE\n- **Path:** `/api/clientes/{cliente_id}`\n- **Cuerpo:** No requiere.\n- **Respuesta 204:** Sin contenido (éxito).\n- **Respuesta 404:** Cliente no encontrado."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 204 or 404', function () {",
+              "    const code = pm.response.code;",
+              "    pm.expect([204, 404]).to.include(code);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prueba integral - Flujo CRUD completo",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/health",
+        "description": "**Prueba integral:** ejecuta un flujo CRUD completo contra la API y valida cada paso.\n\n1. Health check (GET /health).\n2. Listar clientes (GET /api/clientes).\n3. Crear cliente (POST /api/clientes).\n4. Obtener por ID (GET /api/clientes/:id).\n5. Actualizar cliente (PUT /api/clientes/:id).\n6. Obtener de nuevo y comprobar cambios.\n7. Eliminar cliente (DELETE /api/clientes/:id).\n8. Comprobar que GET por ID devuelve 404.\n\nEjecuta esta petición una sola vez para validar todo el flujo. Usa la pestaña **Tests** o el **Collection Runner**."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Prueba integral: no hace falta enviar esta request; el test dispara todo el flujo.",
+              "// Se usa GET /health como disparador; el script 'test' ejecuta el CRUD completo."
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const baseUrl = pm.collectionVariables.get('baseUrl');",
+              "const timeout = 5000;",
+              "",
+              "pm.test('0. Health check', function (done) {",
+              "    pm.sendRequest({ url: baseUrl + '/health', method: 'GET' }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(200);",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "let createdId;",
+              "pm.test('1. Listar clientes (GET)', function (done) {",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes', method: 'GET' }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(200);",
+              "        pm.expect(res.json()).to.be.an('array');",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "pm.test('2. Crear cliente (POST)', function (done) {",
+              "    const body = { nombres: 'Test Integral', teléfono: '5511223344', email: 'test@integral.com' };",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes', method: 'POST', header: { 'Content-Type': 'application/json' }, body: { mode: 'raw', raw: JSON.stringify(body) } }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(201);",
+              "        const data = res.json();",
+              "        pm.expect(data).to.have.property('id');",
+              "        createdId = data.id;",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "pm.test('3. Obtener por ID (GET)', function (done) {",
+              "    if (!createdId) return done();",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes/' + createdId, method: 'GET' }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(200);",
+              "        pm.expect(res.json().nombres).to.eql('Test Integral');",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "pm.test('4. Actualizar cliente (PUT)', function (done) {",
+              "    if (!createdId) return done();",
+              "    const body = { nombres: 'Test Actualizado', teléfono: '5599887766', email: 'updated@integral.com' };",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes/' + createdId, method: 'PUT', header: { 'Content-Type': 'application/json' }, body: { mode: 'raw', raw: JSON.stringify(body) } }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(200);",
+              "        pm.expect(res.json().nombres).to.eql('Test Actualizado');",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "pm.test('5. Obtener de nuevo y comprobar cambios', function (done) {",
+              "    if (!createdId) return done();",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes/' + createdId, method: 'GET' }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(200);",
+              "        const data = res.json();",
+              "        pm.expect(data.email).to.eql('updated@integral.com');",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "pm.test('6. Eliminar cliente (DELETE)', function (done) {",
+              "    if (!createdId) return done();",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes/' + createdId, method: 'DELETE' }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(204);",
+              "        done();",
+              "    });",
+              "});",
+              "",
+              "pm.test('7. GET por ID debe devolver 404', function (done) {",
+              "    if (!createdId) return done();",
+              "    pm.sendRequest({ url: baseUrl + '/api/clientes/' + createdId, method: 'GET' }, function (err, res) {",
+              "        pm.expect(err).to.be.null;",
+              "        pm.expect(res.code).to.eql(404);",
+              "        done();",
+              "    });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}

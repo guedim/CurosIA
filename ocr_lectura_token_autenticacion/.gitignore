@@ -1,0 +1,41 @@
+# Ambiente virtual de Python
+venv/
+env/
+.venv/
+
+# Bytecode y caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribución y build
+build/
+dist/
+eggs/
+*.egg-info/
+*.egg
+
+# Archivos generados por el script
+authenticator_log.txt
+fotos/
+
+# IDE y editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Variables de entorno (pueden contener secretos)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

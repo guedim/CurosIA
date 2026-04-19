@@ -1,0 +1,11 @@
+services:
+  mcp:
+    build: .
+    volumes:
+      - ./:/app
+    environment:
+      - MCP_SERVER_PORT=6274
+      - HOST=0.0.0.0
+    ports:
+      - "6274:6274"
+      - "6277:6277"

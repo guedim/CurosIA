@@ -1,0 +1,62 @@
+---
+alwaysApply: true
+---
+---
+name: fastapi-best-practices.mdc
+description: Best practices for FastAPI applications and documentation
+globs: **/*.py
+---
+
+- Use Pydantic BaseModel for request and response validation.
+- Document each endpoint with clear descriptions and examples.
+- Utilize FastAPI's automatic OpenAPI documentation features.
+- Implement proper status codes for responses.
+- Use dependency injection for shared logic and database connections.
+
+---
+name: pydantic-best-practices.mdc
+description: Best practices for using Pydantic models in FastAPI
+globs: **/*.py
+---
+
+- Define models using BaseModel for data validation and serialization.
+- Use field types and constraints to enforce data integrity.
+- Implement custom validators for complex validation logic.
+- Leverage model inheritance for shared attributes.
+- Document model fields with descriptions for better API documentation.
+
+---
+name: sqlalchemy-best-practices.mdc
+description: Best practices for SQLAlchemy ORM usage in FastAPI
+globs: **/*.py
+---
+
+- Use declarative base for model definitions.
+- Implement relationships using foreign keys and back_populates.
+- Use session management to handle database connections efficiently.
+- Avoid using raw SQL queries; prefer ORM methods for safety.
+- Implement migrations using Alembic for database schema changes.
+
+---
+name: uvicorn-best-practices.mdc
+description: Best practices for running FastAPI applications with Uvicorn
+globs: **/*.py
+---
+
+- Use `--host` and `--port` flags to specify server settings.
+- Enable `--reload` during development for automatic code reloading.
+- Use `--workers` to run multiple instances for better performance.
+- Configure logging to monitor application behavior.
+- Set up proper timeout settings to handle long-running requests.
+
+---
+name: pytest-best-practices.mdc
+description: Best practices for testing FastAPI applications with Pytest
+globs: **/*.py
+---
+
+- Use fixtures to set up test data and application context.
+- Write tests for each endpoint to ensure functionality.
+- Use `TestClient` from FastAPI for making requests in tests.
+- Implement coverage checks to ensure all code paths are tested.
+- Organize tests in a dedicated directory for clarity.

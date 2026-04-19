@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba de Números</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffffff;
+        }
+
+        #contenedor {
+            text-align: center;
+            border: 5px solid red; /* Borde rojo para verificar que carga */
+            padding: 50px;
+        }
+
+        #numero {
+            font-size: 150px; /* Tamaño fijo en pixeles para asegurar visibilidad */
+            font-weight: bold;
+            color: black;
+        }
+
+        /* Mensaje por si JS está desactivado */
+        noscript {
+            color: red;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <noscript>¡Atención! Tu navegador tiene desactivado JavaScript.</noscript>
+
+    <div id="contenedor">
+        <div style="font-size: 20px; color: grey;">Número actual:</div>
+        <div id="numero">---</div>
+    </div>
+
+    <script>
+        // Función simple
+        function actualizar() {
+            var min = 111111;
+            var max = 999999;
+            var num = Math.floor(Math.random() * (max - min + 1)) + min;
+            
+            // Forzar actualización
+            var elemento = document.getElementById('numero');
+            if(elemento) {
+                elemento.innerHTML = num;
+                console.log("Número generado: " + num); // Ver en consola F12
+            } else {
+                alert("Error: No se encuentra el elemento HTML");
+            }
+        }
+
+        // Ejecutar
+        actualizar();
+        setInterval(actualizar, 5000);
+    </script>
+
+</body>
+</html>

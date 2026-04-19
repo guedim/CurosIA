@@ -1,0 +1,186 @@
+import type { Locale } from '../config';
+
+/**
+ * Diccionario base (es). El shape de este objeto es la fuente de verdad para
+ * el tipo `Dictionary`; todos los demás idiomas lo implementan.
+ */
+export const es = {
+  locale: 'es' as Locale,
+  localeLabel: 'Español',
+  dateLocale: 'es-ES',
+  currencyLocale: 'es-ES',
+  timeZone: 'Europe/Madrid',
+
+  nav: {
+    partidos: 'Partidos',
+    equipo: 'Equipo',
+    competicion: 'Competición',
+    noticias: 'Noticias',
+    entradas: 'Entradas',
+    tienda: 'Tienda',
+    club: 'Club',
+    mainLabel: 'Navegación principal',
+    skipToContent: 'Saltar al contenido',
+    search: 'Buscar en el sitio',
+    home: 'Ir al inicio de Platzi FC',
+    languageSwitcher: 'Cambiar idioma',
+  },
+
+  footer: {
+    sections: {
+      club: 'Club',
+      deportivo: 'Deportivo',
+      fans: 'Fans',
+      legal: 'Legal',
+    },
+    links: {
+      historia: 'Historia',
+      identidad: 'Identidad',
+      directiva: 'Directiva',
+      estadio: 'Estadio',
+      contacto: 'Contacto',
+      partidos: 'Partidos',
+      equipo: 'Equipo',
+      staff: 'Staff',
+      competicion: 'Competición',
+      entradas: 'Entradas',
+      abonos: 'Abonos',
+      tienda: 'Tienda',
+      noticias: 'Noticias',
+      terminos: 'Términos',
+      privacidad: 'Privacidad',
+      cookies: 'Cookies',
+      accesibilidad: 'Accesibilidad',
+    },
+    rights: 'Todos los derechos reservados.',
+    disclaimer: 'Sitio ficticio con fines educativos.',
+  },
+
+  home: {
+    season: 'Temporada 2026',
+    title: 'Bienvenido a Platzi FC',
+    subtitle: 'Sitio oficial del club. Partidos, equipo, noticias, entradas y mucho más.',
+    ctaMatches: 'Ver partidos',
+    ctaTickets: 'Comprar entradas',
+    nextMatch: 'Próximo partido',
+    live: 'En vivo ahora',
+    viewCalendar: 'Ver calendario →',
+    latestResults: 'Últimos resultados',
+    viewAll: 'Ver todos →',
+    noUpcoming: 'No hay próximos partidos programados.',
+    noResults: 'Aún no hay resultados disponibles.',
+    news: 'Noticias',
+    newsDesc: 'Últimas noticias del club, comunicados oficiales y contenido editorial.',
+    newsCta: 'Ver noticias →',
+    standings: 'Tabla de posiciones',
+    standingsDesc: 'Clasificación en competiciones activas con datos en vivo.',
+    standingsCta: 'Ver clasificación →',
+    shop: 'Tienda oficial',
+    shopDesc: 'Camisetas, merchandising y productos oficiales del club.',
+    shopCta: 'Visitar tienda →',
+  },
+
+  matchTabs: {
+    label: 'Secciones del partido',
+    resumen: 'Resumen',
+    estadisticas: 'Estadísticas',
+    alineaciones: 'Alineaciones',
+    minutoAMinuto: 'Minuto a minuto',
+    media: 'Media',
+  },
+
+  matchFilters: {
+    season: 'Temporada',
+    competition: 'Competición',
+    side: 'Lado',
+    status: 'Estado',
+    all: 'Todas',
+    allMasc: 'Todos',
+    local: 'Local',
+    visita: 'Visita',
+    upcoming: 'Próximos',
+    live: 'En vivo',
+    results: 'Resultados',
+  },
+
+  fans: {
+    title: 'Área de fans',
+    subtitle:
+      'Hazte socio, únete a los eventos de la comunidad y recibe todo lo que pasa en el club.',
+    membership: {
+      sectionTitle: 'Planes de membresía',
+      sectionDesc: 'Elige tu nivel de implicación con el club.',
+      pricePerYear: 'al año',
+      cta: 'Quiero este plan',
+      seeAll: 'Ver todos los planes',
+      benefits: 'Beneficios incluidos',
+      external: 'Continúa en el portal oficial de socios',
+      heroTitle: 'Hazte parte del Platzi FC',
+      heroSubtitle:
+        'Cuatro niveles de membresía pensados para cada tipo de aficionado. Del acceso digital al palco VIP.',
+      mostPopular: 'Más popular',
+    },
+    events: {
+      sectionTitle: 'Eventos de comunidad',
+      sectionDesc: 'Actividades abiertas, encuentros con la plantilla y acciones solidarias.',
+      heroTitle: 'Eventos de la comunidad Platzi FC',
+      heroSubtitle:
+        'Consulta el calendario de actividades del club con la afición: puertas abiertas, firmas, galas solidarias y más.',
+      upcoming: 'Próximos',
+      past: 'Pasados',
+      all: 'Todos',
+      typeAll: 'Todos los tipos',
+      typePuertasAbiertas: 'Puertas abiertas',
+      typeFirmaAutografos: 'Firma de autógrafos',
+      typeClinic: 'Clinic',
+      typeSolidario: 'Solidario',
+      typeEncuentroAficion: 'Encuentro con la afición',
+      rsvp: 'Reservar plaza',
+      openDoors: 'Entrada libre hasta completar aforo',
+      capacity: 'Aforo',
+      location: 'Lugar',
+      startsAt: 'Fecha',
+      noEvents: 'No hay eventos que coincidan con tu búsqueda.',
+      back: '← Volver a eventos',
+      detailCta: 'Ver detalle',
+    },
+    newsletter: {
+      sectionTitle: 'Newsletter',
+      sectionDesc:
+        'Recibe una vez por semana las noticias, próximas convocatorias y ofertas para la afición.',
+      emailLabel: 'Correo electrónico',
+      emailPlaceholder: 'tu@email.com',
+      submit: 'Suscribirme',
+      successTitle: '¡Listo!',
+      successBody: 'Te hemos añadido a la newsletter. Revisa tu bandeja de entrada.',
+      errorInvalid: 'El correo no es válido.',
+      errorRequired: 'Introduce un correo electrónico.',
+      errorUnknown:
+        'No hemos podido completar la suscripción. Vuelve a intentarlo en unos minutos.',
+      consent:
+        'Al suscribirte aceptas recibir emails del club. Puedes darte de baja en cualquier momento.',
+    },
+  },
+
+  mediaFilters: {
+    label: 'Filtros',
+    all: 'Todos',
+    categoryTitle: 'Categoría',
+    scopeTitle: 'Tipo de galería',
+    onlyMatch: 'Con partido',
+    noMatch: 'General',
+    videos: {
+      resumen: 'Resumen',
+      rueda_prensa: 'Rueda de prensa',
+      entrevista: 'Entrevista',
+      cantera: 'Cantera',
+      comunidad: 'Comunidad',
+    },
+    countVideos: 'vídeos',
+    countGalleries: 'galerías',
+    empty: 'Sin resultados para los filtros seleccionados.',
+    reset: 'Limpiar filtros',
+  },
+};
+
+export type Dictionary = typeof es;
