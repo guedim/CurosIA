@@ -1,0 +1,13 @@
+{
+  "name": "blog-server",
+  "version": "1.0.0",
+  "description": "Servidor HTTP con Bun para el blog API",
+  "type": "module",
+  "scripts": {
+    "start": "bun run server.ts",
+    "dev": "bun --hot server.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

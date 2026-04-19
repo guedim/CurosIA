@@ -1,0 +1,10 @@
+# Ignorar archivos de configuración MCP que contienen tokens sensibles
+mcp.json
+
+# Ignorar archivos temporales y de caché
+*.tmp
+*.cache
+
+# Ignorar archivos de configuración local
+local.json
+settings.json

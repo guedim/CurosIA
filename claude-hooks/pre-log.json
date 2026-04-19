@@ -1,0 +1,13 @@
+{
+  "session_id": "cd9b94bf-13db-4ac7-97d0-1ad0f562edae",
+  "transcript_path": "/home/mario/.claude/projects/-mnt-sda7-mario-claude-cursos-queries-COMPLETED/cd9b94bf-13db-4ac7-97d0-1ad0f562edae.jsonl",
+  "cwd": "/mnt/sda7/mario/claude/cursos/queries_COMPLETED",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "git add . && git status",
+    "description": "Stage all files and show status"
+  },
+  "tool_use_id": "toolu_01FsWWQ1PBVk5PtjbKhM1eYa"
+}

@@ -1,0 +1,20 @@
+{
+  "session_id": "cd9b94bf-13db-4ac7-97d0-1ad0f562edae",
+  "transcript_path": "/home/mario/.claude/projects/-mnt-sda7-mario-claude-cursos-queries-COMPLETED/cd9b94bf-13db-4ac7-97d0-1ad0f562edae.jsonl",
+  "cwd": "/mnt/sda7/mario/claude/cursos/queries_COMPLETED",
+  "permission_mode": "acceptEdits",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "git init && echo -e \"node_modules/\\n*.db\\n.env\" > .gitignore",
+    "description": "Initialize git repo and create .gitignore"
+  },
+  "tool_response": {
+    "stdout": "hint: Using 'master' as the name for the initial branch. This default branch name\nhint: will change to \"main\" in Git 3.0. To configure the initial branch name\nhint: to use in all of your new repositories, which will suppress this warning,\nhint: call:\nhint:\nhint: \tgit config --global init.defaultBranch <name>\nhint:\nhint: Names commonly chosen instead of 'master' are 'main', 'trunk' and\nhint: 'development'. The just-created branch can be renamed via this command:\nhint:\nhint: \tgit branch -m <name>\nhint:\nhint: Disable this message with \"git config set advice.defaultBranchName false\"\nInitialized empty Git repository in /mnt/sda7/mario/claude/cursos/queries_COMPLETED/.git/",
+    "stderr": "",
+    "interrupted": false,
+    "isImage": false,
+    "noOutputExpected": false
+  },
+  "tool_use_id": "toolu_018Ek8BEF9CX5ZvAhF5RMya5"
+}
