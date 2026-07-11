@@ -1,0 +1,9 @@
+import OpenAI from "openai";
+
+const  client = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY || "",
+    logLevel: "debug",
+});
+
+console.log("Cliente inicializado:");
+console.log(client);
