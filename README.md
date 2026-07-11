@@ -19,7 +19,7 @@ Este repositorio centraliza mis laboratorios, cursos y experimentos prácticos c
 | [**Platzi Cursor Api's de LLM's**](./platzi-apis-llms) | Implementar llamado a API's de OpenAPI, Claude, Gemini, para construir un ChatGPT con varios modelos. |
 | [**IA Tools: Deploy to Vercel**](./platzi-ia-tools-deploy-to-vercel) | Proyectos de IA listos para producción con despliegue automatizado en Vercel. |
 | [**OCR Lectura Token**](./ocr_lectura_token_autenticacion) | Implementación de reconocimiento óptico de caracteres para extracción de tokens de autenticación. |
-
+| [**Platzi Supabase Avanzado**](./platzi-supabase) | Suplatzigram: app estilo Instagram con Next.js y Supabase (auth, base de datos, storage), del Curso de Supabase Avanzado. |
 
 ---
 
@@ -28,11 +28,13 @@ Este repositorio centraliza mis laboratorios, cursos y experimentos prácticos c
 * **Modelos:** Claude 3.5 Sonnet, Gemini, GPT-4o.
 * **IDE:** [Cursor](https://cursor.com/) & VS Code.
 * **Infraestructura:** Ubuntu 25.04, Docker, Vercel, Ngrok.
-* **Frameworks:** n8n, MCP, Node.js, Python.
+* **Frameworks:** n8n, MCP, Node.js, Python, Next.js, Supabase.
 
 ## 🛠️ Configuración Local
 
 1. **Clonar el repositorio:**
+
    ```bash
-   git clone [https://github.com/guedim/CurosIA.git](https://github.com/guedim/CurosIA.git)
+   git clone https://github.com/guedim/CurosIA.git
    cd CurosIA
+   ```
