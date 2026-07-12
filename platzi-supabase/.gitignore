@@ -39,6 +39,9 @@ logs/
 # vercel
 .vercel
 
+# playwright test artifacts
+.playwright-mcp/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
