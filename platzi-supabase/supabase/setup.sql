@@ -66,6 +66,7 @@ create table if not exists public.notifications (
 
 create index if not exists likes_post_id_idx on public.likes (post_id);
 create index if not exists comments_post_id_idx on public.comments (post_id);
+create index if not exists comments_user_id_idx on public.comments (user_id);
 create index if not exists notifications_user_id_idx on public.notifications (user_id);
 
 -- ----------------------------------------------------------------------------
