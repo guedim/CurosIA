@@ -37,9 +37,6 @@ export default function ProfilePage() {
           return;
         }
 
-        console.log("👤 Usuario:", user);
-        console.log("📋 Metadata:", user.user_metadata);
-
         // Buscar perfil en la tabla profiles
         const { data: profileData, error: profileError } = await supabase
           .from("profiles")

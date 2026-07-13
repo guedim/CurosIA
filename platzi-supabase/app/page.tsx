@@ -63,12 +63,7 @@ export default function Home() {
         if (post.user_id !== currentUserId) {
           supabase.functions
             .invoke("send-notification", {
-              body: {
-                type: "like",
-                post_id: postId,
-                actor_id: currentUserId,
-                post_owner_id: post.user_id,
-              },
+              body: { type: "like", post_id: postId },
             })
             .then(({ error }) => {
               if (error) console.error("Error en send-notification (like):", error);
@@ -117,37 +112,32 @@ export default function Home() {
         // Crear notificación via Edge Function
         supabase.functions
           .invoke("send-notification", {
-            body: {
-              type: "comment",
-              post_id: postId,
-              actor_id: currentUserId,
-              post_owner_id: post.user_id,
-              comment_body: body,
-            },
+            body: { type: "comment", post_id: postId, comment_body: body },
           })
           .then(({ error }) => {
             if (error) console.error("Error en send-notification (comment):", error);
           });
 
-        // Enviar email
-        fetch("/api/send-comment-email", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            postOwnerId: post.user_id,
-            ownerUsername: post.profile?.username || "Usuario",
-            commenterUsername: commenterProfile?.username || "Alguien",
-            commentBody: body,
-            postCaption: post.caption,
-          }),
-        })
-          .then(async (res) => {
-            if (!res.ok) {
-              const detail = await res.json().catch(() => null);
-              console.error("Error enviando email:", res.status, detail);
-            }
+        // Enviar email (el servidor deriva dueño/usernames/caption; aquí solo
+        // enviamos el token de sesión, el id del post y el texto del comentario)
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          fetch("/api/send-comment-email", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${session.access_token}`,
+            },
+            body: JSON.stringify({ postId, commentBody: body }),
           })
-          .catch((err) => console.error("Error enviando email:", err));
+            .then(async (res) => {
+              if (!res.ok) {
+                const detail = await res.json().catch(() => null);
+                console.error("Error enviando email:", res.status, detail);
+              }
+            })
+            .catch((err) => console.error("Error enviando email:", err));
+        }
       }
     }
   };
