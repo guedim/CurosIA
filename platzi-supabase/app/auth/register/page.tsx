@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/client";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
@@ -94,12 +96,17 @@ export default function RegisterPage() {
 
       setMessage({
         type: "success",
-        text: "¡Registro exitoso! Revisa tu correo para confirmar tu cuenta.",
+        text: "¡Registro exitoso! Revisa tu correo para confirmar tu cuenta. Redirigiendo al login...",
       });
       setEmail("");
       setUsername("");
       setPassword("");
       setConfirmPassword("");
+
+      // Llevar al usuario al login para que inicie sesión
+      setTimeout(() => {
+        router.push("/auth/login");
+      }, 2500);
     } catch (error) {
       setMessage({
         type: "error",

@@ -1,17 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/client";
+
+const MAX_ATTEMPTS = 3;
+const LOCKOUT_SECONDS = 30;
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [attempts, setAttempts] = useState(0);
+  const [lockoutRemaining, setLockoutRemaining] = useState(0);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const router = useRouter();
+
+  const isLocked = lockoutRemaining > 0;
+
+  // Cuenta regresiva del bloqueo; al llegar a 0 se reinician los intentos
+  useEffect(() => {
+    if (lockoutRemaining <= 0) return;
+
+    const timer = setTimeout(() => {
+      setLockoutRemaining((prev) => {
+        if (prev <= 1) {
+          setAttempts(0);
+          setMessage(null);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [lockoutRemaining]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isLocked) return;
+
     setIsLoading(true);
     setMessage(null);
 
@@ -23,21 +52,30 @@ export default function LoginPage() {
 
       if (error) throw error;
 
-      // Obtener datos del usuario logueado
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      const metadata = user?.user_metadata;
+      setMessage({ type: "success", text: "¡Inicio de sesión exitoso! Redirigiendo..." });
 
-      console.log("👤 Usuario logueado:", user);
-      console.log("📋 Metadata:", metadata);
+      // Redirigir al home
+      setTimeout(() => {
+        router.push("/");
+        router.refresh();
+      }, 800);
+    } catch {
+      const newAttempts = attempts + 1;
+      setAttempts(newAttempts);
 
-      setMessage({ type: "success", text: "¡Inicio de sesión exitoso!" });
-    } catch (error) {
-      setMessage({
-        type: "error",
-        text: error instanceof Error ? error.message : "Error al iniciar sesión",
-      });
+      if (newAttempts >= MAX_ATTEMPTS) {
+        setLockoutRemaining(LOCKOUT_SECONDS);
+        setMessage({
+          type: "error",
+          text: `Has agotado los ${MAX_ATTEMPTS} intentos. Podrás reintentar en ${LOCKOUT_SECONDS} segundos.`,
+        });
+      } else {
+        const remaining = MAX_ATTEMPTS - newAttempts;
+        setMessage({
+          type: "error",
+          text: `Correo o contraseña incorrectos. Te ${remaining === 1 ? "queda 1 intento" : `quedan ${remaining} intentos`}.`,
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +100,8 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Correo electrónico"
             required
-            className="w-full px-4 py-3 rounded-xl bg-card-bg border border-border text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+            disabled={isLocked}
+            className="w-full px-4 py-3 rounded-xl bg-card-bg border border-border text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
           />
 
           <input
@@ -71,7 +110,8 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Contraseña"
             required
-            className="w-full px-4 py-3 rounded-xl bg-card-bg border border-border text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+            disabled={isLocked}
+            className="w-full px-4 py-3 rounded-xl bg-card-bg border border-border text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 disabled:opacity-50"
           />
 
           {/* Mensaje de estado */}
@@ -87,12 +127,33 @@ export default function LoginPage() {
             </div>
           )}
 
+          {/* Indicador de intentos */}
+          {attempts > 0 && !isLocked && (
+            <div className="flex items-center justify-center gap-1.5">
+              {Array.from({ length: MAX_ATTEMPTS }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`w-2 h-2 rounded-full ${
+                    i < attempts ? "bg-red-500" : "bg-foreground/20"
+                  }`}
+                />
+              ))}
+              <span className="text-xs text-foreground/50 ml-2">
+                {attempts} de {MAX_ATTEMPTS} intentos
+              </span>
+            </div>
+          )}
+
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={isLoading || isLocked}
             className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-accent text-white font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
+            {isLocked
+              ? `Reintentar en ${lockoutRemaining}s`
+              : isLoading
+              ? "Iniciando sesión..."
+              : "Iniciar sesión"}
           </button>
         </form>
 
@@ -101,6 +162,13 @@ export default function LoginPage() {
           ¿No tienes cuenta?{" "}
           <Link href="/auth/register" className="text-primary hover:underline">
             Regístrate
+          </Link>
+        </p>
+
+        {/* Link al home */}
+        <p className="text-center mt-3">
+          <Link href="/" className="text-sm text-foreground/50 hover:text-foreground hover:underline">
+            ← Volver al inicio
           </Link>
         </p>
       </div>

@@ -79,16 +79,40 @@ npm run lint    # Ejecuta ESLint sobre el proyecto
 
 ## Estructura en Supabase
 
-La app espera esta estructura (desplegada vía migraciones en el proyecto `suplatzigram`):
+Toda la estructura está versionada en la carpeta [`supabase/`](supabase/):
+
+- **[`supabase/setup.sql`](supabase/setup.sql)**: script idempotente que crea todo el backend (tablas, trigger, RLS, Realtime y Storage).
+- **[`supabase/functions/send-notification/`](supabase/functions/send-notification/)**: código de la Edge Function de notificaciones.
+
+Lo que crea el script:
 
 - **`public.profiles`**: perfil 1:1 con `auth.users` (`username` único, `avatar_url`). Se crea automáticamente al registrarse mediante el trigger `on_auth_user_created`.
 - **`public.posts_new`**: posts con `user_id`, `image_url`, `caption`.
 - **`public.likes`**: un like por usuario/post (única `user_id + post_id`).
 - **`public.comments`**: comentarios con autor y post.
 - **`public.notifications`**: notificaciones por like/comentario, con **Realtime habilitado** para la campana.
-- **Edge Function `send-notification`**: crea las notificaciones con service role cuando alguien da like o comenta.
 - **Bucket de Storage `images`** (público): fotos de posts en `posts/` y avatares en `profile/`.
 - **RLS**: lectura pública de posts/perfiles/likes/comentarios; escribir requiere sesión y ser el dueño de la fila; las notificaciones solo las ve su destinatario.
+- **Realtime** habilitado en las 5 tablas (lo usan el dashboard y la campana de notificaciones).
+
+### Desplegar en tu propia cuenta de Supabase
+
+1. **Crea un proyecto nuevo** en [supabase.com/dashboard](https://supabase.com/dashboard).
+
+2. **Ejecuta el script SQL.** Abre el **SQL Editor** del proyecto, pega el contenido completo de [`supabase/setup.sql`](supabase/setup.sql) y ejecútalo. Es idempotente: puedes correrlo más de una vez sin errores.
+
+3. **Despliega la Edge Function** con la [Supabase CLI](https://supabase.com/docs/guides/cli):
+
+   ```bash
+   supabase login
+   supabase functions deploy send-notification --project-ref TU_PROJECT_REF
+   ```
+
+   La función usa `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY`, que Supabase inyecta automáticamente; no necesita secretos adicionales.
+
+4. **Configura la app.** Copia la URL y la anon key del proyecto nuevo (Dashboard → Project Settings → API) a tu `.env.local` (y a Vercel si despliegas), y agrega el hostname `TU_PROYECTO.supabase.co` en `images.remotePatterns` de [`next.config.ts`](next.config.ts) para que `next/image` cargue las fotos.
+
+5. **Ajusta Authentication → URL Configuration** para que el **Site URL** apunte a tu dominio (o `http://localhost:3000` en local) y los correos de confirmación redirijan bien.
 
 ## Ver la aplicación en la URL pública
 
@@ -109,7 +133,7 @@ Consideraciones:
 - Vercel bloquea versiones de Next.js con vulnerabilidades conocidas (p. ej. CVE-2025-66478 en 16.0.6); mantén Next.js actualizado.
 - El hostname del proyecto Supabase debe estar permitido en `next.config.ts` (`images.remotePatterns`) para que `next/image` cargue las fotos.
 - En Supabase (Authentication → URL Configuration) el **Site URL** debe apuntar al dominio de producción para que los correos de confirmación redirijan bien.
-- Para activar el **email de comentarios** agrega en Vercel las variables `SUPABASE_SERVICE_ROLE_KEY` y `NEXT_PUBLIC_RESEND` (API key de Resend); sin ellas el endpoint responde 503 y la app funciona normal.
+- Para activar el **email de comentarios** agrega en Vercel las variables `SUPABASE_SERVICE_ROLE_KEY` y `RESEND_API_KEY` (API key de Resend, server-only — sin prefijo `NEXT_PUBLIC_`); sin ellas el endpoint responde 503 y la app funciona normal.
 
 ## Recursos
 
