@@ -5,6 +5,7 @@ import { Post, Comment } from "./types";
 import { supabase } from "./lib/client";
 import { PostCard } from "./components/PostCard";
 import { NotificationBell } from "./components/NotificationBell";
+import { UserMenu } from "./components/UserMenu";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -60,14 +61,18 @@ export default function Home() {
 
         // Crear notificación via Edge Function
         if (post.user_id !== currentUserId) {
-          supabase.functions.invoke("send-notification", {
-            body: {
-              type: "like",
-              post_id: postId,
-              actor_id: currentUserId,
-              post_owner_id: post.user_id,
-            },
-          });
+          supabase.functions
+            .invoke("send-notification", {
+              body: {
+                type: "like",
+                post_id: postId,
+                actor_id: currentUserId,
+                post_owner_id: post.user_id,
+              },
+            })
+            .then(({ error }) => {
+              if (error) console.error("Error en send-notification (like):", error);
+            });
         }
       }
     }
@@ -110,15 +115,19 @@ export default function Home() {
       // Notificar al titular del post (si no es el mismo usuario)
       if (post.user_id !== currentUserId) {
         // Crear notificación via Edge Function
-        supabase.functions.invoke("send-notification", {
-          body: {
-            type: "comment",
-            post_id: postId,
-            actor_id: currentUserId,
-            post_owner_id: post.user_id,
-            comment_body: body,
-          },
-        });
+        supabase.functions
+          .invoke("send-notification", {
+            body: {
+              type: "comment",
+              post_id: postId,
+              actor_id: currentUserId,
+              post_owner_id: post.user_id,
+              comment_body: body,
+            },
+          })
+          .then(({ error }) => {
+            if (error) console.error("Error en send-notification (comment):", error);
+          });
 
         // Enviar email
         fetch("/api/send-comment-email", {
@@ -131,7 +140,14 @@ export default function Home() {
             commentBody: body,
             postCaption: post.caption,
           }),
-        }).catch((err) => console.error("Error enviando email:", err));
+        })
+          .then(async (res) => {
+            if (!res.ok) {
+              const detail = await res.json().catch(() => null);
+              console.error("Error enviando email:", res.status, detail);
+            }
+          })
+          .catch((err) => console.error("Error enviando email:", err));
       }
     }
   };
@@ -236,7 +252,7 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-card-bg border-b border-border">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="w-10"></div>
+          <UserMenu />
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Suplatzigram
           </h1>

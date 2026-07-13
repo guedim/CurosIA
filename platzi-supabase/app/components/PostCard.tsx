@@ -6,14 +6,12 @@ import { PostCardProps } from "../types";
 import { getTimeAgo } from "../utils/time";
 import { HeartIcon } from "./HeartIcon";
 
-const DEFAULT_AVATAR = "https://xynshcnkxdliapebmyaz.supabase.co/storage/v1/object/public/images/posts/unnamed-14.jpg";
-
 export function PostCard({ post, currentUserId, onLike, onComment }: PostCardProps) {
   const [commentText, setCommentText] = useState("");
   const [showComments, setShowComments] = useState(false);
 
   const username = post.profile?.username || "default_user";
-  const avatarUrl = post.profile?.avatar_url || DEFAULT_AVATAR;
+  const avatarUrl = post.profile?.avatar_url || null;
 
   const handleSubmitComment = (e: React.FormEvent) => {
     e.preventDefault();

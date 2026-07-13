@@ -10,11 +10,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "ID del titular requerido" }, { status: 400 });
     }
 
-    // Sin NEXT_PUBLIC_RESEND o SUPABASE_SERVICE_ROLE_KEY el envío queda desactivado
-    if (!process.env.NEXT_PUBLIC_RESEND) {
+    // Sin RESEND_API_KEY o SUPABASE_SERVICE_ROLE_KEY el envío queda desactivado.
+    // Debe ser server-only (sin prefijo NEXT_PUBLIC_) para no exponer la key al navegador.
+    if (!process.env.RESEND_API_KEY) {
       return NextResponse.json({ error: "Resend no configurado" }, { status: 503 });
     }
-    const resend = new Resend(process.env.NEXT_PUBLIC_RESEND);
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     if (!supabaseAdmin) {
       return NextResponse.json({ error: "Supabase admin no configurado" }, { status: 503 });
