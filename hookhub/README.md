@@ -9,7 +9,7 @@ It's a static, no-backend Next.js site: every hook is a plain data entry rendere
 - **Gallery view** — hooks rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
 - **Category badges** — each hook is tagged with one of: `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`.
 - **Direct links** — every card links out to the hook's GitHub repository.
-- **Dark mode** — automatic light/dark styling via Tailwind.
+- **Bold.co-inspired theme** — a dark, high-contrast UI with a red → navy → blue gradient brand mark, a sticky site header, and a gradient-hairline footer.
 - **Content-as-data** — the entire catalog lives in one file, [`data/hooks.ts`](data/hooks.ts); no CMS or database involved.
 
 ## Tech stack
@@ -19,20 +19,23 @@ It's a static, no-backend Next.js site: every hook is a plain data entry rendere
 - [TypeScript](https://www.typescriptlang.org) (strict mode)
 - [Tailwind CSS](https://tailwindcss.com) v4 (via `@tailwindcss/postcss`, no `tailwind.config` file)
 - [ESLint](https://eslint.org) 9 (flat config, `eslint-config-next`)
+- [Montserrat](https://fonts.google.com/specimen/Montserrat) (via `next/font/google`) — the site's typeface, paired with a dark Bold.co-style color palette defined in `app/globals.css`
 
 ## Project structure
 
 ```text
 hookhub/
 ├── app/
-│   ├── layout.tsx      # Root layout, fonts, metadata
-│   ├── page.tsx        # Home page — renders the hook gallery
-│   └── globals.css     # Tailwind entrypoint + theme tokens
+│   ├── layout.tsx        # Root layout, Montserrat font, metadata
+│   ├── page.tsx           # Home page — renders the hero + hook gallery
+│   └── globals.css        # Tailwind entrypoint + Bold-inspired theme tokens
 ├── components/
-│   └── hook-card.tsx   # Card component for a single hook
+│   ├── hook-card.tsx      # Card component for a single hook
+│   ├── site-header.tsx    # Sticky site header with the gradient "HookHub" wordmark
+│   └── site-footer.tsx    # Footer with the gradient hairline + copyright line
 ├── data/
-│   └── hooks.ts         # The hook catalog (Hook type + hooks[] array)
-└── public/              # Static assets (icons, svgs)
+│   └── hooks.ts            # The hook catalog (Hook type + hooks[] array)
+└── public/                 # Static assets (icons, svgs)
 ```
 
 ## Download this project from GitHub

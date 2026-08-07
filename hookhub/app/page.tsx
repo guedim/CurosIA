@@ -3,13 +3,17 @@ import { HookCard } from "@/components/hook-card";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col items-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="w-full max-w-6xl flex-1 px-6 py-16 sm:px-10">
-        <header className="mb-12 flex flex-col gap-2 text-center sm:text-left">
-          <h1 className="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+    <div className="relative flex flex-1 flex-col items-center overflow-hidden bg-background font-sans">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-gradient-to-r from-[#ff2947] via-[#121e6c] to-[#0407f5] opacity-30 blur-[120px]"
+      />
+      <main className="relative w-full max-w-6xl flex-1 px-6 py-16 sm:px-10">
+        <header className="mb-12 flex flex-col gap-3 text-center sm:text-left">
+          <h1 className="bg-gradient-to-r from-[#ff2947] via-[#7a2ea8] to-[#0407f5] bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
             HookHub
           </h1>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="text-lg text-muted">
             Discover open-source hooks for Claude Code.
           </p>
         </header>
