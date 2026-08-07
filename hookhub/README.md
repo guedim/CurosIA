@@ -152,3 +152,12 @@ The catalog is a plain TypeScript array — no build step or database migration 
 ```
 
 Save the file and the new card will appear in the gallery automatically the next time the page renders.
+
+## Claude Code skills
+
+This repo ships a project-level [Claude Code](https://claude.ai/code) skill at [`.claude/skills/commite-code/SKILL.md`](.claude/skills/commite-code/SKILL.md), invoked with `/commite-code`.
+
+- Gathers `git status`, `git diff HEAD`, the current branch, and recent commit log as context.
+- Generates a conventional commit message and creates a single commit from the staged changes.
+- Explicit-invocation only (`disable-model-invocation: true`) — Claude won't run it on its own.
+- Pre-approves `git status`, `git diff --staged`, and `git commit` via `allowed-tools`, so it won't prompt for permission on those commands.
