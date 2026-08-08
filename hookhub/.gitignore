@@ -42,3 +42,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# the monorepo-root .gitignore blanket-excludes `data/` (for AI dataset folders);
+# this project's data/ is source code (the catalog), not a dataset
+!data/
+!data/**
