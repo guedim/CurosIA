@@ -149,6 +149,83 @@ Claude Code needs a GitHub CLI session already authenticated in the environment 
 
 🔗 **[github.com/guedim/CurosIA/actions/workflows/hookhub-ci.yml](https://github.com/guedim/CurosIA/actions/workflows/hookhub-ci.yml)** — every past and in-progress run of this workflow, with logs per step. It lives under the monorepo's *Actions* tab (not a separate URL per subproject), since `hookhub/` shares the `CurosIA` GitHub repository.
 
+## Automated PR code review (Claude Code Review)
+
+Every pull request that touches `hookhub/**` gets an automated code review from [Claude Code](https://claude.ai/code), focused purely on code elegance and quality — not functional correctness. Findings are posted as **inline comments directly on the PR's diff**, plus one top-level summary comment.
+
+**What it reviews:**
+
+- **Formatting & style** — consistency with the project's ESLint flat config (`eslint-config-next`) and existing conventions
+- **DRY** — duplicated logic/markup, missed extraction opportunities, and over-abstraction
+- **Cyclomatic complexity** — deeply nested conditionals, long/overloaded functions, suggests simplifications
+- **Code quality** — naming, type safety (TypeScript strict mode), dead code, idiomatic Next.js 16 / React 19 patterns
+- **Security** — unsafe use of user input, leaked secrets, unsafe `dangerouslySetInnerHTML`/links, missing validation
+
+**Where it lives:** like the CI workflow, this only works from the **Git repository root** — the file is at `CurosIA/.github/workflows/claude-code-review.yaml`, not inside `hookhub/`.
+
+```yaml
+# CurosIA/.github/workflows/claude-code-review.yaml
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths: ["hookhub/**"]
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            # ...custom review instructions covering the 5 focus areas above...
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
+```
+
+**How it's scoped to this project only:** same mechanism as the CI workflow — `paths: ["hookhub/**"]` on the `pull_request` trigger, plus an explicit instruction in the `prompt` telling Claude to ignore anything outside `hookhub/` even though it can see the whole monorepo checkout.
+
+### How to authenticate
+
+Unlike the plain CI workflow, this one calls the Claude API, so it needs the [Claude GitHub App](https://github.com/apps/claude) installed on the repo, which provisions the `CLAUDE_CODE_OAUTH_TOKEN` repository secret it authenticates with:
+
+```bash
+# From inside a local Claude Code CLI session (needs repo admin access):
+claude
+# then, at the prompt:
+/install-github-app
+```
+
+This walks you through GitHub App installation and creates the secret automatically — no manual token copy-pasting. Verify the secret exists with:
+
+```bash
+gh secret list --repo guedim/CurosIA
+# should list CLAUDE_CODE_OAUTH_TOKEN
+```
+
+Verify the GitHub App itself is installed at `https://github.com/guedim/CurosIA/settings/installations` (repo admin required).
+
+### How to run it
+
+- **Automatically:** open (or push a new commit to) a PR with changes under `hookhub/` — no action needed.
+- It does **not** support `workflow_dispatch` (manual trigger) since its `prompt` depends on PR context (`github.event.pull_request.number`) that only exists for real pull request events.
+
+### Where to view runs
+
+🔗 **[github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml](https://github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml)** — every past and in-progress review run. The review comments themselves show up directly on the PR's *Files changed* tab and in the PR's comment thread.
+
 ## Download this project from GitHub
 
 This project lives inside the `CurosIA` monorepo, in the `hookhub/` subfolder — it is not a standalone repository.
