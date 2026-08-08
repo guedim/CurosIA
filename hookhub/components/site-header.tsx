@@ -8,7 +8,7 @@ export function SiteHeader() {
           href="/"
           className="bg-gradient-to-r from-[#ff2947] via-[#7a2ea8] to-[#0407f5] bg-clip-text text-lg font-extrabold tracking-tight text-transparent"
         >
-          HookPlugHub
+          ClaudeCodeHub
         </Link>
       </div>
     </header>

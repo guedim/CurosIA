@@ -1,4 +1,4 @@
-export type ItemType = "hook" | "plugin";
+export type ItemType = "hook" | "plugin" | "rag";
 
 export type HookCategory =
   | "security"
@@ -19,7 +19,16 @@ export type PluginCategory =
   | "monitoring"
   | "documentation";
 
-export type Category = HookCategory | PluginCategory;
+export type RagCategory =
+  | "code-retrieval"
+  | "vector-db"
+  | "framework"
+  | "ingestion"
+  | "embeddings-rerank"
+  | "evaluation"
+  | "memory";
+
+export type Category = HookCategory | PluginCategory | RagCategory;
 
 export type StackTag =
   | "python"
@@ -92,6 +101,16 @@ export const pluginCategories: PluginCategory[] = [
   "deployment",
   "monitoring",
   "documentation",
+];
+
+export const ragCategories: RagCategory[] = [
+  "code-retrieval",
+  "vector-db",
+  "framework",
+  "ingestion",
+  "embeddings-rerank",
+  "evaluation",
+  "memory",
 ];
 
 const hooks: CatalogItem[] = [
@@ -1341,4 +1360,224 @@ const plugins: CatalogItem[] = [
   },
 ];
 
-export const catalogItems: CatalogItem[] = [...hooks, ...plugins];
+const rag: CatalogItem[] = [
+  {
+    name: "claude-context",
+    type: "rag",
+    category: "code-retrieval",
+    description:
+      "Semantic search MCP server over an entire codebase, powered by Milvus/Zilliz vector storage plus embeddings — add with claude mcp add for index_codebase and search_code tools.",
+    repoUrl: "https://github.com/zilliztech/claude-context",
+    official: true,
+    stars: 12328,
+  },
+  {
+    name: "Serena",
+    type: "rag",
+    category: "code-retrieval",
+    description:
+      "Symbolic code retrieval and editing MCP server built on the Language Server Protocol (find_symbol, find_referencing_symbols) — no embeddings or vector DB required, 30+ languages.",
+    repoUrl: "https://github.com/oraios/serena",
+    official: true,
+    stars: 27744,
+  },
+  {
+    name: "Context7",
+    type: "rag",
+    category: "code-retrieval",
+    description:
+      "Always up-to-date library and framework documentation, served straight into the prompt via MCP or CLI — resolves a library id, then pulls current docs instead of stale training data.",
+    repoUrl: "https://github.com/upstash/context7",
+    official: true,
+    stars: 60431,
+  },
+  {
+    name: "Repomix",
+    type: "rag",
+    category: "code-retrieval",
+    description:
+      "Packs an entire repository into a single AI-friendly file with tree-sitter based compression (~70% fewer tokens), with an MCP server exposing grep-style search over the packed output.",
+    repoUrl: "https://github.com/yamadashy/repomix",
+    stars: 27707,
+  },
+  {
+    name: "Anthropic Cookbook",
+    type: "rag",
+    category: "code-retrieval",
+    description:
+      "Anthropic's official recipes for Contextual Retrieval — contextual embeddings + BM25 + reranking — with runnable code and the evaluation set behind Anthropic's published accuracy numbers.",
+    repoUrl: "https://github.com/anthropics/anthropic-cookbook",
+    official: true,
+    stars: 51147,
+  },
+  {
+    name: "Milvus",
+    type: "rag",
+    category: "vector-db",
+    description:
+      "Vector database built to scale to billions of vectors — the backend behind claude-context, with a dedicated MCP server for direct semantic search integration.",
+    repoUrl: "https://github.com/milvus-io/milvus",
+    official: true,
+    stars: 45567,
+  },
+  {
+    name: "Qdrant",
+    type: "rag",
+    category: "vector-db",
+    description:
+      "Rust-based vector database with an official MCP server (qdrant-store / qdrant-find) — strong balance of performance and filtering, with sparse and ColBERT-style retrieval support.",
+    repoUrl: "https://github.com/qdrant/qdrant",
+    official: true,
+    stars: 33856,
+  },
+  {
+    name: "Chroma",
+    type: "rag",
+    category: "vector-db",
+    description:
+      "The simplest vector database to prototype with — vector, full-text, and metadata filtering, plus an official MCP server supporting Voyage, OpenAI, Cohere, and Jina embeddings.",
+    repoUrl: "https://github.com/chroma-core/chroma",
+    official: true,
+    stars: 28984,
+  },
+  {
+    name: "LangChain",
+    type: "rag",
+    category: "framework",
+    description:
+      "The most widely used RAG/LLM orchestration framework — a custom or FastMCP-wrapped LangChain pipeline is a common way to expose a RAG backend to Claude Code as an MCP server.",
+    repoUrl: "https://github.com/langchain-ai/langchain",
+    official: true,
+    stars: 143720,
+  },
+  {
+    name: "LlamaIndex",
+    type: "rag",
+    category: "framework",
+    description:
+      "Data ingestion and indexing framework purpose-built for RAG — commonly paired with LangChain for orchestration, and the base many community MCP servers index on top of.",
+    repoUrl: "https://github.com/run-llama/llama_index",
+    official: true,
+    stars: 51460,
+  },
+  {
+    name: "Dify",
+    type: "rag",
+    category: "framework",
+    description:
+      "Low-code LLM application platform with built-in RAG pipelines and knowledge bases, exposing APIs that an MCP server can wrap for Claude Code access.",
+    repoUrl: "https://github.com/langgenius/dify",
+    official: true,
+    stars: 151794,
+  },
+  {
+    name: "MarkItDown",
+    type: "rag",
+    category: "ingestion",
+    description:
+      "Microsoft's converter from 15+ document formats (PDF, Office, images) to clean Markdown for LLM consumption, with an MCP server for direct use from Claude Code — 82% table-extraction F1, no GPU needed.",
+    repoUrl: "https://github.com/microsoft/markitdown",
+    official: true,
+    stars: 172385,
+  },
+  {
+    name: "Firecrawl",
+    type: "rag",
+    category: "ingestion",
+    description:
+      "Turns any website into clean Markdown for agents, with an official MCP server that adds scraping and search directly to Claude Code's toolset.",
+    repoUrl: "https://github.com/mendableai/firecrawl",
+    official: true,
+    stars: 163300,
+  },
+  {
+    name: "Voyage AI",
+    type: "rag",
+    category: "embeddings-rerank",
+    description:
+      "Anthropic's preferred text embedding provider — quoted verbatim in Anthropic's own Contextual Retrieval cookbook. voyage-3-large is the current flagship model, with domain-specific variants like voyage-code.",
+    repoUrl: "https://voyageai.com",
+    official: true,
+  },
+  {
+    name: "Cohere Rerank",
+    type: "rag",
+    category: "embeddings-rerank",
+    description:
+      "The reranking API used in Anthropic's own Contextual Retrieval cookbook — the single step that takes retrieval-failure reduction from 49% to 67% over a naive top-20 baseline.",
+    repoUrl: "https://cohere.com/rerank",
+    official: true,
+  },
+  {
+    name: "FlagEmbedding (BGE)",
+    type: "rag",
+    category: "embeddings-rerank",
+    description:
+      "Open-source, self-hostable embedding models from BAAI — a competitive alternative to hosted embedding APIs when data can't leave your infrastructure.",
+    repoUrl: "https://github.com/FlagOpen/FlagEmbedding",
+    official: true,
+    stars: 12032,
+  },
+  {
+    name: "Ragas",
+    type: "rag",
+    category: "evaluation",
+    description:
+      "Reference-free RAG evaluation metrics — faithfulness, answer relevancy, context relevancy — with adapters for LangChain, LlamaIndex, and Haystack.",
+    repoUrl: "https://github.com/explodinggradients/ragas",
+    official: true,
+    stars: 15188,
+  },
+  {
+    name: "DeepEval",
+    type: "rag",
+    category: "evaluation",
+    description:
+      "Pytest-style RAG/LLM testing framework with 50+ metrics, built to run in CI and fail the build when faithfulness or relevancy drops.",
+    repoUrl: "https://github.com/confident-ai/deepeval",
+    official: true,
+    stars: 17478,
+  },
+  {
+    name: "Promptfoo",
+    type: "rag",
+    category: "evaluation",
+    description:
+      "CLI for testing prompts and RAG pipelines, including red-teaming against 50+ vulnerability classes, with YAML config checked into the repo and CI-friendly exit codes.",
+    repoUrl: "https://github.com/promptfoo/promptfoo",
+    official: true,
+    stars: 24070,
+  },
+  {
+    name: "Mem0",
+    type: "rag",
+    category: "memory",
+    description:
+      "Memory layer for agents combining vector, graph, and key-value storage with automatic fact extraction, available as an MCP server for persisting context across Claude Code sessions.",
+    repoUrl: "https://github.com/mem0ai/mem0",
+    official: true,
+    stars: 62826,
+  },
+  {
+    name: "Graphiti",
+    type: "rag",
+    category: "memory",
+    description:
+      "Temporal knowledge graph library for agent memory — tracks how facts change over time and exposes that graph to Claude Code via MCP.",
+    repoUrl: "https://github.com/getzep/graphiti",
+    official: true,
+    stars: 29687,
+  },
+  {
+    name: "MCP Reference Servers",
+    type: "rag",
+    category: "memory",
+    description:
+      "Anthropic's official reference MCP servers — including a knowledge-graph-based memory server, plus filesystem, fetch, and git — the baseline building blocks for RAG-adjacent context.",
+    repoUrl: "https://github.com/modelcontextprotocol/servers",
+    official: true,
+    stars: 89350,
+  },
+];
+
+export const catalogItems: CatalogItem[] = [...hooks, ...plugins, ...rag];

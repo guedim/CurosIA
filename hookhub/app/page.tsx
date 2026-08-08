@@ -7,6 +7,7 @@ import { ItemCard } from "@/components/item-card";
 const tabs: { type: ItemType; label: string }[] = [
   { type: "hook", label: "Hooks" },
   { type: "plugin", label: "Plugins" },
+  { type: "rag", label: "RAG" },
 ];
 
 export default function Home() {
@@ -36,10 +37,10 @@ export default function Home() {
       <main className="relative w-full max-w-6xl flex-1 px-6 py-16 sm:px-10">
         <header className="mb-12 flex flex-col gap-3 text-center sm:text-left">
           <h1 className="bg-gradient-to-r from-[#ff2947] via-[#7a2ea8] to-[#0407f5] bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
-            HookPlugHub
+            ClaudeCodeHub
           </h1>
           <p className="text-lg text-muted">
-            Discover open-source hooks and plugins for Claude Code.
+            Discover open-source hooks, plugins, and RAG tools for Claude Code.
           </p>
         </header>
 

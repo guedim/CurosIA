@@ -11,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "HookPlugHub",
-  description: "Discover open-source hooks and plugins for Claude Code.",
+  title: "ClaudeCodeHub",
+  description: "Discover open-source hooks, plugins, and RAG tools for Claude Code.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

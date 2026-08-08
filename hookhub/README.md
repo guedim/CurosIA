@@ -1,17 +1,17 @@
-# HookPlugHub
+# ClaudeCodeHub
 
-**HookPlugHub** is a curated directory of open-source **hooks and plugins for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks (security, formatting, notifications, logging, testing, automation, workflow) and SDLC-focused plugins (planning, coding, code review, testing, CI/CD, deployment, monitoring, documentation), each linking straight to its source repository on GitHub.
+**ClaudeCodeHub** is a curated directory of open-source **hooks, plugins, and RAG tools for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks (security, formatting, notifications, logging, testing, automation, workflow), SDLC-focused plugins (planning, coding, code review, testing, CI/CD, deployment, monitoring, documentation), and the most popular RAG/retrieval tooling for grounding Claude Code in your code and docs (code-retrieval MCP servers, vector databases, RAG frameworks, ingestion, embeddings/reranking, evaluation, memory), each linking straight to its source (GitHub repo, or vendor site for the couple of API-only entries).
 
 It's a static, no-backend Next.js site: every entry is a plain data record rendered as a card, so there's nothing to configure, no database, and no environment variables required to run it.
 
 ## Features
 
-- **Gallery view** — hooks and plugins rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
-- **Hooks / Plugins toggle** — a tab switcher on the home page filters the gallery between the two catalogs.
-- **Category badges** — hooks are tagged with one of `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`; plugins are tagged by SDLC phase: `planning`, `coding`, `code-review`, `testing`, `ci-cd`, `deployment`, `monitoring`, `documentation`.
-- **Stack tag filter** — an optional, multi-select filter (chips below the Hooks/Plugins toggle) for narrowing the gallery to entries relevant to a specific tech stack: `python`, `aws`, `aws-lambda`, `aws-api-gateway`, `aws-dynamodb`, `aws-s3`, `clean-architecture`, `distributed-systems`, `resilience`, `banking`, `payments`, `ddd`, `design-patterns`, `enterprise-integration-patterns`, `owasp`, `best-practices`, `ai-assisted-sdlc`. Entries without a matching tag just don't appear when a filter is active — `stackTags` is optional per entry.
-- **Official + star badges** — cards optionally show a "✓ Official" badge (published by the tool's own vendor, or part of Anthropic's official plugin marketplace) and a GitHub star count, snapshotted at curation time via the GitHub API.
-- **Direct links** — every card links out to the entry's GitHub repository.
+- **Gallery view** — hooks, plugins, and RAG tools rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
+- **Hooks / Plugins / RAG toggle** — a tab switcher on the home page filters the gallery between the three catalogs.
+- **Category badges** — hooks are tagged with one of `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`; plugins are tagged by SDLC phase: `planning`, `coding`, `code-review`, `testing`, `ci-cd`, `deployment`, `monitoring`, `documentation`; RAG entries are tagged by function: `code-retrieval`, `vector-db`, `framework`, `ingestion`, `embeddings-rerank`, `evaluation`, `memory`.
+- **Stack tag filter** — an optional, multi-select filter (chips below the Hooks/Plugins/RAG toggle) for narrowing the gallery to entries relevant to a specific tech stack: `python`, `aws`, `aws-lambda`, `aws-api-gateway`, `aws-dynamodb`, `aws-s3`, `clean-architecture`, `distributed-systems`, `resilience`, `banking`, `payments`, `ddd`, `design-patterns`, `enterprise-integration-patterns`, `owasp`, `best-practices`, `ai-assisted-sdlc`. Entries without a matching tag just don't appear when a filter is active — `stackTags` is optional per entry.
+- **Official + star badges** — cards optionally show a "✓ Official" badge (published by the tool's own vendor, or part of Anthropic's official plugin marketplace) and a GitHub star count, snapshotted at curation time via the GitHub API. The two API-only RAG entries (Voyage AI, Cohere Rerank) have no repo to star, so they show neither.
+- **Direct links** — every card links out to the entry's source — "View on GitHub" for GitHub-hosted entries, "Visit" for the couple of vendor-site-only RAG entries.
 - **Bold.co-inspired theme** — a dark, high-contrast UI with a red → navy → blue gradient brand mark, a sticky site header, and a gradient-hairline footer.
 - **Content-as-data** — the entire catalog lives in one file, [`data/catalog.ts`](data/catalog.ts); no CMS or database involved.
 
@@ -33,19 +33,19 @@ hookhub/
 │   ├── page.tsx           # Home page — renders the hero, Hooks/Plugins toggle, and gallery
 │   └── globals.css        # Tailwind entrypoint + Bold-inspired theme tokens
 ├── components/
-│   ├── item-card.tsx      # Card component for a single hook or plugin
-│   ├── site-header.tsx    # Sticky site header with the gradient "HookPlugHub" wordmark
+│   ├── item-card.tsx      # Card component for a single hook, plugin, or RAG entry
+│   ├── site-header.tsx    # Sticky site header with the gradient "ClaudeCodeHub" wordmark
 │   └── site-footer.tsx    # Footer with the gradient hairline + copyright line
 ├── data/
-│   └── catalog.ts          # The unified catalog (CatalogItem type + catalogItems[] array)
+│   └── catalog.ts          # The unified catalog (CatalogItem type + catalogItems[] array: hooks, plugins, rag)
 └── public/                 # Static assets (icons, svgs)
 ```
 
 ## Deployment
 
-The production site is live on Vercel at **[hookplughub-guedim-5157s-projects.vercel.app](https://hookplughub-guedim-5157s-projects.vercel.app)**.
+The production site is live on Vercel at **[hookplughub.vercel.app](https://hookplughub.vercel.app)**. That domain and the underlying Vercel project (`hookplughub`, team `guedim-5157s-projects`) still use the pre-rename name — renaming them is a manual step in the Vercel dashboard, not something a code change can do, so the live URL won't match the new "ClaudeCodeHub" branding shown on the site until that's done separately. Use this short domain when sharing the link — Vercel's team-scoped alias (`hookplughub-guedim-5157s-projects.vercel.app`) has Vercel Authentication (SSO) enabled and will prompt other users to log in.
 
-Deploys are git-based: the Vercel project `hookplughub` (team `guedim-5157s-projects`) is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `hookhub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
+Deploys are git-based: the Vercel project is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `hookhub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
 
 This was set up as follows, since `hookhub/` is a subfolder of the `CurosIA` monorepo rather than its own repo:
 
@@ -63,11 +63,11 @@ This project lives inside the `CurosIA` monorepo, in the `hookhub/` subfolder �
 # Clone the monorepo
 git clone https://github.com/guedim/CurosIA.git
 
-# Move into the HookPlugHub project
+# Move into the ClaudeCodeHub project
 cd CurosIA/hookhub
 ```
 
-All commands below assume you're running them from inside this `hookhub/` directory. The folder is still named `hookhub/` in the monorepo — only the project's name/branding changed to HookPlugHub.
+All commands below assume you're running them from inside this `hookhub/` directory. The folder is still named `hookhub/` in the monorepo — only the project's name/branding changed to ClaudeCodeHub.
 
 ## Mandatory tools & installation
 
@@ -155,9 +155,9 @@ Serves the build created by `npm run build` at [http://localhost:3000](http://lo
 
 > There is no test framework configured in this project.
 
-## Adding a new hook or plugin to the gallery
+## Adding a new hook, plugin, or RAG entry to the gallery
 
-The catalog is a plain TypeScript array — no build step or database migration needed. To add an entry, add a new object to the `hooks` or `plugins` array in [`data/catalog.ts`](data/catalog.ts) matching the `CatalogItem` interface:
+The catalog is a plain TypeScript array — no build step or database migration needed. To add an entry, add a new object to the `hooks`, `plugins`, or `rag` array in [`data/catalog.ts`](data/catalog.ts) matching the `CatalogItem` interface:
 
 ```ts
 // Hook
@@ -183,9 +183,20 @@ The catalog is a plain TypeScript array — no build step or database migration 
   official: false,
   stars: 42,
 }
+
+// RAG
+{
+  name: "My RAG Tool",
+  type: "rag",
+  category: "vector-db", // code-retrieval | vector-db | framework | ingestion | embeddings-rerank | evaluation | memory
+  description: "A short description of what the tool does and how it plugs into Claude Code.",
+  repoUrl: "https://github.com/owner/repo", // or a vendor site for API-only tools with no GitHub repo (card link label adapts automatically)
+  official: true,
+  stars: 5678, // omit for API-only entries with no repo to star
+}
 ```
 
-Save the file and the new card will appear in the gallery (under the matching Hooks/Plugins tab) automatically the next time the page renders.
+Save the file and the new card will appear in the gallery (under the matching Hooks/Plugins/RAG tab) automatically the next time the page renders. For the RAG tab specifically, keep the bar high — it's meant to surface the most popular, actively maintained tools in each category, not every RAG-adjacent repo on GitHub.
 
 ## Claude Code skills
 

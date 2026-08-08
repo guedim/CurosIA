@@ -17,6 +17,14 @@ const categoryStyles: Record<Category, string> = {
   deployment: "bg-teal-500/15 text-teal-300 ring-1 ring-inset ring-teal-500/30",
   monitoring: "bg-lime-500/15 text-lime-300 ring-1 ring-inset ring-lime-500/30",
   documentation: "bg-slate-500/15 text-slate-300 ring-1 ring-inset ring-slate-500/30",
+  // rag categories
+  "code-retrieval": "bg-violet-500/15 text-violet-300 ring-1 ring-inset ring-violet-500/30",
+  "vector-db": "bg-blue-500/15 text-blue-300 ring-1 ring-inset ring-blue-500/30",
+  framework: "bg-yellow-500/15 text-yellow-300 ring-1 ring-inset ring-yellow-500/30",
+  ingestion: "bg-rose-500/15 text-rose-300 ring-1 ring-inset ring-rose-500/30",
+  "embeddings-rerank": "bg-green-500/15 text-green-300 ring-1 ring-inset ring-green-500/30",
+  evaluation: "bg-red-500/15 text-red-300 ring-1 ring-inset ring-red-500/30",
+  memory: "bg-stone-500/15 text-stone-300 ring-1 ring-inset ring-stone-500/30",
 };
 
 function formatStars(stars: number): string {
@@ -25,6 +33,8 @@ function formatStars(stars: number): string {
 }
 
 export function ItemCard({ item }: { item: CatalogItem }) {
+  const isGitHub = item.repoUrl.includes("github.com");
+
   return (
     <article className="group flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[.04] p-5 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-white/[.06] hover:shadow-[0_0_0_1px_rgba(255,41,71,0.4),0_8px_30px_-8px_rgba(4,7,245,0.5)]">
       <div className="flex items-start justify-between gap-3">
@@ -68,7 +78,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
         rel="noopener noreferrer"
         className="text-sm font-semibold text-[#ff6b82] transition-colors hover:text-[#ff2947]"
       >
-        View {item.name} on GitHub →
+        {isGitHub ? `View ${item.name} on GitHub →` : `Visit ${item.name} →`}
       </a>
     </article>
   );
