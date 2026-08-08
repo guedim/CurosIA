@@ -1,5 +1,7 @@
 # ClaudeCodeHub
 
+🔗 **Live site: [claudecodehub.vercel.app](https://claudecodehub.vercel.app/)**
+
 **ClaudeCodeHub** is a curated directory of open-source **hooks, plugins, and RAG tools for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks (security, formatting, notifications, logging, testing, automation, workflow), SDLC-focused plugins (planning, coding, code review, testing, CI/CD, deployment, monitoring, documentation), and the most popular RAG/retrieval tooling for grounding Claude Code in your code and docs (code-retrieval MCP servers, vector databases, RAG frameworks, ingestion, embeddings/reranking, evaluation, memory), each linking straight to its source (GitHub repo, or vendor site for the couple of API-only entries).
 
 It's a static, no-backend Next.js site: every entry is a plain data record rendered as a card, so there's nothing to configure, no database, and no environment variables required to run it.
@@ -43,9 +45,9 @@ hookhub/
 
 ## Deployment
 
-The production site is live on Vercel at **[claudecodehub.vercel.app](https://claudecodehub.vercel.app)**. Use this short domain when sharing the link — Vercel's team-scoped alias (`claudecodehub-guedim-5157s-projects.vercel.app`) has Vercel Authentication (SSO) enabled and will prompt other users to log in.
+The production site is live on Vercel at **[claudecodehub.vercel.app](https://claudecodehub.vercel.app/)**. Use this short domain when sharing the link — Vercel's team-scoped alias (`claudecodehub-guedim-5157s-projects.vercel.app`) has Vercel Authentication (SSO) enabled and will prompt other users to log in.
 
-> The underlying Vercel project (team `guedim-5157s-projects`) was originally created as `hookplughub`; renaming a Vercel project's *Settings → General → Project Name* to `claudecodehub` is what reassigns the default `*.vercel.app` domain to match — a manual dashboard step, not something a code change can trigger. The old `hookplughub.vercel.app` domain may keep resolving for a transition period depending on how Vercel handles the rename.
+> The Vercel project (team `guedim-5157s-projects`) was originally created as `hookplughub`. Renaming a project's *Settings → General → Project Name* does **not** move its `*.vercel.app` domain automatically — the new domain had to be added explicitly under *Settings → Domains*, after which the old `hookplughub.vercel.app` domain was removed from the project.
 
 Deploys are git-based: the Vercel project is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `hookhub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
 
