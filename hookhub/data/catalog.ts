@@ -40,6 +40,7 @@ export type StackTag =
   | "clean-architecture"
   | "distributed-systems"
   | "resilience"
+  | "observability"
   | "banking"
   | "payments"
   | "ddd"
@@ -59,6 +60,7 @@ export const stackTags: StackTag[] = [
   "clean-architecture",
   "distributed-systems",
   "resilience",
+  "observability",
   "banking",
   "payments",
   "ddd",
@@ -114,6 +116,7 @@ export const ragCategories: RagCategory[] = [
 ];
 
 const hooks: CatalogItem[] = [
+  // Security
   {
     name: "Lasso Claude-Hooks",
     type: "hook",
@@ -136,33 +139,157 @@ const hooks: CatalogItem[] = [
     stackTags: ["owasp", "best-practices"],
   },
   {
+    name: "Destructive Command Guard",
+    type: "hook",
+    category: "security",
+    description:
+      "Blocks catastrophic git and shell commands — force pushes, hard resets, rm -rf, DROP TABLE — before an agent can run them.",
+    repoUrl: "https://github.com/Dicklesworthstone/destructive_command_guard",
+    stars: 5687,
+    stackTags: ["owasp", "resilience", "best-practices"],
+  },
+  {
+    name: "Sensitive Canary",
+    type: "hook",
+    category: "security",
+    description:
+      "Guards secrets and PII with gitleaks/TruffleHog-derived detection patterns before a prompt or file read ever reaches the API.",
+    repoUrl: "https://github.com/coo-quack/sensitive-canary",
+    stars: 20,
+    stackTags: ["owasp", "banking", "payments", "best-practices"],
+  },
+  {
+    name: "Claude Code Damage Control",
+    type: "hook",
+    category: "security",
+    description:
+      "PreToolUse/PostToolUse safety layer that intercepts and blocks high-risk operations before they execute.",
+    repoUrl: "https://github.com/disler/claude-code-damage-control",
+    stars: 478,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Real-Time Tool Call Guardrails",
+    type: "hook",
+    category: "security",
+    description:
+      "Evaluates every Claude Code tool call against configurable real-time guardrail rules before it's allowed to run.",
+    repoUrl: "https://github.com/rulebricks/claude-code-guardrails",
+    stars: 75,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "AWS Policy-Driven Guardrails",
+    type: "hook",
+    category: "security",
+    description:
+      "AWS's own sample hook that fires on every message and tool invocation to enforce org security policy on an AI coding agent.",
+    repoUrl:
+      "https://github.com/aws-samples/sample-policy-driven-code-assistant-guardrails",
+    official: true,
+    stars: 1,
+    stackTags: ["aws", "owasp", "best-practices"],
+  },
+  {
+    name: "Project Boundary Guard",
+    type: "hook",
+    category: "security",
+    description:
+      "Scope-aware protection that allows destructive ops inside the project directory but blocks them the moment a path escapes it — built for multi-service monorepos.",
+    repoUrl: "https://github.com/justi/claude-code-project-boundary",
+    stars: 86,
+    stackTags: ["best-practices", "distributed-systems"],
+  },
+  {
+    name: "Secret Scanner Hook",
+    type: "hook",
+    category: "security",
+    description:
+      "PreToolUse secret scanner from a 20-hook toolkit, blocking writes that contain hardcoded credentials before they land on disk.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/secret-scanner.js",
+    stars: 2468,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Bash Command Guard",
+    type: "hook",
+    category: "security",
+    description:
+      "Blocks dangerous shell invocations at the PreToolUse boundary as part of a production-grade Claude Code security configuration.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/bash-guard.sh",
+    stars: 112,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "npm Audit Vulnerability Hook",
+    type: "hook",
+    category: "security",
+    description:
+      "Runs a dependency vulnerability audit automatically after package.json changes and surfaces findings before they ship.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/bash-vuln.sh",
+    stars: 112,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "Prompt Secrets Guard",
+    type: "hook",
+    category: "security",
+    description:
+      "UserPromptSubmit hook that inspects every prompt for credentials and secrets before it's ever sent to the model.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/user-prompt-secrets.sh",
+    stars: 112,
+    stackTags: ["owasp", "banking"],
+  },
+
+  // Formatting
+  {
     name: "Auto-lint on Save",
     type: "hook",
     category: "formatting",
     description:
       "Runs the linter after every file write and rejects changes that introduce lint errors.",
     repoUrl: "https://github.com/affaan-m/everything-claude-code",
-    stars: 238733,
+    stars: 238799,
     stackTags: ["best-practices"],
   },
   {
-    name: "Claude Organize",
+    name: "Multi-Language Format Hook",
     type: "hook",
-    category: "automation",
+    category: "formatting",
     description:
-      "AI-powered file organization hook that automatically sorts temporary scripts from permanent docs based on content, not just patterns.",
-    repoUrl: "https://github.com/ramakay/claude-organizer",
-    stars: 68,
+      "Auto-formats files on every Claude Code edit across JS/TS, Python, Go, Kotlin, and Markdown, falling back gracefully between Biome/Ruff/Prettier.",
+    repoUrl: "https://github.com/ryanlewis/claude-format-hook",
+    stars: 4,
+    stackTags: ["best-practices"],
   },
   {
-    name: "claude-code-toast",
+    name: "Auto-Format on Write Hook",
     type: "hook",
-    category: "notifications",
+    category: "formatting",
     description:
-      "Sends a macOS toast notification whenever Claude Code is waiting for a user response.",
-    repoUrl: "https://github.com/eyalzh/claude-code-toast",
-    stars: 17,
+      "PostToolUse formatter that runs the project's own formatter after every Write/Edit so style never drifts across a session.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/write-format.sh",
+    stars: 112,
+    stackTags: ["best-practices"],
   },
+  {
+    name: "Lint Auto-Fix Hook",
+    type: "hook",
+    category: "formatting",
+    description:
+      "Auto-fixes lint violations immediately after an edit instead of just reporting them, from a 20-hook toolkit.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/lint-fix.js",
+    stars: 2468,
+    stackTags: ["best-practices"],
+  },
+
+  // Notifications
   {
     name: "Claude Code Notification",
     type: "hook",
@@ -179,8 +306,29 @@ const hooks: CatalogItem[] = [
     description:
       "Adds text-to-speech voice output to Claude Code responses and notifications.",
     repoUrl: "https://github.com/shanraisshan/claude-code-hooks",
-    stars: 498,
+    stars: 501,
   },
+  {
+    name: "Cross-Platform Smart Notifications",
+    type: "hook",
+    category: "notifications",
+    description:
+      "Zero-dependency notification hook for Linux/macOS/Windows with click-to-focus and webhook fan-out to Slack, Telegram, and ntfy — built for chatops at team scale.",
+    repoUrl: "https://github.com/777genius/claude-notifications-go",
+    stars: 777,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "code-notify",
+    type: "hook",
+    category: "notifications",
+    description:
+      "Cross-platform desktop notifications for Claude Code, Codex, and Gemini CLI, installable via Homebrew, npm, or a one-line script.",
+    repoUrl: "https://github.com/mylee04/code-notify",
+    stars: 280,
+  },
+
+  // Logging
   {
     name: "Multi-Agent Observability Dashboard",
     type: "hook",
@@ -190,6 +338,7 @@ const hooks: CatalogItem[] = [
     repoUrl:
       "https://github.com/disler/claude-code-hooks-multi-agent-observability",
     stars: 1509,
+    stackTags: ["observability"],
   },
   {
     name: "Cost Tracker Hook",
@@ -199,7 +348,52 @@ const hooks: CatalogItem[] = [
       "Tracks token usage and estimated dollar cost per session, part of a 10-hook collection.",
     repoUrl: "https://github.com/karanb192/claude-code-hooks",
     stars: 466,
+    stackTags: ["observability"],
   },
+  {
+    name: "agents-observe",
+    type: "hook",
+    category: "logging",
+    description:
+      "Real-time observability dashboard that captures every hook event across Claude Code sessions and multi-agent runs as it happens.",
+    repoUrl: "https://github.com/simple10/agents-observe",
+    stars: 641,
+    stackTags: ["observability", "distributed-systems"],
+  },
+  {
+    name: "ccusage",
+    type: "hook",
+    category: "logging",
+    description:
+      "The de-facto standard CLI for analyzing Claude Code token usage and cost from local session logs, commonly wired into a Stop/SessionEnd hook for automatic reporting.",
+    repoUrl: "https://github.com/ccusage/ccusage",
+    stars: 17803,
+    stackTags: ["observability", "best-practices"],
+  },
+  {
+    name: "Session Notification Log Hook",
+    type: "hook",
+    category: "logging",
+    description:
+      "Structured JSONL log of every notification event across a session, useful as a lightweight audit trail for team usage patterns.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/notification-log.js",
+    stars: 2468,
+    stackTags: ["observability"],
+  },
+  {
+    name: "PostToolUse Failure Logger",
+    type: "hook",
+    category: "logging",
+    description:
+      "Captures every failed tool call with its error context to a durable log, so failures are diagnosable after the fact instead of scrolling past in the terminal.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/posttooluse-failure.sh",
+    stars: 112,
+    stackTags: ["observability", "resilience"],
+  },
+
+  // Testing
   {
     name: "Protect Tests Hook",
     type: "hook",
@@ -209,6 +403,79 @@ const hooks: CatalogItem[] = [
     repoUrl: "https://github.com/karanb192/claude-code-hooks",
     stars: 466,
     stackTags: ["best-practices"],
+  },
+  {
+    name: "TDD Guard",
+    type: "hook",
+    category: "testing",
+    description:
+      "Blocks implementation edits without a preceding failing test, over-implementation beyond test scope, and adding multiple tests at once — enforced red-green-refactor.",
+    repoUrl: "https://github.com/nizos/tdd-guard",
+    stars: 2299,
+    stackTags: ["best-practices", "ai-assisted-sdlc"],
+  },
+  {
+    name: "Probity",
+    type: "hook",
+    category: "testing",
+    description:
+      "Checks every file write and shell command against a rule set — including TDD enforcement — before it happens, and tells the agent why a violation was blocked.",
+    repoUrl: "https://github.com/nizos/probity",
+    stars: 159,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "TypeScript Hooks",
+    type: "hook",
+    category: "testing",
+    description:
+      "Blocks Claude Code edits that introduce TypeScript type errors, keeping the compiler green across a whole session.",
+    repoUrl: "https://github.com/bartolli/claude-code-typescript-hooks",
+    stars: 178,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Anti-Regression Setup",
+    type: "hook",
+    category: "testing",
+    description:
+      "Ready-to-use hooks and configs that stop Claude Code from silently breaking existing behavior while it works on something else.",
+    repoUrl: "https://github.com/CreatmanCEO/claude-code-antiregression-setup",
+    stars: 12,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Pre-Push Quality Gate Hook",
+    type: "hook",
+    category: "testing",
+    description:
+      "Runs the full quality gate — tests, types, lint — before a push is allowed to leave the machine, from a 20-hook toolkit.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/pre-push-check.js",
+    stars: 2468,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Auto Test Runner Hook",
+    type: "hook",
+    category: "testing",
+    description:
+      "Runs the relevant test file automatically after every edit, catching regressions before they compound across a session.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/auto-test.js",
+    stars: 2468,
+    stackTags: ["best-practices"],
+  },
+
+  // Automation
+  {
+    name: "Claude Organize",
+    type: "hook",
+    category: "automation",
+    description:
+      "AI-powered file organization hook that automatically sorts temporary scripts from permanent docs based on content, not just patterns.",
+    repoUrl: "https://github.com/ramakay/claude-organizer",
+    stars: 68,
   },
   {
     name: "claude-model-router-hook",
@@ -221,13 +488,78 @@ const hooks: CatalogItem[] = [
     stackTags: ["ai-assisted-sdlc"],
   },
   {
+    name: "Git Checkpointing Hook",
+    type: "hook",
+    category: "automation",
+    description:
+      "Automatically creates a git snapshot before every file modification, giving a one-command safety net to restore prior state without touching the real history.",
+    repoUrl: "https://github.com/Ixe1/claude-code-checkpointing-hook",
+    stars: 15,
+    stackTags: ["resilience", "best-practices"],
+  },
+  {
+    name: "ccheckpoints",
+    type: "hook",
+    category: "automation",
+    description:
+      "Tracks every Claude Code CLI session as a navigable checkpoint, so you can see and roll back exactly what an agent did turn by turn.",
+    repoUrl: "https://github.com/p32929/ccheckpoints",
+    stars: 34,
+  },
+  {
+    name: "Commit Guard Hook",
+    type: "hook",
+    category: "automation",
+    description:
+      "Generates checkpoint commits with contextual messages after meaningful edits, from a 20-hook toolkit.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/commit-guard.js",
+    stars: 2468,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Lambda Bundle Size Check Hook",
+    type: "hook",
+    category: "automation",
+    description:
+      "Flags Lambda deployment bundles that cross a size threshold right after a build, catching cold-start regressions before they hit production.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/bundle-check.js",
+    stars: 2468,
+    stackTags: ["aws", "aws-lambda"],
+  },
+  {
+    name: "Smart Auto-Approve Hook",
+    type: "hook",
+    category: "automation",
+    description:
+      "Auto-approves low-risk, previously-seen tool calls while still routing anything novel or risky through normal confirmation — cuts approval fatigue at team scale.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/smart-approve.py",
+    stars: 2468,
+    stackTags: ["ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "Block Dev Server Launch Hook",
+    type: "hook",
+    category: "automation",
+    description:
+      "Stops Claude Code from spinning up a long-running dev server in the background, avoiding orphaned processes and port conflicts.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/block-dev-server.js",
+    stars: 2468,
+    stackTags: ["best-practices"],
+  },
+
+  // Workflow
+  {
     name: "Superpowers Session Start",
     type: "hook",
     category: "workflow",
     description:
       "Automatically loads project context and active tasks whenever a new Claude Code session starts.",
     repoUrl: "https://github.com/obra/superpowers",
-    stars: 269133,
+    stars: 269273,
     stackTags: ["ai-assisted-sdlc"],
   },
   {
@@ -238,6 +570,82 @@ const hooks: CatalogItem[] = [
       "Reference implementation covering all Claude Code hook lifecycle events with captured JSON payloads, TTS, linting, and sub-agent examples.",
     repoUrl: "https://github.com/disler/claude-code-hooks-mastery",
     stars: 3880,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Claude Code Showcase",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Comprehensive reference project wiring hooks together with skills, agents, commands, and GitHub Actions into one coherent configuration.",
+    repoUrl: "https://github.com/ChrisWiles/claude-code-showcase",
+    stars: 6013,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Official Hook Development Skill",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Anthropic's own skill and reference examples for designing and building Claude Code hooks, straight from the claude-code repository.",
+    repoUrl:
+      "https://github.com/anthropics/claude-code/blob/main/plugins/plugin-dev/skills/hook-development/SKILL.md",
+    official: true,
+    stars: 140726,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "claude-hooks (TypeScript framework)",
+    type: "hook",
+    category: "workflow",
+    description:
+      "TypeScript-first framework for authoring Claude Code hooks with full type safety and auto-completion over strongly-typed payloads.",
+    repoUrl: "https://github.com/johnlindquist/claude-hooks",
+    stars: 389,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Session Context Loader Hook",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Loads project context, recent git activity, and open tasks into every new session automatically, from a 20-hook toolkit.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/hooks/scripts/context-loader.js",
+    stars: 2468,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Session Lifecycle Hook",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Paired SessionStart/SessionEnd hooks that capture and restore working context across a production-grade Claude Code configuration.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/session-start.sh",
+    stars: 112,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Context Compaction Hook",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Prepares and summarizes context ahead of a PreCompact event so long-running sessions don't lose critical state when history is trimmed.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/pre-compact.sh",
+    stars: 112,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Stop Event Hook",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Runs end-of-turn verification and wrap-up steps whenever Claude Code finishes responding, closing the loop on every session.",
+    repoUrl:
+      "https://github.com/Aedelon/claude-code-blueprint/blob/main/hooks/scripts/stop.sh",
+    stars: 112,
     stackTags: ["ai-assisted-sdlc"],
   },
 ];
