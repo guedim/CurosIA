@@ -14,11 +14,21 @@ export default function Home() {
   const [activeType, setActiveType] = useState<ItemType>("hook");
   const [activeTags, setActiveTags] = useState<StackTag[]>([]);
 
-  const items = catalogItems.filter((item) => {
-    if (item.type !== activeType) return false;
+  const itemsOfActiveType = catalogItems.filter((item) => item.type === activeType);
+
+  const availableTags = stackTags.filter((tag) =>
+    itemsOfActiveType.some((item) => item.stackTags?.includes(tag)),
+  );
+
+  const items = itemsOfActiveType.filter((item) => {
     if (activeTags.length === 0) return true;
     return item.stackTags?.some((tag) => activeTags.includes(tag)) ?? false;
   });
+
+  function selectType(type: ItemType) {
+    setActiveType(type);
+    setActiveTags([]);
+  }
 
   function toggleTag(tag: StackTag) {
     setActiveTags((current) =>
@@ -55,7 +65,7 @@ export default function Home() {
               type="button"
               role="tab"
               aria-selected={activeType === tab.type}
-              onClick={() => setActiveType(tab.type)}
+              onClick={() => selectType(tab.type)}
               className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
                 activeType === tab.type
                   ? "bg-gradient-to-r from-[#ff2947] via-[#7a2ea8] to-[#0407f5] text-white"
@@ -67,27 +77,29 @@ export default function Home() {
           ))}
         </div>
 
-        <div
-          role="group"
-          aria-label="Filter by stack"
-          className="mb-8 flex flex-wrap gap-2"
-        >
-          {stackTags.map((tag) => (
-            <button
-              key={tag}
-              type="button"
-              aria-pressed={activeTags.includes(tag)}
-              onClick={() => toggleTag(tag)}
-              className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                activeTags.includes(tag)
-                  ? "bg-[#ff2947]/20 text-[#ff6b82] ring-1 ring-inset ring-[#ff2947]/50"
-                  : "bg-white/[.04] text-muted ring-1 ring-inset ring-white/10 hover:text-foreground"
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
+        {availableTags.length > 0 && (
+          <div
+            role="group"
+            aria-label="Filter by stack"
+            className="mb-8 flex flex-wrap gap-2"
+          >
+            {availableTags.map((tag) => (
+              <button
+                key={tag}
+                type="button"
+                aria-pressed={activeTags.includes(tag)}
+                onClick={() => toggleTag(tag)}
+                className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                  activeTags.includes(tag)
+                    ? "bg-[#ff2947]/20 text-[#ff6b82] ring-1 ring-inset ring-[#ff2947]/50"
+                    : "bg-white/[.04] text-muted ring-1 ring-inset ring-white/10 hover:text-foreground"
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        )}
 
         {items.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
