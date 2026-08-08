@@ -43,7 +43,9 @@ hookhub/
 
 ## Deployment
 
-The production site is live on Vercel at **[hookplughub.vercel.app](https://hookplughub.vercel.app)**. That domain and the underlying Vercel project (`hookplughub`, team `guedim-5157s-projects`) still use the pre-rename name — renaming them is a manual step in the Vercel dashboard, not something a code change can do, so the live URL won't match the new "ClaudeCodeHub" branding shown on the site until that's done separately. Use this short domain when sharing the link — Vercel's team-scoped alias (`hookplughub-guedim-5157s-projects.vercel.app`) has Vercel Authentication (SSO) enabled and will prompt other users to log in.
+The production site is live on Vercel at **[claudecodehub.vercel.app](https://claudecodehub.vercel.app)**. Use this short domain when sharing the link — Vercel's team-scoped alias (`claudecodehub-guedim-5157s-projects.vercel.app`) has Vercel Authentication (SSO) enabled and will prompt other users to log in.
+
+> The underlying Vercel project (team `guedim-5157s-projects`) was originally created as `hookplughub`; renaming a Vercel project's *Settings → General → Project Name* to `claudecodehub` is what reassigns the default `*.vercel.app` domain to match — a manual dashboard step, not something a code change can trigger. The old `hookplughub.vercel.app` domain may keep resolving for a transition period depending on how Vercel handles the rename.
 
 Deploys are git-based: the Vercel project is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `hookhub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
 
