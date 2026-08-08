@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "HookHub",
-  description: "Discover open-source hooks for Claude Code.",
+  description: "Discover open-source hooks and plugins for Claude Code.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

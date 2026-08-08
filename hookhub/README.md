@@ -1,16 +1,17 @@
 # HookHub
 
-**HookHub** is a curated directory of open-source **hooks for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks for security, formatting, notifications, logging, testing, automation, and workflow use cases, each linking straight to its source repository on GitHub.
+**HookHub** is a curated directory of open-source **hooks and plugins for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks (security, formatting, notifications, logging, testing, automation, workflow) and SDLC-focused plugins (planning, coding, code review, testing, CI/CD, deployment, monitoring, documentation), each linking straight to its source repository on GitHub.
 
-It's a static, no-backend Next.js site: every hook is a plain data entry rendered as a card, so there's nothing to configure, no database, and no environment variables required to run it.
+It's a static, no-backend Next.js site: every entry is a plain data record rendered as a card, so there's nothing to configure, no database, and no environment variables required to run it.
 
 ## Features
 
-- **Gallery view** — hooks rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
-- **Category badges** — each hook is tagged with one of: `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`.
-- **Direct links** — every card links out to the hook's GitHub repository.
+- **Gallery view** — hooks and plugins rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
+- **Hooks / Plugins toggle** — a tab switcher on the home page filters the gallery between the two catalogs.
+- **Category badges** — hooks are tagged with one of `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`; plugins are tagged by SDLC phase: `planning`, `coding`, `code-review`, `testing`, `ci-cd`, `deployment`, `monitoring`, `documentation`.
+- **Direct links** — every card links out to the entry's GitHub repository.
 - **Bold.co-inspired theme** — a dark, high-contrast UI with a red → navy → blue gradient brand mark, a sticky site header, and a gradient-hairline footer.
-- **Content-as-data** — the entire catalog lives in one file, [`data/hooks.ts`](data/hooks.ts); no CMS or database involved.
+- **Content-as-data** — the entire catalog lives in one file, [`data/catalog.ts`](data/catalog.ts); no CMS or database involved.
 
 ## Tech stack
 
@@ -27,14 +28,14 @@ It's a static, no-backend Next.js site: every hook is a plain data entry rendere
 hookhub/
 ├── app/
 │   ├── layout.tsx        # Root layout, Montserrat font, metadata
-│   ├── page.tsx           # Home page — renders the hero + hook gallery
+│   ├── page.tsx           # Home page — renders the hero, Hooks/Plugins toggle, and gallery
 │   └── globals.css        # Tailwind entrypoint + Bold-inspired theme tokens
 ├── components/
-│   ├── hook-card.tsx      # Card component for a single hook
+│   ├── item-card.tsx      # Card component for a single hook or plugin
 │   ├── site-header.tsx    # Sticky site header with the gradient "HookHub" wordmark
 │   └── site-footer.tsx    # Footer with the gradient hairline + copyright line
 ├── data/
-│   └── hooks.ts            # The hook catalog (Hook type + hooks[] array)
+│   └── catalog.ts          # The unified catalog (CatalogItem type + catalogItems[] array)
 └── public/                 # Static assets (icons, svgs)
 ```
 
@@ -138,20 +139,31 @@ Serves the build created by `npm run build` at [http://localhost:3000](http://lo
 
 > There is no test framework configured in this project.
 
-## Adding a new hook to the gallery
+## Adding a new hook or plugin to the gallery
 
-The catalog is a plain TypeScript array — no build step or database migration needed. To add a hook, add a new object to the `hooks` array in [`data/hooks.ts`](data/hooks.ts) matching the `Hook` interface:
+The catalog is a plain TypeScript array — no build step or database migration needed. To add an entry, add a new object to the `hooks` or `plugins` array in [`data/catalog.ts`](data/catalog.ts) matching the `CatalogItem` interface:
 
 ```ts
+// Hook
 {
   name: "My Hook Name",
-  category: "automation", // one of: security | formatting | notifications | logging | testing | automation | workflow
+  type: "hook",
+  category: "automation", // security | formatting | notifications | logging | testing | automation | workflow
   description: "A short description of what the hook does.",
+  repoUrl: "https://github.com/owner/repo",
+}
+
+// Plugin
+{
+  name: "My Plugin Name",
+  type: "plugin",
+  category: "ci-cd", // planning | coding | code-review | testing | ci-cd | deployment | monitoring | documentation
+  description: "A short description of what the plugin does.",
   repoUrl: "https://github.com/owner/repo",
 }
 ```
 
-Save the file and the new card will appear in the gallery automatically the next time the page renders.
+Save the file and the new card will appear in the gallery (under the matching Hooks/Plugins tab) automatically the next time the page renders.
 
 ## Claude Code skills
 

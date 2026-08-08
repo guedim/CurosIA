@@ -1,7 +1,18 @@
-import { hooks } from "@/data/hooks";
-import { HookCard } from "@/components/hook-card";
+"use client";
+
+import { useState } from "react";
+import { catalogItems, type ItemType } from "@/data/catalog";
+import { ItemCard } from "@/components/item-card";
+
+const tabs: { type: ItemType; label: string }[] = [
+  { type: "hook", label: "Hooks" },
+  { type: "plugin", label: "Plugins" },
+];
 
 export default function Home() {
+  const [activeType, setActiveType] = useState<ItemType>("hook");
+  const items = catalogItems.filter((item) => item.type === activeType);
+
   return (
     <div className="relative flex flex-1 flex-col items-center overflow-hidden bg-background font-sans">
       <div
@@ -14,15 +25,42 @@ export default function Home() {
             HookHub
           </h1>
           <p className="text-lg text-muted">
-            Discover open-source hooks for Claude Code.
+            Discover open-source hooks and plugins for Claude Code.
           </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {hooks.map((hook) => (
-            <HookCard key={hook.repoUrl + hook.name} hook={hook} />
+        <div
+          role="tablist"
+          aria-label="Catalog type"
+          className="mb-8 flex w-fit gap-1 rounded-full border border-white/10 bg-white/[.04] p-1"
+        >
+          {tabs.map((tab) => (
+            <button
+              key={tab.type}
+              type="button"
+              role="tab"
+              aria-selected={activeType === tab.type}
+              onClick={() => setActiveType(tab.type)}
+              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
+                activeType === tab.type
+                  ? "bg-gradient-to-r from-[#ff2947] via-[#7a2ea8] to-[#0407f5] text-white"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              {tab.label}
+            </button>
           ))}
         </div>
+
+        {items.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((item) => (
+              <ItemCard key={item.repoUrl + item.name} item={item} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-muted">No entries yet — check back soon.</p>
+        )}
       </main>
     </div>
   );
