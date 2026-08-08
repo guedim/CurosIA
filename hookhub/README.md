@@ -59,6 +59,96 @@ This was set up as follows, since `hookhub/` is a subfolder of the `CurosIA` mon
 
 With that in place, a normal `git push` to `main` (e.g. via `/commit-push-code`) is all that's needed to ship a change.
 
+## Continuous Integration (GitHub Actions)
+
+CI runs lint + build on every change, via a workflow scoped exclusively to this project.
+
+**Where it lives:** GitHub Actions only reads workflow files from `.github/workflows/` at the **root of the Git repository** — since `hookhub/` is a subfolder of the `CurosIA` monorepo (not its own repo), the workflow file lives at `CurosIA/.github/workflows/hookhub-ci.yml`, one level above this `hookhub/` folder, not inside it.
+
+**How it's scoped to this project only:** the workflow triggers on `push`/`pull_request` to `main`, filtered with `paths: ["hookhub/**"]`, so commits touching other projects in the monorepo (`platzi-supabase`, `IceBreaker-main`, etc.) never trigger it. Inside the job, `working-directory: hookhub` and `cache-dependency-path: hookhub/package-lock.json` scope every step (`npm ci`, `npm run lint`, `npm run build`) to this folder specifically.
+
+```yaml
+# CurosIA/.github/workflows/hookhub-ci.yml
+name: HookHub CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["hookhub/**"]
+  pull_request:
+    branches: [main]
+    paths: ["hookhub/**"]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hookhub
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: hookhub/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+```
+
+### How to (re)create it
+
+1. From the **monorepo root** (not `hookhub/`), create the workflow file at `.github/workflows/hookhub-ci.yml` with the contents above.
+2. Commit and push it — GitHub picks up any file under `.github/workflows/` on the default branch automatically; no dashboard configuration or registration step is required.
+
+```bash
+cd CurosIA
+git add .github/workflows/hookhub-ci.yml
+git commit -m "ci(hookhub): add GitHub Actions workflow for lint and build"
+git push
+```
+
+### Creating and verifying it with Claude Code
+
+This workflow was originally created by asking [Claude Code](https://claude.ai/code) directly from within the `hookhub/` project, e.g.:
+
+1. `"indícame como puedo instalar github workflow en este repositorio"` — Claude reads `hookhub/CLAUDE.md` and `hookhub/AGENTS.md` for project context, but since Actions only reads `.github/workflows/` from the **Git repo root**, it runs `git rev-parse --show-toplevel` first to confirm the real root is `CurosIA/` (one level up from `hookhub/`) and writes the file there — not inside `hookhub/`.
+2. `"commit y push el workflow"` — Claude stages, commits, and pushes just that new file with `git add .github/workflows/hookhub-ci.yml`.
+3. `"revisa que el workflow corra bien en GitHub Actions"` — Claude uses the [GitHub CLI](https://cli.github.com) (`gh workflow run`, `gh run watch --exit-status`) to trigger a run and confirm `npm ci` / `npm run lint` / `npm run build` all pass.
+4. `"deja el workflow exclusivamente para este proyecto"` — Claude scopes the trigger with `paths: ["hookhub/**"]` and `working-directory: hookhub` so it never fires for the monorepo's other projects.
+
+Claude Code needs a GitHub CLI session already authenticated in the environment (see below) to push commits and to trigger/inspect runs — it doesn't need any GitHub App install or repo secret beyond that.
+
+### How to authenticate
+
+- **Automatic runs** (`push` / `pull_request`) need no authentication setup — GitHub Actions runs them under its own ephemeral `GITHUB_TOKEN`, and this workflow needs no secrets since it only lints and builds (no deploy step, no external services).
+- **Manual runs / inspecting runs from the CLI** require the [GitHub CLI](https://cli.github.com) authenticated with the `workflow` scope:
+
+  ```bash
+  gh auth login          # follow the prompts; choose the `workflow` scope when asked
+  gh auth status         # verify — should list `workflow` under Token scopes
+  ```
+
+### How to run it
+
+- **Automatically:** push (or open a PR with) a change under `hookhub/` to `main` — no action needed beyond a normal `git push`.
+- **Manually, from the GitHub UI:** repo → *Actions* tab → *HookHub CI* → *Run workflow*.
+- **Manually, from the CLI:**
+
+  ```bash
+  gh workflow run hookhub-ci.yml --ref main
+
+  # watch the latest run to completion
+  gh run list --workflow=hookhub-ci.yml --limit 1
+  gh run watch <run-id> --exit-status
+  ```
+
+### Where to view runs
+
+🔗 **[github.com/guedim/CurosIA/actions/workflows/hookhub-ci.yml](https://github.com/guedim/CurosIA/actions/workflows/hookhub-ci.yml)** — every past and in-progress run of this workflow, with logs per step. It lives under the monorepo's *Actions* tab (not a separate URL per subproject), since `hookhub/` shares the `CurosIA` GitHub repository.
+
 ## Download this project from GitHub
 
 This project lives inside the `CurosIA` monorepo, in the `hookhub/` subfolder — it is not a standalone repository.
