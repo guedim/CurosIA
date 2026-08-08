@@ -164,6 +164,15 @@ const hooks: CatalogItem[] = [
     stars: 17,
   },
   {
+    name: "Claude Code Notification",
+    type: "hook",
+    category: "notifications",
+    description:
+      "Lightweight macOS desktop notification hook for Claude Code with customizable system sounds when events occur during a session.",
+    repoUrl: "https://github.com/wyattjoh/claude-code-notification",
+    stars: 94,
+  },
+  {
     name: "Voice Output Hooks",
     type: "hook",
     category: "notifications",
