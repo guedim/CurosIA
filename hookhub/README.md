@@ -226,6 +226,66 @@ Verify the GitHub App itself is installed at `https://github.com/guedim/CurosIA/
 
 🔗 **[github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml](https://github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml)** — every past and in-progress review run. The review comments themselves show up directly on the PR's *Files changed* tab and in the PR's comment thread.
 
+## Interactive `@claude` assistant (issues & PRs)
+
+Beyond the automatic PR review above, mentioning `@claude` in a comment lets you have Claude investigate and implement a fix on demand — it reads the codebase and `CLAUDE.md`, makes the change, commits and pushes it, and leaves a link to open the PR, right in the comment thread.
+
+**What triggers it** — any of these, as long as the comment/body/title contains `@claude`:
+
+- A comment on an issue
+- A comment on a pull request review
+- A pull request review submitted with `@claude` in its body
+- An issue opened or assigned with `@claude` in its title or body
+
+**Where it lives:** `CurosIA/.github/workflows/claude.yml` (repo root, same reason as the other two workflows — Actions only reads `.github/workflows/` from the Git repo root).
+
+```yaml
+# CurosIA/.github/workflows/claude.yml
+name: Claude Code
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+      actions: read # Required for Claude to read CI results on PRs
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          additional_permissions: |
+            actions: read
+```
+
+**Scope:** unlike the CI and review workflows, this one is **repo-wide**, not scoped to `hookhub/**` — `paths` filters only apply to `push`/`pull_request` events triggered by file diffs, and comment/issue events (`issue_comment`, `issues`, `pull_request_review`) have no associated diff for GitHub to filter on. So `@claude` responds anywhere in the `CurosIA` monorepo; you steer scope yourself in what you ask it (e.g. mention `hookhub/` explicitly if that's what you mean).
+
+**Authentication:** same `CLAUDE_CODE_OAUTH_TOKEN` secret and Claude GitHub App as the review workflow above — see [How to authenticate](#how-to-authenticate-1) there; nothing extra to set up.
+
+**How to run it:** post a comment containing `@claude` and whatever you want done (e.g. `@claude can you fix this?`, `@claude implement X`) on an issue or PR in the repo — no manual dispatch, it only reacts to real GitHub events.
+
+🔗 **[github.com/guedim/CurosIA/actions/workflows/claude.yml](https://github.com/guedim/CurosIA/actions/workflows/claude.yml)** — every past and in-progress run.
+
 ## Download this project from GitHub
 
 This project lives inside the `CurosIA` monorepo, in the `hookhub/` subfolder — it is not a standalone repository.
