@@ -11,7 +11,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "HookHub",
+  title: "HookPlugHub",
   description: "Discover open-source hooks and plugins for Claude Code.",
 };
 

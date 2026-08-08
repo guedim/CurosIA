@@ -19,6 +19,11 @@ const categoryStyles: Record<Category, string> = {
   documentation: "bg-slate-500/15 text-slate-300 ring-1 ring-inset ring-slate-500/30",
 };
 
+function formatStars(stars: number): string {
+  if (stars >= 1000) return `${(stars / 1000).toFixed(1).replace(/\.0$/, "")}k`;
+  return String(stars);
+}
+
 export function ItemCard({ item }: { item: CatalogItem }) {
   return (
     <article className="group flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[.04] p-5 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-white/[.06] hover:shadow-[0_0_0_1px_rgba(255,41,71,0.4),0_8px_30px_-8px_rgba(4,7,245,0.5)]">
@@ -30,7 +35,33 @@ export function ItemCard({ item }: { item: CatalogItem }) {
           {item.category}
         </span>
       </div>
+      {(item.official || typeof item.stars === "number") && (
+        <div className="flex items-center gap-2 text-xs text-muted">
+          {item.official && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 font-medium text-emerald-300 ring-1 ring-inset ring-emerald-500/30">
+              ✓ Official
+            </span>
+          )}
+          {typeof item.stars === "number" && (
+            <span className="inline-flex items-center gap-1">
+              ★ {formatStars(item.stars)}
+            </span>
+          )}
+        </div>
+      )}
       <p className="flex-1 text-sm leading-6 text-muted">{item.description}</p>
+      {item.stackTags && item.stackTags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {item.stackTags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-white/[.06] px-2 py-0.5 text-[11px] font-medium text-muted ring-1 ring-inset ring-white/10"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
       <a
         href={item.repoUrl}
         target="_blank"
