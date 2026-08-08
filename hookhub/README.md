@@ -41,6 +41,20 @@ hookhub/
 └── public/                 # Static assets (icons, svgs)
 ```
 
+## Deployment
+
+The production site is live on Vercel at **[hookplughub-guedim-5157s-projects.vercel.app](https://hookplughub-guedim-5157s-projects.vercel.app)**.
+
+Deploys are git-based: the Vercel project `hookplughub` (team `guedim-5157s-projects`) is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `hookhub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
+
+This was set up as follows, since `hookhub/` is a subfolder of the `CurosIA` monorepo rather than its own repo:
+
+1. **Connect the Git repository** — in the Vercel project's *Settings → Git*, connected GitHub repo `guedim/CurosIA`.
+2. **Scope the build to the subfolder** — in *Settings → Build and Deployment*, set **Root Directory** to `hookhub`, with "Skip deployments when there are no changes to the root directory or its dependencies" enabled, so pushes touching unrelated folders in the monorepo don't trigger unnecessary rebuilds.
+3. **Fix `data/catalog.ts` visibility** — the monorepo's root `.gitignore` has a blanket `data/` rule (meant for AI dataset folders elsewhere in the monorepo) that was silently excluding `hookhub/data/catalog.ts`, the file holding the entire hooks/plugins catalog. Added a scoped negation in [`hookhub/.gitignore`](.gitignore) (`!data/` / `!data/**`) so the catalog is tracked and available to the build.
+
+With that in place, a normal `git push` to `main` (e.g. via `/commit-push-code`) is all that's needed to ship a change.
+
 ## Download this project from GitHub
 
 This project lives inside the `CurosIA` monorepo, in the `hookhub/` subfolder — it is not a standalone repository.
