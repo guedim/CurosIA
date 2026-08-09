@@ -1,0 +1,47 @@
+name: HookHub Source Discovery
+
+on:
+  schedule:
+    - cron: "0 13 * * 1" # every Monday at 13:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hookhub
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Search GitHub for new candidate sources
+        id: discover
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node --experimental-strip-types scripts/find-new-sources.mjs
+
+      - name: Open PR with new candidates
+        if: steps.discover.outputs.count != '0'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          title: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          body: |
+            Automated weekly scan by the [HookHub Source Discovery](./.github/workflows/hookhub-source-discovery.yml) workflow.
+
+            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.ts`. For each one:
+
+            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.ts`.
+            - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so it isn't suggested again next week.
+          branch: bot/hookhub-source-discovery
+          add-paths: hookhub/data/candidates.ts
+          labels: hookhub, catalog-candidates
+          delete-branch: true

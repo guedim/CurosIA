@@ -39,7 +39,10 @@ hookhub/
 │   ├── site-header.tsx    # Sticky site header with the gradient "ClaudeCodeHub" wordmark
 │   └── site-footer.tsx    # Footer with the gradient hairline + copyright line
 ├── data/
-│   └── catalog.ts          # The unified catalog (CatalogItem type + catalogItems[] array: hooks, plugins, rag)
+│   ├── catalog.ts          # The unified catalog (CatalogItem type + catalogItems[] array: hooks, plugins, rag)
+│   └── candidates.ts       # Curation queue for the weekly source-discovery bot — not rendered by the site
+├── scripts/
+│   └── find-new-sources.mjs # GitHub Search API script run weekly by the HookHub Source Discovery workflow
 └── public/                 # Static assets (icons, svgs)
 ```
 
@@ -225,6 +228,83 @@ Verify the GitHub App itself is installed at `https://github.com/guedim/CurosIA/
 ### Where to view runs
 
 🔗 **[github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml](https://github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml)** — every past and in-progress review run. The review comments themselves show up directly on the PR's *Files changed* tab and in the PR's comment thread.
+
+## Weekly source discovery (HookHub Source Discovery)
+
+A scheduled GitHub Action searches the GitHub Search API every week for new hooks, plugins, and RAG tools worth adding to the catalog — official Anthropic/vendor repos, and community repos tagged with Claude Code-specific topics — and opens a PR with what it finds. It never touches `data/catalog.ts` or the live site directly; it only appends to a separate curation queue, `data/candidates.ts`, which the gallery doesn't render.
+
+**How it searches, in two passes:**
+
+- **Known orgs** — orgs that already have an `official: true` entry in the catalog (auto-extracted from `repoUrl`), plus `anthropics` — searched for repos whose name/description contains the exact phrase `"claude code"`. No star minimum beyond a token floor (5★), since an official repo is worth surfacing even brand new.
+- **Topic search** — GitHub topics like `claude-code`, `claude-code-hook`, `claude-code-plugin`, `claude-skill`, etc., combined with the same `"claude code"` phrase requirement, sorted by stars. Requires ≥50 stars and a push within the last 90 days, to filter out abandoned or barely-touched repos.
+
+Both passes exclude forks, archived repos, and anything already present in `catalog.ts` or `candidates.ts` (including previously `rejected` ones — rejections are remembered, not just deleted). Results above 150,000 stars are logged and skipped rather than trusted outright — GitHub topics can be added to any repo for visibility, and star counts can be farmed, so an implausible outlier is a spam/gaming signal, not proof of relevance.
+
+**Curating a PR:** for each entry in `data/candidates.ts`,
+
+- **Good fit** — move it into the matching array in `data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.ts`.
+- **Not a fit** — set its `status` to `"rejected"` (don't delete it) so the bot doesn't suggest the same repo again next week.
+
+> The first run is expected to surface a large batch — it's scanning everything that exists today, with no prior history to diff against. Weekly runs after that only surface repos that are genuinely new or newly matching, so the volume drops off fast.
+
+**Where it lives:** `CurosIA/.github/workflows/hookhub-source-discovery.yml` (repo root, same reason as the other three workflows). The search script itself is [`hookhub/scripts/find-new-sources.mjs`](scripts/find-new-sources.mjs) — a dependency-free Node 22 script (built-in `fetch`, no npm install step) run directly via `node --experimental-strip-types`, which lets it `import` the `.ts` catalog/candidates files without a build step.
+
+```yaml
+# CurosIA/.github/workflows/hookhub-source-discovery.yml
+name: HookHub Source Discovery
+
+on:
+  schedule:
+    - cron: "0 13 * * 1" # every Monday at 13:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hookhub
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Search GitHub for new candidate sources
+        id: discover
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node --experimental-strip-types scripts/find-new-sources.mjs
+      - name: Open PR with new candidates
+        if: steps.discover.outputs.count != '0'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          title: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          branch: bot/hookhub-source-discovery
+          add-paths: hookhub/data/candidates.ts
+          labels: hookhub, catalog-candidates
+          delete-branch: true
+```
+
+### How to authenticate
+
+Uses the default per-run `GITHUB_TOKEN` — no new secret, no external API, no cost beyond free GitHub Actions minutes (unlimited on public repos). The token needs `pull-requests: write` to open the PR, granted explicitly in the workflow's `permissions:` block; this overrides the repo's default (read-only) workflow permissions, which is standard GitHub Actions behavior.
+
+> If PR creation fails with a permissions error, enable **Settings → Actions → General → Workflow permissions → "Allow GitHub Actions to create and approve pull requests"** on the repo — some accounts have this off by default.
+
+### How to run it
+
+- **Automatically:** every Monday at 13:00 UTC.
+- **Manually, from the CLI:** `gh workflow run hookhub-source-discovery.yml --ref main`
+- **Manually, from the GitHub UI:** repo → *Actions* tab → *HookHub Source Discovery* → *Run workflow*.
+
+### Where to view runs
+
+🔗 **[github.com/guedim/CurosIA/actions/workflows/hookhub-source-discovery.yml](https://github.com/guedim/CurosIA/actions/workflows/hookhub-source-discovery.yml)**
 
 ## Interactive `@claude` assistant (issues & PRs)
 
