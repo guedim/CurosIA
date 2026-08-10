@@ -197,7 +197,7 @@ export const candidateItems: CandidateItem[] = [
     topics: ["agent-skills", "agentic-ai", "agents", "ai-agents", "anthropic", "automation", "claude-code", "claude-code-plugins", "codex-cli", "copilot", "cursor", "cursor-rules", "developer-tools", "gemini-cli", "mcp", "multi-agent", "opencode", "orchestration", "prompt-engineering", "workflows"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-09",
-    status: "pending",
+    status: "rejected",
   },
   {
     name: "Yeachan-Heo/oh-my-claudecode",
@@ -217,7 +217,7 @@ export const candidateItems: CandidateItem[] = [
     topics: ["claude-code", "mcp", "skills"],
     foundVia: "known-org",
     discoveredAt: "2026-08-09",
-    status: "pending",
+    status: "rejected",
   },
   {
     name: "K-Dense-AI/scientific-agent-skills",
@@ -1347,7 +1347,7 @@ export const candidateItems: CandidateItem[] = [
     topics: [],
     foundVia: "known-org",
     discoveredAt: "2026-08-09",
-    status: "pending",
+    status: "rejected",
   },
   {
     name: "aws-samples/sample-acp-bridge",

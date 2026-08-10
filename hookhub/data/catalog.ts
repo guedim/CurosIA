@@ -1120,6 +1120,17 @@ const plugins: CatalogItem[] = [
     stackTags: ["owasp"],
   },
   {
+    name: "Semgrep Guardian",
+    type: "plugin",
+    category: "code-review",
+    description:
+      "Bundles the Semgrep MCP server and hooks into one install that scans every file an agent writes for vulnerabilities, malicious packages, and hardcoded secrets before they're committed.",
+    repoUrl: "https://github.com/semgrep/guardian",
+    official: true,
+    stars: 10,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
     name: "Claude Security",
     type: "plugin",
     category: "code-review",
@@ -1406,6 +1417,18 @@ const plugins: CatalogItem[] = [
     stackTags: ["aws", "distributed-systems"],
   },
   {
+    name: "AWS DevOps Agent",
+    type: "plugin",
+    category: "deployment",
+    description:
+      "Connects Claude Code to the AWS DevOps Agent through the AWS MCP Server for deployment and operational workflows.",
+    repoUrl:
+      "https://github.com/aws-samples/sample-aws-devops-agent-claude-plugin",
+    official: true,
+    stars: 9,
+    stackTags: ["aws", "best-practices"],
+  },
+  {
     name: "Netlify Skills",
     type: "plugin",
     category: "deployment",
@@ -1544,6 +1567,28 @@ const plugins: CatalogItem[] = [
     official: true,
     stars: 121,
     stackTags: ["python", "distributed-systems"],
+  },
+  {
+    name: "Logfire Session Observability",
+    type: "plugin",
+    category: "monitoring",
+    description:
+      "Sends OpenTelemetry traces of the Claude Code session itself — token usage, USD cost, model info, and full conversation history — to Pydantic Logfire, distinct from Logfire's app-instrumentation plugin above.",
+    repoUrl: "https://github.com/pydantic/claude-code-logfire-plugin",
+    official: true,
+    stars: 15,
+    stackTags: ["python", "observability", "ai-assisted-sdlc"],
+  },
+  {
+    name: "LangSmith",
+    type: "plugin",
+    category: "monitoring",
+    description:
+      "Official LangSmith plugins bringing LLM application tracing and evaluation observability into Claude Code.",
+    repoUrl: "https://github.com/langchain-ai/langsmith-claude-code-plugins",
+    official: true,
+    stars: 67,
+    stackTags: ["observability", "ai-assisted-sdlc"],
   },
   {
     name: "LogRocket",
@@ -2926,6 +2971,15 @@ const rag: CatalogItem[] = [
     stars: 51147,
   },
   {
+    name: "Graphify",
+    type: "rag",
+    category: "code-retrieval",
+    description:
+      "Turns a codebase (with docs, SQL schemas, configs, and PDFs) into a queryable knowledge graph — local deterministic AST parsing with tree-sitter, every edge explained, no vector store required.",
+    repoUrl: "https://github.com/Graphify-Labs/graphify",
+    stars: 104641,
+  },
+  {
     name: "Milvus",
     type: "rag",
     category: "vector-db",
@@ -3062,6 +3116,25 @@ const rag: CatalogItem[] = [
     repoUrl: "https://github.com/promptfoo/promptfoo",
     official: true,
     stars: 24070,
+  },
+  {
+    name: "claude-mem",
+    type: "rag",
+    category: "memory",
+    description:
+      "Captures everything an agent does during a session, compresses it with AI, and injects relevant context back into future sessions — backed by ChromaDB, works across Claude Code, OpenClaw, Codex, and Gemini.",
+    repoUrl: "https://github.com/thedotmack/claude-mem",
+    stars: 90217,
+  },
+  {
+    name: "memsearch",
+    type: "rag",
+    category: "memory",
+    description:
+      "Persistent, unified memory layer for AI agents backed by Markdown and Milvus, with hybrid and semantic search and progressive disclosure.",
+    repoUrl: "https://github.com/zilliztech/memsearch",
+    official: true,
+    stars: 2444,
   },
   {
     name: "Mem0",
