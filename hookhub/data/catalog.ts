@@ -1,4 +1,4 @@
-export type ItemType = "hook" | "plugin" | "rag";
+export type ItemType = "hook" | "plugin" | "rag" | "agent";
 
 export type HookCategory =
   | "security"
@@ -28,7 +28,18 @@ export type RagCategory =
   | "evaluation"
   | "memory";
 
-export type Category = HookCategory | PluginCategory | RagCategory;
+export type AgentCategory =
+  | "architecture"
+  | "backend-python"
+  | "security-compliance"
+  | "aws-serverless"
+  | "testing-qa"
+  | "code-review"
+  | "data-persistence"
+  | "documentation"
+  | "devops-cicd";
+
+export type Category = HookCategory | PluginCategory | RagCategory | AgentCategory;
 
 export type StackTag =
   | "python"
@@ -38,6 +49,7 @@ export type StackTag =
   | "aws-dynamodb"
   | "aws-s3"
   | "clean-architecture"
+  | "hexagonal-architecture"
   | "distributed-systems"
   | "resilience"
   | "observability"
@@ -47,6 +59,8 @@ export type StackTag =
   | "design-patterns"
   | "enterprise-integration-patterns"
   | "owasp"
+  | "pci-dss"
+  | "iso27001"
   | "best-practices"
   | "ai-assisted-sdlc";
 
@@ -58,6 +72,7 @@ export const stackTags: StackTag[] = [
   "aws-dynamodb",
   "aws-s3",
   "clean-architecture",
+  "hexagonal-architecture",
   "distributed-systems",
   "resilience",
   "observability",
@@ -67,6 +82,8 @@ export const stackTags: StackTag[] = [
   "design-patterns",
   "enterprise-integration-patterns",
   "owasp",
+  "pci-dss",
+  "iso27001",
   "best-practices",
   "ai-assisted-sdlc",
 ];
@@ -113,6 +130,18 @@ export const ragCategories: RagCategory[] = [
   "embeddings-rerank",
   "evaluation",
   "memory",
+];
+
+export const agentCategories: AgentCategory[] = [
+  "architecture",
+  "backend-python",
+  "security-compliance",
+  "aws-serverless",
+  "testing-qa",
+  "code-review",
+  "data-persistence",
+  "documentation",
+  "devops-cicd",
 ];
 
 const hooks: CatalogItem[] = [
@@ -1777,6 +1806,1065 @@ const plugins: CatalogItem[] = [
   },
 ];
 
+const agents: CatalogItem[] = [
+  // Architecture (DDD, hexagonal/clean architecture, system design)
+  {
+    name: "Backend Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "RESTful API design, microservice boundaries, and database schema definition for backend systems.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/backend-api-security/agents/backend-architect.md",
+    stars: 38654,
+    stackTags: ["ddd", "clean-architecture", "hexagonal-architecture", "design-patterns"],
+  },
+  {
+    name: "Database Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Designs database schemas and technology selection from scratch, including migration planning between engines.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/database-design/agents/database-architect.md",
+    stars: 38654,
+    stackTags: ["ddd", "best-practices"],
+  },
+  {
+    name: "Event Sourcing Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Designs event sourcing, CQRS patterns, event stores, and sagas for auditable, replayable domain state.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/backend-development/agents/event-sourcing-architect.md",
+    stars: 38654,
+    stackTags: ["ddd", "design-patterns", "distributed-systems"],
+  },
+  {
+    name: "Architect Review",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Analyzes architectural consistency and validates that changes follow the project's established patterns.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/comprehensive-review/agents/architect-review.md",
+    stars: 38654,
+    stackTags: ["clean-architecture", "hexagonal-architecture", "design-patterns"],
+  },
+  {
+    name: "Monorepo Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Configures and optimizes monorepo tooling (Nx, Turborepo, Bazel) for large multi-service codebases.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/developer-essentials/agents/monorepo-architect.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Hybrid Cloud Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Designs multi-cloud and hybrid cloud-to-on-premises strategies for regulated enterprise environments.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/cloud-infrastructure/agents/hybrid-cloud-architect.md",
+    stars: 38654,
+    stackTags: ["aws", "distributed-systems"],
+  },
+  {
+    name: "API Designer",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Designs REST/GraphQL endpoints, OpenAPI specs, authentication patterns, and API versioning strategies.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/01-core-development/api-designer.md",
+    stars: 24163,
+    stackTags: ["enterprise-integration-patterns", "best-practices"],
+  },
+  {
+    name: "Microservices Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Decomposes monolithic applications into independent microservices and establishes inter-service communication patterns at scale.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/01-core-development/microservices-architect.md",
+    stars: 24163,
+    stackTags: ["ddd", "distributed-systems", "enterprise-integration-patterns"],
+  },
+  {
+    name: "Feature Dev: Code Architect",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Designs feature architectures from existing codebase patterns, producing implementation blueprints with specific files, component designs, and data flows.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/feature-dev",
+    official: true,
+    stars: 33330,
+    stackTags: ["clean-architecture", "ai-assisted-sdlc"],
+  },
+  {
+    name: "Feature Dev: Code Explorer",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Traces execution paths and maps architecture layers of existing features to inform new development.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/feature-dev",
+    official: true,
+    stars: 33330,
+    stackTags: ["ai-assisted-sdlc", "clean-architecture"],
+  },
+  {
+    name: "Architect (Everything Claude Code)",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Software architecture specialist for system design, scalability, and technical decision-making — used proactively when planning features or making architectural decisions.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["clean-architecture", "best-practices"],
+  },
+  {
+    name: "Full Stack Agent",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Team-lead agent that researches requirements, designs specs, creates implementation plans, and delegates work across a specialist agent pool.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-agent-team",
+    official: true,
+    stars: 48,
+    stackTags: ["aws", "best-practices"],
+  },
+  {
+    name: "Legacy Modernizer",
+    type: "agent",
+    category: "architecture",
+    description:
+      "Refactors and modernizes legacy codebases toward current architecture and language idioms without breaking existing behavior.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/code-refactoring/agents/legacy-modernizer.md",
+    stars: 38654,
+    stackTags: ["clean-architecture", "best-practices"],
+  },
+
+  // Backend Python
+  {
+    name: "Python Pro",
+    type: "agent",
+    category: "backend-python",
+    description:
+      "Python development with advanced language features, async patterns, and performance optimization.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/python-development/agents/python-pro.md",
+    stars: 38654,
+    stackTags: ["python", "best-practices"],
+  },
+  {
+    name: "FastAPI Pro",
+    type: "agent",
+    category: "backend-python",
+    description:
+      "FastAPI development with async request handling and Pydantic-based validation, suited to serverless API backends.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/python-development/agents/fastapi-pro.md",
+    stars: 38654,
+    stackTags: ["python", "aws-api-gateway"],
+  },
+  {
+    name: "Django Pro",
+    type: "agent",
+    category: "backend-python",
+    description:
+      "Django development covering the ORM, async views, and admin-heavy backend applications.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/python-development/agents/django-pro.md",
+    stars: 38654,
+    stackTags: ["python"],
+  },
+  {
+    name: "SQL Pro",
+    type: "agent",
+    category: "backend-python",
+    description: "Writes and optimizes complex SQL queries, indexes, and database migrations.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/database-design/agents/sql-pro.md",
+    stars: 38654,
+    stackTags: ["python", "best-practices"],
+  },
+  {
+    name: "Python Reviewer",
+    type: "agent",
+    category: "backend-python",
+    description:
+      "Reviews Python code for PEP 8 compliance, Pythonic idioms, type hints, security, and performance.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["python", "owasp", "best-practices"],
+  },
+  {
+    name: "Agent SDK Verifier (Python)",
+    type: "agent",
+    category: "backend-python",
+    description:
+      "Verifies that a Python Claude Agent SDK application is properly configured, follows SDK best practices, and is ready for deployment.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/agent-sdk-dev",
+    official: true,
+    stars: 33330,
+    stackTags: ["python", "ai-assisted-sdlc"],
+  },
+  {
+    name: "Coding Agent",
+    type: "agent",
+    category: "backend-python",
+    description:
+      "Implements features and writes tests from specifications handed off by the team lead, using the Sonnet model.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-agent-team",
+    official: true,
+    stars: 48,
+    stackTags: ["python", "aws"],
+  },
+
+  // Security & Compliance (OWASP, PCI DSS, ISO 27001)
+  {
+    name: "Security Auditor",
+    type: "agent",
+    category: "security-compliance",
+    description: "Vulnerability assessment and OWASP compliance review across an application's attack surface.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/security-compliance/agents/security-auditor.md",
+    stars: 38654,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Backend Security Coder",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Implements secure backend coding patterns and API security controls — authN/authZ, input validation, rate limiting.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/backend-api-security/agents/backend-security-coder.md",
+    stars: 38654,
+    stackTags: ["owasp", "aws-api-gateway"],
+  },
+  {
+    name: "Threat Modeling Expert",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Runs STRIDE threat modeling, builds attack trees, and derives security requirements from system design.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/security-scanning/agents/threat-modeling-expert.md",
+    stars: 38654,
+    stackTags: ["owasp", "pci-dss"],
+  },
+  {
+    name: "Payment Integration",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Integrates payment processors with attention to PCI-scoped data handling and transaction flows.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/payment-processing/agents/payment-integration.md",
+    stars: 38654,
+    stackTags: ["banking", "payments", "pci-dss"],
+  },
+  {
+    name: "Security Reviewer",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Flags secrets, SSRF, injection, unsafe crypto, and OWASP Top 10 vulnerabilities in code that handles user input, auth, or sensitive data.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Compliance Auditor",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Implements compliance controls and prepares audit evidence across GDPR, HIPAA, PCI DSS, SOC 2, and ISO frameworks.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/04-quality-security/compliance-auditor.md",
+    stars: 24163,
+    stackTags: ["pci-dss", "iso27001"],
+  },
+  {
+    name: "GDPR/CCPA Compliance",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Reviews data practices and assesses privacy requirements against GDPR and CCPA/CPRA obligations.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/04-quality-security/gdpr-ccpa-compliance.md",
+    stars: 24163,
+    stackTags: ["iso27001"],
+  },
+  {
+    name: "Penetration Tester",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Conducts authorized penetration tests — active exploitation and validation — across web apps, networks, and APIs.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/04-quality-security/penetration-tester.md",
+    stars: 24163,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "Security Engineer",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Builds automated security controls into CI/CD pipelines and establishes compliance and vulnerability-management programs.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/03-infrastructure/security-engineer.md",
+    stars: 24163,
+    stackTags: ["owasp", "pci-dss", "best-practices"],
+  },
+  {
+    name: "Product Manager (Secure SDLC)",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Maps security requirements against the OWASP ASVS framework at the planning stage of the SDLC.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "AppSec Engineer",
+    type: "agent",
+    category: "security-compliance",
+    description: "Conducts threat modeling, SAST/DAST analysis, and vulnerability triage across the SDLC.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "GRC Analyst",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Manages compliance mapping to PCI DSS/ISO 27001-style frameworks, risk registers, and audit evidence collection.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["pci-dss", "iso27001"],
+  },
+  {
+    name: "Security Champion",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Provides lightweight first-line security Q&A and guidance embedded directly in the development team.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "AI Security Engineer",
+    type: "agent",
+    category: "security-compliance",
+    description: "Assesses prompt injection risk and LLM-specific vulnerabilities for AI-assisted features.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp", "ai-assisted-sdlc"],
+  },
+  {
+    name: "Compliance Automation Engineer",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Automates SOX, PCI-DSS, GDPR, and HIPAA compliance with continuous monitoring and audit-trail validation.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/compliance-automation-engineer.md",
+    stars: 28,
+    stackTags: ["pci-dss", "iso27001"],
+  },
+  {
+    name: "Crypto Implementation Expert",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Reviews cryptographic algorithm selection, implementation, and key management for correctness and PCI-scoped data protection.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/crypto-implementation-expert.md",
+    stars: 28,
+    stackTags: ["pci-dss", "owasp"],
+  },
+  {
+    name: "Identity Management Specialist",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Designs IAM and SSO solutions — identity and access management architecture for enterprise environments.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/identity-management-specialist.md",
+    stars: 28,
+    stackTags: ["aws", "iso27001"],
+  },
+  {
+    name: "Privacy Engineer",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Implements privacy-by-design principles and GDPR-compliant data handling in software systems.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/privacy-engineer.md",
+    stars: 28,
+    stackTags: ["iso27001"],
+  },
+  {
+    name: "SAST Specialist",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Integrates static application security testing into development workflows and triages automated findings.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/sast-specialist.md",
+    stars: 28,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Security Architecture Consultant",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Designs zero-trust security architecture and enterprise security frameworks with regulatory-compliance alignment.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/security-architecture-consultant.md",
+    stars: 28,
+    stackTags: ["iso27001", "pci-dss"],
+  },
+  {
+    name: "Supply Chain Security Expert",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Implements software-supply-chain security controls and third-party/vendor dependency risk management.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/supply-chain-security-expert.md",
+    stars: 28,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Zero Trust Architect",
+    type: "agent",
+    category: "security-compliance",
+    description: "Designs 'never trust, always verify' zero-trust architectures for distributed systems.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/zero-trust-architect.md",
+    stars: 28,
+    stackTags: ["iso27001", "aws"],
+  },
+  {
+    name: "Vulnerability Assessment Specialist",
+    type: "agent",
+    category: "security-compliance",
+    description:
+      "Runs CVSS-scored vulnerability assessment and threat modeling with business-impact and compliance correlation.",
+    repoUrl:
+      "https://github.com/gensecaihq/Claude-Code-Subagents-Collection/blob/main/subagents/security-compliance/vulnerability-assessment-specialist.md",
+    stars: 28,
+    stackTags: ["owasp", "pci-dss"],
+  },
+
+  // AWS Serverless
+  {
+    name: "Cloud Architect",
+    type: "agent",
+    category: "aws-serverless",
+    description:
+      "Designs AWS/Azure/GCP infrastructure with a focus on cost optimization, security, and serverless-first patterns.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/cloud-infrastructure/agents/cloud-architect.md",
+    stars: 38654,
+    stackTags: ["aws", "aws-lambda", "aws-api-gateway"],
+  },
+  {
+    name: "Terraform Specialist",
+    type: "agent",
+    category: "aws-serverless",
+    description: "Writes and maintains Infrastructure-as-Code modules and remote state for AWS serverless stacks.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/cloud-infrastructure/agents/terraform-specialist.md",
+    stars: 38654,
+    stackTags: ["aws", "best-practices"],
+  },
+  {
+    name: "Network Engineer",
+    type: "agent",
+    category: "aws-serverless",
+    description:
+      "Debugs networking, load balancing, and traffic analysis across API Gateway, CloudFront, and VPC boundaries.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/cloud-infrastructure/agents/network-engineer.md",
+    stars: 38654,
+    stackTags: ["aws", "aws-api-gateway"],
+  },
+  {
+    name: "Platform Engineer",
+    type: "agent",
+    category: "aws-serverless",
+    description:
+      "Builds internal developer platforms and self-service infrastructure with golden paths for serverless delivery.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/03-infrastructure/platform-engineer.md",
+    stars: 24163,
+    stackTags: ["aws", "best-practices"],
+  },
+  {
+    name: "Cloud Platform Engineer",
+    type: "agent",
+    category: "aws-serverless",
+    description:
+      "Reviews infrastructure-as-code for security issues and handles secrets management across cloud deployments.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["aws", "owasp"],
+  },
+  {
+    name: "DevOps Agent",
+    type: "agent",
+    category: "aws-serverless",
+    description: "Handles infrastructure, CI/CD, containers, and documentation for the agent team's AWS deployments.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-agent-team",
+    official: true,
+    stars: 48,
+    stackTags: ["aws", "aws-lambda"],
+  },
+  {
+    name: "Solutions Architect Agent",
+    type: "agent",
+    category: "aws-serverless",
+    description: "AWS specialist running Well-Architected Framework reviews plus cost and security assessments.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-agent-team",
+    official: true,
+    stars: 48,
+    stackTags: ["aws", "aws-lambda", "aws-api-gateway", "aws-dynamodb", "aws-s3"],
+  },
+
+  // Testing & QA
+  {
+    name: "TDD Orchestrator",
+    type: "agent",
+    category: "testing-qa",
+    description: "Guides Test-Driven Development methodology across a session, enforcing red-green-refactor discipline.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/tdd-workflows/agents/tdd-orchestrator.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Test Automator",
+    type: "agent",
+    category: "testing-qa",
+    description: "Builds comprehensive unit, integration, and end-to-end test suites.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/incident-response/agents/test-automator.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Debugger",
+    type: "agent",
+    category: "testing-qa",
+    description: "Resolves errors and analyzes test failures to find root cause.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/incident-response/agents/debugger.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Error Detective",
+    type: "agent",
+    category: "testing-qa",
+    description: "Analyzes logs and recognizes error patterns across a distributed system.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/incident-response/agents/error-detective.md",
+    stars: 38654,
+    stackTags: ["observability", "distributed-systems"],
+  },
+  {
+    name: "TDD Guard",
+    type: "agent",
+    category: "testing-qa",
+    description: "Enforces test-driven development — write-tests-first methodology with 80%+ coverage targets.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "E2E Runner",
+    type: "agent",
+    category: "testing-qa",
+    description:
+      "Generates and runs end-to-end tests with Playwright, capturing screenshots, videos, and traces as artifacts.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "QA Expert",
+    type: "agent",
+    category: "testing-qa",
+    description: "Builds comprehensive QA strategy, test planning, and quality-metrics analysis across the development cycle.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/04-quality-security/qa-expert.md",
+    stars: 24163,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Chaos Engineer",
+    type: "agent",
+    category: "testing-qa",
+    description:
+      "Designs controlled failure experiments and game-day exercises to validate system resilience before real incidents.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/04-quality-security/chaos-engineer.md",
+    stars: 24163,
+    stackTags: ["resilience", "aws"],
+  },
+  {
+    name: "Team Debugger",
+    type: "agent",
+    category: "testing-qa",
+    description:
+      "Investigates one assigned hypothesis in a parallel debugging effort, gathering evidence with file:line citations and confidence levels.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/agent-teams/agents/team-debugger.md",
+    stars: 38654,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+
+  // Code Review
+  {
+    name: "Code Reviewer (wshobson/agents)",
+    type: "agent",
+    category: "code-review",
+    description: "Code review with a security focus and an eye on production reliability.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/comprehensive-review/agents/code-reviewer.md",
+    stars: 38654,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Team Reviewer",
+    type: "agent",
+    category: "code-review",
+    description:
+      "Reviews one assigned dimension — security, performance, architecture, testing, or accessibility — with a structured finding format, as part of a parallel multi-reviewer team.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/agent-teams/agents/team-reviewer.md",
+    stars: 38654,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Dev Lead (Secure Code Review)",
+    type: "agent",
+    category: "code-review",
+    description: "Performs secure code review and software composition analysis as part of a full secure-SDLC agent team.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "PR Review Toolkit: Code Reviewer",
+    type: "agent",
+    category: "code-review",
+    description: "Reviews code for adherence to project guidelines, style, and best practices before a commit or PR.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
+    official: true,
+    stars: 33330,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "PR Review Toolkit: Code Simplifier",
+    type: "agent",
+    category: "code-review",
+    description:
+      "Simplifies and refines recently modified code for clarity, consistency, and maintainability while preserving functionality.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
+    official: true,
+    stars: 33330,
+    stackTags: ["best-practices", "design-patterns"],
+  },
+  {
+    name: "PR Review Toolkit: Comment Analyzer",
+    type: "agent",
+    category: "code-review",
+    description: "Analyzes code comments for accuracy, completeness, and long-term maintainability before a PR is finalized.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
+    official: true,
+    stars: 33330,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "PR Review Toolkit: PR Test Analyzer",
+    type: "agent",
+    category: "code-review",
+    description:
+      "Reviews a pull request's test coverage for quality and completeness against the new functionality it introduces.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
+    official: true,
+    stars: 33330,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "PR Review Toolkit: Silent Failure Hunter",
+    type: "agent",
+    category: "code-review",
+    description:
+      "Identifies silent failures, inadequate error handling, and inappropriate fallback behavior in error-handling code.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
+    official: true,
+    stars: 33330,
+    stackTags: ["resilience", "best-practices"],
+  },
+  {
+    name: "PR Review Toolkit: Type Design Analyzer",
+    type: "agent",
+    category: "code-review",
+    description: "Analyzes new or changed types for encapsulation, invariant expression, usefulness, and enforcement.",
+    repoUrl:
+      "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
+    official: true,
+    stars: 33330,
+    stackTags: ["design-patterns", "best-practices"],
+  },
+  {
+    name: "Code Reviewer (Everything Claude Code)",
+    type: "agent",
+    category: "code-review",
+    description: "Expert code review for quality, security, and maintainability, used proactively on every code change.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "Refactor Cleaner",
+    type: "agent",
+    category: "code-review",
+    description:
+      "Identifies and safely removes unused code, duplicates, and dead abstractions, backed by dependency-analysis tooling.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Review Agent",
+    type: "agent",
+    category: "code-review",
+    description: "Reviews implementations for correctness, security, and quality, using Opus as the team's quality gate.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-agent-team",
+    official: true,
+    stars: 48,
+    stackTags: ["owasp", "aws"],
+  },
+
+  // Data & Persistence
+  {
+    name: "Database Admin",
+    type: "agent",
+    category: "data-persistence",
+    description: "Handles database operations — backup, replication, and monitoring — for production data stores.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/database-migrations/agents/database-admin.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Database Optimizer",
+    type: "agent",
+    category: "data-persistence",
+    description: "Optimizes queries, index design, and migration strategies for relational and NoSQL data stores.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/database-cloud-optimization/agents/database-optimizer.md",
+    stars: 38654,
+    stackTags: ["aws-dynamodb", "best-practices"],
+  },
+  {
+    name: "Data Engineer",
+    type: "agent",
+    category: "data-persistence",
+    description: "Builds ETL pipelines, data warehouses, and streaming architectures.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/data-engineering/agents/data-engineer.md",
+    stars: 38654,
+    stackTags: ["aws", "distributed-systems"],
+  },
+  {
+    name: "Database Reviewer",
+    type: "agent",
+    category: "data-persistence",
+    description:
+      "PostgreSQL specialist for query optimization, schema design, security, and performance review, incorporating Supabase-style best practices.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Postgres Pro",
+    type: "agent",
+    category: "data-persistence",
+    description:
+      "Optimizes PostgreSQL performance, designs high-availability replication, and troubleshoots database issues at enterprise scale.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/05-data-ai/postgres-pro.md",
+    stars: 24163,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Data Analyst",
+    type: "agent",
+    category: "data-persistence",
+    description:
+      "Extracts insights from business data, builds dashboards and reports, and performs statistical analysis to support decisions.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/05-data-ai/data-analyst.md",
+    stars: 24163,
+    stackTags: ["best-practices"],
+  },
+
+  // Documentation
+  {
+    name: "C4 Context",
+    type: "agent",
+    category: "documentation",
+    description: "Generates C4 Context-level system documentation covering personas, journeys, and system boundaries.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/c4-architecture/agents/c4-context.md",
+    stars: 38654,
+    stackTags: ["design-patterns"],
+  },
+  {
+    name: "C4 Container",
+    type: "agent",
+    category: "documentation",
+    description: "Generates C4 Container-level architecture documentation, including API surface documentation.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/c4-architecture/agents/c4-container.md",
+    stars: 38654,
+    stackTags: ["design-patterns"],
+  },
+  {
+    name: "C4 Component",
+    type: "agent",
+    category: "documentation",
+    description: "Synthesizes and documents C4 Component-level architecture from the codebase.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/c4-architecture/agents/c4-component.md",
+    stars: 38654,
+    stackTags: ["design-patterns"],
+  },
+  {
+    name: "C4 Code",
+    type: "agent",
+    category: "documentation",
+    description: "Generates C4 Code-level documentation with signatures and dependency detail.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/c4-architecture/agents/c4-code.md",
+    stars: 38654,
+    stackTags: ["design-patterns"],
+  },
+  {
+    name: "Docs Architect",
+    type: "agent",
+    category: "documentation",
+    description: "Generates comprehensive technical documentation for a codebase or system.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/code-documentation/agents/docs-architect.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Tutorial Engineer",
+    type: "agent",
+    category: "documentation",
+    description: "Writes step-by-step tutorials and educational onboarding content for a codebase.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/code-documentation/agents/tutorial-engineer.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "API Documenter",
+    type: "agent",
+    category: "documentation",
+    description: "Generates OpenAPI/Swagger specifications and developer-facing API documentation.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/documentation-generation/agents/api-documenter.md",
+    stars: 38654,
+    stackTags: ["aws-api-gateway", "best-practices"],
+  },
+  {
+    name: "Reference Builder",
+    type: "agent",
+    category: "documentation",
+    description: "Builds technical references and API documentation from the codebase.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/documentation-generation/agents/reference-builder.md",
+    stars: 38654,
+    stackTags: ["best-practices"],
+  },
+  {
+    name: "Doc Updater",
+    type: "agent",
+    category: "documentation",
+    description: "Updates codemaps and documentation, keeping READMEs and architecture guides in sync with the codebase.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["best-practices"],
+  },
+
+  // DevOps & CI/CD
+  {
+    name: "Deployment Engineer",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Builds CI/CD pipelines, containerization, and cloud deployment workflows.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/cicd-automation/agents/deployment-engineer.md",
+    stars: 38654,
+    stackTags: ["aws", "best-practices"],
+  },
+  {
+    name: "DevOps Troubleshooter",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Debugs production issues via log analysis and deployment troubleshooting.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/incident-response/agents/devops-troubleshooter.md",
+    stars: 38654,
+    stackTags: ["observability", "resilience"],
+  },
+  {
+    name: "Incident Responder",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Manages and resolves production incidents end to end.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/incident-response/agents/incident-responder.md",
+    stars: 38654,
+    stackTags: ["resilience", "observability"],
+  },
+  {
+    name: "Observability Engineer",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Sets up production monitoring, distributed tracing, and SLI/SLO definitions.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/observability-monitoring/agents/observability-engineer.md",
+    stars: 38654,
+    stackTags: ["observability", "distributed-systems"],
+  },
+  {
+    name: "Performance Engineer",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Profiles applications and optimizes performance bottlenecks.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/observability-monitoring/agents/performance-engineer.md",
+    stars: 38654,
+    stackTags: ["observability", "resilience"],
+  },
+  {
+    name: "Context Manager",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Manages shared context across a multi-agent session so agents stay coordinated on a single source of truth.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/agent-orchestration/agents/context-manager.md",
+    stars: 38654,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Team Lead",
+    type: "agent",
+    category: "devops-cicd",
+    description:
+      "Orchestrates a multi-agent team — decomposes work into parallel tasks with file-ownership boundaries, manages the team's lifecycle, and synthesizes results.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/agent-teams/agents/team-lead.md",
+    stars: 38654,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Team Implementer",
+    type: "agent",
+    category: "devops-cicd",
+    description:
+      "Implements components within strict file-ownership boundaries as part of a parallel multi-agent build, coordinating at integration points via messaging.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/agent-teams/agents/team-implementer.md",
+    stars: 38654,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Conductor Validator",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Validates project artifacts for completeness, consistency, and correctness before implementation begins.",
+    repoUrl: "https://github.com/wshobson/agents/blob/main/plugins/conductor/agents/conductor-validator.md",
+    stars: 38654,
+    stackTags: ["ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "Planner",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Restates requirements, assesses risks, and creates a step-by-step implementation plan before any code is touched.",
+    repoUrl: "https://github.com/affaan-m/everything-claude-code",
+    stars: 239029,
+    stackTags: ["ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "DevOps Incident Responder",
+    type: "agent",
+    category: "devops-cicd",
+    description:
+      "Responds to production incidents, performs rapid diagnostics, and implements permanent fixes with a focus on reducing MTTR.",
+    repoUrl:
+      "https://github.com/VoltAgent/awesome-claude-code-subagents/blob/main/categories/03-infrastructure/devops-incident-responder.md",
+    stars: 24163,
+    stackTags: ["resilience", "observability"],
+  },
+  {
+    name: "Release Manager",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Executes pre-release security gates and sign-off as part of a secure-SDLC release process.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "DX Optimizer",
+    type: "agent",
+    category: "devops-cicd",
+    description: "Optimizes developer experience and tooling to reduce friction across the SDLC.",
+    repoUrl:
+      "https://github.com/wshobson/agents/blob/main/plugins/team-collaboration/agents/dx-optimizer.md",
+    stars: 38654,
+    stackTags: ["best-practices", "ai-assisted-sdlc"],
+  },
+  {
+    name: "Agent Organizer",
+    type: "agent",
+    category: "devops-cicd",
+    description:
+      "Analyzes project requirements and recommends an optimal team of specialized agents for a task, without implementing solutions itself.",
+    repoUrl: "https://github.com/lst97/claude-code-sub-agents/blob/main/agents/agent-organizer.md",
+    stars: 1658,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+];
+
 const rag: CatalogItem[] = [
   {
     name: "claude-context",
@@ -1997,4 +3085,4 @@ const rag: CatalogItem[] = [
   },
 ];
 
-export const catalogItems: CatalogItem[] = [...hooks, ...plugins, ...rag];
+export const catalogItems: CatalogItem[] = [...hooks, ...plugins, ...rag, ...agents];

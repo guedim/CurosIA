@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Weekly source-discovery bot: searches the GitHub Search API for new
-// Claude Code hooks/plugins/RAG tools and appends candidates to
+// Claude Code hooks/plugins/RAG tools/agents and appends candidates to
 // data/candidates.ts for human curation. Requires GITHUB_TOKEN in env.
 //
 // Run with: node --experimental-strip-types scripts/find-new-sources.mjs
@@ -24,6 +24,10 @@ const TOPICS = [
   "claude-code-plugin",
   "claude-code-plugins",
   "claude-code-agent",
+  "claude-code-agents",
+  "claude-code-subagents",
+  "claude-subagent",
+  "claude-subagents",
   "claude-skill",
   "claude-skills",
 ];

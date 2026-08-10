@@ -8,6 +8,7 @@ const tabs: { type: ItemType; label: string }[] = [
   { type: "hook", label: "Hooks" },
   { type: "plugin", label: "Plugins" },
   { type: "rag", label: "RAG" },
+  { type: "agent", label: "Agentes" },
 ];
 
 export default function Home() {

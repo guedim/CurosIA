@@ -25,6 +25,14 @@ const categoryStyles: Record<Category, string> = {
   "embeddings-rerank": "bg-green-500/15 text-green-300 ring-1 ring-inset ring-green-500/30",
   evaluation: "bg-red-500/15 text-red-300 ring-1 ring-inset ring-red-500/30",
   memory: "bg-stone-500/15 text-stone-300 ring-1 ring-inset ring-stone-500/30",
+  // agent categories
+  architecture: "bg-purple-500/15 text-purple-300 ring-1 ring-inset ring-purple-500/30",
+  "backend-python": "bg-emerald-600/15 text-emerald-300 ring-1 ring-inset ring-emerald-600/30",
+  "security-compliance": "bg-red-600/15 text-red-300 ring-1 ring-inset ring-red-600/30",
+  "aws-serverless": "bg-orange-600/15 text-orange-300 ring-1 ring-inset ring-orange-600/30",
+  "testing-qa": "bg-cyan-600/15 text-cyan-300 ring-1 ring-inset ring-cyan-600/30",
+  "data-persistence": "bg-blue-600/15 text-blue-300 ring-1 ring-inset ring-blue-600/30",
+  "devops-cicd": "bg-teal-600/15 text-teal-300 ring-1 ring-inset ring-teal-600/30",
 };
 
 function formatStars(stars: number): string {
