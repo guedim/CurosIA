@@ -602,6 +602,16 @@ const hooks: CatalogItem[] = [
     stackTags: ["ai-assisted-sdlc"],
   },
   {
+    name: "Infinite Agentic Loop",
+    type: "hook",
+    category: "workflow",
+    description:
+      "Two-prompt system that fans a single spec out to N parallel sub-agents, each given a unique creative direction, iterating in waves until context limits are reached.",
+    repoUrl: "https://github.com/disler/infinite-agentic-loop",
+    stars: 608,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
     name: "Claude Code Showcase",
     type: "hook",
     category: "workflow",
