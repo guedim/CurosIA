@@ -7,6 +7,7 @@
 
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
+import { TRUSTED_ORGS } from "./trusted-orgs.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const CATALOG_PATH = `${ROOT}data/catalog.ts`;
@@ -14,7 +15,10 @@ const CANDIDATES_PATH = `${ROOT}data/candidates.ts`;
 const CANDIDATES_ARRAY_MARKER =
   "export const candidateItems: CandidateItem[] = [";
 
-const FIXED_KNOWN_ORGS = ["anthropics"];
+const REQUEST_TIMEOUT_MS = 15_000;
+// If more than this fraction of searches fail, the run is untrustworthy —
+// don't report a misleadingly clean "0 new candidates" week.
+const MAX_FAILURE_RATE = 0.2;
 // Deliberately narrow to claude-code-specific topics — generic ones like
 // "mcp-server" pull in the entire MCP ecosystem regardless of relevance.
 const TOPICS = [
@@ -64,26 +68,62 @@ function normalizeRepoUrl(url) {
   return url.trim().replace(/\.git$/i, "").replace(/\/+$/, "").toLowerCase();
 }
 
+// Returns NaN for missing/unparseable dates, never a comparison-defeating
+// value — callers must treat NaN as "reject", not silently pass every
+// staleness check the way `NaN > threshold` (always false) would.
 function daysAgo(isoDate) {
-  return (Date.now() - new Date(isoDate).getTime()) / (24 * 60 * 60 * 1000);
+  const parsed = Date.parse(isoDate ?? "");
+  if (Number.isNaN(parsed)) return NaN;
+  return (Date.now() - parsed) / (24 * 60 * 60 * 1000);
 }
 
+let searchFailures = 0;
+let searchAttempts = 0;
+
 async function githubSearchRepos(query) {
+  searchAttempts++;
   const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=30`;
-  const res = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2022-11-28",
-      "User-Agent": "hookhub-source-discovery-bot",
-    },
-  });
+  let res;
+  try {
+    res = await fetch(url, {
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "hookhub-source-discovery-bot",
+      },
+    });
+  } catch (err) {
+    searchFailures++;
+    console.warn(`GitHub search request failed for query "${query}": ${err.message}`);
+    return [];
+  }
   if (!res.ok) {
+    searchFailures++;
     console.warn(`GitHub search failed (${res.status}) for query "${query}": ${await res.text()}`);
     return [];
   }
   const data = await res.json();
-  return data.items ?? [];
+  if (!Array.isArray(data.items)) {
+    searchFailures++;
+    console.warn(`Unexpected search response shape for query "${query}"`);
+    return [];
+  }
+  return data.items;
+}
+
+// Fail closed: a repo with a missing/malformed stargazers_count or pushed_at
+// must not silently bypass every admission gate the way `undefined < 50` and
+// `NaN > 90` (both always false) would otherwise let it.
+function parseRepo(repo) {
+  const stars = Number(repo?.stargazers_count);
+  const ageDays = daysAgo(repo?.pushed_at);
+  if (!Number.isFinite(stars) || Number.isNaN(ageDays) || typeof repo?.html_url !== "string") {
+    console.warn(`Skipping malformed search result: ${JSON.stringify(repo?.full_name ?? repo)}`);
+    return null;
+  }
+  return { ...repo, stars, ageDays };
 }
 
 function toCandidateItem(repo, foundVia, discoveredAt) {
@@ -91,17 +131,12 @@ function toCandidateItem(repo, foundVia, discoveredAt) {
     name: repo.full_name,
     repoUrl: repo.html_url,
     description: (repo.description ?? "").trim(),
-    stars: repo.stargazers_count,
+    stars: repo.stars,
     topics: repo.topics ?? [],
     foundVia,
     discoveredAt,
     status: "pending",
   };
-}
-
-function extractOrg(repoUrl) {
-  const match = repoUrl.match(/github\.com\/([^/]+)\//i);
-  return match?.[1];
 }
 
 function tsString(value) {
@@ -110,12 +145,13 @@ function tsString(value) {
 
 function serializeCandidate(item) {
   const topicsLiteral = `[${item.topics.map(tsString).join(", ")}]`;
+  const stars = Number.isFinite(item.stars) ? Math.trunc(item.stars) : 0;
   return [
     "  {",
     `    name: ${tsString(item.name)},`,
     `    repoUrl: ${tsString(item.repoUrl)},`,
     `    description: ${tsString(item.description)},`,
-    `    stars: ${item.stars},`,
+    `    stars: ${stars},`,
     `    topics: ${topicsLiteral},`,
     `    foundVia: ${tsString(item.foundVia)},`,
     `    discoveredAt: ${tsString(item.discoveredAt)},`,
@@ -145,25 +181,27 @@ async function main() {
     [...catalogItems, ...existingCandidates].map((item) => normalizeRepoUrl(item.repoUrl)),
   );
 
-  const knownOrgs = new Set(FIXED_KNOWN_ORGS.map((org) => org.toLowerCase()));
-  for (const item of catalogItems) {
-    if (item.official) {
-      const org = extractOrg(item.repoUrl);
-      if (org) knownOrgs.add(org.toLowerCase());
-    }
-  }
+  const trustedOrgById = new Map(TRUSTED_ORGS.map((org) => [org.id, org.login]));
 
   const today = new Date().toISOString().slice(0, 10);
   const found = new Map(); // normalized repoUrl -> candidate
 
-  for (const org of knownOrgs) {
-    const repos = await githubSearchRepos(`org:${org} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`);
+  for (const { login } of TRUSTED_ORGS) {
+    const repos = await githubSearchRepos(`org:${login} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`);
     await sleep(SEARCH_API_DELAY_MS);
-    for (const repo of repos) {
-      if (repo.stargazers_count < MIN_ORG_STARS) continue;
-      if (daysAgo(repo.pushed_at) > ORG_STALE_AFTER_DAYS) continue;
-      if (repo.stargazers_count > MAX_PLAUSIBLE_STARS) {
-        console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stargazers_count}★)`);
+    for (const raw of repos) {
+      const repo = parseRepo(raw);
+      if (!repo) continue;
+      // Pin trust to the org's immutable numeric id, not just its login —
+      // a renamed/deleted org's old login can be squatted by someone else.
+      if (!trustedOrgById.has(repo.owner?.id)) {
+        console.warn(`Skipping ${repo.full_name}: owner id ${repo.owner?.id} doesn't match trusted org "${login}"`);
+        continue;
+      }
+      if (repo.stars < MIN_ORG_STARS) continue;
+      if (repo.ageDays > ORG_STALE_AFTER_DAYS) continue;
+      if (repo.stars > MAX_PLAUSIBLE_STARS) {
+        console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stars}★)`);
         continue;
       }
       const norm = normalizeRepoUrl(repo.html_url);
@@ -175,17 +213,25 @@ async function main() {
   for (const topic of TOPICS) {
     const repos = await githubSearchRepos(`topic:${topic} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`);
     await sleep(SEARCH_API_DELAY_MS);
-    for (const repo of repos) {
-      if (repo.stargazers_count < MIN_TOPIC_STARS) continue;
-      if (repo.stargazers_count > MAX_PLAUSIBLE_STARS) {
-        console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stargazers_count}★)`);
+    for (const raw of repos) {
+      const repo = parseRepo(raw);
+      if (!repo) continue;
+      if (repo.stars < MIN_TOPIC_STARS) continue;
+      if (repo.stars > MAX_PLAUSIBLE_STARS) {
+        console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stars}★)`);
         continue;
       }
-      if (daysAgo(repo.pushed_at) > TOPIC_STALE_AFTER_DAYS) continue;
+      if (repo.ageDays > TOPIC_STALE_AFTER_DAYS) continue;
       const norm = normalizeRepoUrl(repo.html_url);
       if (knownUrls.has(norm) || found.has(norm)) continue;
       found.set(norm, toCandidateItem(repo, "topic-search", today));
     }
+  }
+
+  if (searchAttempts > 0 && searchFailures / searchAttempts > MAX_FAILURE_RATE) {
+    throw new Error(
+      `${searchFailures}/${searchAttempts} GitHub searches failed — results are incomplete, refusing to report a clean run`,
+    );
   }
 
   const newCandidates = [...found.values()].sort((a, b) => b.stars - a.stars);

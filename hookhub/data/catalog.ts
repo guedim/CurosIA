@@ -41,6 +41,22 @@ export type AgentCategory =
 
 export type Category = HookCategory | PluginCategory | RagCategory | AgentCategory;
 
+interface BaseCatalogItem {
+  name: string;
+  description: string;
+  repoUrl: string;
+  stackTags?: StackTag[];
+  /**
+   * Published by the tool's own vendor/org, or by Anthropic's official
+   * plugin marketplace. Also grants the repo's GitHub org a lowered
+   * admission bar (5★ vs 50★, 365-day vs 90-day staleness) in the weekly
+   * discovery pipeline — see scripts/trusted-orgs.mjs.
+   */
+  official?: boolean;
+  /** GitHub star count of the hosting repository, snapshotted at curation time. */
+  stars?: number;
+}
+
 export type StackTag =
   | "python"
   | "aws"
@@ -88,18 +104,11 @@ export const stackTags: StackTag[] = [
   "ai-assisted-sdlc",
 ];
 
-export interface CatalogItem {
-  name: string;
-  type: ItemType;
-  category: Category;
-  description: string;
-  repoUrl: string;
-  stackTags?: StackTag[];
-  /** Published by the tool's own vendor/org, or by Anthropic's official plugin marketplace. */
-  official?: boolean;
-  /** GitHub star count of the hosting repository, snapshotted at curation time. */
-  stars?: number;
-}
+export type CatalogItem =
+  | (BaseCatalogItem & { type: "hook"; category: HookCategory })
+  | (BaseCatalogItem & { type: "plugin"; category: PluginCategory })
+  | (BaseCatalogItem & { type: "rag"; category: RagCategory })
+  | (BaseCatalogItem & { type: "agent"; category: AgentCategory });
 
 export const hookCategories: HookCategory[] = [
   "security",
