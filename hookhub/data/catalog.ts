@@ -282,7 +282,7 @@ const hooks: CatalogItem[] = [
     description:
       "Runs the linter after every file write and rejects changes that introduce lint errors.",
     repoUrl: "https://github.com/affaan-m/everything-claude-code",
-    stars: 238799,
+    stars: 239029,
     stackTags: ["best-practices"],
   },
   {
@@ -886,7 +886,7 @@ const plugins: CatalogItem[] = [
     repoUrl:
       "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/feature-dev",
     official: true,
-    stars: 33269,
+    stars: 33330,
     stackTags: ["ai-assisted-sdlc", "clean-architecture"],
   },
   {
@@ -933,7 +933,7 @@ const plugins: CatalogItem[] = [
     repoUrl:
       "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/agent-sdk-dev",
     official: true,
-    stars: 33269,
+    stars: 33330,
     stackTags: ["ai-assisted-sdlc"],
   },
   {
@@ -943,7 +943,7 @@ const plugins: CatalogItem[] = [
     description:
       "Teaches Claude brainstorming, subagent-driven development with built-in code review, systematic debugging, and red/green TDD.",
     repoUrl: "https://github.com/obra/superpowers",
-    stars: 269133,
+    stars: 269273,
   },
   {
     name: "Claude Forge",
@@ -1110,7 +1110,7 @@ const plugins: CatalogItem[] = [
     repoUrl:
       "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pr-review-toolkit",
     official: true,
-    stars: 33269,
+    stars: 33330,
     stackTags: ["best-practices"],
   },
   {
