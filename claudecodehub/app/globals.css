@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07060f;
-  --foreground: #f5f5f9;
-  --muted: #9a9ab3;
+  --background: #000000;
+  --foreground: #ffffff;
+  --muted: #babdd3;
 
-  /* Bold.co brand palette */
+  /* Bold.co brand palette — measured from bold.co (colors, gradient stops, theme-color meta) */
   --bold-red: #ff2947;
-  --bold-pink: #ff6b82;
-  --bold-violet: #7a2ea8;
+  --bold-pink: #f59fa5;
+  --bold-violet: #6b2d60;
   --bold-blue: #0407f5;
   --bold-navy: #121e6c;
 }

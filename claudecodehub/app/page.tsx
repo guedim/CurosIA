@@ -27,7 +27,7 @@ export default function Home() {
       />
       <main className="relative w-full max-w-6xl flex-1 px-6 py-16 sm:px-10">
         <header className="mb-12 flex flex-col gap-3 text-center sm:text-left">
-          <h1 className="bg-gradient-to-r from-bold-red via-bold-violet to-bold-blue bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl">
+          <h1 className="bg-gradient-to-r from-bold-red via-bold-violet to-bold-blue bg-clip-text text-4xl font-medium tracking-tight text-transparent sm:text-5xl">
             ClaudeCodeHub
           </h1>
           <p className="text-lg text-muted">
