@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Weekly source-discovery bot: searches the GitHub Search API for new
 // Claude Code hooks/plugins/RAG tools/agents and appends candidates to
-// data/candidates.ts for human curation. Requires GITHUB_TOKEN in env.
+// data/candidates.json for human curation. Requires GITHUB_TOKEN in env.
 //
 // Run with: node --experimental-strip-types scripts/find-new-sources.mjs
 
@@ -11,9 +11,7 @@ import { TRUSTED_ORGS } from "./trusted-orgs.mjs";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const CATALOG_PATH = `${ROOT}data/catalog.ts`;
-const CANDIDATES_PATH = `${ROOT}data/candidates.ts`;
-const CANDIDATES_ARRAY_MARKER =
-  "export const candidateItems: CandidateItem[] = [";
+const CANDIDATES_JSON_PATH = `${ROOT}data/candidates.json`;
 
 const REQUEST_TIMEOUT_MS = 15_000;
 // If more than this fraction of searches fail, the run is untrustworthy —
@@ -139,43 +137,19 @@ function toCandidateItem(repo, foundVia, discoveredAt) {
   };
 }
 
-function tsString(value) {
-  return JSON.stringify(value);
-}
-
-function serializeCandidate(item) {
-  const topicsLiteral = `[${item.topics.map(tsString).join(", ")}]`;
-  const stars = Number.isFinite(item.stars) ? Math.trunc(item.stars) : 0;
-  return [
-    "  {",
-    `    name: ${tsString(item.name)},`,
-    `    repoUrl: ${tsString(item.repoUrl)},`,
-    `    description: ${tsString(item.description)},`,
-    `    stars: ${stars},`,
-    `    topics: ${topicsLiteral},`,
-    `    foundVia: ${tsString(item.foundVia)},`,
-    `    discoveredAt: ${tsString(item.discoveredAt)},`,
-    `    status: ${tsString(item.status)},`,
-    "  },",
-  ].join("\n");
+async function readCandidatesFile() {
+  const src = await readFile(CANDIDATES_JSON_PATH, "utf8");
+  return JSON.parse(src);
 }
 
 async function writeCandidatesFile(allCandidates) {
-  const src = await readFile(CANDIDATES_PATH, "utf8");
-  const markerIndex = src.indexOf(CANDIDATES_ARRAY_MARKER);
-  if (markerIndex === -1) {
-    throw new Error(`Could not find "${CANDIDATES_ARRAY_MARKER}" in ${CANDIDATES_PATH}`);
-  }
-  const header = src.slice(0, markerIndex);
-  const body = allCandidates.length
-    ? `${CANDIDATES_ARRAY_MARKER}\n${allCandidates.map(serializeCandidate).join("\n")}\n];\n`
-    : `${CANDIDATES_ARRAY_MARKER}];\n`;
+  const body = `${JSON.stringify(allCandidates, null, 2)}\n`;
   // Write to a temp file and rename (atomic on the same filesystem) so an
-  // overlapping run or a crash mid-write can't leave candidates.ts
+  // overlapping run or a crash mid-write can't leave candidates.json
   // truncated or torn between two runs' output.
-  const tmpPath = `${CANDIDATES_PATH}.tmp-${process.pid}`;
-  await writeFile(tmpPath, header + body);
-  await rename(tmpPath, CANDIDATES_PATH);
+  const tmpPath = `${CANDIDATES_JSON_PATH}.tmp-${process.pid}`;
+  await writeFile(tmpPath, body);
+  await rename(tmpPath, CANDIDATES_JSON_PATH);
 }
 
 // Shared pipeline for both search strategies below: run the query, then
@@ -204,7 +178,7 @@ async function collectFrom({ query, foundVia, minStars, staleAfterDays, validate
 
 async function main() {
   const { catalogItems } = await import(CATALOG_PATH);
-  const { candidateItems: existingCandidates } = await import(CANDIDATES_PATH);
+  const existingCandidates = await readCandidatesFile();
 
   const ctx = {
     knownUrls: new Set(

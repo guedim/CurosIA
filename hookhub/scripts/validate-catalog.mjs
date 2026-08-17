@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Data-integrity gate for data/catalog.ts and data/candidates.ts. Run in CI
+// Data-integrity gate for data/catalog.ts and data/candidates.json. Run in CI
 // (and locally before curating) to catch defects lint/build can't see:
 // a candidate marked "rejected" that's nonetheless published, a "pending"
 // candidate that's already been curated, and diverging star counts for the
@@ -43,7 +43,7 @@ async function main() {
 
   const errors = [];
 
-  // 1. No repo marked "rejected" in candidates.ts may appear in catalog.ts.
+  // 1. No repo marked "rejected" in candidates.json may appear in catalog.ts.
   const rejectedUrls = new Set(
     candidateItems
       .filter((c) => c.status === "rejected")
@@ -52,7 +52,7 @@ async function main() {
   for (const item of catalogItems) {
     if (rejectedUrls.has(normalizeRepoUrl(item.repoUrl))) {
       errors.push(
-        `"${item.name}" (${item.repoUrl}) is published in catalog.ts but marked "rejected" in candidates.ts`,
+        `"${item.name}" (${item.repoUrl}) is published in catalog.ts but marked "rejected" in candidates.json`,
       );
     }
   }
@@ -62,7 +62,7 @@ async function main() {
   for (const candidate of candidateItems) {
     if (candidate.status === "pending" && catalogUrls.has(normalizeRepoUrl(candidate.repoUrl))) {
       errors.push(
-        `"${candidate.name}" (${candidate.repoUrl}) is still "pending" in candidates.ts but already exists in catalog.ts — delete it from candidates.ts`,
+        `"${candidate.name}" (${candidate.repoUrl}) is still "pending" in candidates.json but already exists in catalog.ts — delete it from candidates.json`,
       );
     }
   }

@@ -37,11 +37,11 @@ jobs:
           body: |
             Automated weekly scan by the [HookHub Source Discovery](./.github/workflows/hookhub-source-discovery.yml) workflow.
 
-            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.ts`. For each one:
+            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.json`. For each one:
 
-            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.ts`.
+            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`.
             - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so it isn't suggested again next week.
           branch: bot/hookhub-source-discovery
-          add-paths: hookhub/data/candidates.ts
+          add-paths: hookhub/data/candidates.json
           labels: hookhub, catalog-candidates
           delete-branch: true

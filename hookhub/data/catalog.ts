@@ -67,9 +67,11 @@ interface BaseCatalogItem {
   stackTags?: StackTag[];
   /**
    * Published by the tool's own vendor/org, or by Anthropic's official
-   * plugin marketplace. Also grants the repo's GitHub org a lowered
-   * admission bar (5★ vs 50★, 365-day vs 90-day staleness) in the weekly
-   * discovery pipeline — see scripts/trusted-orgs.mjs.
+   * plugin marketplace. Purely a display concern (renders the "✓ Official"
+   * badge) — it does NOT grant anything in the weekly discovery pipeline.
+   * That pipeline has its own separate, explicitly-reviewed allowlist in
+   * scripts/trusted-orgs.mjs; add an org there (a security-relevant change)
+   * if you also want its repos to get a lowered admission bar.
    */
   official?: boolean;
   /** GitHub star count of the hosting repository, snapshotted at curation time. */

@@ -41,7 +41,8 @@ hookhub/
 │   └── site-footer.tsx    # Footer with the gradient hairline + copyright line
 ├── data/
 │   ├── catalog.ts          # The unified catalog (CatalogItem type + catalogItems[] array: hooks, plugins, rag, agents)
-│   └── candidates.ts       # Curation queue for the weekly source-discovery bot — not rendered by the site
+│   ├── candidates.ts       # Thin typed re-export of candidates.json
+│   └── candidates.json     # Curation queue for the weekly source-discovery bot — not rendered by the site
 ├── scripts/
 │   └── find-new-sources.mjs # GitHub Search API script run weekly by the HookHub Source Discovery workflow
 └── public/                 # Static assets (icons, svgs)
@@ -235,18 +236,18 @@ Verify the GitHub App itself is installed at `https://github.com/guedim/CurosIA/
 
 ## Weekly source discovery (HookHub Source Discovery)
 
-A scheduled GitHub Action searches the GitHub Search API every week for new hooks, plugins, RAG tools, and agents worth adding to the catalog — official Anthropic/vendor repos, and community repos tagged with Claude Code-specific topics — and opens a PR with what it finds. It never touches `data/catalog.ts` or the live site directly; it only appends to a separate curation queue, `data/candidates.ts`, which the gallery doesn't render.
+A scheduled GitHub Action searches the GitHub Search API every week for new hooks, plugins, RAG tools, and agents worth adding to the catalog — trusted-org and vendor repos, and community repos tagged with Claude Code-specific topics — and opens a PR with what it finds. It never touches `data/catalog.ts` or the live site directly; it only appends to a separate curation queue, `data/candidates.json`, which the gallery doesn't render.
 
 **How it searches, in two passes:**
 
-- **Known orgs** — orgs that already have an `official: true` entry in the catalog (auto-extracted from `repoUrl`), plus `anthropics` — searched for repos whose name/description contains the exact phrase `"claude code"`. No star minimum beyond a token floor (5★), since an official repo is worth surfacing even brand new.
+- **Trusted orgs** — an explicit, reviewed allowlist in [`scripts/trusted-orgs.mjs`](scripts/trusted-orgs.mjs), each entry pinned to the org's immutable numeric GitHub id (not just its login, which can be squatted after a rename or deletion) — searched for repos whose name/description contains the exact phrase `"claude code"`, with results checked against that pinned id. No star minimum beyond a token floor (5★), since a trusted-org repo is worth surfacing even brand new. Adding an org here grants it this lowered bar, so treat it as a reviewable, security-relevant change, not just a catalog edit.
 - **Topic search** — GitHub topics like `claude-code`, `claude-code-hook`, `claude-code-plugin`, `claude-code-agent`, `claude-subagent`, `claude-skill`, etc. (including agent/subagent-specific topics so new subagent collections surface for the Agentes tab), combined with the same `"claude code"` phrase requirement, sorted by stars. Requires ≥50 stars and a push within the last 90 days, to filter out abandoned or barely-touched repos.
 
-Both passes exclude forks, archived repos, and anything already present in `catalog.ts` or `candidates.ts` (including previously `rejected` ones — rejections are remembered, not just deleted). Results above 150,000 stars are logged and skipped rather than trusted outright — GitHub topics can be added to any repo for visibility, and star counts can be farmed, so an implausible outlier is a spam/gaming signal, not proof of relevance.
+Both passes exclude forks, archived repos, and anything already present in `catalog.ts` or `candidates.json` (including previously `rejected` ones — rejections are remembered, not just deleted). Results above 150,000 stars are logged and skipped rather than trusted outright — GitHub topics can be added to any repo for visibility, and star counts can be farmed, so an implausible outlier is a spam/gaming signal, not proof of relevance.
 
-**Curating a PR:** for each entry in `data/candidates.ts`,
+**Curating a PR:** for each entry in `data/candidates.json`,
 
-- **Good fit** — move it into the matching array in `data/catalog.ts` (`hooks`, `plugins`, `rag`, or `agents`), filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.ts`. For repos that bundle multiple subagents (e.g. a `.claude/agents/` or `plugins/*/agents/` directory), consider adding each individually relevant subagent as its own `agents` entry rather than one entry for the whole repo — see [Adding a new hook, plugin, RAG tool, or agent](#adding-a-new-hook-plugin-rag-tool-or-agent-to-the-gallery) above.
+- **Good fit** — move it into the matching array in `data/catalog.ts` (`hooks`, `plugins`, `rag`, or `agents`), filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`. For repos that bundle multiple subagents (e.g. a `.claude/agents/` or `plugins/*/agents/` directory), consider adding each individually relevant subagent as its own `agents` entry rather than one entry for the whole repo — see [Adding a new hook, plugin, RAG tool, or agent](#adding-a-new-hook-plugin-rag-tool-or-agent-to-the-gallery) above.
 - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so the bot doesn't suggest the same repo again next week.
 
 > The first run is expected to surface a large batch — it's scanning everything that exists today, with no prior history to diff against. Weekly runs after that only surface repos that are genuinely new or newly matching, so the volume drops off fast.
@@ -294,12 +295,12 @@ jobs:
           body: |
             Automated weekly scan by the [HookHub Source Discovery](./.github/workflows/hookhub-source-discovery.yml) workflow.
 
-            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.ts`. For each one:
+            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.json`. For each one:
 
-            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.ts`.
+            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`.
             - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so it isn't suggested again next week.
           branch: bot/hookhub-source-discovery
-          add-paths: hookhub/data/candidates.ts
+          add-paths: hookhub/data/candidates.json
           labels: hookhub, catalog-candidates
           delete-branch: true
 ```
