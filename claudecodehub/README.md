@@ -30,7 +30,7 @@ It's a static, no-backend Next.js site: every entry is a plain data record rende
 ## Project structure
 
 ```text
-hookhub/
+claudecodehub/
 ├── app/
 │   ├── layout.tsx        # Root layout, Montserrat font, metadata
 │   ├── page.tsx           # Home page — renders the hero, Hooks/Plugins/RAG/Agentes toggle, and gallery
@@ -44,7 +44,7 @@ hookhub/
 │   ├── candidates.ts       # Thin typed re-export of candidates.json
 │   └── candidates.json     # Curation queue for the weekly source-discovery bot — not rendered by the site
 ├── scripts/
-│   └── find-new-sources.mjs # GitHub Search API script run weekly by the HookHub Source Discovery workflow
+│   └── find-new-sources.mjs # GitHub Search API script run weekly by the ClaudeCodeHub Source Discovery workflow
 └── public/                 # Static assets (icons, svgs)
 ```
 
@@ -54,13 +54,13 @@ The production site is live on Vercel at **[claudecodehub.vercel.app](https://cl
 
 > The Vercel project (team `guedim-5157s-projects`) was originally created as `hookplughub`. Renaming a project's *Settings → General → Project Name* does **not** move its `*.vercel.app` domain automatically — the new domain had to be added explicitly under *Settings → Domains*, after which the old `hookplughub.vercel.app` domain was removed from the project.
 
-Deploys are git-based: the Vercel project is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `hookhub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
+Deploys are git-based: the Vercel project is connected directly to this monorepo's GitHub repository, so **every push to `main` that touches `claudecodehub/` automatically triggers a new production deployment** — no manual `vercel deploy` needed.
 
-This was set up as follows, since `hookhub/` is a subfolder of the `CurosIA` monorepo rather than its own repo:
+This was set up as follows, since `claudecodehub/` is a subfolder of the `CurosIA` monorepo rather than its own repo:
 
 1. **Connect the Git repository** — in the Vercel project's *Settings → Git*, connected GitHub repo `guedim/CurosIA`.
-2. **Scope the build to the subfolder** — in *Settings → Build and Deployment*, set **Root Directory** to `hookhub`, with "Skip deployments when there are no changes to the root directory or its dependencies" enabled, so pushes touching unrelated folders in the monorepo don't trigger unnecessary rebuilds.
-3. **Fix `data/catalog.ts` visibility** — the monorepo's root `.gitignore` has a blanket `data/` rule (meant for AI dataset folders elsewhere in the monorepo) that was silently excluding `hookhub/data/catalog.ts`, the file holding the entire hooks/plugins catalog. Added a scoped negation in [`hookhub/.gitignore`](.gitignore) (`!data/` / `!data/**`) so the catalog is tracked and available to the build.
+2. **Scope the build to the subfolder** — in *Settings → Build and Deployment*, set **Root Directory** to `claudecodehub`, with "Skip deployments when there are no changes to the root directory or its dependencies" enabled, so pushes touching unrelated folders in the monorepo don't trigger unnecessary rebuilds.
+3. **Fix `data/catalog.ts` visibility** — the monorepo's root `.gitignore` has a blanket `data/` rule (meant for AI dataset folders elsewhere in the monorepo) that was silently excluding `claudecodehub/data/catalog.ts`, the file holding the entire hooks/plugins catalog. Added a scoped negation in [`claudecodehub/.gitignore`](.gitignore) (`!data/` / `!data/**`) so the catalog is tracked and available to the build.
 
 With that in place, a normal `git push` to `main` (e.g. via `/commit-push-code`) is all that's needed to ship a change.
 
@@ -68,21 +68,21 @@ With that in place, a normal `git push` to `main` (e.g. via `/commit-push-code`)
 
 CI runs lint + build on every change, via a workflow scoped exclusively to this project.
 
-**Where it lives:** GitHub Actions only reads workflow files from `.github/workflows/` at the **root of the Git repository** — since `hookhub/` is a subfolder of the `CurosIA` monorepo (not its own repo), the workflow file lives at `CurosIA/.github/workflows/hookhub-ci.yml`, one level above this `hookhub/` folder, not inside it.
+**Where it lives:** GitHub Actions only reads workflow files from `.github/workflows/` at the **root of the Git repository** — since `claudecodehub/` is a subfolder of the `CurosIA` monorepo (not its own repo), the workflow file lives at `CurosIA/.github/workflows/claudecodehub-ci.yml`, one level above this `claudecodehub/` folder, not inside it.
 
-**How it's scoped to this project only:** the workflow triggers on `push`/`pull_request` to `main`, filtered with `paths: ["hookhub/**"]`, so commits touching other projects in the monorepo (`platzi-supabase`, `IceBreaker-main`, etc.) never trigger it. Inside the job, `working-directory: hookhub` and `cache-dependency-path: hookhub/package-lock.json` scope every step (`npm ci`, `npm run lint`, `npm run build`) to this folder specifically.
+**How it's scoped to this project only:** the workflow triggers on `push`/`pull_request` to `main`, filtered with `paths: ["claudecodehub/**"]`, so commits touching other projects in the monorepo (`platzi-supabase`, `IceBreaker-main`, etc.) never trigger it. Inside the job, `working-directory: claudecodehub` and `cache-dependency-path: claudecodehub/package-lock.json` scope every step (`npm ci`, `npm run lint`, `npm run build`) to this folder specifically.
 
 ```yaml
-# CurosIA/.github/workflows/hookhub-ci.yml
-name: HookHub CI
+# CurosIA/.github/workflows/claudecodehub-ci.yml
+name: ClaudeCodeHub CI
 
 on:
   push:
     branches: [main]
-    paths: ["hookhub/**"]
+    paths: ["claudecodehub/**"]
   pull_request:
     branches: [main]
-    paths: ["hookhub/**"]
+    paths: ["claudecodehub/**"]
   workflow_dispatch: {}
 
 jobs:
@@ -90,7 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hookhub
+        working-directory: claudecodehub
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
@@ -98,7 +98,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: hookhub/package-lock.json
+          cache-dependency-path: claudecodehub/package-lock.json
 
       - run: npm ci
       - run: npm run lint
@@ -108,24 +108,24 @@ jobs:
 
 ### How to (re)create it
 
-1. From the **monorepo root** (not `hookhub/`), create the workflow file at `.github/workflows/hookhub-ci.yml` with the contents above.
+1. From the **monorepo root** (not `claudecodehub/`), create the workflow file at `.github/workflows/claudecodehub-ci.yml` with the contents above.
 2. Commit and push it — GitHub picks up any file under `.github/workflows/` on the default branch automatically; no dashboard configuration or registration step is required.
 
 ```bash
 cd CurosIA
-git add .github/workflows/hookhub-ci.yml
-git commit -m "ci(hookhub): add GitHub Actions workflow for lint and build"
+git add .github/workflows/claudecodehub-ci.yml
+git commit -m "ci(claudecodehub): add GitHub Actions workflow for lint and build"
 git push
 ```
 
 ### Creating and verifying it with Claude Code
 
-This workflow was originally created by asking [Claude Code](https://claude.ai/code) directly from within the `hookhub/` project, e.g.:
+This workflow was originally created by asking [Claude Code](https://claude.ai/code) directly from within the `claudecodehub/` project, e.g.:
 
-1. `"indícame como puedo instalar github workflow en este repositorio"` — Claude reads `hookhub/CLAUDE.md` and `hookhub/AGENTS.md` for project context, but since Actions only reads `.github/workflows/` from the **Git repo root**, it runs `git rev-parse --show-toplevel` first to confirm the real root is `CurosIA/` (one level up from `hookhub/`) and writes the file there — not inside `hookhub/`.
-2. `"commit y push el workflow"` — Claude stages, commits, and pushes just that new file with `git add .github/workflows/hookhub-ci.yml`.
+1. `"indícame como puedo instalar github workflow en este repositorio"` — Claude reads `claudecodehub/CLAUDE.md` and `claudecodehub/AGENTS.md` for project context, but since Actions only reads `.github/workflows/` from the **Git repo root**, it runs `git rev-parse --show-toplevel` first to confirm the real root is `CurosIA/` (one level up from `claudecodehub/`) and writes the file there — not inside `claudecodehub/`.
+2. `"commit y push el workflow"` — Claude stages, commits, and pushes just that new file with `git add .github/workflows/claudecodehub-ci.yml`.
 3. `"revisa que el workflow corra bien en GitHub Actions"` — Claude uses the [GitHub CLI](https://cli.github.com) (`gh workflow run`, `gh run watch --exit-status`) to trigger a run and confirm `npm ci` / `npm run lint` / `npm run build` all pass.
-4. `"deja el workflow exclusivamente para este proyecto"` — Claude scopes the trigger with `paths: ["hookhub/**"]` and `working-directory: hookhub` so it never fires for the monorepo's other projects.
+4. `"deja el workflow exclusivamente para este proyecto"` — Claude scopes the trigger with `paths: ["claudecodehub/**"]` and `working-directory: claudecodehub` so it never fires for the monorepo's other projects.
 
 Claude Code needs a GitHub CLI session already authenticated in the environment (see below) to push commits and to trigger/inspect runs — it doesn't need any GitHub App install or repo secret beyond that.
 
@@ -141,25 +141,25 @@ Claude Code needs a GitHub CLI session already authenticated in the environment 
 
 ### How to run it
 
-- **Automatically:** push (or open a PR with) a change under `hookhub/` to `main` — no action needed beyond a normal `git push`.
-- **Manually, from the GitHub UI:** repo → *Actions* tab → *HookHub CI* → *Run workflow*.
+- **Automatically:** push (or open a PR with) a change under `claudecodehub/` to `main` — no action needed beyond a normal `git push`.
+- **Manually, from the GitHub UI:** repo → *Actions* tab → *ClaudeCodeHub CI* → *Run workflow*.
 - **Manually, from the CLI:**
 
   ```bash
-  gh workflow run hookhub-ci.yml --ref main
+  gh workflow run claudecodehub-ci.yml --ref main
 
   # watch the latest run to completion
-  gh run list --workflow=hookhub-ci.yml --limit 1
+  gh run list --workflow=claudecodehub-ci.yml --limit 1
   gh run watch <run-id> --exit-status
   ```
 
 ### Where to view runs
 
-🔗 **[github.com/guedim/CurosIA/actions/workflows/hookhub-ci.yml](https://github.com/guedim/CurosIA/actions/workflows/hookhub-ci.yml)** — every past and in-progress run of this workflow, with logs per step. It lives under the monorepo's *Actions* tab (not a separate URL per subproject), since `hookhub/` shares the `CurosIA` GitHub repository.
+🔗 **[github.com/guedim/CurosIA/actions/workflows/claudecodehub-ci.yml](https://github.com/guedim/CurosIA/actions/workflows/claudecodehub-ci.yml)** — every past and in-progress run of this workflow, with logs per step. It lives under the monorepo's *Actions* tab (not a separate URL per subproject), since `claudecodehub/` shares the `CurosIA` GitHub repository.
 
 ## Automated PR code review (Claude Code Review)
 
-Every pull request that touches `hookhub/**` gets an automated code review from [Claude Code](https://claude.ai/code), focused purely on code elegance and quality — not functional correctness. Findings are posted as **inline comments directly on the PR's diff**, plus one top-level summary comment.
+Every pull request that touches `claudecodehub/**` gets an automated code review from [Claude Code](https://claude.ai/code), focused purely on code elegance and quality — not functional correctness. Findings are posted as **inline comments directly on the PR's diff**, plus one top-level summary comment.
 
 **What it reviews:**
 
@@ -169,7 +169,7 @@ Every pull request that touches `hookhub/**` gets an automated code review from 
 - **Code quality** — naming, type safety (TypeScript strict mode), dead code, idiomatic Next.js 16 / React 19 patterns
 - **Security** — unsafe use of user input, leaked secrets, unsafe `dangerouslySetInnerHTML`/links, missing validation
 
-**Where it lives:** like the CI workflow, this only works from the **Git repository root** — the file is at `CurosIA/.github/workflows/claude-code-review.yaml`, not inside `hookhub/`.
+**Where it lives:** like the CI workflow, this only works from the **Git repository root** — the file is at `CurosIA/.github/workflows/claude-code-review.yaml`, not inside `claudecodehub/`.
 
 ```yaml
 # CurosIA/.github/workflows/claude-code-review.yaml
@@ -178,7 +178,7 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, synchronize]
-    paths: ["hookhub/**"]
+    paths: ["claudecodehub/**"]
 
 jobs:
   claude-review:
@@ -203,7 +203,7 @@ jobs:
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
 ```
 
-**How it's scoped to this project only:** same mechanism as the CI workflow — `paths: ["hookhub/**"]` on the `pull_request` trigger, plus an explicit instruction in the `prompt` telling Claude to ignore anything outside `hookhub/` even though it can see the whole monorepo checkout.
+**How it's scoped to this project only:** same mechanism as the CI workflow — `paths: ["claudecodehub/**"]` on the `pull_request` trigger, plus an explicit instruction in the `prompt` telling Claude to ignore anything outside `claudecodehub/` even though it can see the whole monorepo checkout.
 
 ### How to authenticate
 
@@ -227,14 +227,14 @@ Verify the GitHub App itself is installed at `https://github.com/guedim/CurosIA/
 
 ### How to run it
 
-- **Automatically:** open (or push a new commit to) a PR with changes under `hookhub/` — no action needed.
+- **Automatically:** open (or push a new commit to) a PR with changes under `claudecodehub/` — no action needed.
 - It does **not** support `workflow_dispatch` (manual trigger) since its `prompt` depends on PR context (`github.event.pull_request.number`) that only exists for real pull request events.
 
 ### Where to view runs
 
 🔗 **[github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml](https://github.com/guedim/CurosIA/actions/workflows/claude-code-review.yaml)** — every past and in-progress review run. The review comments themselves show up directly on the PR's *Files changed* tab and in the PR's comment thread.
 
-## Weekly source discovery (HookHub Source Discovery)
+## Weekly source discovery (ClaudeCodeHub Source Discovery)
 
 A scheduled GitHub Action searches the GitHub Search API every week for new hooks, plugins, RAG tools, and agents worth adding to the catalog — trusted-org and vendor repos, and community repos tagged with Claude Code-specific topics — and opens a PR with what it finds. It never touches `data/catalog.ts` or the live site directly; it only appends to a separate curation queue, `data/candidates.json`, which the gallery doesn't render.
 
@@ -252,11 +252,11 @@ Both passes exclude forks, archived repos, and anything already present in `cata
 
 > The first run is expected to surface a large batch — it's scanning everything that exists today, with no prior history to diff against. Weekly runs after that only surface repos that are genuinely new or newly matching, so the volume drops off fast.
 
-**Where it lives:** `CurosIA/.github/workflows/hookhub-source-discovery.yml` (repo root, same reason as the other three workflows). The search script itself is [`hookhub/scripts/find-new-sources.mjs`](scripts/find-new-sources.mjs) — a dependency-free Node 22 script (built-in `fetch`, no npm install step) run directly via `node --experimental-strip-types`, which lets it `import` the `.ts` catalog/candidates files without a build step.
+**Where it lives:** `CurosIA/.github/workflows/claudecodehub-source-discovery.yml` (repo root, same reason as the other three workflows). The search script itself is [`claudecodehub/scripts/find-new-sources.mjs`](scripts/find-new-sources.mjs) — a dependency-free Node 22 script (built-in `fetch`, no npm install step) run directly via `node --experimental-strip-types`, which lets it `import` the `.ts` catalog/candidates files without a build step.
 
 ```yaml
-# CurosIA/.github/workflows/hookhub-source-discovery.yml
-name: HookHub Source Discovery
+# CurosIA/.github/workflows/claudecodehub-source-discovery.yml
+name: ClaudeCodeHub Source Discovery
 
 on:
   schedule:
@@ -272,7 +272,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hookhub
+        working-directory: claudecodehub
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
@@ -290,18 +290,18 @@ jobs:
         if: steps.discover.outputs.count != '0'
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
-          commit-message: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
-          title: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          commit-message: "chore(claudecodehub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          title: "chore(claudecodehub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
           body: |
-            Automated weekly scan by the [HookHub Source Discovery](./.github/workflows/hookhub-source-discovery.yml) workflow.
+            Automated weekly scan by the [ClaudeCodeHub Source Discovery](./.github/workflows/claudecodehub-source-discovery.yml) workflow.
 
-            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.json`. For each one:
+            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `claudecodehub/data/candidates.json`. For each one:
 
-            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`.
+            - **Good fit** — move it into the matching array in `claudecodehub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`.
             - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so it isn't suggested again next week.
-          branch: bot/hookhub-source-discovery
-          add-paths: hookhub/data/candidates.json
-          labels: hookhub, catalog-candidates
+          branch: bot/claudecodehub-source-discovery
+          add-paths: claudecodehub/data/candidates.json
+          labels: claudecodehub, catalog-candidates
           delete-branch: true
 ```
 
@@ -314,12 +314,12 @@ Uses the default per-run `GITHUB_TOKEN` — no new secret, no external API, no c
 ### How to run it
 
 - **Automatically:** every Monday at 13:00 UTC.
-- **Manually, from the CLI:** `gh workflow run hookhub-source-discovery.yml --ref main`
-- **Manually, from the GitHub UI:** repo → *Actions* tab → *HookHub Source Discovery* → *Run workflow*.
+- **Manually, from the CLI:** `gh workflow run claudecodehub-source-discovery.yml --ref main`
+- **Manually, from the GitHub UI:** repo → *Actions* tab → *ClaudeCodeHub Source Discovery* → *Run workflow*.
 
 ### Where to view runs
 
-🔗 **[github.com/guedim/CurosIA/actions/workflows/hookhub-source-discovery.yml](https://github.com/guedim/CurosIA/actions/workflows/hookhub-source-discovery.yml)**
+🔗 **[github.com/guedim/CurosIA/actions/workflows/claudecodehub-source-discovery.yml](https://github.com/guedim/CurosIA/actions/workflows/claudecodehub-source-discovery.yml)**
 
 ## Interactive `@claude` assistant (issues & PRs)
 
@@ -395,7 +395,7 @@ jobs:
           # claude_args: '--allowed-tools Bash(gh pr *)'
 ```
 
-**Scope:** unlike the CI and review workflows, this one is **repo-wide**, not scoped to `hookhub/**` — `paths` filters only apply to `push`/`pull_request` events triggered by file diffs, and comment/issue events (`issue_comment`, `issues`, `pull_request_review`) have no associated diff for GitHub to filter on. So `@claude` responds anywhere in the `CurosIA` monorepo; you steer scope yourself in what you ask it (e.g. mention `hookhub/` explicitly if that's what you mean).
+**Scope:** unlike the CI and review workflows, this one is **repo-wide**, not scoped to `claudecodehub/**` — `paths` filters only apply to `push`/`pull_request` events triggered by file diffs, and comment/issue events (`issue_comment`, `issues`, `pull_request_review`) have no associated diff for GitHub to filter on. So `@claude` responds anywhere in the `CurosIA` monorepo; you steer scope yourself in what you ask it (e.g. mention `claudecodehub/` explicitly if that's what you mean).
 
 **Author gate:** the `if:` condition also requires the triggering actor's `author_association` to be `OWNER`, `MEMBER`, or `COLLABORATOR` — this is a public repo, so without that gate anyone could open an issue containing `@claude` and spend the job's compute/tokens before `claude-code-action`'s own internal permission check runs.
 
@@ -407,17 +407,17 @@ jobs:
 
 ## Download this project from GitHub
 
-This project lives inside the `CurosIA` monorepo, in the `hookhub/` subfolder — it is not a standalone repository.
+This project lives inside the `CurosIA` monorepo, in the `claudecodehub/` subfolder — it is not a standalone repository.
 
 ```bash
 # Clone the monorepo
 git clone https://github.com/guedim/CurosIA.git
 
 # Move into the ClaudeCodeHub project
-cd CurosIA/hookhub
+cd CurosIA/claudecodehub
 ```
 
-All commands below assume you're running them from inside this `hookhub/` directory. The folder is still named `hookhub/` in the monorepo — only the project's name/branding changed to ClaudeCodeHub.
+All commands below assume you're running them from inside this `claudecodehub/` directory.
 
 ## Mandatory tools & installation
 
@@ -463,7 +463,7 @@ npm -v    # should print 10.x or newer
 
 ## Running the project
 
-From inside the `hookhub/` directory:
+From inside the `claudecodehub/` directory:
 
 ### 1. Install dependencies
 

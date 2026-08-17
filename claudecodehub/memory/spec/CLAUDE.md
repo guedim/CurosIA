@@ -1,4 +1,4 @@
-# HookHub — Spec (superseded)
+# ClaudeCodeHub — Spec (superseded)
 
 This document described the original MVP (a single `data/hooks.ts` array of
 ~10–15 hooks, a static RSC-only page, no filtering, no star counts). That

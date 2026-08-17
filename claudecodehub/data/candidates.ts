@@ -5,7 +5,7 @@
  * in ./candidates.json (machine-written by the discovery script); this file
  * just adds the type layer JSON can't carry.
  *
- * Workflow: the `hookhub-source-discovery` GitHub Action opens a PR when it
+ * Workflow: the `claudecodehub-source-discovery` GitHub Action opens a PR when it
  * finds new candidates. To curate a PR:
  *   - Good find: move it into the matching array in `data/catalog.ts`,
  *     filling in `type`, `category`, and optional `stackTags`/`official`,

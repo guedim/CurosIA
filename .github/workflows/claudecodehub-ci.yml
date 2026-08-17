@@ -1,12 +1,12 @@
-name: HookHub CI
+name: ClaudeCodeHub CI
 
 on:
   push:
     branches: [main]
-    paths: ["hookhub/**"]
+    paths: ["claudecodehub/**"]
   pull_request:
     branches: [main]
-    paths: ["hookhub/**"]
+    paths: ["claudecodehub/**"]
   workflow_dispatch: {}
 
 jobs:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hookhub
+        working-directory: claudecodehub
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: hookhub/package-lock.json
+          cache-dependency-path: claudecodehub/package-lock.json
 
       - run: npm ci
       - run: npm run lint

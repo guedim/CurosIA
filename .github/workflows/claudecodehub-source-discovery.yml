@@ -1,4 +1,4 @@
-name: HookHub Source Discovery
+name: ClaudeCodeHub Source Discovery
 
 on:
   schedule:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: hookhub
+        working-directory: claudecodehub
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
@@ -32,16 +32,16 @@ jobs:
         if: steps.discover.outputs.count != '0'
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
-          commit-message: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
-          title: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          commit-message: "chore(claudecodehub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          title: "chore(claudecodehub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
           body: |
-            Automated weekly scan by the [HookHub Source Discovery](./.github/workflows/hookhub-source-discovery.yml) workflow.
+            Automated weekly scan by the [ClaudeCodeHub Source Discovery](./.github/workflows/claudecodehub-source-discovery.yml) workflow.
 
-            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.json`. For each one:
+            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `claudecodehub/data/candidates.json`. For each one:
 
-            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`.
+            - **Good fit** — move it into the matching array in `claudecodehub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`.
             - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so it isn't suggested again next week.
-          branch: bot/hookhub-source-discovery
-          add-paths: hookhub/data/candidates.json
-          labels: hookhub, catalog-candidates
+          branch: bot/claudecodehub-source-discovery
+          add-paths: claudecodehub/data/candidates.json
+          labels: claudecodehub, catalog-candidates
           delete-branch: true

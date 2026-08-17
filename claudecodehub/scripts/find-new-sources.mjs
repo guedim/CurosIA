@@ -89,7 +89,7 @@ async function githubSearchRepos(query) {
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
-        "User-Agent": "hookhub-source-discovery-bot",
+        "User-Agent": "claudecodehub-source-discovery-bot",
       },
     });
   } catch (err) {

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-All commands run from this directory (`hookhub/`):
+All commands run from this directory (`claudecodehub/`):
 
 - `npm run dev` — start the dev server (<http://localhost:3000>)
 - `npm run build` — production build
