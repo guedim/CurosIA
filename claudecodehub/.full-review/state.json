@@ -1,0 +1,16 @@
+{
+  "target": "Whole codebase: app/, components/, data/, scripts/, config files",
+  "status": "complete",
+  "flags": {
+    "security_focus": false,
+    "performance_critical": false,
+    "strict_mode": false,
+    "framework": "Next.js 16 (App Router) + React 19 + TypeScript strict + Tailwind v4"
+  },
+  "current_step": 5,
+  "current_phase": 5,
+  "completed_steps": ["0", "1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5"],
+  "files_created": [".full-review/00-scope.md", ".full-review/01-quality-architecture.md", ".full-review/02-security-performance.md", ".full-review/03-testing-documentation.md", ".full-review/04-best-practices.md", ".full-review/05-final-report.md"],
+  "started_at": "2026-08-16T00:00:00Z",
+  "last_updated": "2026-08-16T00:50:00Z"
+}
