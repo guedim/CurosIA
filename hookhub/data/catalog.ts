@@ -1,3 +1,22 @@
+/**
+ * The curated, production catalog rendered on the site — every entry here
+ * is live. New entries normally arrive via data/candidates.ts (see that
+ * file's header for the curation workflow); hand-adding one directly here
+ * is also fine as long as `scripts/validate-catalog.mjs` passes.
+ *
+ * Curation bar, per tab:
+ *   - hook / plugin: broad — most real, maintained Claude Code hooks and
+ *     SDLC-phase plugins are worth including.
+ *   - rag: keep the bar high. Only the most popular, actively maintained
+ *     retrieval tooling — not every RAG-adjacent repo on GitHub.
+ *   - agent: curated for a fintech/banking, DDD/hexagonal-architecture,
+ *     100% Python, 100% AWS-serverless audience. Favor subagents whose role
+ *     maps onto architecture, security/compliance (PCI DSS, OWASP, ISO
+ *     27001), AWS serverless infra, or the rest of a Python SDLC, and tag
+ *     them with the relevant `stackTags` even when the source repo itself
+ *     is generic rather than fintech-specific.
+ */
+
 export type ItemType = "hook" | "plugin" | "rag" | "agent";
 
 export type HookCategory =

@@ -5,7 +5,7 @@
 //
 // Run with: node --experimental-strip-types scripts/find-new-sources.mjs
 
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, rename } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { TRUSTED_ORGS } from "./trusted-orgs.mjs";
 
@@ -170,7 +170,12 @@ async function writeCandidatesFile(allCandidates) {
   const body = allCandidates.length
     ? `${CANDIDATES_ARRAY_MARKER}\n${allCandidates.map(serializeCandidate).join("\n")}\n];\n`
     : `${CANDIDATES_ARRAY_MARKER}];\n`;
-  await writeFile(CANDIDATES_PATH, header + body);
+  // Write to a temp file and rename (atomic on the same filesystem) so an
+  // overlapping run or a crash mid-write can't leave candidates.ts
+  // truncated or torn between two runs' output.
+  const tmpPath = `${CANDIDATES_PATH}.tmp-${process.pid}`;
+  await writeFile(tmpPath, header + body);
+  await rename(tmpPath, CANDIDATES_PATH);
 }
 
 async function main() {
