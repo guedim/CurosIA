@@ -20,7 +20,7 @@ Este repositorio centraliza mis laboratorios, cursos y experimentos prácticos c
 | [**IA Tools: Deploy to Vercel**](./platzi-ia-tools-deploy-to-vercel) | Proyectos de IA listos para producción con despliegue automatizado en Vercel. |
 | [**OCR Lectura Token**](./ocr_lectura_token_autenticacion) | Implementación de reconocimiento óptico de caracteres para extracción de tokens de autenticación. |
 | [**Platzi Supabase Avanzado**](./platzi-supabase) | Suplatzigram: app estilo Instagram con Next.js y Supabase (auth, base de datos, storage), del Curso de Supabase Avanzado. |
-| [**HookHub**](./hookhub) | Directorio/galería de hooks open-source para Claude Code, construida con Next.js 16 y un rediseño visual inspirado en Bold.co. |
+| [**ClaudeCodeHub**](./claudecodehub) | Directorio curado de hooks, plugins, herramientas RAG y subagentes open-source para Claude Code (~290 entradas), con descubrimiento semanal automatizado vía GitHub Actions. Construido con Next.js 16. |
 | [**IceBreaker**](./IceBreaker-main) | Generador de "ice breakers" con IA que analiza perfiles de LinkedIn/Twitter usando LangChain y Flask. |
 
 ---
