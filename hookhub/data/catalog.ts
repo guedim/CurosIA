@@ -946,6 +946,33 @@ const plugins: CatalogItem[] = [
     stars: 269133,
   },
   {
+    name: "Claude Forge",
+    type: "plugin",
+    category: "coding",
+    description:
+      "Oh-my-zsh-inspired plugin framework adding 11 agents, 36 commands, and 15 skills to Claude Code, with 6-layer security hooks built in.",
+    repoUrl: "https://github.com/sangrokjung/claude-forge",
+    stars: 801,
+  },
+  {
+    name: "Smart Ralph",
+    type: "plugin",
+    category: "coding",
+    description:
+      "Combines the Ralph Wiggum autonomous-loop pattern with a structured specification workflow and smart context compaction for spec-driven development.",
+    repoUrl: "https://github.com/tzachbon/smart-ralph",
+    stars: 489,
+  },
+  {
+    name: "Atlas",
+    type: "plugin",
+    category: "coding",
+    description:
+      "Senior-engineer layer for Claude Code: explore with wireframes and prototypes, capture the spec in an HTML doc, then hand off to Claude Code's native plan/build loop — KISS/YAGNI, no overengineering.",
+    repoUrl: "https://github.com/syahiidkamil/Software-Engineer-AI-Agent-Atlas",
+    stars: 316,
+  },
+  {
     name: "Lumen",
     type: "plugin",
     category: "coding",
@@ -1589,6 +1616,16 @@ const plugins: CatalogItem[] = [
     official: true,
     stars: 67,
     stackTags: ["observability", "ai-assisted-sdlc"],
+  },
+  {
+    name: "LangChain Plugins",
+    type: "plugin",
+    category: "monitoring",
+    description:
+      "Cross-tool plugin marketplace from LangChain bringing LangChain/LangSmith skills and MCP servers to Claude Code, deepagents-code, and OpenAI Codex.",
+    repoUrl: "https://github.com/langchain-ai/langchain-plugins",
+    official: true,
+    stars: 5,
   },
   {
     name: "LogRocket",
