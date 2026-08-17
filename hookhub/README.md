@@ -91,14 +91,17 @@ jobs:
       run:
         working-directory: hookhub
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: hookhub/package-lock.json
+
       - run: npm ci
       - run: npm run lint
+      - run: npm run validate-catalog
       - run: npm run build
 ```
 
@@ -185,12 +188,12 @@ jobs:
       id-token: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 1
 
       - name: Claude Code Review
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@d07835ac7037978eb1aa67c6be18ed0883cea652 # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
@@ -270,21 +273,31 @@ jobs:
       run:
         working-directory: hookhub
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
+
       - name: Search GitHub for new candidate sources
         id: discover
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node --experimental-strip-types scripts/find-new-sources.mjs
+
       - name: Open PR with new candidates
         if: steps.discover.outputs.count != '0'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
         with:
           commit-message: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
           title: "chore(hookhub): weekly source discovery — ${{ steps.discover.outputs.count }} new candidate(s)"
+          body: |
+            Automated weekly scan by the [HookHub Source Discovery](./.github/workflows/hookhub-source-discovery.yml) workflow.
+
+            Found **${{ steps.discover.outputs.count }}** new candidate repo(s), appended to `hookhub/data/candidates.ts`. For each one:
+
+            - **Good fit** — move it into the matching array in `hookhub/data/catalog.ts`, filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.ts`.
+            - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so it isn't suggested again next week.
           branch: bot/hookhub-source-discovery
           add-paths: hookhub/data/candidates.ts
           labels: hookhub, catalog-candidates
@@ -336,11 +349,19 @@ on:
 
 jobs:
   claude:
+    # Gate on the triggering actor's association with the repo, not just the
+    # presence of "@claude" — this is a public repo, and anyone can open an
+    # issue or comment. Scoped per event type since each surfaces the actor's
+    # association on a different field. anthropics/claude-code-action@v1 also
+    # checks write access itself, but that check is delegated to a mutable
+    # third-party action tag; gate here too, before compute/tokens are spent.
     if: |
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      (
+        (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)) ||
+        (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)) ||
+        (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.review.author_association)) ||
+        (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')) && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association))
+      )
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -349,17 +370,33 @@ jobs:
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 1
-      - uses: anthropics/claude-code-action@v1
+
+      - name: Run Claude Code
+        id: claude
+        uses: anthropics/claude-code-action@d07835ac7037978eb1aa67c6be18ed0883cea652 # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+          # Allows Claude to read CI results on PRs
           additional_permissions: |
             actions: read
+
+          # No custom prompt: Claude follows whatever instructions are given
+          # in the @claude comment/issue that triggered it.
+          # prompt: 'Update the pull request description to include a summary of changes.'
+
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://code.claude.com/docs/en/cli-reference for available options
+          # claude_args: '--allowed-tools Bash(gh pr *)'
 ```
 
 **Scope:** unlike the CI and review workflows, this one is **repo-wide**, not scoped to `hookhub/**` — `paths` filters only apply to `push`/`pull_request` events triggered by file diffs, and comment/issue events (`issue_comment`, `issues`, `pull_request_review`) have no associated diff for GitHub to filter on. So `@claude` responds anywhere in the `CurosIA` monorepo; you steer scope yourself in what you ask it (e.g. mention `hookhub/` explicitly if that's what you mean).
+
+**Author gate:** the `if:` condition also requires the triggering actor's `author_association` to be `OWNER`, `MEMBER`, or `COLLABORATOR` — this is a public repo, so without that gate anyone could open an issue containing `@claude` and spend the job's compute/tokens before `claude-code-action`'s own internal permission check runs.
 
 **Authentication:** same `CLAUDE_CODE_OAUTH_TOKEN` secret and Claude GitHub App as the review workflow above — see [How to authenticate](#how-to-authenticate-1) there; nothing extra to set up.
 

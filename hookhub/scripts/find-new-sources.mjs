@@ -178,59 +178,73 @@ async function writeCandidatesFile(allCandidates) {
   await rename(tmpPath, CANDIDATES_PATH);
 }
 
+// Shared pipeline for both search strategies below: run the query, then
+// apply the same star-floor / implausible-star-ceiling / staleness /
+// dedup gates. `validateOwner`, when given, runs before the star checks
+// and can reject a result outright (used to pin known-org results to the
+// expected org id).
+async function collectFrom({ query, foundVia, minStars, staleAfterDays, validateOwner }, ctx) {
+  const repos = await githubSearchRepos(query);
+  await sleep(SEARCH_API_DELAY_MS);
+  for (const raw of repos) {
+    const repo = parseRepo(raw);
+    if (!repo) continue;
+    if (validateOwner && !validateOwner(repo)) continue;
+    if (repo.stars < minStars) continue;
+    if (repo.stars > MAX_PLAUSIBLE_STARS) {
+      console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stars}★)`);
+      continue;
+    }
+    if (repo.ageDays > staleAfterDays) continue;
+    const norm = normalizeRepoUrl(repo.html_url);
+    if (ctx.knownUrls.has(norm) || ctx.found.has(norm)) continue;
+    ctx.found.set(norm, toCandidateItem(repo, foundVia, ctx.today));
+  }
+}
+
 async function main() {
   const { catalogItems } = await import(CATALOG_PATH);
   const { candidateItems: existingCandidates } = await import(CANDIDATES_PATH);
 
-  const knownUrls = new Set(
-    [...catalogItems, ...existingCandidates].map((item) => normalizeRepoUrl(item.repoUrl)),
-  );
+  const ctx = {
+    knownUrls: new Set(
+      [...catalogItems, ...existingCandidates].map((item) => normalizeRepoUrl(item.repoUrl)),
+    ),
+    today: new Date().toISOString().slice(0, 10),
+    found: new Map(), // normalized repoUrl -> candidate
+  };
 
-  const trustedOrgById = new Map(TRUSTED_ORGS.map((org) => [org.id, org.login]));
-
-  const today = new Date().toISOString().slice(0, 10);
-  const found = new Map(); // normalized repoUrl -> candidate
-
-  for (const { login } of TRUSTED_ORGS) {
-    const repos = await githubSearchRepos(`org:${login} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`);
-    await sleep(SEARCH_API_DELAY_MS);
-    for (const raw of repos) {
-      const repo = parseRepo(raw);
-      if (!repo) continue;
-      // Pin trust to the org's immutable numeric id, not just its login —
-      // a renamed/deleted org's old login can be squatted by someone else.
-      if (!trustedOrgById.has(repo.owner?.id)) {
-        console.warn(`Skipping ${repo.full_name}: owner id ${repo.owner?.id} doesn't match trusted org "${login}"`);
-        continue;
-      }
-      if (repo.stars < MIN_ORG_STARS) continue;
-      if (repo.ageDays > ORG_STALE_AFTER_DAYS) continue;
-      if (repo.stars > MAX_PLAUSIBLE_STARS) {
-        console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stars}★)`);
-        continue;
-      }
-      const norm = normalizeRepoUrl(repo.html_url);
-      if (knownUrls.has(norm) || found.has(norm)) continue;
-      found.set(norm, toCandidateItem(repo, "known-org", today));
-    }
+  for (const { login, id } of TRUSTED_ORGS) {
+    await collectFrom(
+      {
+        query: `org:${login} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`,
+        foundVia: "known-org",
+        minStars: MIN_ORG_STARS,
+        staleAfterDays: ORG_STALE_AFTER_DAYS,
+        // Pin trust to the org's immutable numeric id, not just its login —
+        // a renamed/deleted org's old login can be squatted by someone else.
+        validateOwner: (repo) => {
+          if (repo.owner?.id !== id) {
+            console.warn(`Skipping ${repo.full_name}: owner id ${repo.owner?.id} doesn't match trusted org "${login}" (expected ${id})`);
+            return false;
+          }
+          return true;
+        },
+      },
+      ctx,
+    );
   }
 
   for (const topic of TOPICS) {
-    const repos = await githubSearchRepos(`topic:${topic} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`);
-    await sleep(SEARCH_API_DELAY_MS);
-    for (const raw of repos) {
-      const repo = parseRepo(raw);
-      if (!repo) continue;
-      if (repo.stars < MIN_TOPIC_STARS) continue;
-      if (repo.stars > MAX_PLAUSIBLE_STARS) {
-        console.warn(`Skipping implausible star count: ${repo.full_name} (${repo.stars}★)`);
-        continue;
-      }
-      if (repo.ageDays > TOPIC_STALE_AFTER_DAYS) continue;
-      const norm = normalizeRepoUrl(repo.html_url);
-      if (knownUrls.has(norm) || found.has(norm)) continue;
-      found.set(norm, toCandidateItem(repo, "topic-search", today));
-    }
+    await collectFrom(
+      {
+        query: `topic:${topic} ${RELEVANCE_PHRASE} in:name,description fork:false archived:false`,
+        foundVia: "topic-search",
+        minStars: MIN_TOPIC_STARS,
+        staleAfterDays: TOPIC_STALE_AFTER_DAYS,
+      },
+      ctx,
+    );
   }
 
   if (searchAttempts > 0 && searchFailures / searchAttempts > MAX_FAILURE_RATE) {
@@ -239,7 +253,7 @@ async function main() {
     );
   }
 
-  const newCandidates = [...found.values()].sort((a, b) => b.stars - a.stars);
+  const newCandidates = [...ctx.found.values()].sort((a, b) => b.stars - a.stars);
   const allCandidates = [...existingCandidates, ...newCandidates];
 
   await writeCandidatesFile(allCandidates);
