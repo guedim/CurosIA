@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "brand-extract": {
+      "source": "nexu-io/open-design",
+      "sourceType": "github",
+      "skillPath": "skills/brand-extract/SKILL.md",
+      "computedHash": "daf1497a38c7011764021e8126af43da310e0618dd7f8b289fd8fab2c2f57b54"
+    }
+  }
+}

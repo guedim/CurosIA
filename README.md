@@ -22,6 +22,7 @@ Este repositorio centraliza mis laboratorios, cursos y experimentos prácticos c
 | [**Platzi Supabase Avanzado**](./platzi-supabase) | Suplatzigram: app estilo Instagram con Next.js y Supabase (auth, base de datos, storage), del Curso de Supabase Avanzado. |
 | [**ClaudeCodeHub**](./claudecodehub) | Directorio curado de hooks, plugins, herramientas RAG y subagentes open-source para Claude Code (~290 entradas), con descubrimiento semanal automatizado vía GitHub Actions. Construido con Next.js 16. |
 | [**IceBreaker**](./IceBreaker-main) | Generador de "ice breakers" con IA que analiza perfiles de LinkedIn/Twitter usando LangChain y Flask. |
+| [**Movers Adventure**](./movers-adventure) | Juego web (single-file HTML/CSS/JS, sin build ni backend) para que niños practiquen el examen Cambridge A1 Movers: 12 mini-juegos de listening/reading/writing/speaking, 3 niveles desbloqueables con sistema de estrellas, Web Speech API para voz y reconocimiento, e instalable como PWA. |
 
 ---
 
