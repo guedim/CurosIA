@@ -833,12 +833,8 @@ function reward(levelId, score, total, replay){
    ========================================================= */
 function startListen(){
   setGame('🎧 Listen & Choose');
-  let round=0, score=0; const total=6;
   const pool=allWords();
-  function next(){
-    if(round>=total){ reward('listen',score,total,startListen); return; }
-    setProg(round/total);
-    let missed=false;
+  runPracticeChoiceLoop('listen', 6, 1100, startListen, (round, advance)=>{
     const opts=pick(pool,4);
     const answer=opts[Math.floor(Math.random()*opts.length)];
     BODY().innerHTML=`
@@ -852,26 +848,14 @@ function startListen(){
     const speak=()=>say(answer[0]);
     document.getElementById('sp').onclick=speak;
     const og=document.getElementById('opts');
-    opts.forEach(o=>{
-      const d=document.createElement('button'); d.type='button'; d.className='opt';
-      d.innerHTML=`<div>${o[1]}</div>`;
-      d.onclick=()=>{
-        if(d.classList.contains('done'))return;
-        if(o[0]===answer[0]){ d.classList.add('correct'); blip(true); if(!missed) score++;
-          document.getElementById('fb').textContent='✅ '+cap(answer[0])+'!';
-          document.getElementById('fb').className='feedback good';
-          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
-          round++; later(next,1100);
-        } else { d.classList.add('wrong'); blip(false); missed=true;
-          document.getElementById('fb').textContent='Try again! 👂';
-          document.getElementById('fb').className='feedback bad';
-        }
-      };
-      og.appendChild(d);
+    wireChoiceOptions(og, opts.map(o=>({value:o[0], display:o[1]})), answer[0], {
+      textMode:false,
+      feedbackFor:()=>'✅ '+cap(answer[0])+'!',
+      wrongFeedback:()=>'Try again! 👂',
+      onCorrect:advance
     });
     later(speak,400);
-  }
-  next();
+  });
 }
 
 /* =========================================================
@@ -1057,11 +1041,8 @@ const GAP_ITEMS = [
 ];
 function startGap(){
   setGame('✍️ Fill the Gap');
-  let items=pick(GAP_ITEMS,6), round=0, score=0; const total=items.length;
-  function next(){
-    if(round>=total){ reward('gap',score,total,startGap); return; }
-    setProg(round/total);
-    let missed=false;
+  let items=pick(GAP_ITEMS,6);
+  runPracticeChoiceLoop('gap', items.length, 1500, startGap, (round, advance)=>{
     const it=items[round];
     BODY().innerHTML=`<div class="panel">
       <div class="big-emoji">${it.emoji}</div>
@@ -1074,24 +1055,13 @@ function startGap(){
     const sentence=it.q.replace('___',it.a);
     document.getElementById('sp').onclick=()=>say(sentence);
     const og=document.getElementById('opts');
-    shuffle(it.opts).forEach(o=>{
-      const d=document.createElement('button'); d.type='button'; d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
-      d.onclick=()=>{
-        if(d.classList.contains('done'))return;
-        if(o===it.a){ d.classList.add('correct'); blip(true); if(!missed) score++;
-          document.getElementById('fb').textContent='✅ '+sentence;
-          document.getElementById('fb').className='feedback good';
-          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
-          say(sentence); round++; later(next,1500);
-        } else { d.classList.add('wrong'); blip(false); missed=true;
-          document.getElementById('fb').textContent='Hmm, try again 🤔';
-          document.getElementById('fb').className='feedback bad';
-        }
-      };
-      og.appendChild(d);
+    wireChoiceOptions(og, it.opts.map(o=>({value:o, display:o})), it.a, {
+      textMode:true,
+      feedbackFor:()=>'✅ '+sentence,
+      wrongFeedback:()=>'Hmm, try again 🤔',
+      onCorrect:(wasClean)=>{ say(sentence); advance(wasClean); }
     });
-  }
-  next();
+  });
 }
 
 /* =========================================================
@@ -1111,10 +1081,33 @@ const TALK_ITEMS = [
   {emoji:'☀️', s:'It is a sunny day.'},
   {emoji:'🎂', s:'I like chocolate cake.'},
 ];
+/* ---------- Shared speech-check adapter (Picture Talk + Charades) ----------
+   Wires a mic button to SpeechRecognition (or a self-confirm fallback when unsupported),
+   matching the transcript against targetSentence via the same overlap check the exam
+   subsystem already uses. Tracks the active recognizer so show() can abort it on
+   navigation (see the activeRecognizer/stopActiveRecognizer system near line 616). */
+function attachSpeechCheck(mic, heard, fb, targetSentence, onPass){
+  const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(SR){
+    const rec=new SR(); rec.lang='en-US'; rec.interimResults=false; rec.maxAlternatives=3;
+    mic.onclick=()=>{ try{ activeRecognizer=rec; rec.start(); mic.classList.add('rec'); mic.textContent='👂'; heard.textContent='Listening... say it now!'; }catch(e){} };
+    rec.onresult=(e)=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤';
+      let best=''; for(let i=0;i<e.results[0].length;i++) best+=' '+e.results[0][i].transcript;
+      best=best.toLowerCase();
+      heard.textContent='I heard: "'+e.results[0][0].transcript+'"';
+      if(wordOverlapPass(targetSentence, best)) onPass('🌟 Perfect! You said it!');
+      else { blip(false); fb.textContent='Good try! Tap 🎤 again or 👍'; fb.className='feedback bad'; }
+    };
+    rec.onerror=()=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤';
+      heard.textContent='(Mic off — just say it and tap 👍)'; };
+    rec.onend=()=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤'; };
+  } else {
+    mic.onclick=()=>{ heard.textContent='Say it out loud, then tap 👍'; say(targetSentence); };
+  }
+}
 function startTalk(){
   setGame('🗣️ Picture Talk');
   let items=pick(TALK_ITEMS,5), round=0, score=0; const total=items.length;
-  const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
   function next(){
     if(round>=total){ reward('talk',score,total,startTalk); return; }
     setProg(round/total);
@@ -1139,29 +1132,7 @@ function startTalk(){
     // Fallback for no speech recognition: self-confirm button
     okBtn.style.display='block';
     okBtn.onclick=()=>pass('🌟 Great speaking!');
-    if(SR){
-      const rec=new SR(); rec.lang='en-US'; rec.interimResults=false; rec.maxAlternatives=3;
-      mic.onclick=()=>{
-        try{ activeRecognizer=rec; rec.start(); mic.classList.add('rec'); mic.textContent='👂'; heard.textContent='Listening... say it now!'; }
-        catch(e){}
-      };
-      rec.onresult=(e)=>{
-        activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤';
-        let best=''; for(let i=0;i<e.results[0].length;i++) best+=' '+e.results[0][i].transcript;
-        best=best.toLowerCase();
-        heard.textContent='I heard: "'+e.results[0][0].transcript+'"';
-        const target=it.s.toLowerCase().replace(/[.!?]/g,'');
-        const words=target.split(' ').filter(w=>w.length>2);
-        const hit=words.filter(w=>best.includes(w)).length;
-        if(hit>=Math.ceil(words.length*0.6)) pass('🌟 Perfect! You said it!');
-        else { blip(false); fb.textContent='Good try! Tap 🎤 again or 👍'; fb.className='feedback bad'; }
-      };
-      rec.onerror=()=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤';
-        heard.textContent='(Mic off — just say it and tap 👍)'; };
-      rec.onend=()=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤'; };
-    } else {
-      mic.onclick=()=>{ heard.textContent='Say it out loud, then tap 👍'; say(it.s); };
-    }
+    attachSpeechCheck(mic, heard, fb, it.s, (msg)=>pass(msg));
   }
   next();
 }
@@ -1245,7 +1216,6 @@ const CHARADES = [
 function startCharades(){
   setGame('🎭 Charades');
   let items=pick(CHARADES,5), round=0, score=0; const total=items.length;
-  const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
   function next(){
     if(round>=total){ reward('charades',score,total,startCharades); return; }
     setProg(round/total);
@@ -1268,25 +1238,7 @@ function startCharades(){
     function pass(msg){ score++; blip(true); fb.textContent=msg; fb.className='feedback good';
       say('Great acting!'); round++; later(next,1400); }
     document.getElementById('ok').onclick=()=>pass('🌟 Bravo! Great acting!');
-    if(SR){
-      const rec=new SR(); rec.lang='en-US'; rec.interimResults=false; rec.maxAlternatives=3;
-      mic.onclick=()=>{ try{ activeRecognizer=rec; rec.start(); mic.classList.add('rec'); mic.textContent='👂';
-        heard.textContent='Listening... say it now!'; }catch(e){} };
-      rec.onresult=(e)=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤';
-        let best=''; for(let i=0;i<e.results[0].length;i++) best+=' '+e.results[0][i].transcript;
-        best=best.toLowerCase();
-        heard.textContent='I heard: "'+e.results[0][0].transcript+'"';
-        const target=it.s.toLowerCase().replace(/[.!?]/g,'');
-        const words=target.split(' ').filter(w=>w.length>2);
-        const hit=words.filter(w=>best.includes(w)).length;
-        if(hit>=Math.ceil(words.length*0.6)) pass('🌟 Perfect! You said it!');
-        else { blip(false); fb.textContent='Good try! Tap 🎤 again or 👍'; fb.className='feedback bad'; } };
-      rec.onerror=()=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤';
-        heard.textContent='(Mic off — just say it and tap 👍)'; };
-      rec.onend=()=>{ activeRecognizer=null; mic.classList.remove('rec'); mic.textContent='🎤'; };
-    } else {
-      mic.onclick=()=>{ heard.textContent='Say it out loud, then tap 👍'; say(it.s); };
-    }
+    attachSpeechCheck(mic, heard, fb, it.s, (msg)=>pass(msg));
   }
   next();
 }
@@ -1319,11 +1271,8 @@ const READING = [
 ];
 function startReading(){
   setGame('🔍 Reading Detective');
-  let items=pick(READING,6), round=0, score=0; const total=items.length;
-  function next(){
-    if(round>=total){ reward('reading',score,total,startReading); return; }
-    setProg(round/total);
-    let missed=false;
+  let items=pick(READING,6);
+  runPracticeChoiceLoop('reading', items.length, 1300, startReading, (round, advance)=>{
     const it=items[round];
     BODY().innerHTML=`<div class="panel">
       <div class="big-emoji" style="font-size:54px">${it.emoji}🔍</div>
@@ -1336,24 +1285,13 @@ function startReading(){
     </div>`;
     document.getElementById('sp').onclick=()=>say(it.text);
     const og=document.getElementById('opts');
-    shuffle(it.opts).forEach(o=>{
-      const d=document.createElement('button'); d.type='button'; d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
-      d.onclick=()=>{
-        if(d.classList.contains('done'))return;
-        if(o===it.a){ d.classList.add('correct'); blip(true); if(!missed) score++;
-          document.getElementById('fb').textContent='✅ Yes! '+o;
-          document.getElementById('fb').className='feedback good';
-          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
-          say('Yes! '+o); round++; later(next,1300);
-        } else { d.classList.add('wrong'); blip(false); missed=true;
-          document.getElementById('fb').textContent='Read again, detective! 🔍';
-          document.getElementById('fb').className='feedback bad';
-        }
-      };
-      og.appendChild(d);
+    wireChoiceOptions(og, it.opts.map(o=>({value:o, display:o})), it.a, {
+      textMode:true,
+      feedbackFor:(opt)=>'✅ Yes! '+opt.display,
+      wrongFeedback:()=>'Read again, detective! 🔍',
+      onCorrect:(wasClean)=>{ say('Yes! '+it.a); advance(wasClean); }
     });
-  }
-  next();
+  });
 }
 
 /* =========================================================
@@ -1379,11 +1317,8 @@ const LISTEN_STORIES = [
 ];
 function startListenPlus(){
   setGame('📻 Story Listening');
-  let items=pick(LISTEN_STORIES,5), round=0, score=0; const total=items.length;
-  function next(){
-    if(round>=total){ reward('listenplus',score,total,startListenPlus); return; }
-    setProg(round/total);
-    let missed=false;
+  let items=pick(LISTEN_STORIES,5);
+  runPracticeChoiceLoop('listenplus', items.length, 1400, startListenPlus, (round, advance)=>{
     const it=items[round];
     BODY().innerHTML=`<div class="panel">
       <div class="prompt">Listen to the story 📻</div>
@@ -1400,24 +1335,14 @@ function startListenPlus(){
     document.getElementById('show').onclick=()=>{ const t=document.getElementById('txt');
       t.style.display='block'; t.textContent=it.story; };
     const og=document.getElementById('opts');
-    shuffle(it.opts).forEach(o=>{
-      const d=document.createElement('button'); d.type='button'; d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
-      d.onclick=()=>{
-        if(d.classList.contains('done'))return;
-        if(o===it.a){ d.classList.add('correct'); blip(true); if(!missed) score++;
-          document.getElementById('fb').textContent='✅ '+o;
-          document.getElementById('fb').className='feedback good';
-          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
-          say('Yes! '+o); round++; later(next,1400);
-        } else { d.classList.add('wrong'); blip(false); missed=true;
-          document.getElementById('fb').textContent='Listen again 👂';
-          document.getElementById('fb').className='feedback bad'; }
-      };
-      og.appendChild(d);
+    wireChoiceOptions(og, it.opts.map(o=>({value:o, display:o})), it.a, {
+      textMode:true,
+      feedbackFor:(opt)=>'✅ '+opt.display,
+      wrongFeedback:()=>'Listen again 👂',
+      onCorrect:(wasClean)=>{ say('Yes! '+it.a); advance(wasClean); }
     });
     later(speak,500);
-  }
-  next();
+  });
 }
 
 /* =========================================================
@@ -1443,11 +1368,8 @@ const READING_PLUS = [
 ];
 function startReadingPlus(){
   setGame('📖 Reading Power');
-  let items=pick(READING_PLUS,5), round=0, score=0; const total=items.length;
-  function next(){
-    if(round>=total){ reward('readingplus',score,total,startReadingPlus); return; }
-    setProg(round/total);
-    let missed=false;
+  let items=pick(READING_PLUS,5);
+  runPracticeChoiceLoop('readingplus', items.length, 1300, startReadingPlus, (round, advance)=>{
     const it=items[round];
     BODY().innerHTML=`<div class="panel">
       <div class="big-emoji" style="font-size:50px">${it.emoji}</div>
@@ -1460,23 +1382,13 @@ function startReadingPlus(){
     </div>`;
     document.getElementById('sp').onclick=()=>say(it.text);
     const og=document.getElementById('opts');
-    shuffle(it.opts).forEach(o=>{
-      const d=document.createElement('button'); d.type='button'; d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
-      d.onclick=()=>{
-        if(d.classList.contains('done'))return;
-        if(o===it.a){ d.classList.add('correct'); blip(true); if(!missed) score++;
-          document.getElementById('fb').textContent='✅ '+o;
-          document.getElementById('fb').className='feedback good';
-          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
-          say('Yes! '+o); round++; later(next,1300);
-        } else { d.classList.add('wrong'); blip(false); missed=true;
-          document.getElementById('fb').textContent='Read again 🔍';
-          document.getElementById('fb').className='feedback bad'; }
-      };
-      og.appendChild(d);
+    wireChoiceOptions(og, it.opts.map(o=>({value:o, display:o})), it.a, {
+      textMode:true,
+      feedbackFor:(opt)=>'✅ '+opt.display,
+      wrongFeedback:()=>'Read again 🔍',
+      onCorrect:(wasClean)=>{ say('Yes! '+it.a); advance(wasClean); }
     });
-  }
-  next();
+  });
 }
 
 /* =========================================================
