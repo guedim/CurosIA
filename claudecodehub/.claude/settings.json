@@ -4,7 +4,16 @@
     "command": "uv run \"$(git rev-parse --show-toplevel)/claudecodehub/.claude/statusline-command.py\""
   },
   "enabledPlugins": {
-    "security-guidance@claude-plugins-official": true
+    "security-guidance@claude-plugins-official": true,
+    "engineering-workflow-skills@mhattingpete-claude-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "mhattingpete-claude-skills": {
+      "source": {
+        "source": "github",
+        "repo": "mhattingpete/claude-skills-marketplace"
+      }
+    }
   },
   "permissions": {
     "allow": [
