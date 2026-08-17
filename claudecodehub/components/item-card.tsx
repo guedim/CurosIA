@@ -2,37 +2,37 @@ import type { Category, CatalogItem } from "@/data/catalog";
 
 const categoryStyles: Record<Category, string> = {
   // hook categories
-  security: "bg-bold-red/15 text-bold-pink ring-1 ring-inset ring-bold-red/30",
-  formatting: "bg-bold-blue/15 text-[#7d80ff] ring-1 ring-inset ring-bold-blue/30",
-  notifications: "bg-amber-500/15 text-amber-300 ring-1 ring-inset ring-amber-500/30",
-  logging: "bg-bold-violet/15 text-purple-300 ring-1 ring-inset ring-bold-violet/30",
-  testing: "bg-emerald-500/15 text-emerald-300 ring-1 ring-inset ring-emerald-500/30",
-  automation: "bg-cyan-500/15 text-cyan-300 ring-1 ring-inset ring-cyan-500/30",
-  workflow: "bg-pink-500/15 text-pink-300 ring-1 ring-inset ring-pink-500/30",
+  security: "bg-bold-red/10 text-bold-red ring-1 ring-inset ring-bold-red/25",
+  formatting: "bg-blue-100 text-blue-700 ring-1 ring-inset ring-blue-200",
+  notifications: "bg-amber-100 text-amber-800 ring-1 ring-inset ring-amber-200",
+  logging: "bg-purple-100 text-purple-700 ring-1 ring-inset ring-purple-200",
+  testing: "bg-emerald-100 text-emerald-700 ring-1 ring-inset ring-emerald-200",
+  automation: "bg-cyan-100 text-cyan-700 ring-1 ring-inset ring-cyan-200",
+  workflow: "bg-pink-100 text-pink-700 ring-1 ring-inset ring-pink-200",
   // plugin (SDLC) categories
-  planning: "bg-indigo-500/15 text-indigo-300 ring-1 ring-inset ring-indigo-500/30",
-  coding: "bg-sky-500/15 text-sky-300 ring-1 ring-inset ring-sky-500/30",
-  "code-review": "bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-inset ring-fuchsia-500/30",
-  "ci-cd": "bg-orange-500/15 text-orange-300 ring-1 ring-inset ring-orange-500/30",
-  deployment: "bg-teal-500/15 text-teal-300 ring-1 ring-inset ring-teal-500/30",
-  monitoring: "bg-lime-500/15 text-lime-300 ring-1 ring-inset ring-lime-500/30",
-  documentation: "bg-slate-500/15 text-slate-300 ring-1 ring-inset ring-slate-500/30",
+  planning: "bg-indigo-100 text-indigo-700 ring-1 ring-inset ring-indigo-200",
+  coding: "bg-sky-100 text-sky-700 ring-1 ring-inset ring-sky-200",
+  "code-review": "bg-fuchsia-100 text-fuchsia-700 ring-1 ring-inset ring-fuchsia-200",
+  "ci-cd": "bg-orange-100 text-orange-700 ring-1 ring-inset ring-orange-200",
+  deployment: "bg-teal-100 text-teal-700 ring-1 ring-inset ring-teal-200",
+  monitoring: "bg-lime-100 text-lime-800 ring-1 ring-inset ring-lime-200",
+  documentation: "bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-200",
   // rag categories
-  "code-retrieval": "bg-violet-500/15 text-violet-300 ring-1 ring-inset ring-violet-500/30",
-  "vector-db": "bg-blue-500/15 text-blue-300 ring-1 ring-inset ring-blue-500/30",
-  framework: "bg-yellow-500/15 text-yellow-300 ring-1 ring-inset ring-yellow-500/30",
-  ingestion: "bg-rose-500/15 text-rose-300 ring-1 ring-inset ring-rose-500/30",
-  "embeddings-rerank": "bg-green-500/15 text-green-300 ring-1 ring-inset ring-green-500/30",
-  evaluation: "bg-red-500/15 text-red-300 ring-1 ring-inset ring-red-500/30",
-  memory: "bg-stone-500/15 text-stone-300 ring-1 ring-inset ring-stone-500/30",
+  "code-retrieval": "bg-violet-100 text-violet-700 ring-1 ring-inset ring-violet-200",
+  "vector-db": "bg-blue-100 text-blue-700 ring-1 ring-inset ring-blue-200",
+  framework: "bg-yellow-100 text-yellow-800 ring-1 ring-inset ring-yellow-200",
+  ingestion: "bg-rose-100 text-rose-700 ring-1 ring-inset ring-rose-200",
+  "embeddings-rerank": "bg-green-100 text-green-700 ring-1 ring-inset ring-green-200",
+  evaluation: "bg-red-100 text-red-700 ring-1 ring-inset ring-red-200",
+  memory: "bg-stone-100 text-stone-700 ring-1 ring-inset ring-stone-200",
   // agent categories
-  architecture: "bg-purple-500/15 text-purple-300 ring-1 ring-inset ring-purple-500/30",
-  "backend-python": "bg-emerald-600/15 text-emerald-300 ring-1 ring-inset ring-emerald-600/30",
-  "security-compliance": "bg-red-600/15 text-red-300 ring-1 ring-inset ring-red-600/30",
-  "aws-serverless": "bg-orange-600/15 text-orange-300 ring-1 ring-inset ring-orange-600/30",
-  "testing-qa": "bg-cyan-600/15 text-cyan-300 ring-1 ring-inset ring-cyan-600/30",
-  "data-persistence": "bg-blue-600/15 text-blue-300 ring-1 ring-inset ring-blue-600/30",
-  "devops-cicd": "bg-teal-600/15 text-teal-300 ring-1 ring-inset ring-teal-600/30",
+  architecture: "bg-purple-100 text-purple-700 ring-1 ring-inset ring-purple-200",
+  "backend-python": "bg-emerald-100 text-emerald-800 ring-1 ring-inset ring-emerald-200",
+  "security-compliance": "bg-red-100 text-red-800 ring-1 ring-inset ring-red-200",
+  "aws-serverless": "bg-orange-100 text-orange-800 ring-1 ring-inset ring-orange-200",
+  "testing-qa": "bg-cyan-100 text-cyan-800 ring-1 ring-inset ring-cyan-200",
+  "data-persistence": "bg-blue-100 text-blue-800 ring-1 ring-inset ring-blue-200",
+  "devops-cicd": "bg-teal-100 text-teal-800 ring-1 ring-inset ring-teal-200",
 };
 
 function formatStars(stars: number): string {
@@ -44,7 +44,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
   const isGitHub = item.repoUrl.includes("github.com");
 
   return (
-    <article className="group flex flex-col gap-3 rounded-xl border border-white/10 bg-white/[.04] p-5 shadow-sm backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-white/[.06] hover:shadow-[0_0_0_1px_rgba(255,41,71,0.4),0_8px_30px_-8px_rgba(4,7,245,0.5)]">
+    <article className="group flex flex-col gap-3 rounded-[20px] border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-white hover:shadow-[0_0_0_1px_rgba(255,41,71,0.25),0_12px_30px_-12px_rgba(18,30,108,0.25)]">
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-foreground">{item.name}</h3>
         <span
@@ -56,7 +56,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
       {(item.official || typeof item.stars === "number") && (
         <div className="flex items-center gap-2 text-xs text-muted">
           {item.official && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 px-2 py-0.5 font-medium text-emerald-300 ring-1 ring-inset ring-emerald-500/30">
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-emerald-700 ring-1 ring-inset ring-emerald-200">
               ✓ Official
             </span>
           )}
@@ -73,7 +73,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
           {item.stackTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-white/[.06] px-2 py-0.5 text-[11px] font-medium text-muted ring-1 ring-inset ring-white/10"
+              className="rounded-full bg-white px-2 py-0.5 text-[11px] font-medium text-muted ring-1 ring-inset ring-border"
             >
               {tag}
             </span>
@@ -84,7 +84,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
         href={item.repoUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm font-semibold text-bold-pink transition-colors hover:text-bold-red"
+        className="text-sm font-semibold text-bold-red transition-colors hover:text-bold-navy"
       >
         {isGitHub ? `View ${item.name} on GitHub →` : `Visit ${item.name} →`}
       </a>

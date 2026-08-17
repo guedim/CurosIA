@@ -75,7 +75,7 @@ export function CatalogBrowser({
       <div
         role="tablist"
         aria-label="Catalog type"
-        className="mb-8 flex w-fit gap-1 rounded-full border border-white/10 bg-white/[.04] p-1"
+        className="mb-8 flex w-fit gap-1 rounded-full border border-border bg-surface p-1"
       >
         {tabs.map((tab) => (
           <button
@@ -86,7 +86,7 @@ export function CatalogBrowser({
             onClick={() => selectType(tab.type)}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
               activeType === tab.type
-                ? "bg-gradient-to-r from-bold-red via-bold-violet to-bold-blue text-white"
+                ? "bg-bold-red text-white"
                 : "text-muted hover:text-foreground"
             }`}
           >
@@ -109,8 +109,8 @@ export function CatalogBrowser({
               onClick={() => toggleTag(tag)}
               className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                 activeTags.includes(tag)
-                  ? "bg-bold-red/20 text-bold-pink ring-1 ring-inset ring-bold-red/50"
-                  : "bg-white/[.04] text-muted ring-1 ring-inset ring-white/10 hover:text-foreground"
+                  ? "bg-bold-red/10 text-bold-red ring-1 ring-inset ring-bold-red/30"
+                  : "bg-surface text-muted ring-1 ring-inset ring-border hover:text-foreground"
               }`}
             >
               {tag}

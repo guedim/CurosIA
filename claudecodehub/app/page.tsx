@@ -23,11 +23,11 @@ export default function Home() {
     <div className="relative flex flex-1 flex-col items-center overflow-hidden bg-background font-sans">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-gradient-to-r from-bold-red via-bold-navy to-bold-blue opacity-30 blur-[120px]"
+        className="pointer-events-none absolute -top-32 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-gradient-to-r from-bold-red via-bold-navy to-bold-blue opacity-[0.12] blur-[120px]"
       />
       <main className="relative w-full max-w-6xl flex-1 px-6 py-16 sm:px-10">
         <header className="mb-12 flex flex-col gap-3 text-center sm:text-left">
-          <h1 className="bg-gradient-to-r from-bold-red via-bold-violet to-bold-blue bg-clip-text text-4xl font-medium tracking-tight text-transparent sm:text-5xl">
+          <h1 className="text-4xl font-medium tracking-tight text-bold-navy sm:text-5xl">
             ClaudeCodeHub
           </h1>
           <p className="text-lg text-muted">

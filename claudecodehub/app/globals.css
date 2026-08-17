@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --muted: #babdd3;
+  /* Light theme — measured from bold.co (predominantly white/light, navy headings, red pill CTAs) */
+  --background: #ffffff;
+  --surface: #f7f8fb;
+  --foreground: #14141f;
+  --muted: #5b5f77;
+  --border: #e6e7ef;
 
   /* Bold.co brand palette — measured from bold.co (colors, gradient stops, theme-color meta) */
   --bold-red: #ff2947;
@@ -15,8 +18,10 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-border: var(--border);
   --color-bold-red: var(--bold-red);
   --color-bold-pink: var(--bold-pink);
   --color-bold-violet: var(--bold-violet);
