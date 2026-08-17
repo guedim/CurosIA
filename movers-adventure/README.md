@@ -18,11 +18,11 @@ A single-file, mobile-first web game that helps kids practice for the **Cambridg
 - **Voice**: uses the browser's Web Speech API (`speechSynthesis`) to read words/sentences aloud, preferring natural US English voices; uses `SpeechRecognition` (mic input) for the speaking games.
 - **Rewards**: confetti animation + star tally screen after each game; best score per game is kept for the session.
 - **Parents' guide**: an in-app modal (in Spanish) explaining the exam context, level structure, and a suggested daily practice routine.
-- **Installable PWA**: embedded manifest (base64 data URI) and icons so it can be added to a phone's home screen; responsive layout tuned for small phones, landscape mode, and tablets.
+- **Installable**: embedded manifest (base64 data URI) and icons let phones offer "Add to Home Screen"; responsive layout tuned for small phones, landscape mode, and tablets. There's no offline/service-worker caching yet — the app needs network access to load.
 
 ## Tech
 
-Plain HTML/CSS/JavaScript in a single file (`index.html`) — no framework, no dependencies, no build tooling. State (stars, progress) lives in memory for the session; nothing is persisted to `localStorage` or a server.
+Plain HTML/CSS/JavaScript in a single file (`index.html`) — no framework, no dependencies, no build tooling. Game progress (stars, level unlocks) lives in memory only and resets on reload. The Mock Exam Simulator is the exception: it saves the candidate's name and up to 20 past exam results (score + date) to the browser's `localStorage`, so a child can see their progress across sessions. Nothing is sent to a server — this data never leaves the device — but it does persist locally until browser storage is cleared.
 
 ## Running it
 
