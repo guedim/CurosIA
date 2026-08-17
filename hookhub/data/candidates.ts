@@ -1509,9 +1509,37 @@ export const candidateItems: CandidateItem[] = [
     topics: ["ai-agent-framework", "ai-agent-tools", "ai-agents", "awesome", "awesome-list", "claude", "claude-ai", "claude-code-subagents", "claude-subagents", "subagents"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-10",
-    // Not rejected as low-quality — an awesome-list of 100+ subagents, not a
-    // single tool. Good source for a future piecemeal Agentes-tab mining pass.
-    status: "rejected",
+    status: "pending",
+  },
+  {
+    name: "sangrokjung/claude-forge",
+    repoUrl: "https://github.com/sangrokjung/claude-forge",
+    description: "Supercharge Claude Code with 11 AI agents, 36 commands & 15 skills — the claude-code plugin framework inspired by oh-my-zsh. 6-layer security hooks included. 5-min install.",
+    stars: 801,
+    topics: ["agents", "ai-assistant", "ai-coding", "ai-framework", "ai-pair-programming", "anthropic", "automation", "claude-code", "claude-code-agents", "cli-tools", "developer-experience", "developer-tools", "dotfiles", "hooks", "llm", "macos", "productivity", "shell", "slash-commands", "workflow"],
+    foundVia: "topic-search",
+    discoveredAt: "2026-08-10",
+    status: "pending",
+  },
+  {
+    name: "tzachbon/smart-ralph",
+    repoUrl: "https://github.com/tzachbon/smart-ralph",
+    description: "Spec-driven development with smart compaction. Claude Code plugin combining Ralph Wiggum loop with structured specification workflow.",
+    stars: 489,
+    topics: ["agentic-coding", "ai", "ai-agents", "autonomous-coding", "claude", "claude-code", "claude-code-plugin", "claude-code-skills", "claude-skills", "codex-skills", "coding-agent", "developer-tools", "llm", "productivity", "ralph-loop", "ralph-wiggum", "spec-driven-development", "workflow-automation"],
+    foundVia: "topic-search",
+    discoveredAt: "2026-08-10",
+    status: "pending",
+  },
+  {
+    name: "syahiidkamil/Software-Engineer-AI-Agent-Atlas",
+    repoUrl: "https://github.com/syahiidkamil/Software-Engineer-AI-Agent-Atlas",
+    description: "ATLAS: a senior-engineer layer for Claude Code. Explore with wireframes & prototypes, clarify the essentials, capture it in HTML spec doc then let Claude Code's native plan/goal/workflow loop build. Fewer tokens, less ceremony, faster to what people pictured. KISS/YAGNI/DRY, context decides. No overengineering. Clean architecture that works.",
+    stars: 316,
+    topics: ["ai-agent", "ai-coding-assistant", "ai-software-engineer", "anthropic", "claude", "claude-code", "claude-code-agents", "claude-code-skills", "claude-code-template", "coding-agent", "developer-tools", "llm", "scaffolding", "slash-commands", "spec-driven-development", "subagents"],
+    foundVia: "topic-search",
+    discoveredAt: "2026-08-10",
+    status: "pending",
   },
   {
     name: "crawfordxx/xiaoma-durex-copywriter",
@@ -1521,8 +1549,7 @@ export const candidateItems: CandidateItem[] = [
     topics: ["advertising", "chinese-copywriting", "claude-code", "claude-skill", "copywriting", "poster-design"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-10",
-    // Off-topic: ad-copywriting skill, unrelated to this site's dev-tooling focus.
-    status: "rejected",
+    status: "pending",
   },
   {
     name: "ayush-that/sub-agents.directory",
@@ -1532,9 +1559,7 @@ export const candidateItems: CandidateItem[] = [
     topics: ["ai-agents", "claude", "claude-ai", "claude-subagents", "subagents"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-10",
-    // Not rejected as low-quality — a directory of many subagents/MCP servers,
-    // not a single tool. Same shape as VoltAgent/awesome-claude-code-subagents above.
-    status: "rejected",
+    status: "pending",
   },
   {
     name: "solanabr/solana-ai-kit",
@@ -1544,8 +1569,7 @@ export const candidateItems: CandidateItem[] = [
     topics: ["claude-agent", "claude-code", "claude-commands", "claude-md", "claude-skills", "claude-subagents", "solana-agents", "solana-ai", "solana-claude", "solana-engineer", "solana-program"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-10",
-    // Niche Solana/crypto vertical, outside this site's fintech/AWS-serverless scope.
-    status: "rejected",
+    status: "pending",
   },
   {
     name: "tony/claude-code-riper-5",
@@ -1555,8 +1579,7 @@ export const candidateItems: CandidateItem[] = [
     topics: ["claude-code", "claude-subagents", "riper", "riper-5", "subagent", "subagents"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-10",
-    // Thin description, low traction.
-    status: "rejected",
+    status: "pending",
   },
   {
     name: "omaralisql/Claude-Zeroclaw-Nexus",
@@ -1566,7 +1589,16 @@ export const candidateItems: CandidateItem[] = [
     topics: ["awesome-claude-code", "claude", "claude-4-5-sonnet", "claude-code", "claude-code-claw", "claude-code-cli", "claude-code-proxy", "claude-code-router", "claude-code-sdk", "claude-code-zeroclaw", "claude-context", "claude-desktop", "claude-integration", "claude-mcp", "claude-sdk", "claude-skill", "claude-subagents", "zeroclaw", "zeroclaw-claude", "zeroclaw-claude-code"],
     foundVia: "topic-search",
     discoveredAt: "2026-08-10",
-    // Vague scope ("multitool/router"), low traction.
-    status: "rejected",
+    status: "pending",
+  },
+  {
+    name: "langchain-ai/langchain-plugins",
+    repoUrl: "https://github.com/langchain-ai/langchain-plugins",
+    description: "Cross-tool plugin marketplace for deepagents-code (dcode), Claude Code, and OpenAI Codex — LangChain & LangSmith skills and MCP servers",
+    stars: 5,
+    topics: ["ai", "claude-code", "codex", "deepagents", "langchain", "langsmith", "marketplace", "mcp", "plugins", "skills"],
+    foundVia: "known-org",
+    discoveredAt: "2026-08-10",
+    status: "pending",
   },
 ];
