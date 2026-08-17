@@ -86,7 +86,7 @@ export function CatalogBrowser({
             onClick={() => selectType(tab.type)}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${
               activeType === tab.type
-                ? "bg-gradient-to-r from-[#ff2947] via-[#7a2ea8] to-[#0407f5] text-white"
+                ? "bg-gradient-to-r from-bold-red via-bold-violet to-bold-blue text-white"
                 : "text-muted hover:text-foreground"
             }`}
           >
@@ -109,7 +109,7 @@ export function CatalogBrowser({
               onClick={() => toggleTag(tag)}
               className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                 activeTags.includes(tag)
-                  ? "bg-[#ff2947]/20 text-[#ff6b82] ring-1 ring-inset ring-[#ff2947]/50"
+                  ? "bg-bold-red/20 text-bold-pink ring-1 ring-inset ring-bold-red/50"
                   : "bg-white/[.04] text-muted ring-1 ring-inset ring-white/10 hover:text-foreground"
               }`}
             >

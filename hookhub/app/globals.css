@@ -7,14 +7,10 @@
 
   /* Bold.co brand palette */
   --bold-red: #ff2947;
+  --bold-pink: #ff6b82;
+  --bold-violet: #7a2ea8;
   --bold-blue: #0407f5;
   --bold-navy: #121e6c;
-  --bold-gradient: linear-gradient(
-    120deg,
-    var(--bold-red) 0%,
-    var(--bold-navy) 55%,
-    var(--bold-blue) 100%
-  );
 }
 
 @theme inline {
@@ -22,6 +18,8 @@
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-bold-red: var(--bold-red);
+  --color-bold-pink: var(--bold-pink);
+  --color-bold-violet: var(--bold-violet);
   --color-bold-blue: var(--bold-blue);
   --color-bold-navy: var(--bold-navy);
   --font-sans: var(--font-montserrat);

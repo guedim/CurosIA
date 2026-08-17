@@ -2,10 +2,10 @@ import type { Category, CatalogItem } from "@/data/catalog";
 
 const categoryStyles: Record<Category, string> = {
   // hook categories
-  security: "bg-[#ff2947]/15 text-[#ff6b82] ring-1 ring-inset ring-[#ff2947]/30",
-  formatting: "bg-[#0407f5]/15 text-[#7d80ff] ring-1 ring-inset ring-[#0407f5]/30",
+  security: "bg-bold-red/15 text-bold-pink ring-1 ring-inset ring-bold-red/30",
+  formatting: "bg-bold-blue/15 text-[#7d80ff] ring-1 ring-inset ring-bold-blue/30",
   notifications: "bg-amber-500/15 text-amber-300 ring-1 ring-inset ring-amber-500/30",
-  logging: "bg-[#7a2ea8]/15 text-purple-300 ring-1 ring-inset ring-[#7a2ea8]/30",
+  logging: "bg-bold-violet/15 text-purple-300 ring-1 ring-inset ring-bold-violet/30",
   testing: "bg-emerald-500/15 text-emerald-300 ring-1 ring-inset ring-emerald-500/30",
   automation: "bg-cyan-500/15 text-cyan-300 ring-1 ring-inset ring-cyan-500/30",
   workflow: "bg-pink-500/15 text-pink-300 ring-1 ring-inset ring-pink-500/30",
@@ -84,7 +84,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
         href={item.repoUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm font-semibold text-[#ff6b82] transition-colors hover:text-[#ff2947]"
+        className="text-sm font-semibold text-bold-pink transition-colors hover:text-bold-red"
       >
         {isGitHub ? `View ${item.name} on GitHub →` : `Visit ${item.name} →`}
       </a>

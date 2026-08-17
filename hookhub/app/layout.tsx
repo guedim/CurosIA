@@ -10,9 +10,25 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700", "800"],
 });
 
+const SITE_URL = "https://claudecodehub.vercel.app";
+const SITE_DESCRIPTION = "Discover open-source hooks, plugins, and RAG tools for Claude Code.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "ClaudeCodeHub",
-  description: "Discover open-source hooks, plugins, and RAG tools for Claude Code.",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: "ClaudeCodeHub",
+    description: SITE_DESCRIPTION,
+    url: "/",
+    siteName: "ClaudeCodeHub",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "ClaudeCodeHub",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
