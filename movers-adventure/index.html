@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#5b8def">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAI3UlEQVR4nO2dO3YcNxBF3+h4AVbkzDljR1qA7dSxxVWY66BWQTlWamkBihwzV6ZI2gEdWE01m/1BAwWgHurdiIefGQzwbhW6ezh9gTNe33556D0GUY+3Ny8vvccwp+tgFHYB9JWi+RMr9GKP1jI0ezIFX5yhlQjVn0TBFyXUFqHagyv4wpJaIpg/qIIvamItwgvLB1P4RW2sM2Zik4IvemDRDYo7gMIvemGRvSIBFH7Rm9IMZgug8AsvlGQxSwCFX3gjN5OnBVD4hVdysnlKAIVfeOdsRpMFUPgFC2eymiSAwi/YSM3soQAKv2AlJbumb4UQgo1dAVT9BTtHGd4UQOEXo7CXZW2BRGhWBVD1F6OxlWl1ABGaZwIwVv+7X//oPQRBwFq21QFEaJ4IwFz91QVECsuMqwOI0DwKwFz9hTjDPOtDdQAJIc5CK4DCLix4AXBuf4QoYco8ZQfYq/7qDOIMP/QewByr8KY+zvWHdybPJ3hx1QFaBlLhF4CzDgB8D2atrYyCL+ZcPB8AW0ug8IslrrZASywDq/CLNVx3gDm53UDBF3u47gBzcoKs8IsjaAQQogY0AuRsgXRRTBzhSoC7h1e9hyAa4GmdXV0HuL58fDI515ePHUcjLPG6rq4EWPK0UvzUbRwiD0+VfguXp0GfTdxv2+Gfn+nZ2vPrbFBb9oLvqfoDzjvALu8/P5vM6w/vXB743v31Y/bfXr/5ajaOmjBU+zVcdgBgMaHLDvD+87PfX8owF6FlBygJeypepDgbem/VH3AsAPBtgufhXwn+GtNEt5CgReCPaClEbqX3GH6AZQuUGPyJx0V6/+3MkvG2yEPo58zHU0MG1u1NCq47AGA3+aUVyFvoUyiVwcvc14SjAxiQex6aMfgT09jPiDBytV/DfQcA6i7KlgzMwd9iS4Qe8+sFCgGANpXp+vJxyOAvuX7ztdl8esfVe4F6c/fwCri96j2Mutxehdvm7EHTAYBO+9Ob+/bPaU0HqRmqPxDoIDibeXiYZBi9kxlB1QEAR2cpPMrgJPQs1R8gFABwJMFETxmchH6CKfyAtkA2TCFsKYKz4LNC2QEAh11gSQ0ZnIeerfoD6gD1WB4854Q39+9EMrQdACDoAoFgrP6ALoSJ4FALwFp1RoN5HagFALgnfwTY559eACFKGEKA6lXI41XfFCqPm736AzoNus8UINZTkbdX/K+hMuMIYHXOfF41RwjN2lVqq3ly8ukUJYwjAFB2wWnJCOGfM+8GpTKwbglXGOIYIPu/uG7uY4R/Yu11bc1BAiP89xz1lWBgYxH2Any02KOGf07JHKz8rZcP6sphiA6QREqlixB+4Ph1FnQFNqg7wG4Lnu95U4gS/jln52fn91m7AK0ApvvPiOGfMKz0jBLE2QJtETn8QPjXTymAWfUPvviPGM0D41khSgFMUPifEnQ+6ARgrDKRYFsfOgFMCFrtDgk4L1QCmFSXgIt8CoP5YeoCVAIIYU0sAVT90wg0TzQCMLVVwbNeNAIUE6iqmRBkvuIIIMQKFAIUt9Mg1cycwnlj2AZRCCBELcYXQNW/jMHnb3wBhNjBvQAM+0ixjff1cy9AEYO372YMPI9jfSxKI67+/vnx6/s/P3Ucyf94Gw8TEuAE86Atv9cjeN7Gw8jYWyAhDnAtgKcDqLVqe+bn1ngbzx6e1nGJawGKGPjArQuDzue4AgiRgARI5OigsvVBp7fxsCIBRGh0GvQEU1X1ct7d23gYkQAZeAuZt/EwoS2QCI06QGtSPox20FOOHpEALTj7Ccyj3afMMRKgJhYfPa67PFZFAtSgxt1VJEIVdBBsTe1bCwW5dVErJIAlrcIpCcwYdwtkdePsM893gqtffn/2vft//zn3fI5fHwuuOwDNPacMwr/3favn7YXndXQtAAVG4U/9eenzi6dIgBKMw3/293LHIb4jAURoxhagZmX0VnUjvVZD3Avg+QBKHON9/dwLIERNxheg5tsSTpJ6nv/U9YA5jl4rC+ML4IyjcGeHX2RBIUDxPtJZFdsKubvwF86b9/0/MPJbIZzjLuxBoegAJjjrAu4JMl80AjC0U/EdlvWiEcCEIFWtmEDzFEsAK7z+V5bXcTmGSgCTthqoumVhMD8s2x+ATAAzJME6AeeFTgA31cXbdsPJeNysTyJ0ApgRsNrtEnQ+KAUwqzKli+6k6haPwyj8bNUfIBXAFHYJnISfFVoBTKsNqwSOws9Y/QFiAYDgEij8JlALYA6LBI7Czw69AObVx7sEzsLPXP0B4PL69stD70FYYH4vWosgW4bN23jAH35ggA5QDYuw3F6VB9fiMQBtezYYpgMAFe9IbrmtaX2HmErBH6H6A4MJAJBI0AqF/5DhBAAqSgBwiFBxuzNS+IFBBQAqSwD4FKHyPn+08AP6p/h8PN2ySAe42QzbAYAGXWBODxEaBn/E6g8MLgDQWIKJmjJ0qPajhh8IIADQSYIlOVI42NqMHH4giAATLkQgYfTgT4S6EhxlUUuJNE+hBABiLW4O0eYnnABAvEVOJeK8hL0OMC22jgtiBn8iZAeYE3nxAb3+sB1gTsRuED34E+E7wJwooYjyOlNQB1gwcjdQ8J8jATYYSQQFf5sLAES6GpwLowgK/j5vb15e1AESmYfJswwK/TkkQAbeZFDo85EAhSzD10IIBd4OCWDMWjhLpFDY63KZvtCBsIjE25uXF0AXwkRwJIAIzaMAU0sQYnTmWVcHEKF5IoC6gBidZcbVAURongmgLiBGZS3b6gAiNKsCqAuI0djKtDqACM2mAOoCYhT2srzbASSBYOcow9oCidAcCqAuIFhJyW5SB5AEgo3UzCZvgSSBYOFMVk8dA0gC4Z2zGT19ECwJhFdyspl1FkgSCG/kZjL7NKgkEF4oyWLRdQBJIHpTmsHiC2GSQPTCInum4dVHq4gWWBZd07dCqBuI2lhnrFpg1Q2EJbWKa/WKLRFECbV3Fc22LBJBnKHVdrr5nl0iiD1aH0d2PWiVDALoe/LE3VkbSTE23s4U/gdwAmIJQl7AVAAAAABJRU5ErkJggg==">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiTW92ZXJzIEFkdmVudHVyZSIsInNob3J0X25hbWUiOiJNb3ZlcnMiLCJkZXNjcmlwdGlvbiI6IkZ1biBDYW1icmlkZ2UgQTEgTW92ZXJzIHByYWN0aWNlIGZvciBraWRzIiwic3RhcnRfdXJsIjoiLiIsInNjb3BlIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwib3JpZW50YXRpb24iOiJwb3J0cmFpdCIsImJhY2tncm91bmRfY29sb3IiOiIjYmZlM2ZmIiwidGhlbWVfY29sb3IiOiIjNWI4ZGVmIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTUFBQUFEQUNBWUFBQUJTM0d3SEFBQUkzVWxFUVZSNG5PMmRPM1ljTnhCRjMraDRBVmJrekRsalIxcUE3ZFN4eFZXWTY2QldRVGxXYW1rQmlod3pWNlpJMmdFZFdFMDFtLzFCQXdXZ0h1cmRpSWVmR1F6d2JoVzZlemg5Z1ROZTMzNTU2RDBHVVkrM055OHZ2Y2N3cCt0Z0ZIWUI5SldpK1JNcjlHS1AxakkwZXpJRlg1eWhsUWpWbjBUQkZ5WFVGcUhhZ3l2NHdwSmFJcGcvcUlJdmFtSXR3Z3ZMQjFQNFJXMnNNMlppazRJdmVtRFJEWW83Z01JdmVtR1J2U0lCRkg3Um05SU1aZ3VnOEFzdmxHUXhTd0NGWDNnak41T25CVkQ0aFZkeXNubEtBSVZmZU9kc1JwTUZVUGdGQzJleW1pU0F3aS9ZU00zc29RQUt2MkFsSmJ1bWI0VVFnbzFkQVZUOUJUdEhHZDRVUU9FWG83Q1haVzJCUkdoV0JWRDFGNk94bFdsMUFCR2Fad0l3VnYrN1gvL29QUVJCd0ZxMjFRRkVhSjRJd0Z6OTFRVkVDc3VNcXdPSTBEd0t3Rno5aFRqRFBPdERkUUFKSWM1Q0s0RENMaXg0QVhCdWY0UW9ZY284WlFmWXEvN3FET0lNUC9RZXdCeXI4S1krenZXSGR5YlBKM2h4MVFGYUJsTGhGNEN6RGdCOEQyYXRyWXlDTCtaY1BCOEFXMHVnOElzbHJyWkFTeXdEcS9DTE5WeDNnRG01M1VEQkYzdTQ3Z0J6Y29LczhJc2phQVFRb2dZMEF1UnNnWFJSVEJ6aFNvQzdoMWU5aHlBYTRHbWRYVjBIdUw1OGZESTUxNWVQSFVjakxQRzZycTRFV1BLMFV2elViUndpRDArVmZndVhwMEdmVGR4djIrR2ZuK25aMnZQcmJGQmI5b0x2cWZvRHpqdkFMdTgvUDV2TTZ3L3ZYQjc0M3YzMVkvYmZYci81YWphT21qQlUrelZjZGdCZ01hSExEdkQrODdQZlg4b3dGNkZsQnlnSmV5cGVwRGdiZW0vVkgzQXNBUEJ0Z3VmaFh3bitHdE5FdDVDZ1JlQ1BhQ2xFYnFYM0dINkFaUXVVR1B5SngwVjYvKzNNa3ZHMnlFUG81OHpIVTBNRzF1MU5DcTQ3QUdBMythVVZ5RnZvVXlpVndjdmMxNFNqQXhpUWV4NmFNZmdUMDlqUGlEQnl0Vi9EZlFjQTZpN0tsZ3pNd2Q5aVM0UWU4K3NGQ2dHQU5wWHArdkp4eU9BdnVYN3p0ZGw4ZXNmVmU0RjZjL2Z3Q3JpOTZqMk11dHhlaGR2bTdFSFRBWUJPKzlPYisvYlBhVTBIcVJtcVB4RG9JRGliZVhpWVpCaTlreGxCMVFFQVIyY3BQTXJnSlBRczFSOGdGQUJ3Sk1GRVR4bWNoSDZDS2Z5QXRrQTJUQ0ZzS1lLejRMTkMyUUVBaDExZ1NRMFpuSWVlcmZvRDZnRDFXQjQ4NTRRMzkrOUVNclFkQUNEb0FvRmdyUDZBTG9TSjRGQUx3RnAxUm9ONUhhZ0ZBTGduZndUWTU1OWVBQ0ZLR0VLQTZsWEk0MVhmRkNxUG03MzZBem9OdXM4VUlOWlRrYmRYL0sraE11TUlZSFhPZkY0MVJ3ak4ybFZxcTNseTh1a1VKWXdqQUZCMndXbkpDT0dmTSs4R3BUS3diZ2xYR09JWUlQdS91Rzd1WTRSL1l1MTFiYzFCQWlQODl4ejFsV0JnWXhIMkFueTAyS09HZjA3SkhLejhyWmNQNnNwaGlBNlFSRXFsaXhCKzRQaDFGblFGTnFnN3dHNExudTk1VTRnUy9qbG41MmZuOTFtN0FLMEFwdnZQaU9HZk1LejBqQkxFMlFKdEVUbjhRUGpYVHltQVdmVVB2dmlQR00wRDQxa2hTZ0ZNVVBpZkVuUSs2QVJnckRLUllGc2ZPZ0ZNQ0ZydERnazRMMVFDbUZTWGdJdDhDb1A1WWVvQ1ZBSUlZVTBzQVZUOTB3ZzBUelFDTUxWVndiTmVOQUlVRTZpcW1SQmt2dUlJSU1RS0ZBSVV0OU1nMWN5Y3dubGoyQVpSQ0NCRUxjWVhRTlcvak1IbmIzd0JoTmpCdlFBTSswaXhqZmYxY3k5QUVZTzM3MllNUEk5amZTeEtJNjcrL3ZueDYvcy9QM1VjeWY5NEd3OFRFdUFFODZBdHY5Y2plTjdHdzhqWVd5QWhEbkF0Z0tjRHFMVnFlK2JuMW5nYnp4NmUxbkdKYXdHS0dQakFyUXVEenVlNEFnaVJnQVJJNU9pZ3N2VkJwN2Z4c0NJQlJHaDBHdlFFVTFYMWN0N2QyM2dZa1FBWmVBdVp0L0V3b1MyUUNJMDZRR3RTUG94MjBGT09IcEVBTFRqN0NjeWozYWZNTVJLZ0poWWZQYTY3UEZaRkF0U2d4dDFWSkVJVmRCQnNUZTFiQ3dXNWRWRXJKSUFscmNJcENjd1lkd3RrZGVQc004OTNncXRmZm4vMnZmdC8vem4zZkk1Zkh3dXVPd0ROUGFjTXdyLzNmYXZuN1lYbmRYUXRBQVZHNFUvOWVlbnppNmRJZ0JLTXczLzI5M0xISWI0akFVUm94aGFnWm1YMFZuVWp2VlpEM0F2ZytRQktIT045L2R3TElFUk54aGVnNXRzU1RwSjZudi9VOVlBNWpsNHJDK01MNEl5amNHZUhYMlJCSVVEeFB0SlpGZHNLdWJ2d0Y4NmI5LzAvTVBKYklaempMdXhCb2VnQUpqanJBdTRKTWw4MEFqQzBVL0VkbHZXaUVjQ0VJRld0bUVEekZFc0FLN3orVjViWGNUbUdTZ0NUdGhxb3VtVmhNRDhzMngrQVRBQXpKTUU2QWVlRlRnQTMxY1hiZHNQSmVOeXNUeUowQXBnUnNOcnRFblErS0FVd3F6S2xpKzZrNmhhUHd5ajhiTlVmSUJYQUZIWUpuSVNmRlZvQlRLc05xd1NPd3M5WS9RRmlBWURnRWlqOEpsQUxZQTZMQkk3Q3p3NjlBT2JWeDdzRXpzTFBYUDBCNFBMNjlzdEQ3MEZZWUg0dldvc2dXNGJOMjNqQUgzNWdnQTVRRFl1dzNGNlZCOWZpTVFCdGV6WVlwZ01BRmU5SWJybXRhWDJIbUVyQkg2SDZBNE1KQUpCSTBBcUYvNURoQkFBcVNnQndpRkJ4dXpOUytJRkJCUUFxU3dENEZLSHlQbiswOEFQNnAvaDhQTjJ5U0FlNDJRemJBWUFHWFdCT0R4RWFCbi9FNmc4TUxnRFFXSUtKbWpKMHFQYWpoaDhJSUFEUVNZSWxPVkk0Mk5xTUhINGdpQUFUTGtRZ1lmVGdUNFM2RWh4bFVVdUpORStoQkFCaUxXNE8wZVlubkFCQXZFVk9KZUs4aEwwT01DMjJqZ3RpQm44aVpBZVlFM254QWIzK3NCMWdUc1J1RUQzNEUrRTd3Sndvb1lqeU9sTlFCMWd3Y2pkUThKOGpBVFlZU1FRRmY1c0xBRVM2R3B3TG93Z0svajV2YjE1ZTFBRVNtWWZKc3d3Sy9Ua2tRQWJlWkZEbzg1RUFoU3pEMTBJSUJkNE9DV0RNV2poTHBGRFk2M0tadnRDQnNJakUyNXVYRjBBWHdrUndKSUFJemFNQVUwc1FZblRtV1ZjSEVLRjVJb0M2Z0JpZFpjYlZBVVJvbmdtZ0xpQkdaUzNiNmdBaU5Lc0NxQXVJMGRqS3REcUFDTTJtQU9vQ1loVDJzcnpiQVNTQllPY293OW9DaWRBY0NxQXVJRmhKeVc1U0I1QUVnbzNVekNadmdTU0JZT0ZNVms4ZEEwZ0M0WjJ6R1QxOUVDd0poRmR5c3BsMUZrZ1NDRy9rWmpMN05LZ2tFRjRveVdMUmRRQkpJSHBUbXNIaUMyR1NRUFRDSW51bTRkVkhxNGdXV0JaZDA3ZENxQnVJMmxobnJGcGcxUTJFSmJXS2EvV0tMUkZFQ2JWM0ZjMjJMQkpCbktIVmRycjVubDBpaUQxYUgwZDJQV2lWREFMb2UvTEUzVmtiU1RFMjNzNFUvZ2R3QW1JSlFsN0FWQUFBQUFCSlJVNUVya0pnZ2c9PSIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9wbmciLCJwdXJwb3NlIjoiYW55In0seyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFhSmtsRVFWUjRuTzNkTzdvZHgzVUcwQVkvRG9DS25EbEhyTWdEc0pVNk5qRUtZaHpRS0NESFNtVU5RSkZpNU00Y2tUT2dBL0NBNTk1N0h2Mm82dHE3OWxxSmFmR0JQbjI2Ni85cmQrUGkzVUpJUDM3NitkZlJ4d0RRd2w4Ky91SGQ2R1BnTFYvS0lBSWU0Q3NGWVF3bi9RVENIbUFicGFBL0o3Z0RnUS9RbGtMUW5oUGFnTUFIT0pkQ2NKd1R1SlBRQjRoQkdkakhTZHRBNkFQRXBneXM1MFE5SWZRQmNsSUdIbk55N2hEOEFITlFCRzV6VXE0SWZZQzVLUU8vY3lJV3dROVFqU0pRdkFBSWZvRGFLaGVCa2g5YzhBTndyV0lSS1BXQkJUOEFqMVFxQWlVK3FPQUhZSXNLUmVDNzBRZlFtL0FIWUtzSzJURnR3Nm53NVFIUTM2elRnT2srbE9BSG9JZlppc0JVandDRVB3Qzl6Sll4VTdTWjJiNFVBR0tiWVJxUWZnSWcvQUU0Mnd6Wms3b0F6UEFGQUpCVDlneEtPY0xJZnRJQm1FdkdSd0xwSmdEQ0g0Qm9NbVpUcWdLUThRUURVRU8yakVveHNzaDJVZ0dvTGNNamdmQVRBT0VQUURZWnNpdDBBY2h3QWdIZ2x1Z1pGcllBUkQ5eEFQQk01Q3dMV1FBaW56QUEyQ0pxcG9VckFGRlBGQURzRlRIYlFoV0FpQ2NJQUZxSWxuRmhDa0MwRXdNQXJVWEt1aEFGSU5JSkFZQ2VvbVRlOEFJUTVVUUF3RmtpWk4vUUFoRGhCQURBQ0tNemNGZ0JHUDNCQVdDMGtWazRwQUFJZndENGFsUW1ubDRBaEQ4QXZEUWlHMDh0QU1JZkFHNDdPeU5QS3dEQ0h3QWVPek1yVHlrQXdoOEExamtyTTRmL0hBQUE0SHpkQzREZFB3QnNjMFoyZGkwQXdoOEE5dW1kb2QwS2dQQUhnR042WnFsM0FBQ2dvQzRGd080ZkFOcm9sYW5OQzREd0I0QzJlbVJyMHdJZy9BR2dqOVlaNngwQUFDaW9XUUd3K3dlQXZscG1iWk1DSVB3QjRCeXRNdGNqQUFBbzZIQUJzUHNIZ0hPMXlGNFRBQUFvNkZBQnNQc0hnREdPWnZEdUFpRDhBV0NzSTFuc0VRQUFGTFNyQU5qOUEwQU1lelBaQkFBQUN0cGNBT3orQVNDV1BkbHNBZ0FBQlcwcUFIYi9BQkRUMW93MkFlQ056Ly8rbjZNUEFZRE9WaGNBdTM4QWlHMUxWcHNBOE1KbDkyOEtBREMzVlFYQTdoOEFjbGliMlNZQWZHUFhEMUNIQXNCZENnSEF2SjRXQU9OL0FNaGxUWGFiQUxBc3kvM2R2aWtBd0p3ZUZnQzdmd0RJNlZtR213QmdsdzlRa0FMQVV3b0N3SHp1RmdEamZ3REk3VkdXbXdBVVozY1BVSk1Dd0NxS0FzQmNiaFlBNC84YWhEckEvTzVsdWdrQUFCU2tBTENhaVFIQVBONFVBT1AvR29RNVFCMjNzdDBFQUFBS1VnQUtPckw3TnprQW1JTUNBQUFGdlNnQW52K3poaWtBUUQ2dk05NEVvQmpoRGNDeUtBQUFVSklDVUVqTDNiOUpBa0J1M3dxQTUvOEFNTGZyclA5KzVJR1FleWQ5NXJGLytQdGZUL3UxQUNyd0NHQXd3ZmFjY3dUUW5nbEFBSmVBeXp3TjZFSHdBL1JqQWhDSXdQdWRjd0hRMTNmTDRnWEFTQVNmY3dEUTB5WHpQUUlJcU9vakFjRVBjQjZQQUFLckZJaVZQaXRBQkFwQWNCV0NzY0puQklqR0k0QUVabjBrSVBnQnhqRUJTR1Ntd0p6cHN3QmtwQUFrTTBOd3p2QVpBTEpUQUJMS0hLQ1pqeDFnSnUvOERJRGNzcndYSVBnQllqRUJTQzVEc0dZNFJvQnFGSUFKUkE3WXlNY0dVSmxIQUpPSjhraEE4QVBFWmdJd21RakJHK0VZQUhoTUFRQ0FnaFNBeVVSNEJCRGhHQUI0VEFFQWdJSVVBQUFvU0FFQWdJSVVnSWxFZXZZZTZWZ0FlRXNCR09EenIvODIraEFBUXJFdW51LzcwUWRRMFlkMy8zaHhzWDk0OTQrQlJ3TXdoblZ3TEFVZ0FEY0JVSVdkZmh4K0ZQQkFqMjZFclVVZzZqTjNQeFVRV0phMjZ4MXRtQUFFWlNvQVpHZTNINXNDTU5EcmR3SHVVUWFBTExhR3ZqVnRIQVZnc0xVbDRLSjNHYmdlMlVkOXJBREVzbmVuTC96SDhnNUFBSWZIWlAveEwwMk80OWJ6K2hZbHdIc0FNS2VqYTVjQ01KWUpRQUJicHdETmYvMEhBWDM1ZTZZQndMSzBlNjR2L01kVEFBcmJzalAvOFBlL0tnRlFsSmY1NXVRUlFDQzdicktkNC84alkvazlSY0JqZ0hOOC91bUg3ci9HaHovLzB2M1hZTHllb1cvM0g0TUNFTXptbTI1akFXZ1Z4RnRMZ0FKdzNCbmgzb3FTa0ZmdjNiN3dqOE1qZ0NyKzUvK1daVm1XejB1YjMwWGczWUIrTWdYOVBmYytnMklRa3hGL1RTWUFBVzI2R2RkTUFINEwvMGVPdHZKblJjQUU0TFlad3Y0b3BXQ01FYUZ2OXgrTEFoRFE2aHZ6V2ZpdkNQNWI5dDZrU3NCekF2ODVoYUNmMFR0OUJTQVdCU0NvVlRmcW93S3dNL3l2dFM0Q0ZRdUF3RDlPSVRodWRQQXZpL0NQU0FFSTdPbE5lNnNBTkFqK1cxcjg0VVFWQ29EQTcwOGhXQ2RDNkY4SS81aThCRGlMVHNGL3NmVkhFRmQ2U1ZEb24rdjZmQ3NETDBVS2ZlSXpBUWp1N2cxOXZmdnZIUDZQckNrRDF5VmdsaW1BMEkrbmFobUlIdnAyLzNHWkFHUTJNUGd2MWt3R1pwa0dDUDNZS2swR29vYytPWmdBSkpEdFpwK3Q4UXYrdkdZckF0WUNXbElBa3NoMjQxOWtYUUNFL255eWxnSDNQcjE0QkVCWFcxOGVIRTN3eit2eTNXWW9BbGxEbjF4TUFCS1phVkdJVmdZRWZ6M1Jpb0Q3bTdPWkFEREVaYkVidVZBSS9kcWl2RFE0VS9DVGl3bEFNak12Rm1lVkFjSFBQV2NWQWZjeEVTZ0FDYzI4ZUZ6MFdFUUVQMnYxS0FMdVc2THhDSUNRV3I0OEtQalpxdFVMZ3hWQ243eE1BSktxdUxEc0tRTENuNlAybEFEM0p4bVlBSkRHbHFtQTRLZVZ0ZE9BaXFGUGJpWUFpVmx3dnJvdUE0S2YzcTZMZ0h2d0s3di9uRXdBRXZ2dzdoOFdvT1gxSXZ4bDJIRlFnM3Z1SmVHZmx3TEFYRDY5Ly9wL1B5b0NOSGE1dG1BU0hnRk13STdrQ1dXQXZZVCtRM2IvdVprQU1ML3JSVndaNEJtaFR4RW1BSk13QmRoQkdlQkM2RzltOTUrZkFqQVJKZUFBWmFBZW9iK2I4SitEUndDd0xGNGVyRVR3dzdJc0pnRFRNUVZvU0JtWWg5QnZ4dTUvSGlZQWNJK1hCM01UK3ZDUUNjQ0VUQUU2VXdiaUV2cGQyZjNQUlFHWWxCSndBa1VnRHNIZm5mQ2ZqMGNBc0pkSEJHTUpmVGpFQkdCaXBnQ0RLQVA5Q1AwaDdQN25aQUlBclprTXRDWDBvUXNUZ01tWkFnU2hDR3duK0VPdys1K1hBbENBRWhDTU1uQ2YwQTlGK00vTkl3QTRtMGNFTHdsOUdNSUVvQWhUZ0FRcWxRR2hINTdkLy94TUFDQ0tDbjhlZ2VDSE1Fd0FDakVGU0dpR01pRDAwN0g3cjBFQktFWUpTR3hMR2VnUnVxTi9mVTRoL092d0NBQWl1eGU2SXdMMjJhOTVmYXpYZjYwTVFFZ21BQVdaQWlRd1M0RE84am1Lc1B1dnhRUUFvcmlFNWFmMzg0VGw2ODl4L1JtQm9Vd0FpaklGQ09Mamw5cGhXUDN6QjJMM1g0OENVSmdTQUN5TDhLL3F1OUVIQUFDY1R3RW9UT3NIckFOMUtRQUFVSkFDVUp6MkQzVzUvMnRUQUxBSVFFSHVleFFBMkdPR245RS9FOThIYk9hM0FmS04zeGI0aEI5aUU1L3ZhQlc3ZjViRlR3S0U1NFJLSHEvL1NHWGZHZHhsQXNBTHBnQy84VFBzNStCN2ZNUHVud3NGZ0RmS2xvQmJ6NUdGUm42KzEyK0VQOWM4QWdBQk1iZlhqd1d1LzlyM1RHRW1BTncwL1JUZzNsdmpBbUYrUmI5N3UzOWVNd0dnam1lL1ZXenlBT0Ezbjk3ZnZoYThMMEF4SmdEY05jMFVRUEJ6VDVGcncrNmZXeFFBYnZyODB3OWYveUxyQXJqMkI4TmsvWHkwTS91MTh0dm4rL0RuWDhZZUIrRjRCTUFiMzhJL202MC9EUzdyZ2s1Yjl4NEp2SmI4RWNIbm4zNVFBbmpCQklBWGJvWi85TVZPOE5QS2JOZlNqYytqQkhCaEFrQk9lMy8yZS9RRm03SFdUZ011a2s4RnFNMEVnRzhlanY0akxHNUgvOENYQ0orQkhHYTQxaDU4QmxNQWxrVUI0RGVybnZ1UFd0Um1XSXpKS2V1MXQrSzRsUUE4QWlEbVMzK3QvbmhYNGM4Uld4OEp2QmI0RVlHWEF2bHU5QUdReUJsLzV2ckhMOEtmV0ZwZFJ5MnY3V2UvRHF4Z0FsQmNpTjEvandWTCtOUFMwVW5BdFVCVEFWT0EycndEVU5qdThHK3hhUFhjcFFoL2VvbCszZTQ4UGlXZ0pvOEEyTzdvTTlIb2l5amMwL1A2T25wdkdQMnprVWNBUlowNitqOXJZUkwrbktIbDQ0QmJCandpOENpZ0pnV0FmVDUrZWJ3NG5iMGJFZjZjcVhjSnVGaGJCdXorMmNFamdJSzY3djdQZXRQNW12Qm5oTE92dTg3M1ZvZ1hnam1WbHdDTGFYNlRuN1VUZXZUcncwaWpyLy9Hdjc1SEFYV1lBSERNNk1VUFJodDVIUnI5YzRBQ1VNaFVJejdoVHlRVFhZOVRyUk04cEFDUXowU0xMUk54WFpLTUFsREVOSzNlSWt0a2sxeWYwNndYUEtRQWtNY2tpeXVUYzUyU2hBSlF3QlJ0M3FKS0poTmNyMU9zR3p5a0FFeHVpcHQ0Z3NXVWdpYTRicWRZUDdoTEFRQ0FnaFNBaVUzUjNpZllSVkhZQk5mdkZPc0lOeWtBeERYQjRnbXVZNkpTQUNhVnZyVmJOSmxKOHVzNS9YckNUUW9BQUJTa0FFd29mVnRQdmx1Q201SmYxK25YRmQ1UUFJZ2wrU0lKRDdtK0NVUUJJQTZMSXhXNHpnbENBWmlNTVIzUWkvVmxMZ29BTWRnVlVZbnJuUUFVZ0lta2JlY1dReXBLZXQyblhXZDRRd0VBZ0lJVWdFbWtiZVZKZDBIUVJOTHJQKzE2d3dzS0FBQVVwQUF3VHRMZER6VGxQbUFRQldBQ0tjZHhGajM0WGNMN0llVzZ3d3NLQUFBVXBBQWtsN0tGSjl6dFFIY0o3NHVVNncvZktBQUFVSkFDd0xrUzduTGdOTzRQVHFRQUpHYjhCb3htSGNwTEFlQThkamZ3blB1RWt5Z0FBRkNRQXBCVXVyR2JYUTJzbCt4K1NiY2VzU3lMQWdBQUpTa0E5SmRzTndNaHVHL29UQUZJeUxnTmlNYTZsSThDQUFBRktRRDBaWXdKKzdsLzZFZ0JBSUNDRklCa1VqMW5zM3VCNHhMZFI2bldKeFFBQUtoSUFRQ0FnaFFBK2tnMHRvVHczRTkwb0FBazR2a2FFSjExS2c4RkFBQUtVZ0JvejdnUzJuTmYwWmdDQUFBRktRQkplSzRHWkdHOXlrRUJvQzFqU3VqSC9VVkRDZ0FBRktRQUFFQkJDZ0FBRlBUdXgwOC8venI2SUhnc3pRczFreitmZlAvZi8zcjM3MzM1ci84OThVaFlsdUxmeDhjdm80OWdsUTkvL21YMElmREE5Nk1QQUtKN0ZEU3YvNW5wZ3ljQTN3ZTA0UkVBUExBbWJJNzg4MnpqKzRCMlRBRGdoaVBCWWZmWm51OEQyak1Cb0kzSm4vOURLTzQzR2xBQTRKVldZMlBqNXpaOEg5Q0hBaEJjbXQ4Qk1JbldJU0YwanZGOTVHYjlpazBCQUlDQ0ZBRDRUYS9kb1YzblByNFA2RXNCNERndkpNSDUzSGNjcEFBQVFFRUtBQUFVcEFBQVFFRUtBQUFVcEFBQVFFRUtRR0IraU1hNWV2MnNlRCtEZmgvZnh4eXNZM0VwQUFCUWtBTEFNWlA5WHVUV3UwTzd6V044SDA5TWR2OXhMZ1VBWG1rVkV0T0Z6U0MrRCtoREFRQ0FncjRmZlFBUTBXVzN1T2ZueHR0cHR1ZjdnUFpNQU9DQnJlRWhiUHJ5ZlVBN0pnRHd4SnJkcDZBNWorOEQybEFBWUNXaEVvdnZBNDd4Q0FBQUNsSUFBS0FnQlFBQUNsSUFBS0FnQlFBQUNsSUFBS0FnQlFBQUN2SnpBR0IySDcvcy8zZjlhWE13TFFVQVpuRWs2TGYrTnhVRFNFOEJnS3g2QlA3ZVgxc2hnSFFVQU1oa1pPZy9jbjFjeWdDa29BQkFCbEdELzViTHNTb0NFSm9DQUZGbEN2MWJUQVVnTkFVQW9za2UvTGVZQ2tBNGZnNEF4OHdZVnFOOC9ETC8rYXp3R2Mva1hIS0FBZ0FSVkZ2SXEzMWVDRWdCQ096RG4zOFpmUWowVm5sSFhQbXpGMklkaTBzQmdGR0UzMWZPQXd6aEpVQTRtOEI3eTB1Q2NEb1RBRGlUOEgvTStZSFRLQUJ3RnVHMmp2TUVwL0FJQU00UUtOVGUvL0ZQZC8vZWwzLys3Y1FqZWVEakY0OERvRE1GZ09NczFvOEZDUDlIb1gvdm54dGVCbHhYandXNHJzaE5BWUNlQmkvU2E0UC8wYjg3dEFnb0FkQ05kd0NnbDhUaDMrTy9zNXVkTG5TaEFBVG5oMmdrTlVuNDkvcnZiYVlFcEdUOWlrMEJnTlltQy8vZS85M1ZsQUJvU2dHZ0RZdnpWNU9HLzFuLy9hZGNaMTg1RHpTZ0FFQXJrNGYvMmIvT1hjSVBtbEFBQUtBZ0JRQmFLTEw3SC9YcnZXRUtBSWNwQUFta2VaTzI2cUpjOVhPUFZ2VzhKL25jYWRhdHdoUUFBQ2hJQVlBakF1ekdSbzNqaHo4R1dKWVE1eCt5VWdBQW9DQUZnTFlxN2NncWZkYklLbjBQbFQ0cjNTa0FTWGloQnNqQ2VwV0RBZ0I3MkluRjR2dUF6UlFBMnJNWVEzdnVLeHBUQUdBckMzRk12aGZZUkFGSXhITTFidm55ejcrVituV0p6VHFWaHdKQUgzWmowSTc3aVE0VUFOakNRaHliN3dkV1V3QmdBbWVQNDQzL0lUOEZJSmxVejlmc3h1QzRSUGRScXZVSkJRQm1jZGF1M080ZjVxQUEwRmVpM2N0VENUNUw3M0JPRWY0SnZxZlZadm9zaEtNQXdHUjZoWFNLOEFkV1V3QVM4cHlOWjFxSHRmRG5HZXRTUGdvQS9SbGpEdEVxdElYL0lPNGJPdnQrOUFFQS9WekMrLzBmLzdUNzN3WG05TzdIVHovL092b2cyT2Z6VHorTVBvUnRQcjBmZlFUSFRMSWplMVFHcGdsOTE5cXBqUDl6TWdHQVlxWUplZUFRN3dCd25tUzdHaGpDZmNKSkZJREVqTjJBMGF4RGVTa0FuTXZ1QnU1emYzQWlCUUFBQ2xJQWtrczVmclBMZ2JjUzNoY3AxeCsrVVFBQW9DQUZZQUlwVzNqQzNVNzYzMXRlUmNidktlSDlrSExkNFFVRmdIRVNMbnJRblB1QVFSUUFBQ2hJQVpoRTJuR2MzUStWSmIzKzA2NDN2S0FBQUVCQkNzQkUwcmJ5VEx1Z2pDK1lWWkxwKzhsMDNWOUp1ODd3aGdKQURFa1hROWpGOVU0QUNzQmt0SE9nRit2TFhCUUE0c2l5SzhvMFpxNGt5L2VTNVRwbmVnb0FzVmdjbVpucm0wQVVnQW1sSDlObFdDU3o3RGFyeVBCOVpMaXVIMGkvcnZDR0FnQUFCU2tBazByZjFqUHNsakxzT2l2SThEMWt1SjRmU0wrZWNKTUNRRnpKRjAxWWxzVjFURmdLd01TbWFPM1JGODhNdTgrWlJULy8wYS9mRmFaWVI3aEpBUUNBZ2hTQXlVM1IzcVB2b3FMdlFtY1YvYnhIdjI1WG1HTDk0QzRGb0lBcGJ1TG9pMm4wTUpwTjlQTWQvWHBkWVlwMWc0Y1VBUEtZWUZHbEFOY3BTU2dBUlV6VDVpTXZydEYzcGJPSWZKNGpYNThiVExOZThKQUNRRDZSRjluSTRUU0R5T2MzOG5VSk55Z0FoVXpWNmlNdnRwRkRLclBJNXpYeTlialJWT3NFRHlrQTVCVjUwWTBjVmhsRlBwK1JyME40UUFFb1pycDJIM254alJ4YW1VUStqNUd2dngybVd4OTRTQUVvYUxxYlBQSWlIRG04TW9oOC9pSmZkenRNdHk3d2xBTEFIQ0l2eHBGRExMTEk1eTN5OVFZcktRQkZUZG4ySXkvS2tjTXNvc2puSy9KMXR0T1U2d0ZQS1FETUpmTGlIRG5VSW9sOG5pSmZYN0NSQWxEWXRLMC84aUlkT2R3aWlIeCtJbDlYQjB5N0R2RFV1eDgvL2Z6cjZJTmdyTTgvL1RENkVQcUlIQ2JMTW0yZzdPSzdHa0w0MTJZQ3dMeWlMOXJSUSs4czBjOUQ5T3NJZGpJQllGbVdpYWNBeXhJL1lKYWxac2o0WG9heSswY0I0SnVwUzhDeXhBK2NpY1BtRGQvRlVNS2ZaVkVBZUVVSkNHRG04SEgraHhQK1hIZ0hnRm95TE82ZjN1Y0l5aTJ5ZktZTTF3YzBZZ0xBRzlOUEFTNHlCTkpGeG1CeWZzT3grK2VhQXNCTlNrQlFHWUxLT1ExSitQT2FBc0JkU2tCd2tZTExPUXhOK0hQTDk2TVBBSWE3aEVDMkVIdDl2R2VHV2JaejlWcVI0SWRIVEFCNHFNd1U0Q0o3c04xeUpPeWNqL1RzL3JsSEFlQ3BjaVZnV2VZTXZ1cUtCZit5Q0g4ZVV3QllwV1FKV0JaRllBWUZnMzlaaEQvUCtUa0FyRkoyTVNrYUh0TW8rdjJWdlYvWnhFdUE4RXpXbHdRckt4cjhzSVZIQUd4UzlsSEFOVVVnTHNGdjk4OXFDZ0NiS1FHL1VRVGlFUHpMc2doL3RsRUEyRVVKdUtJSWpDUDR2eEgrYktVQXNKc1M4SW9pY0I3Qi80THdadzhGZ0VPVWdEdVVnZmFFL2szQ243MFVBQTVUQWg1UUJJNFQvSGNKZjQ1UUFHaENDVmhCR1ZoUDZEOGwvRGxLQWFBWkpXQURaZUF0b2IrYThLY0ZCWUNtbElBZEtwY0JvYitaOEtjVkJZRG1sSUNEWmk0RUF2OFE0VTlMQ2dCZEtBRU5aUzRFQXI4WjRVOXJDZ0RkS0FFZFJTd0Z3cjRiNFU4UENnQmRLUUdEOUNnSUFuNEk0VTh2Q2dEZEtRR3dqL0NucCs5R0h3RHpzNGpCZHU0YmVsTUFPSVhGRE5aenYzQUdCWURUV05UZ09mY0paMUVBT0pYRkRlNXpmM0NtNzBjZkFQVmNGamt2QjhKWGdwOFJUQUFZeHFJSDdnUEdVUUFZeXVKSFphNS9SbElBR000aVNFV3VlMGJ6RGdBaGVDK0FLZ1EvVVpnQUVJckZrWm01dm9sRUFTQWNpeVF6Y2wwVGpVY0FoT1NSQUxNUS9FUmxBa0JvRms4eWMvMFNtUUpBZUJaUk1uTGRFcDFIQUtUZ2tRQlpDSDZ5TUFFZ0ZZc3JrYmsreWNRRWdIUk1BNGhHOEpPUkFrQmFpZ0NqQ1g0eTh3aUE5Q3pDak9DNkl6c1RBS1pnR3NCWkJEK3plTGNzeS9ManA1OS9IWDBnMEpJaVFHdUNuNW44NWVNZjNwa0FNQ1VUQVZvUi9NektPd0JNemVMTkVhNGZabVlDd1BSTUE5aEs4Rk9CQWtBWmlnRFBDSDRxVVFBb1J4SGdOY0ZQUlFvQVpWMHYrc3BBUFVLZjZoUUFXRXdGS2hIODhOVzd5MS80V1FEd08wVmdQb0lmdnZyTHh6KzhXeFlUQUxqSjQ0RTVDSDI0VHdHQUp6d2V5RWZ3dzNNS0FLeGtLaENiMElkdEZBRFlRUm1JUWVqRGZ1K3UveDh2QXNJeHlrQi9RaC8ydTd3QXVDd21BTkRVNjNCU0NJNFQrTkNIQWdBZEtRVGJDWHc0aHdJQUoxSUkzaEw0TU1hNzEvK0Q5d0JnckpsTGdiQ0hjYTZmL3krTENRQ0VjeThrTXhVRFFRL3hLUUNReEpwUVBhTWtDSGVZZ3dJQUV4SE93RnJmdmY0ZlhqOGpBQUJ5dTVYdGJ3b0FBREEvQlFBQUNycFpBRHdHQUlBNTNNdDBFd0FBS0VnQkFJQ0M3aFlBandFQUlMZEhXVzRDQUFBRktRQUFVTkREQXVBeEFBRGs5Q3pEVFFBQW9LQ25CY0FVQUFCeVdaUGRKZ0FBVUpBQ0FBQUZyU29BSGdNQVFBNXJNOXNFQUFBS1dsMEFUQUVBSUxZdFdXMENBQUFGYlNvQXBnQUFFTlBXakRZQkFJQ0NOaGNBVXdBQWlHVlBOcHNBQUVCQnV3cUFLUUFBeExBM2swMEFBS0NnM1FYQUZBQUF4anFTeFljbUFFb0FBSXh4TklNOUFnQ0FnZzRYQUZNQUFEaFhpK3cxQVFDQWdwb1VBRk1BQURoSHE4eHROZ0ZRQWdDZ3I1Wlo2eEVBQUJUVXRBQ1lBZ0JBSDYwenR2a0VRQWtBZ0xaNlpHdVhSd0JLQUFDMDBTdFR2UU1BQUFWMUt3Q21BQUJ3VE04czdUb0JVQUlBWUovZUdkcjlFWUFTQUFEYm5KR2QzZ0VBZ0lKT0tRQ21BQUN3emxtWmVkb0VRQWtBZ01mT3pNcFRId0VvQVFCdzI5a1plZm83QUVvQUFMdzBJaHVIdkFTb0JBREFWNk15Y2RqdkFsQUNBS2h1WkJZTy9XMkFTZ0FBVlkzT3dPRS9CMkQwQ1FDQXMwWEl2dUVGWUZsaW5BZ0FPRU9VekF0UkFKWWx6Z2tCZ0Y0aVpWMllBckFzc1U0TUFMUVVMZU5DRllCbGlYZUNBT0NvaU5rV3JnQXNTOHdUQlFCN1JNMjBrQVZnV2VLZU1BQllLM0tXaFMwQXl4TDd4QUhBSTlFekxIUUJXSmI0SnhBQVhzdVFYZUVQOE5xUG4zNytkZlF4QU1BOUdZTC9JdndFNEZxbUV3dEFMZGt5S2xVQldKWjhKeGlBK1dYTXBuUUhmTTBqQVFCR3loajhGK2ttQU5jeW4zZ0Fjc3VlUWFrTHdMTGsvd0lBeUdlRzdFbi9BYTU1SkFCQVR6TUUvMFg2Q2NDMW1iNFlBR0taTFdPbStqRFhUQU1BYUdHMjRMK1k4a05kVXdRQTJHUFc0TCtZNmhIQUxiTi9nUUMwVnlFN3B2K0ExMHdEQUhpa1F2QmZsUG1nMXhRQkFLNVZDdjZMY2gvNG1pSUFVRnZGNEw4bys4R3ZLUUlBdFZRTy9vdnlKK0NhSWdBd044SC9PeWZpRG1VQVlBNUMvelluNVFsRkFDQW53ZitZazdPQk1nQVFtOUJmejRuYVNSa0FpRUhvNytPa05hQU1BSnhMNkIvbkJIYWdFQUMwSmZEYmMwSlBvQkFBYkNQdyszT0NCMUVLQUw0UzltTTQ2VUVwQ01Bc0JIeE0vdzlQM3pIK2R6bGNLUUFBQUFCSlJVNUVya0pnZ2c9PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9wbmciLCJwdXJwb3NlIjoiYW55IG1hc2thYmxlIn1dfQ==">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Movers">
+
+<title>Movers Adventure 🦊</title>
+<style>
+  :root{
+    --blue:#5b8def; --blue2:#3f6fd6; --green:#3ec46d; --green2:#2fa257;
+    --yellow:#ffd23f; --orange:#ff9f43; --red:#ff6b6b; --purple:#a55eea;
+    --bg1:#bfe3ff; --bg2:#e7f0ff; --card:#ffffff; --ink:#274472; --soft:#eaf2ff;
+    /* Cambridge English Qualifications brand teal — used only in the Mock Exam Simulator,
+       so that section reads like the real digital exam rather than the game's rainbow palette. */
+    --camb-teal:#00a4a1; --camb-teal-dark:#00807d; --camb-teal-light:#3be0d0;
+    --camb-ink:#2d3b3a; --camb-bg:#f2f1f0; --camb-soft:#e3f6f5;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0; height:100%;}
+  body{
+    font-family:'Comic Sans MS','Baloo 2',Verdana,system-ui,sans-serif;
+    background:linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--ink); overflow-x:hidden; user-select:none;
+    min-height:100vh; min-height:100dvh;
+  }
+  #app{max-width:480px; margin:0 auto; padding:14px 14px 30px; position:relative;}
+  .screen{display:none; animation:pop .35s ease;}
+  .screen.active{display:block;}
+  @keyframes pop{from{opacity:0; transform:scale(.96) translateY(8px);} to{opacity:1; transform:none;}}
+  @keyframes wiggle{0%,100%{transform:rotate(-3deg);}50%{transform:rotate(3deg);}}
+  @keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-7px);}75%{transform:translateX(7px);}}
+
+  /* ---------- Top bar ---------- */
+  .topbar{display:flex; align-items:center; gap:8px; margin-bottom:10px;}
+  .btn-back{background:#fff; border:none; border-radius:16px; padding:8px 12px; font-size:20px;
+    box-shadow:0 4px 0 #cdd8ee; cursor:pointer; color:var(--ink);}
+  .btn-back:active{transform:translateY(3px); box-shadow:0 1px 0 #cdd8ee;}
+  .stars-pill{margin-left:auto; background:#fff; border-radius:20px; padding:6px 14px; font-weight:bold;
+    box-shadow:0 4px 0 #cdd8ee; font-size:18px; display:flex; align-items:center; gap:6px;}
+  .title-pill{flex:1; text-align:center; font-weight:bold; font-size:18px;}
+
+  /* ---------- Home ---------- */
+  .hero{text-align:center; padding:6px 0 2px;}
+  .mascot{font-size:78px; display:inline-block; animation:bounce 2.4s ease-in-out infinite;}
+  .game-title{font-size:30px; font-weight:bold; margin:2px 0 0; color:var(--blue2);
+    text-shadow:2px 2px 0 #fff;}
+  .subtitle{font-size:15px; margin:2px 0 8px; color:#5a6b8c;}
+  .speech{background:#fff; border-radius:18px; padding:12px 14px; margin:6px 4px 14px;
+    box-shadow:0 5px 0 #cdd8ee; font-size:16px; position:relative; line-height:1.35;}
+  .speech:after{content:''; position:absolute; top:-12px; left:40px; border:8px solid transparent;
+    border-bottom-color:#fff;}
+
+  .map{display:flex; flex-direction:column; gap:14px; margin-top:6px;}
+  .level-card{display:flex; align-items:center; gap:14px; background:var(--card); border-radius:22px;
+    padding:14px 16px; box-shadow:0 6px 0 rgba(60,90,160,.18); cursor:pointer; position:relative;
+    border:3px solid transparent; transition:transform .12s;}
+  .level-card:active{transform:translateY(3px) scale(.99);}
+  .level-card .ico{font-size:40px; width:62px; height:62px; border-radius:18px; display:flex;
+    align-items:center; justify-content:center; flex:0 0 auto;}
+  .level-card .meta{flex:1;}
+  .level-card .meta h3{margin:0; font-size:18px;}
+  .level-card .meta p{margin:2px 0 0; font-size:13px; color:#7385a5;}
+  .level-card .go{font-size:26px; color:var(--green);}
+  .lvstars{font-size:13px; margin-top:3px; letter-spacing:1px;}
+  .c-blue{background:#e3edff;} .c-green{background:#dff7e7;} .c-yellow{background:#fff3cf;}
+  .c-orange{background:#ffe9d4;} .c-purple{background:#f0e3ff;} .c-pink{background:#ffe0ec;}
+
+  /* ---------- Generic game UI ---------- */
+  .panel{background:var(--card); border-radius:22px; padding:16px; box-shadow:0 6px 0 rgba(60,90,160,.16); margin-bottom:14px;}
+  .prompt{text-align:center; font-size:19px; font-weight:bold; margin:4px 0 12px; min-height:26px;}
+  .big-emoji{font-size:80px; text-align:center; margin:6px 0;}
+  .speaker-btn{display:block; margin:8px auto; background:var(--yellow); border:none; border-radius:50%;
+    width:84px; height:84px; font-size:40px; box-shadow:0 6px 0 #e3b400; cursor:pointer;}
+  .speaker-btn:active{transform:translateY(4px); box-shadow:0 2px 0 #e3b400;}
+  .speaker-btn.small{width:54px; height:54px; font-size:24px; box-shadow:0 4px 0 #e3b400;}
+
+  .opts{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;}
+  .opt{background:var(--soft); border:3px solid #d6e3ff; border-radius:18px; padding:16px 8px;
+    font-size:30px; text-align:center; cursor:pointer; min-height:74px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:4px; transition:transform .1s;}
+  .opt .lbl{font-size:15px; color:var(--ink); font-weight:bold;}
+  .opt:active{transform:scale(.96);}
+  .opt.correct{background:#d4f7df; border-color:var(--green); animation:pop .3s;}
+  .opt.wrong{background:#ffdede; border-color:var(--red); animation:shake .4s;}
+  .opts.text .opt{font-size:20px;}
+
+  .btn{display:block; width:100%; border:none; border-radius:18px; padding:15px; font-size:19px;
+    font-weight:bold; color:#fff; cursor:pointer; margin-top:8px; font-family:inherit;}
+  .btn-green{background:var(--green); box-shadow:0 6px 0 var(--green2);}
+  .btn-blue{background:var(--blue); box-shadow:0 6px 0 var(--blue2);}
+  .btn-orange{background:var(--orange); box-shadow:0 6px 0 #e07e1f;}
+  .btn:active{transform:translateY(4px); box-shadow:0 2px 0 var(--green2);}
+
+  .feedback{text-align:center; font-size:22px; font-weight:bold; min-height:30px; margin:8px 0;}
+  .feedback.good{color:var(--green2);}
+  .feedback.bad{color:var(--red);}
+
+  .progressbar{height:14px; background:#e6edf9; border-radius:10px; overflow:hidden; margin:4px 0 10px;}
+  .progressbar > span{display:block; height:100%; background:linear-gradient(90deg,var(--green),var(--yellow));
+    width:0; transition:width .4s;}
+
+  /* ---------- Bingo ---------- */
+  .bingo-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  .bcell{background:var(--soft); border:3px solid #d6e3ff; border-radius:16px; min-height:88px; aspect-ratio:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:34px; cursor:pointer; position:relative;}
+  .bcell .bl{font-size:12px; color:var(--ink); font-weight:bold;}
+  .bcell.marked{background:#d4f7df; border-color:var(--green); transform:scale(.97);}
+  .bcell.marked:after{content:'⭐'; position:absolute;}
+
+  /* ---------- Hangman ---------- */
+  .hm-stage{font-size:64px; text-align:center; min-height:74px;}
+  .hm-word{text-align:center; font-size:34px; letter-spacing:8px; font-weight:bold; margin:6px 0; min-height:42px;}
+  .hm-hint{text-align:center; font-size:15px; color:#7385a5; margin-bottom:6px;}
+  .keyboard{display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:8px;}
+  .key{background:#fff; border:2px solid #d6e3ff; border-radius:10px; padding:10px 0; font-size:16px;
+    font-weight:bold; cursor:pointer; color:var(--ink);}
+  .key:active{transform:scale(.92);}
+  .key.used{opacity:.3; pointer-events:none;}
+  .hearts{text-align:center; font-size:22px; min-height:28px; letter-spacing:2px;}
+
+  /* ---------- Writing ---------- */
+  .write-input{width:100%; padding:14px; font-size:22px; border:3px solid #d6e3ff; border-radius:16px;
+    text-align:center; font-family:inherit; color:var(--ink); outline:none;}
+  .write-input:focus{border-color:var(--blue);}
+  .letters{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-top:10px;}
+  .ltile{background:var(--yellow); border:none; border-radius:12px; min-width:42px; padding:12px 0;
+    font-size:22px; font-weight:bold; cursor:pointer; box-shadow:0 4px 0 #e3b400;}
+  .ltile:active{transform:translateY(3px); box-shadow:0 1px 0 #e3b400;}
+  .ltile.used{opacity:.25; pointer-events:none;}
+  .answer-slots{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; min-height:50px; margin:6px 0;}
+  .slot{width:42px; height:50px; border-bottom:4px solid var(--blue); display:flex; align-items:center;
+    justify-content:center; font-size:24px; font-weight:bold;}
+
+  /* ---------- Speaking ---------- */
+  .mic-btn{display:block; margin:14px auto; background:var(--red); border:none; border-radius:50%;
+    width:96px; height:96px; font-size:46px; color:#fff; box-shadow:0 6px 0 #d64545; cursor:pointer;}
+  .mic-btn:active{transform:translateY(4px); box-shadow:0 2px 0 #d64545;}
+  .mic-btn.rec{animation:bounce 1s infinite; background:var(--green); box-shadow:0 6px 0 var(--green2);}
+  .heard{text-align:center; font-size:16px; color:#5a6b8c; min-height:24px; font-style:italic;}
+  .model{background:var(--soft); border-radius:14px; padding:10px; text-align:center; font-size:18px; margin:8px 0;}
+
+  /* ---------- Reward / confetti ---------- */
+  #confetti{position:fixed; top:0; left:0; right:0; bottom:0; inset:0; width:100%; height:100%; pointer-events:none; z-index:50;}
+  .reward{text-align:center; padding:10px;}
+  .reward .big{font-size:90px; animation:wiggle .6s ease infinite;}
+  .reward h2{font-size:28px; margin:8px 0; color:var(--blue2);}
+  .reward .got{font-size:40px; margin:8px 0; letter-spacing:4px;}
+
+  .hint-small{font-size:13px; color:#8aa; text-align:center; margin-top:6px;}
+  .footer-note{font-size:12px; color:#90a0bd; text-align:center; margin-top:18px; line-height:1.4;}
+  .parent-btn{background:none; border:1px dashed #b9c8e6; border-radius:14px; color:#7385a5;
+    padding:8px 12px; font-size:13px; margin:14px auto 0; display:block; cursor:pointer;}
+  .modal{position:fixed; top:0; left:0; right:0; bottom:0; inset:0; background:rgba(30,50,90,.55); display:none; align-items:center;
+    justify-content:center; z-index:60; padding:18px;}
+  .modal.show{display:flex;}
+  .modal-card{background:#fff; border-radius:22px; padding:20px; max-width:430px; max-height:84vh;
+    overflow:auto; box-shadow:0 12px 40px rgba(0,0,0,.3);}
+  .modal-card h2{margin-top:0; color:var(--blue2);}
+  .modal-card h3{color:var(--orange); margin:14px 0 4px;}
+  .modal-card p, .modal-card li{font-size:14px; line-height:1.5; color:#3a4d6e;}
+  .modal-card .btn{margin-top:14px;}
+
+  /* ---------- Level (world) cards ---------- */
+  .world-card{position:relative; overflow:hidden;}
+  .world-card .badge{position:absolute; top:8px; right:12px; font-size:13px; font-weight:bold;
+    background:#fff5d6; color:#b88600; padding:2px 8px; border-radius:10px;}
+  .world-card.locked{filter:grayscale(.7) brightness(.97); opacity:.85;}
+  .world-card.locked .go{color:#b9c4d8;}
+  .lock-info{font-size:12px; color:#a06a00; margin-top:4px; font-weight:bold;}
+  .mini-prog{height:9px; background:#e6edf9; border-radius:8px; overflow:hidden; margin-top:5px; max-width:170px;}
+  .mini-prog > span{display:block; height:100%; background:linear-gradient(90deg,var(--orange),var(--yellow)); width:0;}
+  .done-tick{color:var(--green); font-weight:bold;}
+  @keyframes lockshake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-6px);}40%,80%{transform:translateX(6px);}}
+  .shake{animation:lockshake .45s;}
+
+  /* ---------- Small phones (e.g. Samsung Galaxy A3 ~360px) ---------- */
+  @media (max-width:360px){
+    #app{padding:10px 10px 26px;}
+    .game-title{font-size:26px;}
+    .mascot{font-size:62px;}
+    .subtitle{font-size:14px;}
+    .speech{font-size:15px; padding:10px 12px;}
+    .panel{padding:13px;}
+    .prompt{font-size:17px;}
+    .big-emoji{font-size:66px;}
+    .speaker-btn{width:74px; height:74px; font-size:34px;}
+    .mic-btn{width:84px; height:84px; font-size:40px;}
+    .opts{gap:9px;}
+    .opt{font-size:26px; min-height:66px; padding:13px 6px;}
+    .opt .lbl{font-size:14px;}
+    .opts.text .opt{font-size:18px;}
+    .level-card{padding:12px; gap:11px;}
+    .level-card .ico{font-size:34px; width:54px; height:54px;}
+    .level-card .meta h3{font-size:16px;}
+    .bingo-grid{gap:8px;}
+    .bcell{font-size:30px; min-height:80px;}
+    .keyboard{grid-template-columns:repeat(7,1fr); gap:5px;}
+    .key{padding:9px 0; font-size:15px;}
+    .hm-word{font-size:28px; letter-spacing:5px;}
+    .ltile,.slot{min-width:36px; width:36px;}
+    .ltile{font-size:20px; padding:11px 0;}
+    .reward .big{font-size:76px;}
+    .reward h2{font-size:24px;}
+    .btn{font-size:18px; padding:14px;}
+  }
+
+  /* ---------- Very narrow phones (<=320px, older A3 models) ---------- */
+  @media (max-width:320px){
+    .key{font-size:13px; padding:8px 0;}
+    .opt{font-size:24px;}
+    .big-emoji{font-size:58px;}
+    .mascot{font-size:56px;}
+  }
+
+  /* ---------- Short / landscape screens: keep buttons reachable ---------- */
+  @media (max-height:480px) and (orientation:landscape){
+    #app{max-width:560px;}
+    .mascot{font-size:48px;}
+    .game-title{font-size:24px;}
+    .big-emoji{font-size:54px;}
+    .speaker-btn{width:64px; height:64px; font-size:30px;}
+  }
+
+  /* ---------- Tablets (10" Samsung, etc.) ---------- */
+  @media (min-width:700px){
+    #app{max-width:640px; padding:20px 20px 44px;}
+    .game-title{font-size:40px;}
+    .mascot{font-size:100px;}
+    .subtitle{font-size:18px;}
+    .speech{font-size:20px; padding:16px 20px; border-radius:22px;}
+    .panel{padding:24px; border-radius:26px;}
+    .prompt{font-size:25px;}
+    .big-emoji{font-size:120px;}
+    .speaker-btn{width:104px; height:104px; font-size:48px;}
+    .speaker-btn.small{width:68px; height:68px; font-size:32px;}
+    .mic-btn{width:124px; height:124px; font-size:58px;}
+    .opts{gap:16px;}
+    .opt{font-size:40px; min-height:104px; padding:22px 10px; border-radius:22px;}
+    .opt .lbl{font-size:20px;}
+    .opts.text .opt{font-size:26px;}
+    .level-card{padding:18px 20px; gap:18px; border-radius:26px;}
+    .level-card .ico{font-size:52px; width:82px; height:82px; border-radius:22px;}
+    .level-card .meta h3{font-size:23px;}
+    .level-card .meta p{font-size:15px;}
+    .bingo-grid{gap:14px;}
+    .bcell{font-size:48px; min-height:120px;}
+    .bcell .bl{font-size:16px;}
+    .keyboard{gap:9px;}
+    .key{font-size:23px; padding:15px 0; border-radius:14px;}
+    .hm-stage{font-size:84px; min-height:96px;}
+    .hm-word{font-size:46px; letter-spacing:12px; min-height:56px;}
+    .hm-hint{font-size:18px;}
+    .ltile{font-size:28px; min-width:56px; padding:16px 0; border-radius:14px;}
+    .slot{width:56px; height:64px; font-size:32px;}
+    .write-input{font-size:28px; padding:18px;}
+    .feedback{font-size:27px;}
+    .heard{font-size:19px;}
+    .model{font-size:22px;}
+    .btn{font-size:22px; padding:18px;}
+    .reward .big{font-size:130px;}
+    .reward h2{font-size:36px;}
+    .reward .got{font-size:52px;}
+    .stars-pill,.title-pill{font-size:22px;}
+    .progressbar{height:18px;}
+    .exam-clock{font-size:32px;}
+  }
+
+  /* ---------- Mock Exam Simulator (Cambridge English teal identity) ---------- */
+  .exam-cta{width:100%; border:none; border-radius:20px; padding:16px; margin-top:14px;
+    background:linear-gradient(135deg,var(--camb-teal),var(--camb-teal-dark)); color:#fff; font-family:inherit;
+    font-size:17px; font-weight:bold; cursor:pointer; box-shadow:0 6px 0 #005f5d; text-align:left;
+    display:flex; align-items:center; gap:12px;}
+  .exam-cta:active{transform:translateY(4px); box-shadow:0 2px 0 #005f5d;}
+  .exam-cta .ico{font-size:32px;}
+  .exam-cta small{display:block; font-weight:normal; font-size:12px; opacity:.9; margin-top:2px;}
+
+  /* Screens under #examHome/#examRun/#examReport get the teal exam identity via this wrapper class */
+  .exam-theme{color:var(--camb-ink);}
+  .exam-ribbon{display:inline-flex; align-items:center; gap:8px; background:var(--camb-teal); color:#fff;
+    padding:7px 16px 7px 14px; border-radius:8px 16px 16px 8px; font-weight:bold; font-size:15px;
+    box-shadow:0 3px 0 var(--camb-teal-dark);}
+  .exam-ribbon .tag-point{width:0; height:0; border-top:12px solid transparent; border-bottom:12px solid transparent;
+    border-left:10px solid var(--camb-teal); margin-right:-16px;}
+  .exam-sub{font-size:12px; color:#5a7a79; margin:2px 0 0 2px;}
+
+  .exam-intro{background:var(--card); border-radius:16px; padding:16px; margin:12px 0; font-size:14px;
+    line-height:1.5; border-top:4px solid var(--camb-teal);}
+  .exam-intro h3{margin:0 0 8px; color:var(--camb-teal-dark); font-size:16px;}
+
+  .exam-table{width:100%; border-collapse:collapse; font-size:13px; margin-top:4px;}
+  .exam-table th{background:var(--camb-teal); color:#fff; text-align:left; padding:8px 10px; font-size:12px;}
+  .exam-table th:first-child{border-radius:8px 0 0 0;} .exam-table th:last-child{border-radius:0 8px 0 0;}
+  .exam-table td{padding:8px 10px; border-bottom:1px solid #e2e8e8; background:var(--camb-soft);}
+  .exam-table tr:last-child td{border-bottom:none;}
+  .exam-table .dim{color:#5a7a79; font-size:11px; font-weight:normal;}
+
+  .candidate-box{display:flex; align-items:center; gap:10px; background:var(--camb-soft); border-radius:14px;
+    padding:10px 14px; margin:12px 0;}
+  .candidate-box label{font-size:13px; font-weight:bold; color:var(--camb-teal-dark); flex:0 0 auto;}
+  .candidate-box input{flex:1; border:2px solid var(--camb-teal-light); border-radius:10px; padding:8px 10px;
+    font-family:inherit; font-size:14px; color:var(--camb-ink); background:#fff;}
+  .candidate-box input:focus{outline:none; border-color:var(--camb-teal);}
+
+  .exam-history{margin:14px 0;}
+  .exam-history h3{font-size:14px; color:var(--camb-teal-dark); margin:0 0 8px;}
+  .hist-row{display:flex; align-items:center; gap:10px; background:var(--card); border-radius:12px;
+    padding:8px 12px; margin-bottom:6px; font-size:12px; box-shadow:0 2px 0 #e2e8e8;}
+  .hist-row .hd{flex:1; color:#5a7a79;}
+  .hist-row .hs{font-weight:bold; color:var(--camb-teal-dark); letter-spacing:1px;}
+  .hist-empty{font-size:12px; color:#8aa; text-align:center; padding:6px;}
+
+  .exam-partlabel{display:inline-block; background:var(--camb-soft); border-radius:14px; padding:4px 12px;
+    font-size:13px; font-weight:bold; color:var(--camb-teal-dark); margin-bottom:8px;
+    border-bottom:3px solid var(--camb-teal);}
+  .exam-topbar{display:flex; align-items:center; gap:8px; margin-bottom:10px; background:var(--camb-teal);
+    padding:10px 12px; border-radius:16px; box-shadow:0 4px 0 var(--camb-teal-dark);}
+  .exam-topbar .title-pill{color:#fff; font-weight:bold;}
+  .exam-topbar .btn-back{box-shadow:0 3px 0 #cdd8ee;}
+  .exam-clock{font-size:24px; font-weight:bold; background:#fff; color:var(--camb-teal-dark); border-radius:14px;
+    padding:5px 12px; letter-spacing:1px; margin-left:auto;}
+  .exam-clock.low{color:var(--red); animation:pulse 1s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+
+  .exam-board{display:grid; grid-template-columns:repeat(auto-fit,minmax(72px,1fr)); gap:10px; margin:10px 0;}
+  .exam-card-item{background:var(--camb-soft); border:3px solid #b9e6e3; border-radius:16px; min-height:88px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:32px;
+    cursor:pointer; padding:6px; text-align:center;}
+  .exam-card-item .nm{font-size:12px; font-weight:bold; margin-top:4px; min-height:14px;}
+  .exam-card-item.selected{background:#cdf2ef; border-color:var(--camb-teal); cursor:default;}
+  .exam-card-item.used{opacity:.5; cursor:default;}
+
+  #examBody .opt.selected{background:#cdf2ef; border-color:var(--camb-teal);}
+  #examBody .speaker-btn{background:var(--camb-teal-light); box-shadow:0 6px 0 var(--camb-teal);}
+  #examBody .speaker-btn:active{box-shadow:0 2px 0 var(--camb-teal);}
+  #examBody .btn-green{background:var(--camb-teal); box-shadow:0 6px 0 var(--camb-teal-dark);}
+  #examBody .btn-green:active{box-shadow:0 2px 0 var(--camb-teal-dark);}
+  #examBody .write-input:focus{border-color:var(--camb-teal);}
+
+  .form-row{display:flex; align-items:center; gap:10px; margin-bottom:10px; text-align:left;}
+  .form-row label{flex:0 0 42%; font-size:13px; font-weight:bold; color:var(--camb-ink);}
+  .form-row input{flex:1;}
+
+  .exam-transition{text-align:center; padding:20px 6px;}
+  .exam-transition .ico{font-size:64px;}
+
+  .shield-row{font-size:34px; text-align:center; letter-spacing:4px; margin:6px 0;}
+  .report-row{display:flex; justify-content:space-between; align-items:center; background:var(--camb-soft);
+    border-radius:14px; padding:10px 14px; margin-bottom:8px;}
+  .report-row .lbl{font-size:14px; font-weight:bold; color:var(--camb-ink);}
+  .report-row .shields{font-size:20px; letter-spacing:2px;}
+  .exam-report-panel{background:var(--card); border-radius:20px; padding:18px; border-top:4px solid var(--camb-teal);}
+  .exam-report-panel .btn-green{background:var(--camb-teal); box-shadow:0 6px 0 var(--camb-teal-dark);}
+  .exam-report-panel .btn-green:active{box-shadow:0 2px 0 var(--camb-teal-dark);}
+  .candidate-line{text-align:center; font-size:12px; color:#5a7a79; margin:-4px 0 10px;}
+  .progress-note{text-align:center; font-weight:bold; color:var(--camb-teal-dark); margin:6px 0; font-size:14px;}
+
+  @media (max-width:360px){
+    .exam-clock{font-size:20px; padding:5px 10px;}
+    .exam-card-item{min-height:74px; font-size:26px;}
+  }
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div id="app">
+
+  <!-- ============ HOME ============ -->
+  <section id="home" class="screen active">
+    <div class="topbar">
+      <div class="title-pill">🌟 Movers Adventure</div>
+      <div class="stars-pill">⭐ <span id="homeStars">0</span></div>
+    </div>
+    <div class="hero">
+      <div class="mascot">🦊</div>
+      <div class="game-title">Movers Adventure</div>
+      <div class="subtitle">Play, learn and become an English star!</div>
+    </div>
+    <div class="speech">Hi! I'm <b>Max the Fox</b> 🦊. Climb the levels! Win ⭐ to open the next level. Pick a level below 👇</div>
+
+    <div class="map" id="levelMap"></div>
+
+    <button class="exam-cta" onclick="showExamHome()">
+      <div class="ico">📝</div>
+      <div>Mock Exam Simulator
+        <small>Practice a real A1 Movers exam: Listening + Reading &amp; Writing, timed!</small>
+      </div>
+    </button>
+
+    <button class="parent-btn" onclick="openParents()">👨‍👩‍👧 For parents · Para papá y mamá</button>
+    <div class="footer-note">
+      Tip: use 🎧 headphones to hear the words.<br>Works best in Chrome / Safari.
+    </div>
+  </section>
+
+  <!-- ============ WORLD (LEVEL) SCREEN ============ -->
+  <section id="world" class="screen">
+    <div class="topbar">
+      <button class="btn-back" onclick="goHome()">⬅️</button>
+      <div class="title-pill" id="worldTitle">Level</div>
+      <div class="stars-pill">⭐ <span id="worldStars">0</span></div>
+    </div>
+    <div class="speech" id="worldHint">Play these games and win stars! ⭐</div>
+    <div class="map" id="worldMap"></div>
+  </section>
+
+  <!-- ============ GAME SCREEN ============ -->
+  <section id="game" class="screen">
+    <div class="topbar">
+      <button class="btn-back" onclick="backFromGame()">⬅️</button>
+      <div class="title-pill" id="gameTitle">Game</div>
+      <div class="stars-pill">⭐ <span id="gameStars">0</span></div>
+    </div>
+    <div class="progressbar"><span id="gProg"></span></div>
+    <div id="gameBody"></div>
+  </section>
+
+  <!-- ============ REWARD SCREEN ============ -->
+  <section id="reward" class="screen">
+    <div class="reward">
+      <div class="big" id="rewardEmoji">🏆</div>
+      <h2 id="rewardTitle">Great job!</h2>
+      <div class="got" id="rewardStars">⭐⭐⭐</div>
+      <div class="speech" id="rewardMsg">You did it! 🎉</div>
+      <div id="unlockBanner" style="display:none; text-align:center; font-size:18px; font-weight:bold; color:var(--green2); margin:6px 0;"></div>
+      <button class="btn btn-green" id="rewardBack">🗺️ Back to level</button>
+      <button class="btn btn-blue" id="replayBtn">🔁 Play again</button>
+    </div>
+  </section>
+
+  <!-- ============ EXAM HOME (choose & start a simulacro) ============ -->
+  <section id="examHome" class="screen exam-theme">
+    <div class="exam-topbar">
+      <button class="btn-back" onclick="goHome()">⬅️</button>
+      <div class="title-pill" style="color:#fff">📝 Mock Exam</div>
+    </div>
+    <div class="exam-ribbon"><span class="tag-point"></span>🦊 A1 Movers Simulacro</div>
+    <div class="exam-sub">Modeled on the real Cambridge English A1 Movers exam</div>
+
+    <div class="exam-intro">
+      <h3>How the real exam works</h3>
+      <table class="exam-table">
+        <tr><th>Component</th><th>Content</th><th>Score</th></tr>
+        <tr><td><b>🎧 Listening</b><br><span class="dim">about 25 min</span></td><td>5 parts / 25 questions</td><td>up to 5 🛡️</td></tr>
+        <tr><td><b>📖 Reading &amp; Writing</b><br><span class="dim">about 30 min</span></td><td>6 parts / 35 questions</td><td>up to 5 🛡️</td></tr>
+      </table>
+      <p style="margin:10px 0 0; font-size:12px; color:#5a7a79">Each part is answered <b>once</b>, just like the real test — no retries, results at the end. Spelling counts! ✍️</p>
+    </div>
+
+    <div class="candidate-box">
+      <label for="candidateName">🧑 Name:</label>
+      <input id="candidateName" type="text" placeholder="Your name..." maxlength="20">
+    </div>
+
+    <div class="map" id="examChoices"></div>
+
+    <div class="exam-history">
+      <h3>📈 Your previous simulacros</h3>
+      <div id="examHistoryList"></div>
+    </div>
+  </section>
+
+  <!-- ============ EXAM RUN (a timed part is in progress) ============ -->
+  <section id="examRun" class="screen exam-theme">
+    <div class="exam-topbar">
+      <button class="btn-back" onclick="exitExam()">⬅️</button>
+      <div class="title-pill" id="examSectionTitle">Exam</div>
+      <div class="exam-clock" id="examClock">25:00</div>
+    </div>
+    <div class="exam-partlabel" id="examPartLabel">Part 1 of 5</div>
+    <div class="progressbar"><span id="examItemProg"></span></div>
+    <div id="examBody"></div>
+  </section>
+
+  <!-- ============ EXAM REPORT (shields, like the real Cambridge result) ============ -->
+  <section id="examReport" class="screen exam-theme">
+    <div class="exam-report-panel">
+      <div class="reward">
+        <div class="big">🛡️</div>
+        <h2 id="examReportTitle">Simulacro complete!</h2>
+        <div id="examReportBody"></div>
+        <button class="btn btn-green" onclick="showExamHome()">🔁 Try another simulacro</button>
+        <button class="btn btn-blue" onclick="goHome()">🏠 Back home</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ PARENTS MODAL ============ -->
+<div class="modal" id="parentModal">
+  <div class="modal-card">
+    <h2>👨‍👩‍👧 For parents · Guía rápida</h2>
+    <p><b>Objetivo:</b> preparar a tu hijo para el examen <b>Cambridge A1 Movers</b> practicando las 4 habilidades de forma divertida.</p>
+    <p style="font-size:12px;color:#90a0bd">Examen oficial Movers: <b>19 y 20 de octubre de 2026</b>. Estos juegos siguen las estrategias del webinar del colegio: Bingo, Hangman, Charades, descripción de imágenes y estrategias de lectura.</p>
+    <h3>Ruta por niveles 🗺️</h3>
+    <p>El juego es una ruta de 3 niveles que se <b>desbloquean</b> al ganar estrellas ⭐. El niño se reta a sí mismo: gana estrellas, abre el siguiente nivel y practica retos más grandes.</p>
+    <p>
+      🌱 <b>Nivel 1 · Starter</b> — bases: Listen &amp; Choose, Memory Match, Picture Bingo, Word Builder, Picture Talk. <i>(Gana 8 ⭐ para abrir el Nivel 2.)</i><br>
+      🚀 <b>Nivel 2 · Explorer</b> — más difícil: Fill the Gap (gramática), Reading Detective, Word Hangman, Charades. <i>(Gana 7 ⭐ para abrir el Nivel 3.)</i><br>
+      🏆 <b>Nivel 3 · Champion</b> — retos grandes: Story Listening (escucha 2 oraciones + pregunta), Reading Power (lectura de 3 oraciones), Sentence Maker (escribe oraciones completas).
+    </p>
+    <p style="font-size:12px;color:#90a0bd">Cada juego da hasta 3 ⭐ según los aciertos. Repetir un juego sube la mejor marca. Estrategias del webinar incluidas: Bingo, Hangman, Charades, descripción de imágenes y estrategias de lectura. Contextos: Animals, Food, Clothes, Home, Body, Sports, School, Transport, Nature, <b>Seasons, Professions, Travel y Time</b>.</p>
+    <h3>Ruta sugerida (15–20 min al día)</h3>
+    <p>1) Calienta con <b>Bingo</b> o <b>Memory</b> (vocabulario). 2) Un reto de <b>Listening</b>. 3) Un reto de <b>Reading</b> (Reading Detective / Word Builder / Hangman). 4) Termina con <b>Speaking</b> (Picture Talk o Charades) en voz alta. Repite los temas hasta ganar 3 estrellas ⭐⭐⭐.</p>
+    <h3>Consejos</h3>
+    <p>Usa audífonos para el listening. Celebra los aciertos. Si se frustra, vuelve a un juego más fácil. ¡La meta es que disfrute el inglés!</p>
+    <p style="font-size:12px;color:#90a0bd">El listening usa la voz del navegador y el speaking usa el micrófono (solo Chrome/Android/Safari). Si el micrófono no funciona, igual puede practicar repitiendo en voz alta.</p>
+    <button class="btn btn-green" onclick="closeParents()">OK 👍</button>
+  </div>
+</div>
+
+<script>
+/* On-screen error reporter (helps debug old tablets/phones) */
+window.addEventListener('error',function(ev){try{var b=document.getElementById('errbar');if(!b){b=document.createElement('div');b.id='errbar';b.style.cssText='position:fixed;left:0;right:0;top:0;z-index:99999;background:#ffdede;color:#a00;font:12px/1.4 sans-serif;padding:8px;white-space:pre-wrap;';(document.body||document.documentElement).appendChild(b);}b.textContent='⚠️ '+(ev.message||'error')+'  @line '+(ev.lineno||'?');}catch(e){}});
+</script>
+<script>
+/* =========================================================
+   MOVERS ADVENTURE — single-file kids English game
+   All content aligned to Cambridge A1 Movers topics.
+   ========================================================= */
+
+/* ---------- Sound: Web Speech API ---------- */
+let voices = [];
+let ttsUnlocked = false;
+function loadVoices(){ try{ voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }catch(e){ voices=[]; } }
+if(window.speechSynthesis){
+  loadVoices();
+  speechSynthesis.onvoiceschanged = loadVoices;
+}
+function pickVoice(){
+  // Prefer high-quality, natural-sounding AMERICAN English voices.
+  const preferred = [
+    /Samantha/i, /Ava/i, /Allison/i, /Susan/i, /Nicky/i,          // Apple US
+    /Google US English/i,                                          // Android/Chrome US
+    /Microsoft (Aria|Jenny|Michelle|Guy|Ana|Zira|David)/i,        // Windows US (Aria/Jenny are natural)
+    /English \(United States\)/i, /en[-_]US/i
+  ];
+  for(const re of preferred){ const v=voices.find(v=>re.test(v.name||'') || re.test(v.lang||'')); if(v) return v; }
+  return voices.find(v=>/en[-_]US/i.test(v.lang))
+      || voices.find(v=>/^en/i.test(v.lang))
+      || voices.find(v=>/english/i.test(v.name||''))
+      || null;
+}
+// Must run inside a real user gesture to "wake up" speech on phones.
+function unlockTTS(){
+  if(ttsUnlocked || !window.speechSynthesis) return;
+  try{
+    loadVoices();
+    speechSynthesis.resume();
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0; u.lang='en-US';
+    speechSynthesis.speak(u);
+    ttsUnlocked = true;
+  }catch(e){}
+}
+function say(text, rate){
+  const synth = window.speechSynthesis;
+  if(!synth){ return; }
+  if(!voices.length) loadVoices();
+  const build = ()=>{
+    try{ synth.resume(); }catch(e){}
+    try{ synth.cancel(); }catch(e){}
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    u.rate = rate || 0.9;    // gentle but natural for an 8-year-old
+    u.pitch = 1.05;          // closer to a natural voice, less robotic
+    u.volume = 1;
+    const v = pickVoice();
+    if(v) u.voice = v;
+    // Chrome silences a speak() that comes too soon after cancel().
+    setTimeout(()=>{ try{ synth.speak(u); }catch(e){} }, 70);
+  };
+  ttsUnlocked = true;
+  // If voices not ready yet, wait briefly for them.
+  if(!voices.length){
+    let tries=0;
+    const t=setInterval(()=>{ loadVoices(); if(voices.length || ++tries>8){ clearInterval(t); build(); } }, 120);
+  } else { build(); }
+}
+
+/* ---------- Tiny blip sounds via WebAudio ---------- */
+let actx;
+function blip(ok){
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended'){ try{ actx.resume(); }catch(e){} }
+    const o=actx.createOscillator(), g=actx.createGain();
+    o.connect(g); g.connect(actx.destination);
+    o.type='sine';
+    if(ok){ o.frequency.setValueAtTime(523,actx.currentTime); o.frequency.setValueAtTime(784,actx.currentTime+.12);}
+    else{ o.frequency.setValueAtTime(220,actx.currentTime);}
+    g.gain.setValueAtTime(.15,actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+.3);
+    o.start(); o.stop(actx.currentTime+.3);
+  }catch(e){}
+}
+
+/* ---------- Progress (in-memory, no storage) ---------- */
+const State = { stars:0, levelStars:{} };
+function addStars(n){ State.stars+=n; document.getElementById('homeStars').textContent=State.stars;
+  document.getElementById('gameStars').textContent=State.stars; }
+function setLevelStars(id,n){ State.levelStars[id]=Math.max(State.levelStars[id]||0,n); renderMap(); }
+
+/* =========================================================
+   MOVERS VOCABULARY BANK (emoji = picture, no assets needed)
+   ========================================================= */
+const VOCAB = {
+  animals:[['cat','🐱'],['dog','🐶'],['horse','🐴'],['rabbit','🐰'],['elephant','🐘'],['lion','🦁'],
+           ['frog','🐸'],['fish','🐟'],['bird','🐦'],['monkey','🐵'],['cow','🐮'],['duck','🦆'],
+           ['sheep','🐑'],['bear','🐻'],['snake','🐍'],['spider','🕷️']],
+  food:[['apple','🍎'],['banana','🍌'],['bread','🍞'],['cake','🍰'],['egg','🥚'],['milk','🥛'],
+        ['orange','🍊'],['pizza','🍕'],['rice','🍚'],['ice cream','🍦'],['carrot','🥕'],['fish','🐟'],
+        ['burger','🍔'],['grapes','🍇'],['watermelon','🍉'],['cheese','🧀']],
+  clothes:[['hat','🎩'],['shoes','👟'],['shirt','👕'],['dress','👗'],['socks','🧦'],['coat','🧥'],
+           ['glasses','👓'],['boots','🥾'],['skirt','👚'],['gloves','🧤']],
+  home:[['house','🏠'],['bed','🛏️'],['chair','🪑'],['door','🚪'],['lamp','💡'],['clock','🕐'],
+        ['phone','📱'],['book','📖'],['cup','☕'],['television','📺'],['bath','🛁'],['key','🔑']],
+  nature:[['sun','☀️'],['rain','🌧️'],['tree','🌳'],['flower','🌸'],['star','⭐'],['moon','🌙'],
+          ['cloud','☁️'],['snow','❄️'],['mountain','⛰️'],['river','🏞️'],['rainbow','🌈'],['leaf','🍃']],
+  transport:[['car','🚗'],['bus','🚌'],['bike','🚲'],['plane','✈️'],['boat','⛵'],['train','🚆'],
+             ['truck','🚚'],['rocket','🚀'],['helicopter','🚁'],['scooter','🛴']],
+  body:[['hand','✋'],['foot','🦶'],['eye','👁️'],['ear','👂'],['nose','👃'],['mouth','👄'],
+        ['hair','💇'],['tooth','🦷'],['leg','🦵'],['face','🙂']],
+  sports:[['ball','⚽'],['swim','🏊'],['run','🏃'],['bike','🚴'],['tennis','🎾'],['basketball','🏀'],
+          ['skateboard','🛹'],['dance','💃'],['climb','🧗'],['kick','🦵']],
+  school:[['pen','🖊️'],['pencil','✏️'],['book','📚'],['bag','🎒'],['ruler','📏'],['scissors','✂️'],
+          ['paint','🎨'],['desk','🪑'],['teacher','🧑‍🏫'],['paper','📄']],
+  // ---- Contexts recommended by the Movers webinar ----
+  seasons:[['spring','🌷'],['summer','🌞'],['autumn','🍂'],['winter','⛄'],['hot','🥵'],['cold','🥶'],
+           ['wind','🌬️'],['storm','⛈️'],['ice','🧊'],['warm','🔥']],
+  professions:[['doctor','👨‍⚕️'],['farmer','👨‍🌾'],['pilot','👨‍✈️'],['cook','👨‍🍳'],['police','👮'],
+               ['nurse','🩺'],['painter','👨‍🎨'],['singer','🧑‍🎤'],['dentist','🦷'],['driver','🚕']],
+  travel:[['airport','🛫'],['hotel','🏨'],['beach','🏖️'],['map','🗺️'],['suitcase','🧳'],['ticket','🎫'],
+          ['camera','📷'],['holiday','🏝️'],['sea','🌊'],['tent','⛺']],
+  time:[['clock','🕐'],['watch','⌚'],['morning','🌅'],['evening','🌆'],['night','🌙'],['calendar','📅'],
+        ['hour','⏰'],['birthday','🎂'],['weekend','🎉'],['minute','⏱️']]
+};
+const TOPIC_NAMES = {animals:'Animals 🐾',food:'Food 🍎',clothes:'Clothes 👕',home:'The home 🏠',
+  nature:'Nature ☀️',transport:'Transport 🚗',body:'Body 🙂',sports:'Sports ⚽',school:'School 🎒',
+  seasons:'Seasons 🍂',professions:'Professions 👮',travel:'Travel ✈️',time:'Time 🕐'};
+
+// Flatten all topics into one list, removing duplicate words (keep first).
+function allWords(){ let a=[],seen=new Set();
+  for(const k in VOCAB){ for(const x of VOCAB[k]){ if(!seen.has(x[0])){ seen.add(x[0]); a.push([x[0],x[1],k]); } } }
+  return a; }
+function pick(arr,n){ const c=[...arr]; const out=[]; while(n-- && c.length){ out.push(c.splice(Math.floor(Math.random()*c.length),1)[0]); } return out; }
+function shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; }
+function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+/* =========================================================
+   GAMES REGISTRY + LEVEL WORLDS (an unlockable learning path)
+   ========================================================= */
+const GAMES = {
+  listen:    {name:'Listen & Choose',  desc:'Listening · hear it, find it 🎧', icon:'🎧', cls:'c-blue',  start:()=>startListen()},
+  memory:    {name:'Memory Match',     desc:'Vocabulary · find the pairs 🧠', icon:'🧠', cls:'c-purple',start:()=>startMemory()},
+  bingo:     {name:'Picture Bingo',    desc:'Vocabulary · mark what you hear 🎯', icon:'🎯', cls:'c-green', start:()=>startBingo()},
+  builder:   {name:'Word Builder',     desc:'Reading & spelling · build the word 🔤', icon:'🔤', cls:'c-yellow',start:()=>startBuilder()},
+  talk:      {name:'Picture Talk',     desc:'Speaking · say the sentence 🗣️', icon:'🗣️', cls:'c-pink',  start:()=>startTalk()},
+  gap:       {name:'Fill the Gap',     desc:'Writing & grammar · complete it ✍️', icon:'✍️', cls:'c-orange',start:()=>startGap()},
+  reading:   {name:'Reading Detective',desc:'Reading · title, keywords, ideas 🔍', icon:'🔍', cls:'c-blue',  start:()=>startReading()},
+  hangman:   {name:'Word Hangman',     desc:'Spelling · guess the letters 🪢', icon:'🪢', cls:'c-green', start:()=>startHangman()},
+  charades:  {name:'Charades',         desc:'Speaking · act it out 🎭', icon:'🎭', cls:'c-purple',start:()=>startCharades()},
+  listenplus:{name:'Story Listening',  desc:'Listening · a story + question 📻', icon:'📻', cls:'c-blue',  start:()=>startListenPlus()},
+  readingplus:{name:'Reading Power',   desc:'Reading · a 3-sentence story 📖', icon:'📖', cls:'c-orange',start:()=>startReadingPlus()},
+  sentence:  {name:'Sentence Maker',   desc:'Writing · build & write sentences ✏️', icon:'✏️', cls:'c-yellow',start:()=>startSentence()},
+};
+const WORLDS = [
+  {id:1, name:'Level 1 · Starter',  emoji:'🌱', cls:'c-green',
+   sub:'Read, listen & speak — the basics', games:['listen','memory','bingo','builder','talk'], need:0},
+  {id:2, name:'Level 2 · Explorer', emoji:'🚀', cls:'c-blue',
+   sub:'Grammar, spelling, reading & acting', games:['gap','reading','hangman','charades'], need:8},
+  {id:3, name:'Level 3 · Champion', emoji:'🏆', cls:'c-orange',
+   sub:'Big sentences & comprehension', games:['listenplus','readingplus','sentence'], need:7},
+];
+function starsIn(w){ return w.games.reduce((s,g)=>s+(State.levelStars[g]||0),0); }
+function maxStars(w){ return w.games.length*3; }
+function worldUnlocked(i){ return i===0 || starsIn(WORLDS[i-1])>=WORLDS[i].need; }
+let currentWorldId = 1;
+
+function renderMap(){
+  const m=document.getElementById('levelMap'); m.innerHTML='';
+  WORLDS.forEach((w,i)=>{
+    const unlocked=worldUnlocked(i);
+    const got=starsIn(w), max=maxStars(w);
+    const el=document.createElement('div');
+    el.className='level-card world-card'+(unlocked?'':' locked');
+    const right = `<div class="go">${unlocked?'▶️':'🔒'}</div>`;
+    const badge = got>=max ? '<div class="badge">★ DONE</div>'
+                : (unlocked && got>0 ? `<div class="badge">⭐ ${got}/${max}</div>` : '');
+    let lockline='';
+    if(!unlocked){
+      const have=starsIn(WORLDS[i-1]);
+      lockline=`<div class="lock-info">🔒 Win ${w.need} ⭐ in Level ${i} to open (${have}/${w.need})</div>
+        <div class="mini-prog"><span style="width:${Math.min(100,have/w.need*100)}%"></span></div>`;
+    }
+    el.innerHTML=`${badge}<div class="ico ${w.cls}" style="font-size:40px">${w.emoji}</div>
+      <div class="meta"><h3>${w.name}</h3><p>${w.sub}</p>${lockline}</div>${right}`;
+    el.onclick=()=>{
+      if(unlocked){ blip(true); showWorld(w.id); }
+      else { blip(false); el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake');
+        say('Win more stars to open this level!'); }
+    };
+    m.appendChild(el);
+  });
+}
+
+function showWorld(id){
+  currentWorldId=id;
+  const w=WORLDS.find(x=>x.id===id), idx=WORLDS.indexOf(w), next=WORLDS[idx+1];
+  document.getElementById('worldTitle').textContent=w.emoji+' '+w.name;
+  document.getElementById('worldStars').textContent=State.stars;
+  let hint='Play and win ⭐! ';
+  if(next){ const have=starsIn(w);
+    hint += have>=next.need ? `Level ${next.id} is open! 🎉` : `Win ${next.need} ⭐ here to open Level ${next.id} (${have}/${next.need}).`; }
+  else { hint += 'This is the final level — become a Champion! 🏆'; }
+  document.getElementById('worldHint').innerHTML=hint;
+  const m=document.getElementById('worldMap'); m.innerHTML='';
+  w.games.forEach(gid=>{
+    const g=GAMES[gid]; const got=State.levelStars[gid]||0;
+    const stars='⭐'.repeat(got)+'☆'.repeat(3-got);
+    const el=document.createElement('div'); el.className='level-card';
+    el.innerHTML=`<div class="ico ${g.cls}">${g.icon}</div>
+      <div class="meta"><h3>${g.name}</h3><p>${g.desc}</p><div class="lvstars">${stars}</div></div>
+      <div class="go">▶️</div>`;
+    el.onclick=()=>{ blip(true); g.start(); };
+    m.appendChild(el);
+  });
+  show('world');
+}
+
+/* ---------- Screen helpers ---------- */
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+function goHome(){ if(window.speechSynthesis)speechSynthesis.cancel(); show('home'); renderMap(); }
+function backFromGame(){ if(window.speechSynthesis)speechSynthesis.cancel(); showWorld(currentWorldId); }
+function openParents(){ document.getElementById('parentModal').classList.add('show'); }
+function closeParents(){ document.getElementById('parentModal').classList.remove('show'); }
+function setGame(title){ document.getElementById('gameTitle').textContent=title;
+  document.getElementById('gameStars').textContent=State.stars; show('game'); }
+function setProg(p){ document.getElementById('gProg').style.width=Math.round(p*100)+'%'; }
+const BODY=()=>document.getElementById('gameBody');
+
+/* ---------- Reward ---------- */
+function reward(levelId, score, total, replay){
+  if(window.speechSynthesis)speechSynthesis.cancel();
+  const before = WORLDS.map((w,i)=>worldUnlocked(i));
+  const ratio=score/total;
+  const stars = ratio>=0.9?3 : ratio>=0.6?2 : 1;   // always at least 1 to encourage
+  setLevelStars(levelId, stars);
+  addStars(stars);
+  document.getElementById('rewardEmoji').textContent = stars===3?'🏆':stars===2?'🌟':'👍';
+  document.getElementById('rewardTitle').textContent = stars===3?'Amazing! Perfect!':stars===2?'Well done!':'Good try!';
+  document.getElementById('rewardStars').textContent = '⭐'.repeat(stars)+'☆'.repeat(3-stars);
+  document.getElementById('rewardMsg').innerHTML = `You got <b>${score}/${total}</b>! ${stars===3?'You are an English star! 🎉':'Play again to win 3 stars! 💪'}`;
+  document.getElementById('replayBtn').onclick=()=>{ blip(true); replay(); };
+  document.getElementById('rewardBack').onclick=()=>{ blip(true); backFromGame(); };
+  // Did a new level just unlock?
+  const after = WORLDS.map((w,i)=>worldUnlocked(i));
+  let newWorld=null;
+  for(let i=0;i<WORLDS.length;i++){ if(!before[i] && after[i]) newWorld=WORLDS[i]; }
+  const banner=document.getElementById('unlockBanner');
+  if(newWorld){ banner.style.display='block'; banner.textContent='🎉 New! '+newWorld.name+' is open!'; }
+  else { banner.style.display='none'; }
+  show('reward');
+  fireConfetti();
+  say((stars===3?'Amazing! You are an English star! ':'Well done! ')+(newWorld?('You opened '+newWorld.name+'!'):''));
+}
+
+/* =========================================================
+   1) LISTEN & CHOOSE  (Listening)
+   ========================================================= */
+function startListen(){
+  setGame('🎧 Listen & Choose');
+  let round=0, score=0; const total=6;
+  const pool=allWords();
+  function next(){
+    if(round>=total){ reward('listen',score,total,startListen); return; }
+    setProg(round/total);
+    const opts=pick(pool,4);
+    const answer=opts[Math.floor(Math.random()*opts.length)];
+    BODY().innerHTML=`
+      <div class="panel">
+        <div class="prompt">Listen and tap the picture 👂</div>
+        <button class="speaker-btn" id="sp">🔊</button>
+        <div class="hint-small">Tap 🔊 to hear it again</div>
+        <div class="opts" id="opts"></div>
+        <div class="feedback" id="fb"></div>
+      </div>`;
+    const speak=()=>say(answer[0]);
+    document.getElementById('sp').onclick=speak;
+    const og=document.getElementById('opts');
+    opts.forEach(o=>{
+      const d=document.createElement('div'); d.className='opt';
+      d.innerHTML=`<div>${o[1]}</div>`;
+      d.onclick=()=>{
+        if(d.classList.contains('done'))return;
+        if(o[0]===answer[0]){ d.classList.add('correct'); blip(true); score++;
+          document.getElementById('fb').textContent='✅ '+cap(answer[0])+'!';
+          document.getElementById('fb').className='feedback good';
+          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
+          round++; setTimeout(next,1100);
+        } else { d.classList.add('wrong'); blip(false);
+          document.getElementById('fb').textContent='Try again! 👂';
+          document.getElementById('fb').className='feedback bad';
+        }
+      };
+      og.appendChild(d);
+    });
+    setTimeout(speak,400);
+  }
+  next();
+}
+
+/* =========================================================
+   2) PICTURE BINGO (Vocabulary + Listening)
+   ========================================================= */
+function startBingo(){
+  setGame('🎯 Picture Bingo');
+  const cells=pick(allWords(),9);
+  let called=[], marked=new Set(), score=0;
+  const order=shuffle(cells.map((_,i)=>i));
+  let idx=0;
+  setProg(0);
+  BODY().innerHTML=`
+    <div class="panel">
+      <div class="prompt">Listen and find the picture! 🎧 Make a line to win!</div>
+      <button class="speaker-btn" id="callbtn">🔊</button>
+      <div class="hint-small" id="callword">Tap 🔊 to start</div>
+      <div class="bingo-grid" id="grid" style="margin-top:12px"></div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+  const grid=document.getElementById('grid');
+  cells.forEach((c,i)=>{
+    const d=document.createElement('div'); d.className='bcell'; d.dataset.i=i;
+    d.innerHTML=`<div>${c[1]}</div><div class="bl">${cap(c[0])}</div>`;
+    d.onclick=()=>tap(i,d); grid.appendChild(d);
+  });
+  let current=null;
+  function call(){
+    if(idx>=order.length){ finish(); return; }
+    current=order[idx];
+    document.getElementById('callword').textContent='Find: '+cap(cells[current][0]);
+    say(cells[current][0]);
+  }
+  document.getElementById('callbtn').onclick=()=>{ if(current===null) call(); else say(cells[current][0]); };
+  function tap(i,d){
+    if(current===null){ call(); return; }
+    if(marked.has(i)) return;
+    if(i===current){ d.classList.add('marked'); marked.add(i); score++; blip(true);
+      document.getElementById('fb').textContent='⭐ Yes! '+cap(cells[i][0]);
+      document.getElementById('fb').className='feedback good';
+      setProg(marked.size/9);
+      if(checkLine()){ document.getElementById('fb').textContent='🎉 BINGO! Line!'; }
+      idx++; current=null;
+      setTimeout(()=>{ if(idx<order.length) call(); else finish(); }, 900);
+    } else { d.classList.add('wrong'); blip(false); setTimeout(()=>d.classList.remove('wrong'),400);
+      document.getElementById('fb').textContent='That is '+cap(cells[i][0])+'. Listen again 👂';
+      document.getElementById('fb').className='feedback bad';
+    }
+  }
+  function checkLine(){
+    const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    return L.some(l=>l.every(x=>marked.has(x)));
+  }
+  function finish(){ reward('bingo', score, 9, startBingo); }
+}
+
+/* =========================================================
+   3) MEMORY MATCH (Vocabulary)
+   ========================================================= */
+function startMemory(){
+  setGame('🧠 Memory Match');
+  const words=pick(allWords(),6);
+  // cards: each word -> one emoji card + one text card
+  let cards=[];
+  words.forEach(w=>{ cards.push({k:w[0],face:w[1],t:'e'}); cards.push({k:w[0],face:cap(w[0]),t:'w'}); });
+  cards=shuffle(cards);
+  let open=[], matched=0, tries=0;
+  setProg(0);
+  BODY().innerHTML=`<div class="panel">
+    <div class="prompt">Find the pairs: picture + word 🧠</div>
+    <div class="bingo-grid" id="mgrid" style="grid-template-columns:repeat(4,1fr)"></div>
+    <div class="feedback" id="fb"></div></div>`;
+  const g=document.getElementById('mgrid');
+  cards.forEach((c,i)=>{
+    const d=document.createElement('div'); d.className='bcell'; d.style.fontSize='26px';
+    d.innerHTML='<div>❓</div>'; d.dataset.i=i;
+    d.onclick=()=>flip(i,d,c); g.appendChild(d);
+  });
+  function flip(i,d,c){
+    if(open.length>=2 || d.classList.contains('marked') || d.classList.contains('flip')) return;
+    d.innerHTML = c.t==='e'?`<div>${c.face}</div>`:`<div class="bl" style="font-size:14px">${c.face}</div>`;
+    d.classList.add('flip'); open.push({i,d,c});
+    if(c.t==='e') say(c.k);
+    if(open.length===2){
+      tries++;
+      if(open[0].c.k===open[1].c.k){
+        blip(true); matched++; setProg(matched/6);
+        open.forEach(o=>{o.d.classList.add('marked');});
+        document.getElementById('fb').textContent='⭐ Match! '+cap(open[0].c.k);
+        document.getElementById('fb').className='feedback good';
+        open=[];
+        if(matched===6){ const score=Math.max(2,9-tries); setTimeout(()=>reward('memory',Math.min(score,9),9,startMemory),700); }
+      } else {
+        blip(false);
+        document.getElementById('fb').textContent='Try again 🔁';
+        document.getElementById('fb').className='feedback bad';
+        const o=open; open=[];
+        setTimeout(()=>{o.forEach(x=>{x.d.classList.remove('flip'); x.d.innerHTML='<div>❓</div>';});},800);
+      }
+    }
+  }
+}
+
+/* =========================================================
+   4) WORD BUILDER (Reading & spelling)
+   ========================================================= */
+function startBuilder(){
+  setGame('🔤 Word Builder');
+  let round=0, score=0; const total=6;
+  const pool=allWords().filter(w=>w[0].length<=8 && !w[0].includes(' '));
+  function next(){
+    if(round>=total){ reward('builder',score,total,startBuilder); return; }
+    setProg(round/total);
+    const w=pick(pool,1)[0];
+    const word=w[0];
+    const letters=shuffle(word.split(''));
+    let built=[];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji">${w[1]}</div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="prompt">Build the word! 🔤</div>
+      <div class="answer-slots" id="slots"></div>
+      <div class="letters" id="ltrs"></div>
+      <button class="btn btn-orange" id="clr" style="margin-top:10px">⬅️ Undo</button>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+    document.getElementById('sp').onclick=()=>say(word);
+    say(word);
+    const slots=document.getElementById('slots'), ltrs=document.getElementById('ltrs');
+    function draw(){
+      slots.innerHTML='';
+      for(let i=0;i<word.length;i++){ const s=document.createElement('div'); s.className='slot';
+        s.textContent=built[i]?built[i].ch:''; slots.appendChild(s); }
+    }
+    draw();
+    letters.forEach((ch,i)=>{
+      const b=document.createElement('button'); b.className='ltile'; b.textContent=ch;
+      b.onclick=()=>{ if(b.classList.contains('used')||built.length>=word.length)return;
+        b.classList.add('used'); built.push({ch,btn:b}); draw(); check(); };
+      ltrs.appendChild(b);
+    });
+    document.getElementById('clr').onclick=()=>{ const last=built.pop(); if(last)last.btn.classList.remove('used'); draw();
+      document.getElementById('fb').textContent=''; };
+    function check(){
+      if(built.length===word.length){
+        const guess=built.map(b=>b.ch).join('');
+        if(guess===word){ blip(true); score++;
+          document.getElementById('fb').textContent='✅ '+cap(word)+'!';
+          document.getElementById('fb').className='feedback good';
+          say(word); round++; setTimeout(next,1200);
+        } else { blip(false);
+          document.getElementById('fb').textContent='Not yet 🔁 Undo and try!';
+          document.getElementById('fb').className='feedback bad';
+        }
+      }
+    }
+  }
+  next();
+}
+
+/* =========================================================
+   5) FILL THE GAP (Writing & grammar — Movers structures)
+   ========================================================= */
+const GAP_ITEMS = [
+  {emoji:'🐱', q:'The cat is ___ the box.', opts:['in','is','at'], a:'in', tip:'prepositions'},
+  {emoji:'🐶', q:'The dog is ___ the table.', opts:['under','open','run'], a:'under', tip:'prepositions'},
+  {emoji:'🐦', q:'The bird is ___ the tree.', opts:['in','on','am'], a:'in', tip:'prepositions'},
+  {emoji:'🏃', q:'He ___ running fast.', opts:['is','are','am'], a:'is', tip:'present continuous'},
+  {emoji:'🏊', q:'They ___ swimming in the pool.', opts:['are','is','am'], a:'are', tip:'present continuous'},
+  {emoji:'🎨', q:'I ___ painting a picture.', opts:['am','is','are'], a:'am', tip:'present continuous'},
+  {emoji:'🍎', q:'I like ___ apple.', opts:['an','a','the'], a:'an', tip:'a / an'},
+  {emoji:'🐘', q:'It is ___ elephant.', opts:['an','a','some'], a:'an', tip:'a / an'},
+  {emoji:'🐰', q:'There ___ two rabbits.', opts:['are','is','am'], a:'are', tip:'there is/are'},
+  {emoji:'☀️', q:'There ___ one sun.', opts:['is','are','be'], a:'is', tip:'there is/are'},
+  {emoji:'🐘', q:'The elephant is ___ than the cat.', opts:['bigger','big','biggest'], a:'bigger', tip:'comparatives'},
+  {emoji:'🐭', q:'The mouse is ___ than the dog.', opts:['smaller','small','smallest'], a:'smaller', tip:'comparatives'},
+  {emoji:'👧', q:'She ___ got long hair.', opts:['has','have','is'], a:'has', tip:'have got'},
+  {emoji:'👦', q:'I ___ got a red bike.', opts:['have','has','am'], a:'have', tip:'have got'},
+  {emoji:'🦁', q:'A lion ___ run fast.', opts:['can','is','are'], a:'can', tip:'can'},
+  {emoji:'🐟', q:'A fish ___ walk.', opts:["can't",'can','do'], a:"can't", tip:'can / can\'t'},
+  {emoji:'🍌', q:'These ___ bananas.', opts:['are','is','am'], a:'are', tip:'plural'},
+  {emoji:'🧦', q:'I wear socks ___ my feet.', opts:['on','in','at'], a:'on', tip:'prepositions'},
+];
+function startGap(){
+  setGame('✍️ Fill the Gap');
+  let items=pick(GAP_ITEMS,6), round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ reward('gap',score,total,startGap); return; }
+    setProg(round/total);
+    const it=items[round];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji">${it.emoji}</div>
+      <div class="prompt">${it.q.replace('___','<span style="color:#5b8def">_____</span>')}</div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="hint-small">Choose the correct word ✍️</div>
+      <div class="opts text" id="opts"></div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+    const sentence=it.q.replace('___',it.a);
+    document.getElementById('sp').onclick=()=>say(sentence);
+    const og=document.getElementById('opts');
+    shuffle(it.opts).forEach(o=>{
+      const d=document.createElement('div'); d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
+      d.onclick=()=>{
+        if(d.classList.contains('done'))return;
+        if(o===it.a){ d.classList.add('correct'); blip(true); score++;
+          document.getElementById('fb').textContent='✅ '+sentence;
+          document.getElementById('fb').className='feedback good';
+          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
+          say(sentence); round++; setTimeout(next,1500);
+        } else { d.classList.add('wrong'); blip(false);
+          document.getElementById('fb').textContent='Hmm, try again 🤔';
+          document.getElementById('fb').className='feedback bad';
+        }
+      };
+      og.appendChild(d);
+    });
+  }
+  next();
+}
+
+/* =========================================================
+   6) PICTURE TALK (Speaking)
+   ========================================================= */
+const TALK_ITEMS = [
+  {emoji:'🐱', s:'I can see a cat.'},
+  {emoji:'🐶🐶', s:'There are two dogs.'},
+  {emoji:'🍎', s:'This is a red apple.'},
+  {emoji:'🏃', s:'The boy is running.'},
+  {emoji:'🏊', s:'She is swimming.'},
+  {emoji:'🌳', s:'The tree is green.'},
+  {emoji:'🐘', s:'The elephant is big.'},
+  {emoji:'🐭', s:'The mouse is small.'},
+  {emoji:'🚗', s:'I have got a blue car.'},
+  {emoji:'🦁', s:'The lion can run fast.'},
+  {emoji:'☀️', s:'It is a sunny day.'},
+  {emoji:'🎂', s:'I like chocolate cake.'},
+];
+function startTalk(){
+  setGame('🗣️ Picture Talk');
+  let items=pick(TALK_ITEMS,5), round=0, score=0; const total=items.length;
+  const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+  function next(){
+    if(round>=total){ reward('talk',score,total,startTalk); return; }
+    setProg(round/total);
+    const it=items[round];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji">${it.emoji}</div>
+      <div class="prompt">Look and say the sentence! 🗣️</div>
+      <div class="model" id="model">🔊 <b>${it.s}</b></div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="hint-small">1) Tap 🔊 to listen. 2) Tap 🎤 and say it!</div>
+      <button class="mic-btn" id="mic">🎤</button>
+      <div class="heard" id="heard"></div>
+      <div class="feedback" id="fb"></div>
+      <button class="btn btn-green" id="ok" style="display:none">👍 I said it!</button>
+    </div>`;
+    document.getElementById('sp').onclick=()=>say(it.s);
+    say(it.s);
+    const fb=document.getElementById('fb'), heard=document.getElementById('heard');
+    const okBtn=document.getElementById('ok'), mic=document.getElementById('mic');
+    function pass(msg){ score++; blip(true); fb.textContent=msg; fb.className='feedback good';
+      say('Well done!'); round++; setTimeout(next,1400); }
+    // Fallback for no speech recognition: self-confirm button
+    okBtn.style.display='block';
+    okBtn.onclick=()=>pass('🌟 Great speaking!');
+    if(SR){
+      const rec=new SR(); rec.lang='en-US'; rec.interimResults=false; rec.maxAlternatives=3;
+      mic.onclick=()=>{
+        try{ rec.start(); mic.classList.add('rec'); mic.textContent='👂'; heard.textContent='Listening... say it now!'; }
+        catch(e){}
+      };
+      rec.onresult=(e)=>{
+        mic.classList.remove('rec'); mic.textContent='🎤';
+        let best=''; for(let i=0;i<e.results[0].length;i++) best+=' '+e.results[0][i].transcript;
+        best=best.toLowerCase();
+        heard.textContent='I heard: "'+e.results[0][0].transcript+'"';
+        const target=it.s.toLowerCase().replace(/[.!?]/g,'');
+        const words=target.split(' ').filter(w=>w.length>2);
+        const hit=words.filter(w=>best.includes(w)).length;
+        if(hit>=Math.ceil(words.length*0.6)) pass('🌟 Perfect! You said it!');
+        else { blip(false); fb.textContent='Good try! Tap 🎤 again or 👍'; fb.className='feedback bad'; }
+      };
+      rec.onerror=()=>{ mic.classList.remove('rec'); mic.textContent='🎤';
+        heard.textContent='(Mic off — just say it and tap 👍)'; };
+      rec.onend=()=>{ mic.classList.remove('rec'); mic.textContent='🎤'; };
+    } else {
+      mic.onclick=()=>{ heard.textContent='Say it out loud, then tap 👍'; say(it.s); };
+    }
+  }
+  next();
+}
+
+/* =========================================================
+   7) WORD HANGMAN  (Spelling — webinar strategy)
+   ========================================================= */
+function startHangman(){
+  setGame('🪢 Word Hangman');
+  let round=0, score=0; const total=5;
+  const pool=allWords().filter(w=>w[0].length>=3 && w[0].length<=7 && !w[0].includes(' '));
+  function next(){
+    if(round>=total){ reward('hangman',score,total,startHangman); return; }
+    setProg(round/total);
+    const w=pick(pool,1)[0]; const word=w[0]; const topic=TOPIC_NAMES[w[2]]||w[2];
+    let guessed=new Set(), wrong=0; const maxWrong=6;
+    const faces=['😀','🙂','😐','😟','😦','😨','😵'];
+    function render(){
+      const display=word.split('').map(c=>guessed.has(c)?c.toUpperCase():'_').join(' ');
+      const hearts='❤️'.repeat(maxWrong-wrong)+'🤍'.repeat(wrong);
+      BODY().innerHTML=`<div class="panel">
+        <div class="hm-stage">${faces[wrong]} ${w[1]}</div>
+        <div class="hm-hint">Hint: a <b>${topic}</b> word · Tap 🔊 to hear it</div>
+        <button class="speaker-btn small" id="sp">🔊</button>
+        <div class="hm-word">${display}</div>
+        <div class="hearts">${hearts}</div>
+        <div class="keyboard" id="kb"></div>
+        <div class="feedback" id="fb"></div>
+      </div>`;
+      document.getElementById('sp').onclick=()=>say(word);
+      const kb=document.getElementById('kb');
+      'abcdefghijklmnopqrstuvwxyz'.split('').forEach(L=>{
+        const b=document.createElement('button');
+        b.className='key'+(guessed.has(L)?' used':''); b.textContent=L.toUpperCase();
+        b.onclick=()=>guess(L); kb.appendChild(b);
+      });
+    }
+    function guess(L){
+      if(guessed.has(L)) return; guessed.add(L);
+      if(word.includes(L)){
+        blip(true);
+        if(word.split('').every(c=>guessed.has(c))){
+          score++; render();
+          document.getElementById('fb').textContent='✅ '+cap(word)+'!';
+          document.getElementById('fb').className='feedback good';
+          say(word); round++; setTimeout(next,1300); return;
+        }
+      } else {
+        wrong++; blip(false);
+        if(wrong>=maxWrong){
+          render();
+          document.getElementById('fb').textContent='The word was: '+cap(word);
+          document.getElementById('fb').className='feedback bad';
+          say(word); round++; setTimeout(next,1900); return;
+        }
+      }
+      render();
+    }
+    render(); say(word);
+  }
+  next();
+}
+
+/* =========================================================
+   8) CHARADES / MIMING  (Speaking + acting — webinar strategy)
+   ========================================================= */
+const CHARADES = [
+  {emoji:'🏃', word:'run',   s:'I am running.'},
+  {emoji:'🦘', word:'jump',  s:'I am jumping.'},
+  {emoji:'🏊', word:'swim',  s:'I am swimming.'},
+  {emoji:'💃', word:'dance', s:'I am dancing.'},
+  {emoji:'😴', word:'sleep', s:'I am sleeping.'},
+  {emoji:'🍽️', word:'eat',   s:'I am eating.'},
+  {emoji:'📖', word:'read',  s:'I am reading.'},
+  {emoji:'🎤', word:'sing',  s:'I am singing.'},
+  {emoji:'✈️', word:'fly',   s:'I am flying.'},
+  {emoji:'🧗', word:'climb', s:'I am climbing.'},
+  {emoji:'👏', word:'clap',  s:'I am clapping.'},
+  {emoji:'🚴', word:'ride',  s:'I am riding a bike.'},
+];
+function startCharades(){
+  setGame('🎭 Charades');
+  let items=pick(CHARADES,5), round=0, score=0; const total=items.length;
+  const SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+  function next(){
+    if(round>=total){ reward('charades',score,total,startCharades); return; }
+    setProg(round/total);
+    const it=items[round];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji">${it.emoji}</div>
+      <div class="prompt">Act it out! 🎭 Mime "<b>${it.word}</b>" for your family.</div>
+      <div class="model" id="model">Then say: 🔊 <b>${it.s}</b></div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="hint-small">1) Mime the action. 2) Tap 🔊 to hear it. 3) Tap 🎤 and say it!</div>
+      <button class="mic-btn" id="mic">🎤</button>
+      <div class="heard" id="heard"></div>
+      <div class="feedback" id="fb"></div>
+      <button class="btn btn-green" id="ok">👍 I did it!</button>
+    </div>`;
+    document.getElementById('sp').onclick=()=>say(it.s);
+    say(it.s);
+    const fb=document.getElementById('fb'), heard=document.getElementById('heard');
+    const mic=document.getElementById('mic');
+    function pass(msg){ score++; blip(true); fb.textContent=msg; fb.className='feedback good';
+      say('Great acting!'); round++; setTimeout(next,1400); }
+    document.getElementById('ok').onclick=()=>pass('🌟 Bravo! Great acting!');
+    if(SR){
+      const rec=new SR(); rec.lang='en-US'; rec.interimResults=false; rec.maxAlternatives=3;
+      mic.onclick=()=>{ try{ rec.start(); mic.classList.add('rec'); mic.textContent='👂';
+        heard.textContent='Listening... say it now!'; }catch(e){} };
+      rec.onresult=(e)=>{ mic.classList.remove('rec'); mic.textContent='🎤';
+        let best=''; for(let i=0;i<e.results[0].length;i++) best+=' '+e.results[0][i].transcript;
+        best=best.toLowerCase();
+        heard.textContent='I heard: "'+e.results[0][0].transcript+'"';
+        const target=it.s.toLowerCase().replace(/[.!?]/g,'');
+        const words=target.split(' ').filter(w=>w.length>2);
+        const hit=words.filter(w=>best.includes(w)).length;
+        if(hit>=Math.ceil(words.length*0.6)) pass('🌟 Perfect! You said it!');
+        else { blip(false); fb.textContent='Good try! Tap 🎤 again or 👍'; fb.className='feedback bad'; } };
+      rec.onerror=()=>{ mic.classList.remove('rec'); mic.textContent='🎤';
+        heard.textContent='(Mic off — just say it and tap 👍)'; };
+      rec.onend=()=>{ mic.classList.remove('rec'); mic.textContent='🎤'; };
+    } else {
+      mic.onclick=()=>{ heard.textContent='Say it out loud, then tap 👍'; say(it.s); };
+    }
+  }
+  next();
+}
+
+/* =========================================================
+   9) READING DETECTIVE  (Reading strategies — webinar)
+   title · keywords · main idea · synonyms · antonyms
+   ========================================================= */
+const READING = [
+  {emoji:'🐶', text:'This is my dog, Rex. He is big and brown. Rex likes to run and play in the park.',
+   q:'What is the best title?', opts:['My Dog Rex','My Red Car','At School'], a:'My Dog Rex', tag:'title'},
+  {emoji:'🍎', text:'I like fruit. I eat an apple every day. Apples are red and sweet.',
+   q:'What is the text about?', opts:['Fruit','Cars','Rain'], a:'Fruit', tag:'main idea'},
+  {emoji:'🏊', text:'My sister can swim. She swims in the sea every summer. She is very fast.',
+   q:'What is the key action?', opts:['swim','sleep','read'], a:'swim', tag:'keyword'},
+  {emoji:'🐘', text:'The elephant is very big. It is large and grey. It has big ears.',
+   q:'Which word means the same as "big"?', opts:['large','small','fast'], a:'large', tag:'synonym'},
+  {emoji:'🌞', text:'In summer it is hot and sunny. In winter it is cold and we wear coats.',
+   q:'What is the opposite of "hot"?', opts:['cold','warm','sunny'], a:'cold', tag:'antonym'},
+  {emoji:'👨‍🍳', text:'My dad is a cook. He works in a restaurant. He makes pizza and cake.',
+   q:'What is dad\u2019s job?', opts:['cook','pilot','farmer'], a:'cook', tag:'main idea'},
+  {emoji:'🏖️', text:'We go on holiday in summer. We take a plane to the beach. We swim in the sea.',
+   q:'Which word means the same as "holiday"?', opts:['vacation','school','homework'], a:'vacation', tag:'synonym'},
+  {emoji:'🐭', text:'The mouse is very small. It is little and quick. It runs under the table.',
+   q:'What is the opposite of "small"?', opts:['big','tiny','little'], a:'big', tag:'antonym'},
+  {emoji:'⏰', text:'I get up in the morning. I go to school at eight. I have lunch at noon.',
+   q:'What is the best title?', opts:['My Day','My Dog','My Toys'], a:'My Day', tag:'title'},
+  {emoji:'🚒', text:'A firefighter is brave. She helps people and puts out fires. She drives a big red truck.',
+   q:'What is the key word?', opts:['firefighter','teacher','singer'], a:'firefighter', tag:'keyword'},
+];
+function startReading(){
+  setGame('🔍 Reading Detective');
+  let items=pick(READING,6), round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ reward('reading',score,total,startReading); return; }
+    setProg(round/total);
+    const it=items[round];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji" style="font-size:54px">${it.emoji}🔍</div>
+      <div class="model" style="text-align:left; font-size:17px; line-height:1.5">${it.text}</div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="hint-small">Read it (or tap 🔊). Then answer · <b>${it.tag}</b></div>
+      <div class="prompt" style="font-size:17px">${it.q}</div>
+      <div class="opts text" id="opts"></div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+    document.getElementById('sp').onclick=()=>say(it.text);
+    const og=document.getElementById('opts');
+    shuffle(it.opts).forEach(o=>{
+      const d=document.createElement('div'); d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
+      d.onclick=()=>{
+        if(d.classList.contains('done'))return;
+        if(o===it.a){ d.classList.add('correct'); blip(true); score++;
+          document.getElementById('fb').textContent='✅ Yes! '+o;
+          document.getElementById('fb').className='feedback good';
+          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
+          say('Yes! '+o); round++; setTimeout(next,1300);
+        } else { d.classList.add('wrong'); blip(false);
+          document.getElementById('fb').textContent='Read again, detective! 🔍';
+          document.getElementById('fb').className='feedback bad';
+        }
+      };
+      og.appendChild(d);
+    });
+  }
+  next();
+}
+
+/* =========================================================
+   LEVEL 3 · 10) STORY LISTENING (listening with 2 sentences + question)
+   ========================================================= */
+const LISTEN_STORIES = [
+  {story:'This is Tom. Tom has a big red ball. He likes to play football in the park.',
+   q:'What does Tom like to play?', opts:['Football','Tennis','Chess'], a:'Football'},
+  {story:'Anna has a cat. The cat is small and black. It sleeps on Anna\u2019s bed.',
+   q:'Where does the cat sleep?', opts:['On the bed','In the box','Under the car'], a:'On the bed'},
+  {story:'It is raining today. Sam puts on his coat and boots. He takes his umbrella to school.',
+   q:'What is the weather like?', opts:['Rainy','Sunny','Snowy'], a:'Rainy'},
+  {story:'Lucy is at the zoo. She can see two elephants and one lion. The lion is sleeping.',
+   q:'How many elephants can Lucy see?', opts:['Two','One','Three'], a:'Two'},
+  {story:'Ben likes fruit. For breakfast he eats an apple and a banana. He drinks milk too.',
+   q:'What does Ben drink?', opts:['Milk','Water','Juice'], a:'Milk'},
+  {story:'My sister Kate can swim very well. On Saturday she swims at the beach with dad.',
+   q:'When does Kate swim?', opts:['On Saturday','On Monday','At night'], a:'On Saturday'},
+  {story:'The toy shop is next to the park. It sells kites, balls and dolls. The kites are blue.',
+   q:'What colour are the kites?', opts:['Blue','Red','Green'], a:'Blue'},
+  {story:'Grandpa has a farm. There are cows, sheep and ducks. The ducks swim in the pond.',
+   q:'What swims in the pond?', opts:['Ducks','Cows','Sheep'], a:'Ducks'},
+];
+function startListenPlus(){
+  setGame('📻 Story Listening');
+  let items=pick(LISTEN_STORIES,5), round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ reward('listenplus',score,total,startListenPlus); return; }
+    setProg(round/total);
+    const it=items[round];
+    BODY().innerHTML=`<div class="panel">
+      <div class="prompt">Listen to the story 📻</div>
+      <button class="speaker-btn" id="sp">🔊</button>
+      <div class="hint-small">Tap 🔊 to hear the story again</div>
+      <div class="model" id="txt" style="display:none; text-align:left"></div>
+      <button class="parent-btn" id="show" style="margin:8px auto">👀 Show the words</button>
+      <div class="prompt" style="font-size:17px; margin-top:6px">${it.q}</div>
+      <div class="opts text" id="opts"></div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+    const speak=()=>say(it.story);
+    document.getElementById('sp').onclick=speak;
+    document.getElementById('show').onclick=()=>{ const t=document.getElementById('txt');
+      t.style.display='block'; t.textContent=it.story; };
+    const og=document.getElementById('opts');
+    shuffle(it.opts).forEach(o=>{
+      const d=document.createElement('div'); d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
+      d.onclick=()=>{
+        if(d.classList.contains('done'))return;
+        if(o===it.a){ d.classList.add('correct'); blip(true); score++;
+          document.getElementById('fb').textContent='✅ '+o;
+          document.getElementById('fb').className='feedback good';
+          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
+          say('Yes! '+o); round++; setTimeout(next,1400);
+        } else { d.classList.add('wrong'); blip(false);
+          document.getElementById('fb').textContent='Listen again 👂';
+          document.getElementById('fb').className='feedback bad'; }
+      };
+      og.appendChild(d);
+    });
+    setTimeout(speak,500);
+  }
+  next();
+}
+
+/* =========================================================
+   LEVEL 3 · 11) READING POWER (3-sentence comprehension)
+   ========================================================= */
+const READING_PLUS = [
+  {emoji:'🏖️', text:'In summer, my family goes to the beach. We swim in the sea and build castles in the sand. In the evening, we eat ice cream.',
+   q:'What do they eat in the evening?', opts:['Ice cream','Pizza','Soup'], a:'Ice cream'},
+  {emoji:'🐶', text:'My dog is called Max. He is brown and very friendly. Every morning, Max runs with me in the park.',
+   q:'When does Max run in the park?', opts:['Every morning','At night','On Sunday'], a:'Every morning'},
+  {emoji:'🎂', text:'Today is my birthday. I am eight years old. My friends come to my house and we eat chocolate cake.',
+   q:'How old is the child?', opts:['Eight','Six','Ten'], a:'Eight'},
+  {emoji:'🚌', text:'I go to school by bus. My favourite subject is English. After school, I do my homework and play.',
+   q:'How does the child go to school?', opts:['By bus','By car','By bike'], a:'By bus'},
+  {emoji:'⛄', text:'In winter it is very cold. We wear warm coats, hats and gloves. We make a big snowman in the garden.',
+   q:'What do they make in the garden?', opts:['A snowman','A castle','A cake'], a:'A snowman'},
+  {emoji:'🍳', text:'My mum is a cook. She works in a big restaurant in the city. She makes pizza, soup and cakes.',
+   q:'Where does mum work?', opts:['In a restaurant','In a school','In a hospital'], a:'In a restaurant'},
+  {emoji:'🐠', text:'We have a fish tank at home. There are three small fish. They are orange and they swim all day.',
+   q:'How many fish are there?', opts:['Three','Two','Five'], a:'Three'},
+  {emoji:'✈️', text:'Last summer we went on holiday. We took a plane to a sunny island. We stayed in a big hotel near the sea.',
+   q:'Where did they stay?', opts:['In a hotel','In a tent','At home'], a:'In a hotel'},
+];
+function startReadingPlus(){
+  setGame('📖 Reading Power');
+  let items=pick(READING_PLUS,5), round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ reward('readingplus',score,total,startReadingPlus); return; }
+    setProg(round/total);
+    const it=items[round];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji" style="font-size:50px">${it.emoji}</div>
+      <div class="model" style="text-align:left; font-size:17px; line-height:1.55">${it.text}</div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="hint-small">Read the story (or tap 🔊). Then answer.</div>
+      <div class="prompt" style="font-size:17px">${it.q}</div>
+      <div class="opts text" id="opts"></div>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+    document.getElementById('sp').onclick=()=>say(it.text);
+    const og=document.getElementById('opts');
+    shuffle(it.opts).forEach(o=>{
+      const d=document.createElement('div'); d.className='opt'; d.innerHTML=`<div class="lbl">${o}</div>`;
+      d.onclick=()=>{
+        if(d.classList.contains('done'))return;
+        if(o===it.a){ d.classList.add('correct'); blip(true); score++;
+          document.getElementById('fb').textContent='✅ '+o;
+          document.getElementById('fb').className='feedback good';
+          og.querySelectorAll('.opt').forEach(x=>x.classList.add('done'));
+          say('Yes! '+o); round++; setTimeout(next,1300);
+        } else { d.classList.add('wrong'); blip(false);
+          document.getElementById('fb').textContent='Read again 🔍';
+          document.getElementById('fb').className='feedback bad'; }
+      };
+      og.appendChild(d);
+    });
+  }
+  next();
+}
+
+/* =========================================================
+   LEVEL 3 · 12) SENTENCE MAKER (writing — build full sentences)
+   ========================================================= */
+const SENTENCES = [
+  {emoji:'🐱', words:['The','cat','is','on','the','mat'], s:'The cat is on the mat'},
+  {emoji:'🏃', words:['I','am','running','in','the','park'], s:'I am running in the park'},
+  {emoji:'🐶', words:['My','dog','is','big','and','brown'], s:'My dog is big and brown'},
+  {emoji:'🍎', words:['I','like','to','eat','apples'], s:'I like to eat apples'},
+  {emoji:'🏊', words:['She','can','swim','very','well'], s:'She can swim very well'},
+  {emoji:'☀️', words:['It','is','a','sunny','day'], s:'It is a sunny day'},
+  {emoji:'🎈', words:['There','are','three','red','balloons'], s:'There are three red balloons'},
+  {emoji:'🚌', words:['I','go','to','school','by','bus'], s:'I go to school by bus'},
+];
+function startSentence(){
+  setGame('✏️ Sentence Maker');
+  let items=pick(SENTENCES,5), round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ reward('sentence',score,total,startSentence); return; }
+    setProg(round/total);
+    const it=items[round];
+    const scrambled=shuffle(it.words.map((w,i)=>({w,i})));
+    let placed=[];
+    BODY().innerHTML=`<div class="panel">
+      <div class="big-emoji">${it.emoji}</div>
+      <button class="speaker-btn small" id="sp">🔊</button>
+      <div class="prompt">Make the sentence! ✏️ Tap the words in order.</div>
+      <div class="answer-slots" id="built" style="min-height:54px"></div>
+      <div class="letters" id="bank"></div>
+      <button class="btn btn-orange" id="undo" style="margin-top:10px">⬅️ Undo</button>
+      <div class="feedback" id="fb"></div>
+    </div>`;
+    document.getElementById('sp').onclick=()=>say(it.s);
+    const built=document.getElementById('built'), bank=document.getElementById('bank');
+    function drawBuilt(){ built.innerHTML='';
+      placed.forEach(p=>{ const s=document.createElement('div'); s.className='slot';
+        s.style.width='auto'; s.style.minWidth='42px'; s.style.padding='0 10px'; s.style.fontSize='18px';
+        s.textContent=p.w; built.appendChild(s); }); }
+    scrambled.forEach(tok=>{
+      const b=document.createElement('button'); b.className='ltile';
+      b.style.minWidth='auto'; b.style.padding='12px 12px'; b.style.fontSize='18px';
+      b.textContent=tok.w;
+      b.onclick=()=>{ if(b.classList.contains('used')||placed.length>=it.words.length)return;
+        b.classList.add('used'); placed.push({w:tok.w,btn:b}); drawBuilt(); check(); };
+      bank.appendChild(b);
+    });
+    document.getElementById('undo').onclick=()=>{ const last=placed.pop(); if(last)last.btn.classList.remove('used');
+      drawBuilt(); document.getElementById('fb').textContent=''; };
+    function check(){
+      if(placed.length===it.words.length){
+        const guess=placed.map(p=>p.w).join(' ');
+        if(guess.toLowerCase()===it.s.toLowerCase()){ blip(true); score++;
+          document.getElementById('fb').textContent='✅ '+it.s+'!';
+          document.getElementById('fb').className='feedback good';
+          say(it.s); round++; setTimeout(next,1700);
+        } else { blip(false);
+          document.getElementById('fb').textContent='Not in order 🔁 Undo and try!';
+          document.getElementById('fb').className='feedback bad'; }
+      }
+    }
+    say(it.s);
+  }
+  next();
+}
+
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+let cv=null, cx=null;
+try{ cv=document.getElementById('confetti'); cx=cv?cv.getContext('2d'):null; }catch(e){}
+function sizeCanvas(){ try{ if(cv){ cv.width=window.innerWidth; cv.height=window.innerHeight; } }catch(e){} }
+try{ sizeCanvas(); window.addEventListener('resize',sizeCanvas); }catch(e){}
+let parts=[];
+function fireConfetti(){
+  if(!cx)return;
+  const colors=['#ffd23f','#3ec46d','#5b8def','#ff6b6b','#a55eea','#ff9f43'];
+  for(let i=0;i<90;i++){ parts.push({x:innerWidth/2,y:innerHeight/3,
+    vx:(Math.random()-0.5)*9, vy:Math.random()*-9-3, g:0.3,
+    s:Math.random()*8+4, c:colors[i%colors.length], r:Math.random()*6, vr:(Math.random()-.5)*.4, life:90}); }
+  if(!confettiRunning){ confettiRunning=true; tick(); }
+}
+let confettiRunning=false;
+function tick(){
+  if(!cx){ confettiRunning=false; return; }
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=p.g; p.r+=p.vr; p.life--;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle=p.c;
+    cx.fillRect(-p.s/2,-p.s/2,p.s,p.s*0.6); cx.restore(); });
+  parts=parts.filter(p=>p.life>0 && p.y<cv.height+20);
+  if(parts.length){ requestAnimationFrame(tick); } else { confettiRunning=false; cx.clearRect(0,0,cv.width,cv.height); }
+}
+
+/* =========================================================
+   MOCK EXAM SIMULATOR
+   Modeled on the real Cambridge English A1 Movers exam:
+   Listening (5 parts / 25 items / ~25 min) and
+   Reading & Writing (6 parts / 35 items / ~30 min).
+   Every question is answered once — no retries, no inline
+   right/wrong feedback — results only appear in the final
+   shields report, like the real test.
+   ========================================================= */
+
+/* ---------- Extra content banks (exam-only) ---------- */
+const CHARACTERS = [
+  {name:'Tom',  emoji:'🧑',      action:'run',   s:'Tom is running.'},
+  {name:'Kate', emoji:'👧',      action:'swim',  s:'Kate is swimming.'},
+  {name:'Sam',  emoji:'👦',      action:'read',  s:'Sam is reading.'},
+  {name:'Amy',  emoji:'🙋',      action:'dance', s:'Amy is dancing.'},
+  {name:'Leo',  emoji:'🧒',      action:'climb', s:'Leo is climbing.'},
+  {name:'Mia',  emoji:'👶',      action:'sleep', s:'Mia is sleeping.'},
+  {name:'Jack', emoji:'🧑‍🦱', action:'sing',  s:'Jack is singing.'},
+  {name:'Zoe',  emoji:'🧑‍🦰', action:'ride',  s:'Zoe is riding a bike.'},
+];
+const ACTION_ICON = {run:'🏃',swim:'🏊',read:'📖',dance:'💃',climb:'🧗',sleep:'😴',sing:'🎤',ride:'🚴'};
+
+const COLORS = ['red','blue','green','yellow','black','white','brown','orange','pink','purple'];
+const L5_COLOR_ITEMS = [
+  {emoji:'🐶', obj:'dog',     color:'brown'}, {emoji:'🐱', obj:'cat',   color:'black'},
+  {emoji:'🎈', obj:'balloon', color:'red'},   {emoji:'🚗', obj:'car',   color:'blue'},
+  {emoji:'🌳', obj:'tree',    color:'green'}, {emoji:'☀️', obj:'sun',   color:'yellow'},
+  {emoji:'🐰', obj:'rabbit',  color:'white'}, {emoji:'🎒', obj:'bag',   color:'orange'},
+];
+
+const DIALOGUE_FORMS = [
+  { lines:["Teacher: What's your name?","Boy: My name is Sam.",
+           "Teacher: How old are you?","Boy: I am eight.",
+           "Teacher: What's your favourite animal?","Boy: I like dogs.",
+           "Teacher: What day is your class?","Boy: It's Monday.",
+           "Teacher: What's your favourite colour?","Boy: My favourite colour is blue."],
+    fields:[{label:'Name', ans:['sam']}, {label:'Age', ans:['8','eight']},
+            {label:'Favourite animal', ans:['dog','dogs']}, {label:'Day', ans:['monday']},
+            {label:'Favourite colour', ans:['blue']}] },
+  { lines:["Teacher: What's your name?","Girl: My name is Anna.",
+           "Teacher: How old are you?","Girl: I am nine.",
+           "Teacher: What's your favourite sport?","Girl: I like swimming.",
+           "Teacher: What day is your class?","Girl: It's Friday.",
+           "Teacher: What's your favourite food?","Girl: My favourite food is pizza."],
+    fields:[{label:'Name', ans:['anna']}, {label:'Age', ans:['9','nine']},
+            {label:'Favourite sport', ans:['swimming','swim']}, {label:'Day', ans:['friday']},
+            {label:'Favourite food', ans:['pizza']}] },
+  { lines:["Teacher: What's your name?","Boy: My name is Leo.",
+           "Teacher: How old are you?","Boy: I am seven.",
+           "Teacher: What's your favourite subject?","Boy: I like art.",
+           "Teacher: What day is your class?","Boy: It's Tuesday.",
+           "Teacher: What's your favourite toy?","Boy: My favourite toy is a robot."],
+    fields:[{label:'Name', ans:['leo']}, {label:'Age', ans:['7','seven']},
+            {label:'Favourite subject', ans:['art']}, {label:'Day', ans:['tuesday']},
+            {label:'Favourite toy', ans:['robot']}] },
+];
+
+const DIALOGUE_CHOICE = [
+  {q:'Do you like pizza?', opts:['Yes, I do.','It is red.','I am seven.'], a:'Yes, I do.'},
+  {q:'What is your name?', opts:['My name is Anna.','It is Monday.','I like dogs.'], a:'My name is Anna.'},
+  {q:'How old are you?', opts:['I am eight.','It is blue.','Yes, I can.'], a:'I am eight.'},
+  {q:'Can you swim?', opts:['Yes, I can.','I have a cat.','It is sunny.'], a:'Yes, I can.'},
+  {q:'What colour is the ball?', opts:['It is red.','I am nine.','No, thank you.'], a:'It is red.'},
+  {q:'Where is the cat?', opts:['It is under the table.','I like cats.','It is Friday.'], a:'It is under the table.'},
+  {q:'What day is it today?', opts:["It's Sunday.",'I am ten.','It is a dog.'], a:"It's Sunday."},
+  {q:'Do you want some milk?', opts:['Yes, please.','It is a bird.','I can jump.'], a:'Yes, please.'},
+  {q:'What is your favourite animal?', opts:['I like elephants.','It is winter.','I am at school.'], a:'I like elephants.'},
+];
+
+const RW5_ITEMS = [
+  {emoji:'🏖️', text:'In summer, my family goes to the beach. We swim in the sea. In the evening, we eat ice cream.',
+   blank:'In the evening, they eat ___.', ans:['ice cream']},
+  {emoji:'🐶', text:'My dog is called Max. He is brown and friendly. Every morning, Max runs in the park.',
+   blank:'Every morning, Max ___ in the park.', ans:['runs']},
+  {emoji:'🎂', text:'Today is my birthday. I am eight years old. My friends come and we eat chocolate cake.',
+   blank:'The children eat chocolate ___.', ans:['cake']},
+  {emoji:'🚌', text:'I go to school by bus. My favourite subject is English. After school I do my homework.',
+   blank:'The child goes to school by ___.', ans:['bus']},
+  {emoji:'⛄', text:'In winter it is very cold. We wear warm coats and gloves. We make a big snowman.',
+   blank:'They make a big ___ in the garden.', ans:['snowman']},
+  {emoji:'🍳', text:'My mum is a cook. She works in a big restaurant. She makes pizza, soup and cakes.',
+   blank:'Mum works in a big ___.', ans:['restaurant']},
+  {emoji:'🐠', text:'We have a fish tank at home. There are three small fish. They swim all day.',
+   blank:'There are three small ___ in the tank.', ans:['fish']},
+  {emoji:'✈️', text:'Last summer we went on holiday. We took a plane to a sunny island and stayed in a hotel.',
+   blank:'They stayed in a ___.', ans:['hotel']},
+];
+
+function wordOverlapPass(target, typed){
+  const clean=s=>(s||'').toLowerCase().replace(/[.!?]/g,'');
+  const words=clean(target).split(' ').filter(w=>w.length>2);
+  const hit=words.filter(w=>clean(typed).includes(w)).length;
+  return hit>=Math.ceil(words.length*0.6);
+}
+
+/* ---------- Generic exam question templates ---------- */
+const EBODY=()=>document.getElementById('examBody');
+function examSetPartProgress(i,total){
+  document.getElementById('examItemProg').style.width=Math.round(i/total*100)+'%';
+}
+
+function renderChoice(cfg){
+  EBODY().innerHTML=`<div class="panel">
+    ${cfg.emoji?`<div class="big-emoji" style="font-size:54px">${cfg.emoji}</div>`:''}
+    ${cfg.text?`<div class="model" style="text-align:left; font-size:16px; line-height:1.5">${cfg.text}</div>`:''}
+    ${cfg.audio?`<button class="speaker-btn small" id="exSp">🔊</button>`:''}
+    <div class="prompt" style="font-size:17px">${cfg.prompt}</div>
+    <div class="opts${cfg.textMode?' text':''}" id="exOpts"></div>
+  </div>`;
+  if(cfg.audio){
+    document.getElementById('exSp').onclick=()=>say(cfg.audio);
+    setTimeout(()=>say(cfg.audio),400);
+  }
+  const og=document.getElementById('exOpts'); let answered=false;
+  shuffle(cfg.options).forEach(opt=>{
+    const d=document.createElement('div'); d.className='opt';
+    d.innerHTML = cfg.textMode ? `<div class="lbl">${opt.display}</div>` : `<div>${opt.display}</div>`;
+    d.onclick=()=>{
+      if(answered) return; answered=true;
+      d.classList.add('selected'); blip(true);
+      og.querySelectorAll('.opt').forEach(x=>x.style.pointerEvents='none');
+      setTimeout(()=>cfg.onAnswer(opt.value===cfg.correctValue), 500);
+    };
+    og.appendChild(d);
+  });
+}
+
+function renderWriteIn(cfg){
+  EBODY().innerHTML=`<div class="panel">
+    ${cfg.emoji?`<div class="big-emoji">${cfg.emoji}</div>`:''}
+    ${cfg.text?`<div class="model" style="text-align:left; font-size:16px; line-height:1.5">${cfg.text}</div>`:''}
+    ${cfg.audio?`<button class="speaker-btn small" id="exSp">🔊</button>`:''}
+    <div class="prompt" style="font-size:17px">${cfg.prompt}</div>
+    <input class="write-input" id="exInput" type="text" autocomplete="off" autocapitalize="off"
+      spellcheck="false" placeholder="${cfg.placeholder||'Type here...'}">
+    <button class="btn btn-green" id="exSubmit" style="margin-top:10px">✅ Submit</button>
+  </div>`;
+  if(cfg.audio){
+    document.getElementById('exSp').onclick=()=>say(cfg.audio);
+    setTimeout(()=>say(cfg.audio),400);
+  }
+  const input=document.getElementById('exInput'), btn=document.getElementById('exSubmit');
+  let answered=false;
+  function submit(){
+    if(answered) return; answered=true;
+    const val=input.value.trim();
+    input.disabled=true; btn.disabled=true; blip(true);
+    setTimeout(()=>cfg.onAnswer(cfg.checkFn(val)), 300);
+  }
+  btn.onclick=submit;
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+  setTimeout(()=>input.focus(), 300);
+}
+
+function renderMultiWriteIn(cfg){
+  EBODY().innerHTML=`<div class="panel">
+    <div class="prompt">Listen to the dialogue and fill the form 🎧</div>
+    <button class="speaker-btn" id="exSp">🔊</button>
+    <div class="hint-small">Tap 🔊 to hear it again</div>
+    <div id="exForm" style="margin-top:14px"></div>
+    <button class="btn btn-green" id="exSubmit">✅ Finish this part</button>
+  </div>`;
+  document.getElementById('exSp').onclick=()=>say(cfg.audio);
+  setTimeout(()=>say(cfg.audio), 500);
+  const form=document.getElementById('exForm');
+  cfg.fields.forEach((f,i)=>{
+    const row=document.createElement('div'); row.className='form-row';
+    const lab=document.createElement('label'); lab.textContent=f.label;
+    const inp=document.createElement('input'); inp.className='write-input'; inp.type='text';
+    inp.autocomplete='off'; inp.spellcheck=false; inp.id='exF'+i;
+    row.appendChild(lab); row.appendChild(inp); form.appendChild(row);
+  });
+  let answered=false;
+  document.getElementById('exSubmit').onclick=()=>{
+    if(answered) return; answered=true;
+    let score=0;
+    cfg.fields.forEach((f,i)=>{
+      const inp=document.getElementById('exF'+i);
+      const val=inp.value.trim().toLowerCase();
+      inp.disabled=true;
+      if(f.ans.includes(val)) score++;
+    });
+    document.getElementById('exSubmit').disabled=true; blip(true);
+    setTimeout(()=>cfg.onAnswer(score, cfg.fields.length), 400);
+  };
+}
+
+function renderSequentialMatch(cfg){
+  let clueIdx=0, score=0, pending=null; const total=cfg.clues.length;
+  const usedKeys=new Set();
+  EBODY().innerHTML=`<div class="panel">
+    <div class="prompt">${cfg.prompt}</div>
+    <button class="speaker-btn small" id="exSp">🔊</button>
+    <div class="exam-board" id="exBoard"></div>
+  </div>`;
+  const boardEl=document.getElementById('exBoard');
+  cfg.boardItems.forEach(b=>{
+    const d=document.createElement('div'); d.className='exam-card-item';
+    d.innerHTML=`<div>${b.display}</div><div class="nm"></div>`;
+    d.onclick=()=>answer(b.key,d);
+    boardEl.appendChild(d);
+  });
+  function speakCurrent(){ if(clueIdx<total) say(cfg.clues[clueIdx].speak); }
+  document.getElementById('exSp').onclick=speakCurrent;
+  function answer(key,el){
+    if(usedKeys.has(key) || clueIdx>=total) return;
+    usedKeys.add(key);
+    if(key===cfg.clues[clueIdx].key) score++;
+    el.classList.add('selected','used');
+    el.querySelector('.nm').textContent='✔️';
+    blip(true);
+    clueIdx++;
+    examSetPartProgress(clueIdx,total);
+    clearTimeout(pending);
+    if(clueIdx>=total){ pending=setTimeout(()=>cfg.onAnswer(score,total), 700); }
+    else { pending=setTimeout(speakCurrent, 900); }
+  }
+  setTimeout(speakCurrent, 500);
+}
+
+/* ---------- Loop helpers (drive N single-attempt questions through a template) ---------- */
+function runChoiceLoop(items, buildCfg, onPartDone){
+  let round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ onPartDone(score,total); return; }
+    examSetPartProgress(round,total);
+    const cfg=buildCfg(items[round]);
+    cfg.onAnswer=(ok)=>{ if(ok) score++; round++; next(); };
+    renderChoice(cfg);
+  }
+  next();
+}
+function runWriteLoop(items, buildCfg, onPartDone){
+  let round=0, score=0; const total=items.length;
+  function next(){
+    if(round>=total){ onPartDone(score,total); return; }
+    examSetPartProgress(round,total);
+    const cfg=buildCfg(items[round]);
+    cfg.onAnswer=(ok)=>{ if(ok) score++; round++; next(); };
+    renderWriteIn(cfg);
+  }
+  next();
+}
+
+/* ---------- LISTENING parts ---------- */
+function runL1(onPartDone){ // "big picture": match a spoken name+action to a character
+  const chars=pick(CHARACTERS,5);
+  renderSequentialMatch({
+    prompt:'Listen and tap the child doing the action! 👂',
+    boardItems: shuffle(chars.map(c=>({key:c.name, display:`${c.emoji}<div style="font-size:22px">${ACTION_ICON[c.action]}</div>`}))),
+    clues: chars.map(c=>({key:c.name, speak:`This is ${c.name}. ${c.s}`})),
+    onAnswer: onPartDone
+  });
+}
+function runL2(onPartDone){ // fill a form from a short dialogue
+  const d=pick(DIALOGUE_FORMS,1)[0];
+  renderMultiWriteIn({ audio:d.lines.join(' '), fields:d.fields, onAnswer:onPartDone });
+}
+function runL3(onPartDone){ // match spoken words to pictures
+  const words=pick(allWords(),5);
+  renderSequentialMatch({
+    prompt:'Listen and tap the correct picture! 👂',
+    boardItems: shuffle(words.map(w=>({key:w[0], display:`<div style="font-size:34px">${w[1]}</div>`}))),
+    clues: words.map(w=>({key:w[0], speak:w[0]})),
+    onAnswer: onPartDone
+  });
+}
+function runL4(onPartDone){ // choose 1 of 3 pictures for a spoken word
+  const pool=allWords(); const items=pick(pool,5);
+  runChoiceLoop(items, (w)=>{
+    const distractors=pick(pool.filter(x=>x[0]!==w[0]),2);
+    return {
+      prompt:'Listen and choose the picture 👂', audio:w[0],
+      options: shuffle([w,...distractors]).map(o=>({display:o[1], value:o[0]})),
+      correctValue: w[0],
+    };
+  }, onPartDone);
+}
+function runL5(onPartDone){ // colour objects (choice) + write words (spelling)
+  const colorItems=pick(L5_COLOR_ITEMS,3);
+  const writeWords=pick(allWords().filter(w=>w[0].length<=8 && !w[0].includes(' ')),2);
+  const queue=shuffle([
+    ...colorItems.map(it=>({type:'choice', it})),
+    ...writeWords.map(w=>({type:'write', w})),
+  ]);
+  let idx=0, score=0; const total=queue.length;
+  function next(){
+    if(idx>=total){ onPartDone(score,total); return; }
+    examSetPartProgress(idx,total);
+    const q=queue[idx];
+    if(q.type==='choice'){
+      const opts=shuffle([q.it.color, ...pick(COLORS.filter(c=>c!==q.it.color),2)]).map(c=>({display:cap(c),value:c}));
+      renderChoice({
+        emoji:q.it.emoji, audio:`Colour the ${q.it.obj} ${q.it.color}.`,
+        prompt:'Listen and choose the colour 🎨', textMode:true,
+        options:opts, correctValue:q.it.color,
+        onAnswer:(ok)=>{ if(ok) score++; idx++; next(); }
+      });
+    } else {
+      renderWriteIn({
+        emoji:q.w[1], audio:q.w[0], prompt:'Listen and write the word ✍️',
+        placeholder:'Type the word...', checkFn:(val)=>val.toLowerCase()===q.w[0],
+        onAnswer:(ok)=>{ if(ok) score++; idx++; next(); }
+      });
+    }
+  }
+  next();
+}
+
+/* ---------- READING & WRITING parts ---------- */
+function runRW1(onPartDone){ // read a picture, write (spell) the word
+  const words=pick(allWords().filter(w=>w[0].length<=9 && !w[0].includes(' ')),5);
+  runWriteLoop(words, (w)=>({
+    emoji:w[1], prompt:'Write the word for the picture ✍️', placeholder:'Type the word...',
+    checkFn:(val)=>val.toLowerCase()===w[0],
+  }), onPartDone);
+}
+function runRW2(onPartDone){ // complete a dialogue (A/B/C)
+  runChoiceLoop(pick(DIALOGUE_CHOICE,6), (it)=>({
+    prompt:it.q, textMode:true,
+    options: it.opts.map(o=>({display:o, value:o})), correctValue:it.a,
+  }), onPartDone);
+}
+function runRW3(onPartDone){ // read a short text and answer
+  runChoiceLoop(pick(READING,6), (it)=>({
+    emoji:it.emoji, text:it.text, prompt:it.q, textMode:true,
+    options: it.opts.map(o=>({display:o, value:o})), correctValue:it.a,
+  }), onPartDone);
+}
+function runRW4(onPartDone){ // choose the correct word for a gap
+  runChoiceLoop(pick(GAP_ITEMS,5), (it)=>({
+    emoji:it.emoji, prompt:it.q.replace('___','<span style="color:#5b8def">_____</span>'), textMode:true,
+    options: it.opts.map(o=>({display:o, value:o})), correctValue:it.a,
+  }), onPartDone);
+}
+function runRW5(onPartDone){ // complete a sentence about a short story
+  runWriteLoop(pick(RW5_ITEMS,7), (it)=>({
+    emoji:it.emoji, text:it.text,
+    prompt:it.blank.replace('___','<span style="color:#5b8def">_____</span>'),
+    placeholder:'Type 1-3 words...', checkFn:(val)=>it.ans.includes(val.toLowerCase()),
+  }), onPartDone);
+}
+function runRW6(onPartDone){ // write a full sentence about a picture
+  runWriteLoop(pick(SENTENCES,6), (it)=>({
+    emoji:it.emoji, prompt:'Write a sentence about the picture ✏️',
+    placeholder:'Write a full sentence...', checkFn:(val)=>wordOverlapPass(it.s, val),
+  }), onPartDone);
+}
+
+/* ---------- Exam flow controller ---------- */
+const EXAM = {
+  listening: { name:'Listening', icon:'🎧', time:25*60,
+    parts:[
+      {id:'L1', title:'Part 1 · Who is who?', run:runL1},
+      {id:'L2', title:'Part 2 · Fill the form', run:runL2},
+      {id:'L3', title:'Part 3 · Match the pictures', run:runL3},
+      {id:'L4', title:'Part 4 · Choose the picture', run:runL4},
+      {id:'L5', title:'Part 5 · Colour and write', run:runL5},
+    ]},
+  reading: { name:'Reading & Writing', icon:'📖', time:30*60,
+    parts:[
+      {id:'RW1', title:'Part 1 · Read and write', run:runRW1},
+      {id:'RW2', title:'Part 2 · Complete the chat', run:runRW2},
+      {id:'RW3', title:'Part 3 · Read and choose', run:runRW3},
+      {id:'RW4', title:'Part 4 · Choose the word', run:runRW4},
+      {id:'RW5', title:'Part 5 · Complete the story', run:runRW5},
+      {id:'RW6', title:'Part 6 · Write about it', run:runRW6},
+    ]},
+};
+let ExamState=null;
+
+/* ---------- Exam history (localStorage — survives reloads, so progress toward exam day is visible) ---------- */
+function loadCandidateName(){ try{ return localStorage.getItem('movers_candidate')||''; }catch(e){ return ''; } }
+function saveCandidateName(name){ try{ localStorage.setItem('movers_candidate', name); }catch(e){} }
+function loadExamHistory(){ try{ return JSON.parse(localStorage.getItem('movers_exam_history')||'[]'); }catch(e){ return []; } }
+function saveExamHistoryEntry(entry){
+  try{
+    const h=loadExamHistory(); h.push(entry);
+    localStorage.setItem('movers_exam_history', JSON.stringify(h.slice(-20)));
+  }catch(e){}
+}
+function renderExamHistory(){
+  const wrap=document.getElementById('examHistoryList');
+  const h=loadExamHistory();
+  if(!h.length){ wrap.innerHTML='<div class="hist-empty">No simulacros yet — start your first one above! 🚀</div>'; return; }
+  wrap.innerHTML=h.slice().reverse().slice(0,5).map(e=>{
+    const d=new Date(e.date);
+    const dateStr=d.toLocaleDateString(undefined,{day:'2-digit',month:'short'});
+    return `<div class="hist-row"><div class="hd">${dateStr} · ${e.label}</div>
+      <div class="hs">${'🛡️'.repeat(e.shields)}${'▫️'.repeat(e.maxShields-e.shields)}</div></div>`;
+  }).join('');
+}
+
+function showExamHome(){
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  const m=document.getElementById('examChoices'); m.innerHTML='';
+  const choices=[
+    {keys:['listening'], name:'Listening only', sub:'5 parts · ~25 min', emoji:'🎧', cls:'c-blue'},
+    {keys:['reading'], name:'Reading & Writing only', sub:'6 parts · ~30 min', emoji:'📖', cls:'c-orange'},
+    {keys:['listening','reading'], name:'Full simulacro', sub:'Both papers · ~55 min', emoji:'🏆', cls:'c-purple'},
+  ];
+  choices.forEach(c=>{
+    const el=document.createElement('div'); el.className='level-card';
+    el.innerHTML=`<div class="ico ${c.cls}">${c.emoji}</div>
+      <div class="meta"><h3>${c.name}</h3><p>${c.sub}</p></div><div class="go">▶️</div>`;
+    el.onclick=()=>{ blip(true); beginExam(c.keys); };
+    m.appendChild(el);
+  });
+  const nameInput=document.getElementById('candidateName');
+  nameInput.value=loadCandidateName();
+  nameInput.oninput=()=>saveCandidateName(nameInput.value.trim());
+  renderExamHistory();
+  show('examHome');
+}
+
+function beginExam(sectionKeys){
+  ExamState={ sections: sectionKeys.map(k=>EXAM[k]), mode: sectionKeys.join('+'),
+    secIdx:0, partIdx:0, timeLeft:0, timerId:null, results:{} };
+  runCurrentSection();
+}
+
+function runCurrentSection(){
+  const section=ExamState.sections[ExamState.secIdx];
+  ExamState.partIdx=0;
+  ExamState.timeLeft=section.time;
+  document.getElementById('examSectionTitle').textContent=section.icon+' '+section.name;
+  clearInterval(ExamState.timerId);
+  ExamState.timerId=setInterval(examTick,1000);
+  updateExamClock();
+  runCurrentPart();
+}
+
+function examTick(){
+  if(!ExamState || ExamState.timerId===null) return; // guards against a stray/duplicate tick after the section already ended
+  ExamState.timeLeft--;
+  updateExamClock();
+  if(ExamState.timeLeft<=0){ clearInterval(ExamState.timerId); ExamState.timerId=null; finishSection(true); }
+}
+
+function updateExamClock(){
+  const t=Math.max(0,ExamState.timeLeft);
+  const m=Math.floor(t/60), s=t%60;
+  const el=document.getElementById('examClock');
+  el.textContent=m+':'+String(s).padStart(2,'0');
+  el.classList.toggle('low', t<=60);
+}
+
+function runCurrentPart(){
+  const section=ExamState.sections[ExamState.secIdx];
+  const part=section.parts[ExamState.partIdx];
+  document.getElementById('examPartLabel').textContent=
+    `${part.title} (Part ${ExamState.partIdx+1} of ${section.parts.length})`;
+  examSetPartProgress(0,1);
+  show('examRun');
+  part.run((score,total)=>{
+    ExamState.results[part.id]={score,total,label:part.title};
+    ExamState.partIdx++;
+    if(ExamState.partIdx<section.parts.length) runCurrentPart();
+    else finishSection(false);
+  });
+}
+
+function finishSection(timedOut){
+  if(!ExamState || ExamState.secIdx>=ExamState.sections.length) return; // already finished — ignore a stray call
+  if(ExamState.timerId!==null){ clearInterval(ExamState.timerId); ExamState.timerId=null; }
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  ExamState.secIdx++;
+  if(ExamState.secIdx<ExamState.sections.length) showExamTransition(timedOut);
+  else showExamReport();
+}
+
+function showExamTransition(timedOut){
+  const next=ExamState.sections[ExamState.secIdx];
+  document.getElementById('examSectionTitle').textContent='☕ Break';
+  document.getElementById('examPartLabel').textContent='';
+  document.getElementById('examClock').textContent='';
+  examSetPartProgress(1,1);
+  EBODY().innerHTML=`<div class="exam-transition panel">
+    <div class="ico">☕</div>
+    <h2 style="color:var(--blue2)">First paper done!</h2>
+    ${timedOut?'<p style="color:var(--red)">⏰ Time was up — let’s continue!</p>':''}
+    <p>Take a short break. When you are ready, start <b>${next.name}</b> (${next.icon}) — about ${Math.round(next.time/60)} minutes.</p>
+    <button class="btn btn-green" id="exContinue">▶️ Start ${next.name}</button>
+  </div>`;
+  document.getElementById('exContinue').onclick=()=>{ blip(true); runCurrentSection(); };
+}
+
+function exitExam(){
+  if(ExamState){ clearInterval(ExamState.timerId); ExamState.timerId=null; }
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  ExamState=null;
+  showExamHome();
+}
+
+function showExamReport(){
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  const bySection=ExamState.sections.map(section=>{
+    let score=0,total=0; const rows=[];
+    section.parts.forEach(p=>{
+      const r=ExamState.results[p.id];
+      if(r){ score+=r.score; total+=r.total; rows.push({label:p.title, score:r.score, total:r.total}); }
+      else rows.push({label:p.title, score:0, total:0});
+    });
+    const shields = total>0 ? Math.max(0,Math.min(5, Math.round(score/total*5))) : 0;
+    return {name:section.name, icon:section.icon, score, total, shields, rows};
+  });
+  document.getElementById('examReportTitle').textContent=
+    bySection.every(s=>s.shields>=4) ? 'Amazing! You are exam-ready! 🎉' : 'Great practice! Keep training! 💪';
+  const candidateName=(document.getElementById('candidateName').value||'').trim();
+  let html=`<p class="candidate-line">${candidateName?cap(candidateName):'Candidate'} · ${new Date().toLocaleDateString()}</p>`;
+  bySection.forEach(s=>{
+    const detail=s.rows.map(r=>`${r.label.split('·')[0].trim()}: ${r.score}/${r.total}`).join(' · ');
+    html += `<div class="report-row">
+      <div class="lbl">${s.icon} ${s.name} (${s.score}/${s.total})</div>
+      <div class="shields">${'🛡️'.repeat(s.shields)}${'▫️'.repeat(5-s.shields)}</div>
+    </div>
+    <div style="font-size:11px;color:#90a0bd;margin:-4px 0 12px 4px">${detail}</div>`;
+  });
+  const totalShields=bySection.reduce((a,s)=>a+s.shields,0), maxShields=5*bySection.length;
+  html += `<div class="shield-row">${'🛡️'.repeat(totalShields)}</div>
+    <p style="text-align:center; font-size:14px; color:#7385a5">
+      ${totalShields} out of ${maxShields} shields — just like a real Cambridge result! 🏅</p>`;
+
+  const prevSame=loadExamHistory().slice().reverse().find(e=>e.mode===ExamState.mode);
+  if(prevSame){
+    const diff=totalShields-prevSame.shields;
+    if(diff>0) html += `<p class="progress-note">🔺 +${diff} shield${diff>1?'s':''} since your last simulacro!</p>`;
+    else if(diff<0) html += `<p class="progress-note" style="color:#8aa;font-weight:normal">Keep practicing — you'll get there! 💪</p>`;
+    else html += `<p class="progress-note" style="color:#8aa;font-weight:normal">Same as last time — try again for more shields!</p>`;
+  }
+  saveExamHistoryEntry({date:Date.now(), mode:ExamState.mode,
+    label:bySection.map(s=>s.icon).join(' '), shields:totalShields, maxShields});
+
+  document.getElementById('examReportBody').innerHTML=html;
+  show('examReport');
+  fireConfetti();
+  say(bySection.every(s=>s.shields>=4) ? 'Amazing! You are ready for the real exam!' : 'Great job practicing! Keep training!');
+}
+
+/* ---------- INIT ---------- */
+renderMap();
+// Unlock audio + voices on the very first user interaction (mobile autoplay policy).
+function firstGesture(){
+  loadVoices();
+  unlockTTS();
+  try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); actx.resume&&actx.resume(); }catch(e){}
+}
+['pointerdown','touchstart','click'].forEach(ev=>
+  document.body.addEventListener(ev, firstGesture, {once:true, passive:true}));
+</script>
+
+<script>
+if('serviceWorker' in navigator && location.protocol.indexOf('http')===0){
+  window.addEventListener('load',function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
+}
+</script>
+</body>
+</html>
