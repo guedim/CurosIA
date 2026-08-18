@@ -15,9 +15,20 @@
  *     27001), AWS serverless infra, or the rest of a Python SDLC, and tag
  *     them with the relevant `stackTags` even when the source repo itself
  *     is generic rather than fintech-specific.
+ *   - workflow: end-to-end Claude Code workflows/orchestration frameworks
+ *     (not single hooks or subagents) — curated for the same fintech/banking,
+ *     DDD/distributed-architecture, AWS-serverless, information-security
+ *     audience as the agent tab. Favor repos with real, sustained GitHub
+ *     traction over one-off experiments, and tag with `stackTags` per the
+ *     same rules as agent.
+ *   - command: individual Claude Code slash commands (single Markdown
+ *     prompt files under `.claude/commands/` or `.claude/skills/`) — one
+ *     command per catalog entry, linked to its specific file, not the whole
+ *     repo. Curated for the same fintech/banking, DDD/distributed-architecture,
+ *     AWS-serverless, information-security audience as agent/workflow.
  */
 
-export type ItemType = "hook" | "plugin" | "rag" | "agent";
+export type ItemType = "hook" | "plugin" | "rag" | "agent" | "workflow" | "command";
 
 export type HookCategory =
   | "security"
@@ -58,7 +69,29 @@ export type AgentCategory =
   | "documentation"
   | "devops-cicd";
 
-export type Category = HookCategory | PluginCategory | RagCategory | AgentCategory;
+export type WorkflowCategory =
+  | "sdlc-orchestration"
+  | "architecture-design"
+  | "distributed-architecture"
+  | "security-compliance"
+  | "cloud-infrastructure"
+  | "fintech-payments";
+
+export type CommandCategory =
+  | "sdlc-productivity"
+  | "architecture-design"
+  | "distributed-architecture"
+  | "security-compliance"
+  | "cloud-deployment"
+  | "fintech-payments";
+
+export type Category =
+  | HookCategory
+  | PluginCategory
+  | RagCategory
+  | AgentCategory
+  | WorkflowCategory
+  | CommandCategory;
 
 interface BaseCatalogItem {
   name: string;
@@ -129,7 +162,9 @@ export type CatalogItem =
   | (BaseCatalogItem & { type: "hook"; category: HookCategory })
   | (BaseCatalogItem & { type: "plugin"; category: PluginCategory })
   | (BaseCatalogItem & { type: "rag"; category: RagCategory })
-  | (BaseCatalogItem & { type: "agent"; category: AgentCategory });
+  | (BaseCatalogItem & { type: "agent"; category: AgentCategory })
+  | (BaseCatalogItem & { type: "workflow"; category: WorkflowCategory })
+  | (BaseCatalogItem & { type: "command"; category: CommandCategory });
 
 export const hookCategories: HookCategory[] = [
   "security",
@@ -172,6 +207,24 @@ export const agentCategories: AgentCategory[] = [
   "data-persistence",
   "documentation",
   "devops-cicd",
+];
+
+export const workflowCategories: WorkflowCategory[] = [
+  "sdlc-orchestration",
+  "architecture-design",
+  "distributed-architecture",
+  "security-compliance",
+  "cloud-infrastructure",
+  "fintech-payments",
+];
+
+export const commandCategories: CommandCategory[] = [
+  "sdlc-productivity",
+  "architecture-design",
+  "distributed-architecture",
+  "security-compliance",
+  "cloud-deployment",
+  "fintech-payments",
 ];
 
 const hooks: CatalogItem[] = [
@@ -3300,4 +3353,333 @@ const rag: CatalogItem[] = [
   },
 ];
 
-export const catalogItems: CatalogItem[] = [...hooks, ...plugins, ...rag, ...agents];
+const workflows: CatalogItem[] = [
+  // SDLC orchestration
+  {
+    name: "Claude Code Workflows",
+    type: "workflow",
+    category: "sdlc-orchestration",
+    description:
+      "Structured development workflows for Claude Code that keep broad exploration focused on the outcome you approved, rather than drifting mid-task.",
+    repoUrl: "https://github.com/shinpr/claude-code-workflows",
+    stars: 669,
+    stackTags: ["ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "Claude Code Workflow (cadence-team)",
+    type: "workflow",
+    category: "sdlc-orchestration",
+    description:
+      "JSON-driven multi-agent cadence-team development framework with intelligent CLI orchestration across Claude, Gemini, Qwen, and Codex, plus a context-first architecture for automated workflow execution.",
+    repoUrl: "https://github.com/catlog22/claude-code-workflow",
+    stars: 2135,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  {
+    name: "Compliance Checker (SDLC Pipeline)",
+    type: "workflow",
+    category: "sdlc-orchestration",
+    description:
+      "Full SDLC pipeline plugin from a 250+ component Claude Code toolkit — tech-lead, senior-dev, QA, security-officer, and DevOps agents collaborate through a two-gate approval flow, checked against 13 compliance frameworks (SOC 2, HIPAA, PCI DSS, GDPR, ISO 27001).",
+    repoUrl: "https://github.com/rohitg00/awesome-claude-code-toolkit/tree/main/plugins/compliance-checker",
+    stars: 2468,
+    stackTags: ["ai-assisted-sdlc", "pci-dss", "iso27001", "best-practices"],
+  },
+  // Architecture & design patterns
+  {
+    name: "Claude Workflow V2",
+    type: "workflow",
+    category: "architecture-design",
+    description:
+      "Universal Claude Code workflow plugin bundling agents, skills, hooks, and commands — including dedicated Clean Architecture and Hexagonal Architecture skill packs.",
+    repoUrl: "https://github.com/CloudAI-X/claude-workflow-v2",
+    stars: 1403,
+    stackTags: ["clean-architecture", "hexagonal-architecture", "design-patterns"],
+  },
+  {
+    name: "PHP Architecture Toolkit",
+    type: "workflow",
+    category: "architecture-design",
+    description:
+      "Architecture-focused Claude Code toolkit covering DDD, CQRS, Event Sourcing, Hexagonal and Clean Architecture, SOLID, GRASP, and PSR — with commands for design review, testing, and documentation.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code",
+    stars: 96,
+    stackTags: ["ddd", "hexagonal-architecture", "clean-architecture", "design-patterns"],
+  },
+  // Distributed architecture
+  {
+    name: "Claude Flow",
+    type: "workflow",
+    category: "distributed-architecture",
+    description:
+      "Agent orchestration platform for Claude Code that deploys multi-agent swarms with distributed, adaptive memory and self-learning coordination — one of the most-starred multi-agent workflow frameworks in the ecosystem.",
+    repoUrl: "https://github.com/ruvnet/claude-flow",
+    stars: 68092,
+    stackTags: ["distributed-systems", "ai-assisted-sdlc"],
+  },
+  {
+    name: "Claude Code Agent Team",
+    type: "workflow",
+    category: "distributed-architecture",
+    description:
+      "Official AWS Samples spec-driven workflow where a Full Stack Developer parent agent dynamically sizes and delegates to pools of Coding, DevOps, Review, and Solutions Architect specialists.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-agent-team",
+    official: true,
+    stars: 48,
+    stackTags: ["distributed-systems", "aws", "best-practices"],
+  },
+  // Information security & compliance
+  {
+    name: "Claude Code Ultimate Guide",
+    type: "workflow",
+    category: "security-compliance",
+    description:
+      "430K+ line guide to agentic Claude Code workflows, including a security-mindset track with AI-specific threat modeling backed by a 28-CVE and 655-malicious-skill database.",
+    repoUrl: "https://github.com/FlorianBruniaux/claude-code-ultimate-guide",
+    stars: 5748,
+    stackTags: ["owasp", "ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "Secure SDLC Workflow",
+    type: "workflow",
+    category: "security-compliance",
+    description:
+      "End-to-end security workflow spanning the full SDLC — OWASP ASVS requirements at planning, threat modeling and SAST/DAST triage during build, IaC review, and compliance attestation before release sign-off.",
+    repoUrl: "https://github.com/Kaademos/secure-sdlc-agents",
+    stars: 12,
+    stackTags: ["owasp", "pci-dss", "iso27001"],
+  },
+  {
+    name: "Claude GRC Engineering",
+    type: "workflow",
+    category: "security-compliance",
+    description:
+      "Open-source GRC toolkit with Claude Code plugins for evidence collection, Secure Controls Framework crosswalks, multi-framework compliance gap reports, and OSCAL-based reporting workflows.",
+    repoUrl: "https://github.com/GRCEngClub/claude-grc-engineering",
+    stars: 376,
+    stackTags: ["iso27001", "best-practices"],
+  },
+  // AWS serverless / cloud infrastructure
+  {
+    name: "AWS Skills Serverless Workflow",
+    type: "workflow",
+    category: "cloud-infrastructure",
+    description:
+      "End-to-end serverless delivery workflow — CDK/SST infrastructure-as-code, Lambda/S3/DynamoDB event-driven design, Step Functions saga and event-sourcing patterns, then cost-ops review.",
+    repoUrl: "https://github.com/zxkane/aws-skills",
+    stars: 346,
+    stackTags: ["aws", "aws-lambda", "aws-dynamodb", "aws-s3", "distributed-systems"],
+  },
+  {
+    name: "AWS Dev Toolkit Workflow (Startups)",
+    type: "workflow",
+    category: "cloud-infrastructure",
+    description:
+      "Official AWS Samples plugin marketplace bundling a startup SDLC workflow for serverless-on-AWS: Lambda cold-start guidance, single-table DynamoDB design, and API Gateway authorizer/throttling review.",
+    repoUrl: "https://github.com/aws-samples/sample-claude-code-plugins-for-startups",
+    official: true,
+    stars: 12,
+    stackTags: ["aws", "aws-lambda", "aws-api-gateway", "aws-dynamodb", "aws-s3"],
+  },
+  // Banking & payment systems
+  {
+    name: "Payment Processing Plugin",
+    type: "workflow",
+    category: "fintech-payments",
+    description:
+      "Payment-processing plugin bundle with a PCI-compliance skill and dedicated agents for building and reviewing payment systems — part of a 38k-star Claude Code subagent collection.",
+    repoUrl: "https://github.com/wshobson/agents/tree/main/plugins/payment-processing",
+    stars: 38654,
+    stackTags: ["banking", "payments", "pci-dss"],
+  },
+  {
+    name: "Finance Skills Domain Workflows",
+    type: "workflow",
+    category: "fintech-payments",
+    description:
+      "81 Claude Code skills across 7 domain plugins for financial services — investment management, regulatory compliance, advisory practice, trading, and operations workflows.",
+    repoUrl: "https://github.com/JoelLewis/finance_skills",
+    stars: 164,
+    stackTags: ["banking", "payments", "best-practices"],
+  },
+];
+
+const commands: CatalogItem[] = [
+  // SDLC productivity
+  {
+    name: "Custom Slash Commands (Official Docs)",
+    type: "command",
+    category: "sdlc-productivity",
+    description:
+      "Anthropic's official reference for custom slash commands — Markdown prompts under .claude/commands/ (now unified with Skills), $ARGUMENTS placeholders, ! for shell injection, and @ for file references.",
+    repoUrl: "https://code.claude.com/docs/en/commands",
+    official: true,
+    stackTags: ["ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "/doc-generate",
+    type: "command",
+    category: "sdlc-productivity",
+    description:
+      "Generates API docs, architecture diagrams, and user guides directly from code, and keeps them synchronized as the codebase changes.",
+    repoUrl: "https://github.com/wshobson/commands/blob/main/tools/doc-generate.md",
+    stars: 2613,
+    stackTags: ["ai-assisted-sdlc", "best-practices"],
+  },
+  {
+    name: "/onboard",
+    type: "command",
+    category: "sdlc-productivity",
+    description:
+      "Onboards a developer (or another agent) into an unfamiliar codebase — summarizes architecture, conventions, and where to start.",
+    repoUrl: "https://github.com/wshobson/commands/blob/main/tools/onboard.md",
+    stars: 2613,
+    stackTags: ["ai-assisted-sdlc"],
+  },
+  // Architecture & design patterns
+  {
+    name: "/audit-ddd",
+    type: "command",
+    category: "architecture-design",
+    description:
+      "DDD architecture audit — analyzes layer separation and domain model richness, and flags architectural violations with actionable pattern recommendations.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code/blob/master/commands/audit-ddd.md",
+    stars: 96,
+    stackTags: ["ddd"],
+  },
+  {
+    name: "/generate-ddd",
+    type: "command",
+    category: "architecture-design",
+    description:
+      "Generates DDD building blocks — entities, value objects, aggregates, commands, queries, repositories, domain services, and specifications — with tests and correct layer placement.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code/blob/master/commands/generate-ddd.md",
+    stars: 96,
+    stackTags: ["ddd"],
+  },
+  {
+    name: "/audit-architecture",
+    type: "command",
+    category: "architecture-design",
+    description:
+      "Detects DDD, CQRS, Clean/Hexagonal/Layered Architecture, and Event Sourcing patterns in a codebase and produces actionable recommendations.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code/blob/master/commands/audit-architecture.md",
+    stars: 96,
+    stackTags: ["ddd", "hexagonal-architecture", "clean-architecture", "design-patterns"],
+  },
+  {
+    name: "/adr",
+    type: "command",
+    category: "architecture-design",
+    description:
+      "Writes an Architecture Decision Record for a significant technical decision — scans the codebase for existing ADRs, numbers the new one, and captures context and constraints.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/commands/architecture/adr.md",
+    stars: 2468,
+    stackTags: ["best-practices", "design-patterns"],
+  },
+  // Distributed architecture & resilience patterns
+  {
+    name: "/audit-patterns",
+    type: "command",
+    category: "distributed-architecture",
+    description:
+      "Design-patterns audit spanning stability patterns (Circuit Breaker, Retry, Rate Limiter, Bulkhead), integration patterns (Outbox, Saga), and GoF/SOLID/GRASP compliance.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code/blob/master/commands/audit-patterns.md",
+    stars: 96,
+    stackTags: ["design-patterns", "distributed-systems", "resilience"],
+  },
+  {
+    name: "/generate-patterns",
+    type: "command",
+    category: "distributed-architecture",
+    description:
+      "Generates resilience and distributed-systems patterns with tests — Circuit Breaker, Retry, Rate Limiter, Bulkhead, Outbox, Saga, Idempotent Consumer, Dead Letter Queue, and more.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code/blob/master/commands/generate-patterns.md",
+    stars: 96,
+    stackTags: ["design-patterns", "distributed-systems", "resilience"],
+  },
+  // Information security & compliance
+  {
+    name: "/security-scan",
+    type: "command",
+    category: "security-compliance",
+    description:
+      "Comprehensive security audit focused on the OWASP Top 10, dependency vulnerabilities, and security misconfigurations, with actionable remediation steps.",
+    repoUrl: "https://github.com/wshobson/commands/blob/main/tools/security-scan.md",
+    stars: 2613,
+    stackTags: ["owasp", "best-practices"],
+  },
+  {
+    name: "/audit-security",
+    type: "command",
+    category: "security-compliance",
+    description:
+      "OWASP Top 10 security audit covering input validation, injection, authentication, authorization, CSRF, XSS, XXE, SSRF, deserialization, and path traversal.",
+    repoUrl: "https://github.com/dykyi-roman/awesome-claude-code/blob/master/commands/audit-security.md",
+    stars: 96,
+    stackTags: ["owasp"],
+  },
+  {
+    name: "/hardening",
+    type: "command",
+    category: "security-compliance",
+    description:
+      "Applies security hardening to a codebase — HTTP security headers (CSP, HSTS, X-Frame-Options), input validation, and other defense-in-depth measures.",
+    repoUrl:
+      "https://github.com/rohitg00/awesome-claude-code-toolkit/blob/main/commands/security/hardening.md",
+    stars: 2468,
+    stackTags: ["owasp", "best-practices"],
+  },
+  // AWS serverless / cloud deployment
+  {
+    name: "/cost-optimize",
+    type: "command",
+    category: "cloud-deployment",
+    description:
+      "Analyzes cloud spending across AWS, Azure, and GCP and recommends cost-saving architecture changes and automated cost controls without sacrificing reliability.",
+    repoUrl: "https://github.com/wshobson/commands/blob/main/tools/cost-optimize.md",
+    stars: 2613,
+    stackTags: ["aws", "best-practices"],
+  },
+  {
+    name: "/deploy-checklist",
+    type: "command",
+    category: "cloud-deployment",
+    description:
+      "Generates a deployment checklist and configuration — pre-deployment gates (tests, security scan, build, docs), then environment-specific deploy steps.",
+    repoUrl: "https://github.com/wshobson/commands/blob/main/tools/deploy-checklist.md",
+    stars: 2613,
+    stackTags: ["best-practices", "ai-assisted-sdlc"],
+  },
+  // Banking & payment systems
+  {
+    name: "/compliance-check",
+    type: "command",
+    category: "fintech-payments",
+    description:
+      "Regulatory compliance audit for GDPR, HIPAA, SOC 2, and PCI-DSS — practical implementation guidance for compliance controls, automated monitoring, and audit-trail generation.",
+    repoUrl: "https://github.com/wshobson/commands/blob/main/tools/compliance-check.md",
+    stars: 2613,
+    stackTags: ["pci-dss", "best-practices"],
+  },
+  {
+    name: "/security-audit (fintech pack)",
+    type: "command",
+    category: "fintech-payments",
+    description:
+      "White/gray-box security audit command mapped to OWASP Top 10:2025, PCI DSS 4.0.1, ISO 27001:2022, and SOC 2 — includes a dedicated fintech compliance pack and CI-gating output.",
+    repoUrl: "https://github.com/afiqiqmal/claude-security-audit",
+    stars: 21,
+    stackTags: ["owasp", "pci-dss", "iso27001", "banking", "payments"],
+  },
+];
+
+export const catalogItems: CatalogItem[] = [
+  ...hooks,
+  ...plugins,
+  ...rag,
+  ...agents,
+  ...workflows,
+  ...commands,
+];

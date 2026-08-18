@@ -22,6 +22,8 @@ const categoryByType = {
   plugin: "pluginCategories",
   rag: "ragCategories",
   agent: "agentCategories",
+  workflow: "workflowCategories",
+  command: "commandCategories",
 };
 
 async function main() {
@@ -31,6 +33,8 @@ async function main() {
     pluginCategories,
     ragCategories,
     agentCategories,
+    workflowCategories,
+    commandCategories,
   } = await import(CATALOG_PATH);
   const { candidateItems } = await import(CANDIDATES_PATH);
 
@@ -39,6 +43,8 @@ async function main() {
     plugin: pluginCategories,
     rag: ragCategories,
     agent: agentCategories,
+    workflow: workflowCategories,
+    command: commandCategories,
   };
 
   const errors = [];
