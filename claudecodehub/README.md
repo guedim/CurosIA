@@ -2,17 +2,19 @@
 
 🔗 **Live site: [claudecodehub.vercel.app](https://claudecodehub.vercel.app/)**
 
-**ClaudeCodeHub** is a curated directory of open-source **hooks, plugins, RAG tools, and subagents for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks (security, formatting, notifications, logging, testing, automation, workflow), SDLC-focused plugins (planning, coding, code review, testing, CI/CD, deployment, monitoring, documentation), the most popular RAG/retrieval tooling for grounding Claude Code in your code and docs (code-retrieval MCP servers, vector databases, RAG frameworks, ingestion, embeddings/reranking, evaluation, memory), and a top-100 curated list of subagents (architecture, backend Python, security/compliance, AWS serverless, testing/QA, code review, data persistence, documentation, DevOps/CI-CD) — the Agentes tab is specifically curated for fintech/banking teams building PCI DSS-, OWASP-, and ISO 27001-conscious software on a DDD/clean/hexagonal-architecture, 100% Python, 100% AWS-serverless stack — each linking straight to its source (GitHub repo, or vendor site for the couple of API-only entries).
+**ClaudeCodeHub** is a curated directory of open-source **hooks, plugins, RAG tools, subagents, workflows, and slash commands for [Claude Code](https://claude.ai/code)** — a browsable gallery where you can discover community-built hooks (security, formatting, notifications, logging, testing, automation, workflow), SDLC-focused plugins (planning, coding, code review, testing, CI/CD, deployment, monitoring, documentation), the most popular RAG/retrieval tooling for grounding Claude Code in your code and docs (code-retrieval MCP servers, vector databases, RAG frameworks, ingestion, embeddings/reranking, evaluation, memory), a top-100 curated list of subagents (architecture, backend Python, security/compliance, AWS serverless, testing/QA, code review, data persistence, documentation, DevOps/CI-CD), a curated list of end-to-end Claude Code workflows/orchestration frameworks, and a curated list of individual Claude Code slash commands (SDLC productivity, architecture & design patterns, distributed architecture, information security & compliance, AWS serverless/cloud deployment, banking & payment systems) — the Agentes, Workflows, and Commands tabs are all specifically curated for fintech/banking teams building PCI DSS-, OWASP-, and ISO 27001-conscious software on a DDD/clean/hexagonal-architecture, 100% Python, 100% AWS-serverless stack — each linking straight to its source (GitHub repo, or vendor site for the couple of API-only entries).
 
 It's a static, no-backend Next.js site: every entry is a plain data record rendered as a card, so there's nothing to configure, no database, and no environment variables required to run it.
 
 ## Features
 
-- **Gallery view** — hooks, plugins, RAG tools, and agents rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
-- **Hooks / Plugins / RAG / Agentes toggle** — a tab switcher on the home page filters the gallery between the four catalogs.
-- **Category badges** — hooks are tagged with one of `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`; plugins are tagged by SDLC phase: `planning`, `coding`, `code-review`, `testing`, `ci-cd`, `deployment`, `monitoring`, `documentation`; RAG entries are tagged by function: `code-retrieval`, `vector-db`, `framework`, `ingestion`, `embeddings-rerank`, `evaluation`, `memory`; agents (the Agentes tab) are tagged by SDLC role: `architecture`, `backend-python`, `security-compliance`, `aws-serverless`, `testing-qa`, `code-review`, `data-persistence`, `documentation`, `devops-cicd`.
-- **Stack tag filter** — an optional, multi-select filter (chips below the Hooks/Plugins/RAG/Agentes toggle) for narrowing the gallery to entries relevant to a specific tech stack: `python`, `aws`, `aws-lambda`, `aws-api-gateway`, `aws-dynamodb`, `aws-s3`, `clean-architecture`, `hexagonal-architecture`, `distributed-systems`, `resilience`, `observability`, `banking`, `payments`, `ddd`, `design-patterns`, `enterprise-integration-patterns`, `owasp`, `pci-dss`, `iso27001`, `best-practices`, `ai-assisted-sdlc`. Entries without a matching tag just don't appear when a filter is active — `stackTags` is optional per entry.
+- **Gallery view** — hooks, plugins, RAG tools, agents, workflows, and commands rendered as cards in a responsive grid (1 column on mobile, up to 3 on desktop).
+- **Hooks / Plugins / RAG / Agentes / Workflows / Commands toggle** — a tab switcher on the home page filters the gallery between the six catalogs.
+- **Category badges** — hooks are tagged with one of `security`, `formatting`, `notifications`, `logging`, `testing`, `automation`, `workflow`; plugins are tagged by SDLC phase: `planning`, `coding`, `code-review`, `testing`, `ci-cd`, `deployment`, `monitoring`, `documentation`; RAG entries are tagged by function: `code-retrieval`, `vector-db`, `framework`, `ingestion`, `embeddings-rerank`, `evaluation`, `memory`; agents (the Agentes tab) are tagged by SDLC role: `architecture`, `backend-python`, `security-compliance`, `aws-serverless`, `testing-qa`, `code-review`, `data-persistence`, `documentation`, `devops-cicd`; workflows (the Workflows tab) are tagged by orchestration focus: `sdlc-orchestration`, `architecture-design`, `distributed-architecture`, `security-compliance`, `cloud-infrastructure`, `fintech-payments`; commands (the Commands tab) are tagged by focus: `sdlc-productivity`, `architecture-design`, `distributed-architecture`, `security-compliance`, `cloud-deployment`, `fintech-payments`.
+- **Stack tag filter** — an optional, multi-select filter (chips below the Hooks/Plugins/RAG/Agentes/Workflows/Commands toggle) for narrowing the gallery to entries relevant to a specific tech stack: `python`, `aws`, `aws-lambda`, `aws-api-gateway`, `aws-dynamodb`, `aws-s3`, `clean-architecture`, `hexagonal-architecture`, `distributed-systems`, `resilience`, `observability`, `banking`, `payments`, `ddd`, `design-patterns`, `enterprise-integration-patterns`, `owasp`, `pci-dss`, `iso27001`, `best-practices`, `ai-assisted-sdlc`. Entries without a matching tag just don't appear when a filter is active — `stackTags` is optional per entry.
 - **Agentes tab** — a top-100 curated list of real Claude Code subagents pulled from official Anthropic plugins and popular community collections (`wshobson/agents`, `VoltAgent/awesome-claude-code-subagents`, `Kaademos/secure-sdlc-agents`, `gensecaihq/Claude-Code-Subagents-Collection`, `aws-samples/sample-claude-code-agent-team`, and others), curated and tagged for a fintech/banking software organization: PCI DSS/OWASP/ISO 27001 compliance, DDD, clean/hexagonal architecture, a 100% Python codebase, and 100% AWS-serverless infrastructure (CloudFront, API Gateway, WAF, Lambda, DynamoDB, S3, IAM).
+- **Workflows tab** — a curated list of end-to-end Claude Code workflow and multi-agent orchestration frameworks (as opposed to single hooks or subagents), sourced from official Anthropic docs and popular repos with real GitHub traction (e.g. `ruvnet/claude-flow`, `rohitg00/awesome-claude-code-toolkit`, `CloudAI-X/claude-workflow-v2`, `aws-samples/sample-claude-code-agent-team`, `Kaademos/secure-sdlc-agents`, `wshobson/agents`), curated for the same fintech/banking, DDD/distributed-architecture, AWS-serverless, and information-security audience as the Agentes tab.
+- **Commands tab** — a curated list of individual Claude Code slash commands (single Markdown prompt files under `.claude/commands/`, now unified with Skills), linked to their specific source file rather than the whole repo — sourced from Anthropic's official commands docs and popular repos (`wshobson/commands`, `dykyi-roman/awesome-claude-code`, `rohitg00/awesome-claude-code-toolkit`, `afiqiqmal/claude-security-audit`), curated for the same fintech/banking, DDD/distributed-architecture, AWS-serverless, and information-security audience as Agentes/Workflows.
 - **Official + star badges** — cards optionally show a "✓ Official" badge (published by the tool's own vendor, or part of Anthropic's official plugin marketplace) and a GitHub star count, snapshotted at curation time via the GitHub API. The two API-only RAG entries (Voyage AI, Cohere Rerank) have no repo to star, so they show neither.
 - **Direct links** — every card links out to the entry's source — "View on GitHub" for GitHub-hosted entries, "Visit" for the couple of vendor-site-only RAG entries.
 - **Bold.co-inspired theme** — a dark, high-contrast UI with a red → navy → blue gradient brand mark, a sticky site header, and a gradient-hairline footer.
@@ -236,18 +238,18 @@ Verify the GitHub App itself is installed at `https://github.com/guedim/CurosIA/
 
 ## Weekly source discovery (ClaudeCodeHub Source Discovery)
 
-A scheduled GitHub Action searches the GitHub Search API every week for new hooks, plugins, RAG tools, and agents worth adding to the catalog — trusted-org and vendor repos, and community repos tagged with Claude Code-specific topics — and opens a PR with what it finds. It never touches `data/catalog.ts` or the live site directly; it only appends to a separate curation queue, `data/candidates.json`, which the gallery doesn't render.
+A scheduled GitHub Action searches the GitHub Search API every week for new hooks, plugins, RAG tools, agents, workflows, and commands worth adding to the catalog — trusted-org and vendor repos, and community repos tagged with Claude Code-specific topics — and opens a PR with what it finds. It never touches `data/catalog.ts` or the live site directly; it only appends to a separate curation queue, `data/candidates.json`, which the gallery doesn't render.
 
 **How it searches, in two passes:**
 
 - **Trusted orgs** — an explicit, reviewed allowlist in [`scripts/trusted-orgs.mjs`](scripts/trusted-orgs.mjs), each entry pinned to the org's immutable numeric GitHub id (not just its login, which can be squatted after a rename or deletion) — searched for repos whose name/description contains the exact phrase `"claude code"`, with results checked against that pinned id. No star minimum beyond a token floor (5★), since a trusted-org repo is worth surfacing even brand new. Adding an org here grants it this lowered bar, so treat it as a reviewable, security-relevant change, not just a catalog edit.
-- **Topic search** — GitHub topics like `claude-code`, `claude-code-hook`, `claude-code-plugin`, `claude-code-agent`, `claude-subagent`, `claude-skill`, etc. (including agent/subagent-specific topics so new subagent collections surface for the Agentes tab), combined with the same `"claude code"` phrase requirement, sorted by stars. Requires ≥50 stars and a push within the last 90 days, to filter out abandoned or barely-touched repos.
+- **Topic search** — GitHub topics like `claude-code`, `claude-code-hook`, `claude-code-plugin`, `claude-code-agent`, `claude-subagent`, `claude-skill`, `claude-code-workflow`, `claude-code-workflows`, `claude-code-command`, `claude-code-commands`, etc. (including agent/subagent-specific topics so new subagent collections surface for the Agentes tab, workflow-specific topics so new orchestration frameworks surface for the Workflows tab, and command-specific topics so new slash-command collections surface for the Commands tab), combined with the same `"claude code"` phrase requirement, sorted by stars. Requires ≥50 stars and a push within the last 90 days, to filter out abandoned or barely-touched repos.
 
 Both passes exclude forks, archived repos, and anything already present in `catalog.ts` or `candidates.json` (including previously `rejected` ones — rejections are remembered, not just deleted). Results above 150,000 stars are logged and skipped rather than trusted outright — GitHub topics can be added to any repo for visibility, and star counts can be farmed, so an implausible outlier is a spam/gaming signal, not proof of relevance.
 
 **Curating a PR:** for each entry in `data/candidates.json`,
 
-- **Good fit** — move it into the matching array in `data/catalog.ts` (`hooks`, `plugins`, `rag`, or `agents`), filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`. For repos that bundle multiple subagents (e.g. a `.claude/agents/` or `plugins/*/agents/` directory), consider adding each individually relevant subagent as its own `agents` entry rather than one entry for the whole repo — see [Adding a new hook, plugin, RAG tool, or agent](#adding-a-new-hook-plugin-rag-tool-or-agent-to-the-gallery) above.
+- **Good fit** — move it into the matching array in `data/catalog.ts` (`hooks`, `plugins`, `rag`, `agents`, `workflows`, or `commands`), filling in `type`, `category`, and optional `stackTags`/`official`, then delete it from `candidates.json`. For repos that bundle multiple subagents (e.g. a `.claude/agents/` or `plugins/*/agents/` directory), consider adding each individually relevant subagent as its own `agents` entry rather than one entry for the whole repo — see [Adding a new hook, plugin, RAG tool, agent, workflow, or command](#adding-a-new-hook-plugin-rag-tool-agent-workflow-or-command-to-the-gallery) above. Reserve the `workflows` array for end-to-end orchestration frameworks, and the `commands` array for individual slash commands linked to their specific file — not single hooks or whole subagent collections.
 - **Not a fit** — set its `status` to `"rejected"` (don't delete it) so the bot doesn't suggest the same repo again next week.
 
 > The first run is expected to surface a large batch — it's scanning everything that exists today, with no prior history to diff against. Weekly runs after that only surface repos that are genuinely new or newly matching, so the volume drops off fast.
@@ -505,9 +507,9 @@ Serves the build created by `npm run build` at [http://localhost:3000](http://lo
 
 > There is no test framework configured in this project.
 
-## Adding a new hook, plugin, RAG tool, or agent to the gallery
+## Adding a new hook, plugin, RAG tool, agent, workflow, or command to the gallery
 
-The catalog is a plain TypeScript array — no build step or database migration needed. To add an entry, add a new object to the `hooks`, `plugins`, `rag`, or `agents` array in [`data/catalog.ts`](data/catalog.ts) matching the `CatalogItem` interface:
+The catalog is a plain TypeScript array — no build step or database migration needed. To add an entry, add a new object to the `hooks`, `plugins`, `rag`, `agents`, `workflows`, or `commands` array in [`data/catalog.ts`](data/catalog.ts) matching the `CatalogItem` interface:
 
 ```ts
 // Hook
@@ -556,9 +558,33 @@ The catalog is a plain TypeScript array — no build step or database migration 
   official: false,
   stars: 42,
 }
+
+// Workflow
+{
+  name: "My Workflow",
+  type: "workflow",
+  category: "sdlc-orchestration", // sdlc-orchestration | architecture-design | distributed-architecture | security-compliance | cloud-infrastructure | fintech-payments
+  description: "A short description of the end-to-end workflow/orchestration pattern it implements.",
+  repoUrl: "https://github.com/owner/repo",
+  stackTags: ["ddd", "distributed-systems"], // optional — see the stack tag list above
+  official: false,
+  stars: 42,
+}
+
+// Command
+{
+  name: "/my-command",
+  type: "command",
+  category: "security-compliance", // sdlc-productivity | architecture-design | distributed-architecture | security-compliance | cloud-deployment | fintech-payments
+  description: "A short description of what the slash command does.",
+  repoUrl: "https://github.com/owner/repo/blob/main/path/to/command.md",
+  stackTags: ["owasp"], // optional — see the stack tag list above
+  official: false,
+  stars: 42,
+}
 ```
 
-Save the file and the new card will appear in the gallery (under the matching Hooks/Plugins/RAG/Agentes tab) automatically the next time the page renders. For the RAG tab specifically, keep the bar high — it's meant to surface the most popular, actively maintained tools in each category, not every RAG-adjacent repo on GitHub. The Agentes tab is curated for a fintech/banking, DDD/hexagonal-architecture, 100% Python, 100% AWS-serverless audience — favor real subagents (from official Anthropic plugins or popular community subagent collections) whose role maps cleanly onto architecture, security/compliance (PCI DSS, OWASP, ISO 27001), AWS serverless infra, or the rest of a Python SDLC, and tag them with the relevant `stackTags` even when the source repo itself is generic rather than fintech-specific.
+Save the file and the new card will appear in the gallery (under the matching Hooks/Plugins/RAG/Agentes/Workflows/Commands tab) automatically the next time the page renders. For the RAG tab specifically, keep the bar high — it's meant to surface the most popular, actively maintained tools in each category, not every RAG-adjacent repo on GitHub. The Agentes, Workflows, and Commands tabs are curated for a fintech/banking, DDD/hexagonal-architecture, 100% Python, 100% AWS-serverless audience — favor real subagents/workflows/commands (from official Anthropic docs/plugins or popular community collections) whose role maps cleanly onto architecture, security/compliance (PCI DSS, OWASP, ISO 27001), AWS serverless infra, distributed/microservices architecture, banking/payment systems, or the rest of a Python SDLC, and tag them with the relevant `stackTags` even when the source repo itself is generic rather than fintech-specific. The Workflows tab specifically favors end-to-end orchestration frameworks (multi-agent pipelines, full-SDLC plugin bundles) over single hooks or individual subagents. The Commands tab favors individual, atomic slash commands (one Markdown prompt file, linked to that specific file rather than the whole repo) over multi-step orchestration — those belong in Workflows.
 
 ## Claude Code skills
 

@@ -1629,30 +1629,6 @@
     "status": "pending"
   },
   {
-    "name": "shinpr/claude-code-workflows",
-    "repoUrl": "https://github.com/shinpr/claude-code-workflows",
-    "description": "Production-ready development workflows for Claude Code, powered by specialized AI agents.",
-    "stars": 666,
-    "topics": [
-      "agent-skills",
-      "agentic-ai",
-      "ai-agents",
-      "automation",
-      "claude-code",
-      "claude-code-plugin",
-      "code-quality",
-      "developer-tools",
-      "development-workflow",
-      "llm-orchestration",
-      "productivity",
-      "prompt-engineering",
-      "skills"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-09",
-    "status": "pending"
-  },
-  {
     "name": "quant-sentiment-ai/claude-equity-research",
     "repoUrl": "https://github.com/quant-sentiment-ai/claude-equity-research",
     "description": "🔌 Claude Code Plugin for institutional-grade equity research.   Install with /plugin marketplace add. Generates professional   buy/sell recommendations with comprehensive fundamental   analysis, technical indicators, and risk assessment. Educational    use only - not financial advice.",

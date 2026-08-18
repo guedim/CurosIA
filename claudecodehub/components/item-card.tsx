@@ -33,6 +33,15 @@ const categoryStyles: Record<Category, string> = {
   "testing-qa": "bg-cyan-100 text-cyan-800 ring-1 ring-inset ring-cyan-200",
   "data-persistence": "bg-blue-100 text-blue-800 ring-1 ring-inset ring-blue-200",
   "devops-cicd": "bg-teal-100 text-teal-800 ring-1 ring-inset ring-teal-200",
+  // workflow categories
+  "sdlc-orchestration": "bg-indigo-100 text-indigo-800 ring-1 ring-inset ring-indigo-200",
+  "architecture-design": "bg-purple-100 text-purple-800 ring-1 ring-inset ring-purple-200",
+  "distributed-architecture": "bg-cyan-100 text-cyan-800 ring-1 ring-inset ring-cyan-200",
+  "cloud-infrastructure": "bg-orange-100 text-orange-800 ring-1 ring-inset ring-orange-200",
+  "fintech-payments": "bg-rose-100 text-rose-800 ring-1 ring-inset ring-rose-200",
+  // command categories
+  "sdlc-productivity": "bg-sky-100 text-sky-800 ring-1 ring-inset ring-sky-200",
+  "cloud-deployment": "bg-amber-100 text-amber-800 ring-1 ring-inset ring-amber-200",
 };
 
 function formatStars(stars: number): string {
@@ -44,7 +53,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
   const isGitHub = item.repoUrl.includes("github.com");
 
   return (
-    <article className="group flex flex-col gap-3 rounded-[20px] border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-white hover:shadow-[0_0_0_1px_rgba(255,41,71,0.25),0_12px_30px_-12px_rgba(18,30,108,0.25)]">
+    <article className="group flex flex-col gap-3 rounded-[20px] border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-transparent hover:bg-surface-hover hover:shadow-[0_0_0_1px_rgba(255,41,71,0.25),0_12px_30px_-12px_rgba(18,30,108,0.25)]">
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-lg font-semibold text-foreground">{item.name}</h3>
         <span
@@ -73,7 +82,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
           {item.stackTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-white px-2 py-0.5 text-[11px] font-medium text-muted ring-1 ring-inset ring-border"
+              className="rounded-full bg-surface-hover px-2 py-0.5 text-[11px] font-medium text-muted ring-1 ring-inset ring-border"
             >
               {tag}
             </span>
@@ -84,7 +93,7 @@ export function ItemCard({ item }: { item: CatalogItem }) {
         href={item.repoUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm font-semibold text-bold-red transition-colors hover:text-bold-navy"
+        className="text-sm font-semibold text-bold-red transition-colors hover:text-bold-navy dark:hover:text-white"
       >
         {isGitHub ? `View ${item.name} on GitHub →` : `Visit ${item.name} →`}
       </a>

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Weekly source-discovery bot: searches the GitHub Search API for new
-// Claude Code hooks/plugins/RAG tools/agents and appends candidates to
-// data/candidates.json for human curation. Requires GITHUB_TOKEN in env.
+// Claude Code hooks/plugins/RAG tools/agents/workflows/commands and appends
+// candidates to data/candidates.json for human curation. Requires
+// GITHUB_TOKEN in env.
 //
 // Run with: node --experimental-strip-types scripts/find-new-sources.mjs
 
@@ -32,6 +33,10 @@ const TOPICS = [
   "claude-subagents",
   "claude-skill",
   "claude-skills",
+  "claude-code-workflow",
+  "claude-code-workflows",
+  "claude-code-command",
+  "claude-code-commands",
 ];
 // Both search strategies additionally require this exact phrase in the repo's
 // name/description — a topic tag or org membership alone is too easy to game
