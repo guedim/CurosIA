@@ -235,36 +235,6 @@
     "status": "pending"
   },
   {
-    "name": "hesreallyhim/awesome-claude-code",
-    "repoUrl": "https://github.com/hesreallyhim/awesome-claude-code",
-    "description": "A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code, the undisputed champion of coding companions, from the unstoppable team at Anthropic PBC. A delectable showcase of top tier skills, ambidextrous agents, scintillating status lines, top notch developer tooling, and also we have plugins",
-    "stars": 51939,
-    "topics": [
-      "agent-skills",
-      "agentic-code",
-      "agentic-coding",
-      "ai-workflow-optimization",
-      "ai-workflows",
-      "anthropic",
-      "anthropic-claude",
-      "awesome",
-      "awesome-claude-code",
-      "awesome-list",
-      "awesome-lists",
-      "awesome-resources",
-      "claude",
-      "claude-code",
-      "coding-agent",
-      "coding-agents",
-      "coding-assistant",
-      "coding-assistants",
-      "llm"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-09",
-    "status": "pending"
-  },
-  {
     "name": "router-for-me/CLIProxyAPI",
     "repoUrl": "https://github.com/router-for-me/CLIProxyAPI",
     "description": "Wrap Antigravity, ChatGPT Codex, Claude Code, Grok Build as an OpenAI/Gemini/Claude/Codex compatible API service, allowing you to enjoy the free Gemini 3.1 Pro, GPT 5.6 Series, Grok 4.5, Claude model through API",
@@ -488,21 +458,6 @@
       "job-search",
       "latex",
       "resume"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-09",
-    "status": "pending"
-  },
-  {
-    "name": "davila7/claude-code-templates",
-    "repoUrl": "https://github.com/davila7/claude-code-templates",
-    "description": "CLI tool for configuring and monitoring Claude Code",
-    "stars": 30158,
-    "topics": [
-      "anthropic",
-      "anthropic-claude",
-      "claude",
-      "claude-code"
     ],
     "foundVia": "topic-search",
     "discoveredAt": "2026-08-09",
@@ -1304,25 +1259,6 @@
     "status": "pending"
   },
   {
-    "name": "kenryu42/cc-safety-net",
-    "repoUrl": "https://github.com/kenryu42/cc-safety-net",
-    "description": "A coding agent CLI hook that acts as a safety net, catching destructive git and filesystem commands and secret file access before they execute. Supports Claude Code, Codex, Gemini CLI, Copilot CLI, Antigravity CLI, Kimi Code, OpenCode, Pi, Cursor, and Amp Code.",
-    "stars": 1475,
-    "topics": [
-      "claude",
-      "claude-code",
-      "claude-code-plugin",
-      "codex",
-      "destructive-commands",
-      "kimi-code",
-      "pi-extension",
-      "security"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-09",
-    "status": "pending"
-  },
-  {
     "name": "Prat011/awesome-llm-skills",
     "repoUrl": "https://github.com/Prat011/awesome-llm-skills",
     "description": "A curated list of awesome LLM and AI Agent Skills, resources and tools for customising AI Agent workflows - that works with Claude Code, Codex, Gemini CLI and your custom AI Agents",
@@ -1971,27 +1907,6 @@
       "phoenix",
       "phoenix-framework",
       "tidewave",
-      "vibe-coding"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-09",
-    "status": "pending"
-  },
-  {
-    "name": "jqueryscript/awesome-claude-code",
-    "repoUrl": "https://github.com/jqueryscript/awesome-claude-code",
-    "description": "A curated list of awesome tools, IDE integrations, frameworks, and other resources for developers working with Anthropic's Claude Code.",
-    "stars": 492,
-    "topics": [
-      "awesome-list",
-      "awesome-lists",
-      "claude",
-      "claude-code",
-      "claude-code-plugin",
-      "claude-skills",
-      "cli",
-      "code-generation",
-      "coding-agents",
       "vibe-coding"
     ],
     "foundVia": "topic-search",
@@ -2666,29 +2581,6 @@
       "claude-code-plugins-marketplace",
       "handbook",
       "plugin"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-09",
-    "status": "pending"
-  },
-  {
-    "name": "ghy196830-del/agent-watch-approve",
-    "repoUrl": "https://github.com/ghy196830-del/agent-watch-approve",
-    "description": "⌚ 在 Apple Watch 上批准 Claude Code / Codex 的危险操作,任务完成自动提醒 | Approve your AI coding agent's risky actions from your Apple Watch, get buzzed when tasks finish",
-    "stars": 117,
-    "topics": [
-      "ai-agent",
-      "apple-watch",
-      "claude-code",
-      "claude-code-hooks",
-      "codex",
-      "devtools",
-      "hooks",
-      "notifications",
-      "ntfy",
-      "pushcut",
-      "remote-approval",
-      "vibe-coding"
     ],
     "foundVia": "topic-search",
     "discoveredAt": "2026-08-09",
@@ -3377,27 +3269,6 @@
       "pdf-tools",
       "pdf-viewer",
       "skill-generator"
-    ],
-    "foundVia": "topic-search",
-    "discoveredAt": "2026-08-17",
-    "status": "pending"
-  },
-  {
-    "name": "ccplugins/awesome-claude-code-plugins",
-    "repoUrl": "https://github.com/ccplugins/awesome-claude-code-plugins",
-    "description": "Awesome Claude Code plugins — a curated list of slash commands, subagents, MCP servers, and hooks for Claude Code",
-    "stars": 916,
-    "topics": [
-      "awesome-claude-code",
-      "awesome-list",
-      "awesome-plugins",
-      "awesome-resources",
-      "claude-code",
-      "claude-code-commands",
-      "claude-code-hooks",
-      "claude-code-mcp",
-      "claude-code-plugin",
-      "claude-code-subagents"
     ],
     "foundVia": "topic-search",
     "discoveredAt": "2026-08-17",

@@ -303,6 +303,16 @@ const hooks: CatalogItem[] = [
     stars: 112,
     stackTags: ["owasp", "banking"],
   },
+  {
+    name: "cc-safety-net",
+    type: "hook",
+    category: "security",
+    description:
+      "Cross-agent safety net that catches destructive git and filesystem commands plus secret-file access before they execute — works across Claude Code, Codex, Gemini CLI, and more.",
+    repoUrl: "https://github.com/kenryu42/cc-safety-net",
+    stars: 1475,
+    stackTags: ["owasp", "best-practices"],
+  },
 
   // Formatting
   {
@@ -385,6 +395,15 @@ const hooks: CatalogItem[] = [
       "Cross-platform desktop notifications for Claude Code, Codex, and Gemini CLI, installable via Homebrew, npm, or a one-line script.",
     repoUrl: "https://github.com/mylee04/code-notify",
     stars: 280,
+  },
+  {
+    name: "Apple Watch Approval Hook",
+    type: "hook",
+    category: "notifications",
+    description:
+      "Sends risky Claude Code and Codex actions to an Apple Watch for remote approval, and buzzes the watch when a task finishes, via ntfy/Pushcut.",
+    repoUrl: "https://github.com/ghy196830-del/agent-watch-approve",
+    stars: 117,
   },
 
   // Logging
@@ -1925,6 +1944,52 @@ const plugins: CatalogItem[] = [
     repoUrl: "https://github.com/JoelLewis/finance_skills",
     stars: 164,
     stackTags: ["banking", "payments"],
+  },
+  {
+    name: "cc-marketplace",
+    type: "plugin",
+    category: "coding",
+    description:
+      "Community marketplace repo for discovering and installing Claude Code plugins through the built-in plugin marketplace system.",
+    repoUrl: "https://github.com/ananddtyagi/cc-marketplace",
+    stars: 688,
+  },
+  {
+    name: "Claude Code Templates (CLI)",
+    type: "plugin",
+    category: "monitoring",
+    description:
+      "CLI tool for configuring and monitoring Claude Code — installs templates, hooks, and agents, and ships a real-time usage/analytics dashboard.",
+    repoUrl: "https://github.com/davila7/claude-code-templates",
+    stars: 30275,
+    stackTags: ["observability"],
+  },
+  {
+    name: "Awesome Claude Code",
+    type: "plugin",
+    category: "documentation",
+    description:
+      "The most-starred curated list of Claude Code resources — commands, workflows, hooks, plugins, and IDE integrations, actively maintained and organized by category.",
+    repoUrl: "https://github.com/hesreallyhim/awesome-claude-code",
+    stars: 52503,
+  },
+  {
+    name: "Awesome Claude Code Plugins",
+    type: "plugin",
+    category: "documentation",
+    description:
+      "Curated list of Claude Code plugins — slash commands, subagents, MCP servers, and hooks — organized by use case.",
+    repoUrl: "https://github.com/ccplugins/awesome-claude-code-plugins",
+    stars: 916,
+  },
+  {
+    name: "Awesome Claude Code (jqueryscript)",
+    type: "plugin",
+    category: "documentation",
+    description:
+      "Curated list of tools, IDE integrations, frameworks, and other resources for developers working with Claude Code.",
+    repoUrl: "https://github.com/jqueryscript/awesome-claude-code",
+    stars: 501,
   },
 ];
 
