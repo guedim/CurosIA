@@ -2,6 +2,8 @@
 
 A single-file, mobile-first web game that helps kids practice for the **Cambridge English A1 Movers** exam (Listening, Reading & Writing, Speaking) through short, playful mini-games. Built as one self-contained `index.html` — no build step, no backend, no external assets.
 
+**Live demo:** [movers-adventure.vercel.app](https://movers-adventure.vercel.app)
+
 ## What it does
 
 - **3 unlockable levels** ("worlds"), each bundling a set of mini-games. Kids earn ⭐ stars by playing games; earning enough stars unlocks the next level.
