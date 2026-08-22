@@ -17,6 +17,7 @@ Este repositorio centraliza mis laboratorios, cursos y experimentos prácticos c
 | [**Platzi Webapp con Windsurf**](./platzi-webapp-windsurf) | Implementación de una webapp utilizando windsurf. |
 | [**Platzi Cursor General MCP**](./platzi-curos-general-mcp) | Implementación de protocolos MCP (Model Context Protocol) para extender las capacidades de Cursor. |
 | [**Platzi Cursor Api's de LLM's**](./platzi-apis-llms) | Implementar llamado a API's de OpenAPI, Claude, Gemini, para construir un ChatGPT con varios modelos. |
+| [**Curso de LangChain**](./langchain) | Apuntes y ejercicios del curso de LangChain: ejemplos de integración con OpenAI y Google Gemini usando la misma interfaz. |
 | [**IA Tools: Deploy to Vercel**](./platzi-ia-tools-deploy-to-vercel) | Proyectos de IA listos para producción con despliegue automatizado en Vercel. |
 | [**OCR Lectura Token**](./ocr_lectura_token_autenticacion) | Implementación de reconocimiento óptico de caracteres para extracción de tokens de autenticación. |
 | [**Platzi Supabase Avanzado**](./platzi-supabase) | Suplatzigram: app estilo Instagram con Next.js y Supabase (auth, base de datos, storage), del Curso de Supabase Avanzado. |
