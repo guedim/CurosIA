@@ -1,0 +1,27 @@
+# Secrets / credentials
+.env
+.env.*
+!.env.example
+*credentials*.json
+*.pem
+*.key
+secrets.*
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+build/
+dist/
+*.egg-info/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
