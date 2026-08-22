@@ -25,3 +25,7 @@ dist/
 .vscode/
 .idea/
 .DS_Store
+
+# Local tooling state
+.claude/
+.full-review/

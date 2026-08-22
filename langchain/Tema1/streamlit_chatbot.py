@@ -1,9 +1,10 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
-from langchain_core.prompts import PromptTemplate
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from dotenv import load_dotenv
 
+MAX_TURNS = 10  # ventana de historial enviada al modelo (turnos usuario+asistente)
 
 load_dotenv()
 
@@ -16,36 +17,36 @@ with st.sidebar:
     st.header("Configuración")
     temperature = st.slider("Temperatura", 0.0, 1.0, 0.5, 0.1)
     model_name = st.selectbox("Modelo", ["gpt-3.5-turbo", "gpt-4", "gpt-4o-mini"])
-    
-    # Recrear el modelo con nuevos parámetros
-    chat_model = ChatOpenAI(model=model_name, temperature=temperature)
+
+
+@st.cache_resource
+def get_chat_model(model_name: str, temperature: float) -> ChatOpenAI:
+    return ChatOpenAI(model=model_name, temperature=temperature)
+
+
+chat_model = get_chat_model(model_name, temperature)
 
 # Inicializar el historial de mensajes en session_state
 if "mensajes" not in st.session_state:
     st.session_state.mensajes = []
 
-# Crear el template de prompt con comportamiento específico
-prompt_template = PromptTemplate(
-    input_variables=["mensaje", "historial"],
-    template="""Eres un asistente útil y amigable llamado ChatBot Pro. 
-
-Historial de conversación:
-{historial}
-
-Responde de manera clara y concisa a la siguiente pregunta: {mensaje}"""
-)
+# Prompt tipado: el sistema y el usuario quedan separados del historial,
+# que se pasa como mensajes reales en vez de interpolarse como texto.
+prompt_template = ChatPromptTemplate.from_messages([
+    ("system", "Eres un asistente útil y amigable llamado ChatBot Pro. "
+               "Responde de manera clara y concisa."),
+    MessagesPlaceholder("historial"),
+    ("human", "{mensaje}"),
+])
 
 # Crear cadena usando LCEL (LangChain Expression Language)
 cadena = prompt_template | chat_model
 
 # Renderizar historial existente
 for msg in st.session_state.mensajes:
-    if isinstance(msg, SystemMessage):
-        continue  # no mostrar mensajes del sistema al usuario
-    
     role = "assistant" if isinstance(msg, AIMessage) else "user"
     with st.chat_message(role):
-        st.markdown(msg.content)
+        st.markdown(msg.text)
 
 if st.button("🗑️ Nueva conversación"):
     st.session_state.mensajes = []
@@ -65,9 +66,10 @@ if pregunta:
             response_placeholder = st.empty()
             full_response = ""
 
-            # Streaming de la respuesta
-            for chunk in cadena.stream({"mensaje": pregunta, "historial": st.session_state.mensajes}):
-                full_response += chunk.content
+            # Streaming de la respuesta (solo se envían los últimos MAX_TURNS turnos)
+            historial = st.session_state.mensajes[-MAX_TURNS * 2:]
+            for chunk in cadena.stream({"mensaje": pregunta, "historial": historial}):
+                full_response += chunk.text
                 response_placeholder.markdown(full_response + "▌")
             
             response_placeholder.markdown(full_response)
