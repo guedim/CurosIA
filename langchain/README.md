@@ -10,12 +10,16 @@ langchain/
 ├── .env.example                   # Plantilla de variables de entorno
 ├── .gitignore
 ├── requirements.txt               # Dependencias de Python del proyecto
-└── Tema1/
-    ├── hello_world_openai.py      # Ejemplo básico usando OpenAI (gpt-4o-mini)
-    ├── hello_world_avanzado.py    # Igual que el anterior, pero usando PromptTemplate + LCEL
-    ├── hello_world_gemini.py      # Mismo ejemplo usando Google Gemini (gemini-3.6-flash)
-    └── streamlit_chatbot.py       # Chatbot con interfaz web usando Streamlit
+├── Tema1/
+│   ├── hello_world_openai.py      # Ejemplo básico usando OpenAI (gpt-4o-mini)
+│   ├── hello_world_avanzado.py    # Igual que el anterior, pero usando PromptTemplate + LCEL
+│   ├── hello_world_gemini.py      # Mismo ejemplo usando Google Gemini (gemini-3.6-flash)
+│   └── streamlit_chatbot.py       # Chatbot con interfaz web usando Streamlit
+└── Tema2/
+    └── Runnables.py                # Introducción a la interfaz Runnable (LCEL) con RunnableLambda
 ```
+
+### Tema1
 
 - **`Tema1/hello_world_openai.py`**: primer contacto con LangChain. Carga las variables de entorno, instancia un modelo `ChatOpenAI` y le hace una pregunta simple, imprimiendo la respuesta.
 - **`Tema1/hello_world_avanzado.py`**: mismo caso de uso que `hello_world_openai.py`, pero en lugar de llamar a `.invoke()` directamente sobre el modelo, construye un `PromptTemplate` y lo encadena con el operador `|` (LCEL: `chain = plantilla | chat`).
@@ -24,6 +28,10 @@ langchain/
   > **Nota:** este script incluye un monkeypatch de `socket.getaddrinfo` que fuerza la resolución IPv4. Es un workaround para un problema de red local (algunas redes resuelven el registro AAAA de la API de Google, pero el `connect()` por IPv6 se queda colgado indefinidamente). Si tu conexión no tiene ese problema, el bloque es inofensivo y puedes ignorarlo.
 
 - **`Tema1/streamlit_chatbot.py`**: chatbot con interfaz web construido con Streamlit + LangChain (LCEL), con historial de conversación (acotado a los últimos turnos) y streaming de respuestas.
+
+### Tema2
+
+- **`Tema2/Runnables.py`**: introduce la interfaz `Runnable` de LangChain (LCEL) usando `RunnableLambda` para envolver funciones Python normales como pasos de una cadena. Define dos runnables (uno que formatea un número como texto y otro que duplica ese texto en una lista) y los encadena con el operador `|`, mostrando cómo componer transformaciones arbitrarias sin necesidad de un LLM.
 
 ## Requisitos previos
 
@@ -81,6 +89,7 @@ Ejecuta cualquiera de los ejemplos desde la raíz del proyecto:
 python Tema1/hello_world_openai.py
 python Tema1/hello_world_avanzado.py
 python Tema1/hello_world_gemini.py
+python Tema2/Runnables.py
 ```
 
 El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
