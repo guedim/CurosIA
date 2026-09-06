@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuración del modelo
-llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash-lite", temperature=0)
 
 def extract_text(content):
     """Normaliza el content de la respuesta (str en OpenAI, list de partes en Gemini)"""
