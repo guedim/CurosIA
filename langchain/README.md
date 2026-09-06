@@ -74,6 +74,14 @@ cd cv_analyzer
 streamlit run app.py
 ```
 
+> **Importante:** ejecútalo con `streamlit run`, no con `python app.py`. Streamlit necesita su propio runner para levantar el servidor web; si lo ejecutas con `python` verás el error `missing ScriptRunContext` y no se abrirá nada en el navegador.
+
+Si no tienes `streamlit` en el PATH (por ejemplo, con el entorno virtual desactivado), invócalo desde el venv:
+
+```bash
+../.venv/bin/streamlit run app.py
+```
+
 ## Requisitos previos
 
 - Python 3.14 (o compatible)
