@@ -65,7 +65,7 @@ Mini-proyecto independiente (con su propia app Streamlit) que analiza hojas de v
 - **`cv_analyzer/ui/streamlit_ui.py`**: interfaz Streamlit con dos columnas (entrada: subir PDF + descripción del puesto; resultado: perfil del candidato, habilidades, fortalezas, áreas de mejora y recomendación final según el porcentaje de ajuste).
 - **`cv_analyzer/app.py`**: punto de entrada que arranca la interfaz de `ui/streamlit_ui.py`.
 
-> **Nota:** a diferencia de los ejemplos de `Tema1`/`Tema2`, este mini-proyecto usa `ChatOpenAI` (requiere `OPENAI_API_KEY`) y depende de `PyPDF2`, que no está listado en el `requirements.txt` raíz — instálalo aparte con `pip install PyPDF2` antes de ejecutarlo.
+> **Nota:** a diferencia de los ejemplos de `Tema1`/`Tema2`, este mini-proyecto usa `ChatOpenAI` (requiere `OPENAI_API_KEY`).
 
 Para ejecutarlo:
 
@@ -121,6 +121,7 @@ GOOGLE_API_KEY=tu_api_key_de_google
 | `langchain-google-genai` | Integración de LangChain con los modelos de Google Gemini (`ChatGoogleGenerativeAI`) |
 | `python-dotenv` | Carga las variables de entorno del archivo `.env` |
 | `streamlit` | Framework para construir la interfaz web del chatbot |
+| `PyPDF2` | Extracción de texto desde archivos PDF (usado en `cv_analyzer`) |
 
 ## Uso
 
