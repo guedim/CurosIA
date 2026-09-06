@@ -1,5 +1,5 @@
 from langchain_core.runnables import RunnableLambda, RunnableParallel
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 import json
 from dotenv import load_dotenv
 
@@ -7,7 +7,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuración del modelo
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0)
+
+def extract_text(content):
+    """Normaliza el content de la respuesta (str en OpenAI, list de partes en Gemini)"""
+    if isinstance(content, list):
+        return "".join(
+            part.get("text", "") if isinstance(part, dict) else str(part)
+            for part in content
+        )
+    return content
 
 # Preprocesador: limpia espacios y limita a 500 caracteres
 def preprocess_text(text):
@@ -21,7 +30,7 @@ def generate_summary(text):
     """Genera un resumen conciso del texto"""
     prompt = f"Resume en una sola oración: {text}"
     response = llm.invoke(prompt)
-    return response.content
+    return extract_text(response.content)
 
 summary_brach = RunnableLambda(generate_summary)
 
@@ -35,8 +44,11 @@ def analyze_sentiment(text):
     Texto: {text}"""
     
     response = llm.invoke(prompt)
+    texto = extract_text(response.content).strip()
+    if texto.startswith("```"):
+        texto = texto.strip("`").removeprefix("json").strip()
     try:
-        return json.loads(response.content)
+        return json.loads(texto)
     except json.JSONDecodeError:
         return {"sentimiento": "neutro", "razon": "Error en análisis"}
     
@@ -60,3 +72,13 @@ parallel_analysis = RunnableParallel({
 
 # Cadena completa
 chain = preprocessor | parallel_analysis | merger
+
+
+reviews_batch = [
+    "Excelente producto, muy satisfecho con la compra",
+    "Terrible calidad, no lo recomiendo para nada",
+    "Está bien, cumple su función básica pero nada especial"
+]
+
+resultado_batch = chain.batch(reviews_batch)
+print(resultado_batch)

@@ -16,7 +16,8 @@ langchain/
 │   ├── hello_world_gemini.py      # Mismo ejemplo usando Google Gemini (gemini-3.6-flash)
 │   └── streamlit_chatbot.py       # Chatbot con interfaz web usando Streamlit
 └── Tema2/
-    └── Runnables.py                # Introducción a la interfaz Runnable (LCEL) con RunnableLambda
+    ├── Runnables.py                # Introducción a la interfaz Runnable (LCEL) con RunnableLambda
+    └── analisis_sentimientos_parte1.py  # Pipeline con RunnableParallel: resumen + análisis de sentimiento
 ```
 
 ### Tema1
@@ -32,6 +33,7 @@ langchain/
 ### Tema2
 
 - **`Tema2/Runnables.py`**: introduce la interfaz `Runnable` de LangChain (LCEL) usando `RunnableLambda` para envolver funciones Python normales como pasos de una cadena. Define dos runnables (uno que formatea un número como texto y otro que duplica ese texto en una lista) y los encadena con el operador `|`, mostrando cómo componer transformaciones arbitrarias sin necesidad de un LLM.
+- **`Tema2/analisis_sentimientos_parte1.py`**: pipeline más avanzado que combina un preprocesador de texto, un `RunnableParallel` con dos ramas (resumen y análisis de sentimiento estructurado en JSON usando `ChatGoogleGenerativeAI`) y un paso final que combina ambos resultados. Incluye `extract_text` para normalizar la respuesta del modelo (Gemini puede devolver `content` como lista de partes en lugar de string) y procesa varias reviews de ejemplo con `chain.batch(...)`.
 
 ## Requisitos previos
 
@@ -90,6 +92,7 @@ python Tema1/hello_world_openai.py
 python Tema1/hello_world_avanzado.py
 python Tema1/hello_world_gemini.py
 python Tema2/Runnables.py
+python Tema2/analisis_sentimientos_parte1.py
 ```
 
 El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
