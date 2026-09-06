@@ -10,6 +10,13 @@ langchain/
 ├── .env.example                   # Plantilla de variables de entorno
 ├── .gitignore
 ├── requirements.txt               # Dependencias de Python del proyecto
+├── cv_analyzer/                   # Mini-proyecto: analizador de CVs con IA (Streamlit + LangChain)
+│   ├── app.py                     # Punto de entrada de la app Streamlit
+│   ├── models/cv_model.py         # Modelo Pydantic `AnalisisCV` (salida estructurada del análisis)
+│   ├── prompts/cv_prompts.py      # System/Human prompts del "reclutador experto"
+│   ├── services/pdf_processor.py  # Extracción de texto desde un PDF con PyPDF2
+│   ├── services/cv_evaluator.py   # Cadena LCEL: prompt | modelo con salida estructurada
+│   └── ui/streamlit_ui.py         # Interfaz Streamlit: carga de CV, descripción del puesto y resultados
 ├── Tema1/
 │   ├── hello_world_openai.py      # Ejemplo básico usando OpenAI (gpt-4o-mini)
 │   ├── hello_world_avanzado.py    # Igual que el anterior, pero usando PromptTemplate + LCEL
@@ -22,7 +29,8 @@ langchain/
     ├── chat_prompt_template.py     # ChatPromptTemplate con mensajes system/human
     ├── message_placeholders.py     # MessagesPlaceholder para inyectar historial de conversación
     ├── rol_prompt_templates.py     # SystemMessagePromptTemplate + HumanMessagePromptTemplate con varias variables
-    └── output_parsers_parte1.py    # Modelo Pydantic como base para parsear salidas estructuradas
+    ├── output_parsers_parte1.py    # Modelo Pydantic como base para parsear salidas estructuradas
+    └── output_parsers_parte2.py    # with_structured_output con Gemini y un Enum para restringir valores
 ```
 
 ### Tema1
@@ -44,6 +52,27 @@ langchain/
 - **`Tema2/message_placeholders.py`**: muestra cómo usar `MessagesPlaceholder` para inyectar dinámicamente un historial de conversación (lista de `HumanMessage`/`AIMessage`) dentro de un `ChatPromptTemplate`, manteniendo el contexto de turnos anteriores.
 - **`Tema2/rol_prompt_templates.py`**: combina `SystemMessagePromptTemplate` y `HumanMessagePromptTemplate` (cada uno con varias variables) dentro de un `ChatPromptTemplate`, simulando un asistente con rol, especialidad y tono configurables.
 - **`Tema2/output_parsers_parte1.py`**: primer paso hacia los *output parsers* de LangChain: define un modelo `Usuario` con Pydantic (`BaseModel`) y muestra cómo valida y castea datos crudos (por ejemplo, castea el `id` de string a int) al construir la instancia.
+- **`Tema2/output_parsers_parte2.py`**: usa `with_structured_output` sobre `ChatGoogleGenerativeAI` para forzar que el modelo devuelva un objeto `AnalisisTexto` (resumen + sentimiento) validado con Pydantic. El campo `sentimiento` es un `Enum` (`Positivo`, `Negativo`, `Neutro`), por lo que el modelo solo puede devolver uno de esos tres valores.
+
+### cv_analyzer
+
+Mini-proyecto independiente (con su propia app Streamlit) que analiza hojas de vida en PDF y evalúa qué tan bien se ajusta un candidato a una descripción de puesto, usando LangChain + `with_structured_output`.
+
+- **`cv_analyzer/models/cv_model.py`**: define `AnalisisCV`, el modelo Pydantic que estructura la salida del análisis (nombre, años de experiencia, habilidades clave, educación, fortalezas, áreas de mejora y porcentaje de ajuste al puesto).
+- **`cv_analyzer/prompts/cv_prompts.py`**: construye un `ChatPromptTemplate` a partir de un `SystemMessagePromptTemplate` (rol de reclutador experto con sus criterios de evaluación) y un `HumanMessagePromptTemplate` (instrucciones para analizar el CV frente a la descripción del puesto).
+- **`cv_analyzer/services/pdf_processor.py`**: usa `PyPDF2` para extraer el texto de cada página del PDF subido, concatenándolo en un único string.
+- **`cv_analyzer/services/cv_evaluator.py`**: arma la cadena LCEL `chat_prompt | modelo.with_structured_output(AnalisisCV)` usando `ChatOpenAI` (`gpt-4o-mini`) y expone `evaluar_candidato(texto_cv, descripcion_puesto)`.
+- **`cv_analyzer/ui/streamlit_ui.py`**: interfaz Streamlit con dos columnas (entrada: subir PDF + descripción del puesto; resultado: perfil del candidato, habilidades, fortalezas, áreas de mejora y recomendación final según el porcentaje de ajuste).
+- **`cv_analyzer/app.py`**: punto de entrada que arranca la interfaz de `ui/streamlit_ui.py`.
+
+> **Nota:** a diferencia de los ejemplos de `Tema1`/`Tema2`, este mini-proyecto usa `ChatOpenAI` (requiere `OPENAI_API_KEY`) y depende de `PyPDF2`, que no está listado en el `requirements.txt` raíz — instálalo aparte con `pip install PyPDF2` antes de ejecutarlo.
+
+Para ejecutarlo:
+
+```bash
+cd cv_analyzer
+streamlit run app.py
+```
 
 ## Requisitos previos
 
@@ -108,6 +137,7 @@ python Tema2/chat_prompt_template.py
 python Tema2/message_placeholders.py
 python Tema2/rol_prompt_templates.py
 python Tema2/output_parsers_parte1.py
+python Tema2/output_parsers_parte2.py
 ```
 
 El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
