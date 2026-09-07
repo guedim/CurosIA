@@ -112,6 +112,23 @@ GOOGLE_API_KEY=tu_api_key_de_google
 
 > El archivo `.env` ya está incluido en `.gitignore`, así que las credenciales nunca se suben al repositorio remoto. También puedes copiar `.env.example` como punto de partida: `cp .env.example .env`.
 
+### Google Drive (`credentials.json`)
+
+Los ejemplos que usan `GoogleDriveLoader` (ver `Tema3/google_drive_loader.py`) necesitan un archivo `credentials.json` de OAuth 2.0 propio, generado desde Google Cloud Console:
+
+1. Entra a [Google Cloud Console](https://console.cloud.google.com/) y crea (o selecciona) un proyecto.
+2. Habilita la **Google Drive API** para ese proyecto (`APIs y servicios` → `Biblioteca`).
+3. Configura la **pantalla de consentimiento OAuth** (`APIs y servicios` → `Pantalla de consentimiento OAuth`), tipo "Externo" y agrégate como usuario de prueba.
+4. Crea credenciales OAuth (`APIs y servicios` → `Credenciales` → `Crear credenciales` → `ID de cliente de OAuth`), tipo de aplicación **"Aplicación de escritorio"**.
+5. Descarga el JSON generado y guárdalo en el proyecto, por ejemplo como `Tema3/credentials.json`.
+6. Apunta las variables en tu `.env` a las rutas de esos archivos:
+   ```
+   GOOGLE_DRIVE_CREDENTIALS_PATH=Tema3/credentials.json
+   GOOGLE_DRIVE_TOKEN_PATH=Tema3/token.json
+   ```
+
+`token.json` se genera solo la primera vez que ejecutas el script (te pedirá autorizar en el navegador). Tanto `credentials.json` como `token.json` quedan cubiertos por `.gitignore` (`*credentials*.json`, `*token*.json`) y nunca deben subirse al repositorio.
+
 ## Notas de seguridad
 
 - **Permisos de `.env`**: restringe el acceso en máquinas compartidas:
@@ -131,6 +148,9 @@ GOOGLE_API_KEY=tu_api_key_de_google
 | `python-dotenv` | Carga las variables de entorno del archivo `.env` |
 | `streamlit` | Framework para construir la interfaz web del chatbot |
 | `PyPDF2` | Extracción de texto desde archivos PDF (usado en `cv_analyzer`) |
+| `google-api-python-client` | Cliente oficial para consumir APIs de Google (Drive, Docs, etc.) |
+| `google-auth-httplib2` | Adaptador de autenticación de Google para `httplib2` |
+| `google-auth-oauthlib` | Flujo de autenticación OAuth 2.0 de Google |
 
 ## Uso
 

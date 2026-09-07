@@ -4,6 +4,10 @@ langchain-google-genai==4.3.5
 langchain-community==0.4.2
 beautifulsoup4==4.15.0
 pypdf==6.17.0
+google-api-python-client==2.200.0
+google-auth-httplib2==0.4.2
+google-auth-oauthlib==1.4.1
+langchain-google-community==5.0.0
 python-dotenv==1.2.3
 streamlit==1.62.0
 PyPDF2==3.0.1

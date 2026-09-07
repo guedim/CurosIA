@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 *credentials*.json
+*token*.json
 *.pem
 *.key
 secrets.*
