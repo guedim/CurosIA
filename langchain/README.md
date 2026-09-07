@@ -127,6 +127,7 @@ GOOGLE_API_KEY=tu_api_key_de_google
 | `langchain-core` | Núcleo de LangChain: abstracciones base (mensajes, prompts, modelos, etc.) |
 | `langchain-openai` | Integración de LangChain con los modelos de OpenAI (`ChatOpenAI`) |
 | `langchain-google-genai` | Integración de LangChain con los modelos de Google Gemini (`ChatGoogleGenerativeAI`) |
+| `langchain-community` | Integraciones y utilidades de la comunidad (loaders, vector stores, herramientas de terceros, etc.) |
 | `python-dotenv` | Carga las variables de entorno del archivo `.env` |
 | `streamlit` | Framework para construir la interfaz web del chatbot |
 | `PyPDF2` | Extracción de texto desde archivos PDF (usado en `cv_analyzer`) |

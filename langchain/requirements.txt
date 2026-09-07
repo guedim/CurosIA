@@ -1,6 +1,7 @@
 langchain-core==1.6.0
 langchain-openai==1.6.0
 langchain-google-genai==4.3.5
+langchain-community==0.4.2
 python-dotenv==1.2.3
 streamlit==1.62.0
 PyPDF2==3.0.1
