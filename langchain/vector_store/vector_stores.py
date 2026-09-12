@@ -54,3 +54,4 @@ print("Top 3 documentos mas similares a la consulta:\n")
 for i, doc in enumerate(resultados, start=1):
     print(f"Contenido: {doc.page_content}")
     print(f"Metadatos: {doc.metadata}")
+    print("\n\n\n\n")
