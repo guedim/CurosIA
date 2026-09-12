@@ -1,7 +1,10 @@
 from pathlib import Path
 
+from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent
 PERSIST_DIR = BASE_DIR / "chroma_db"
