@@ -3,7 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -42,7 +42,7 @@ print(f"Se crearon {len(docs_split)} chunks de texto.")
 
 vectorstore = Chroma.from_documents(
     docs_split,
-    embedding=OpenAIEmbeddings(model="text-embedding-3-large"),
+    embedding=GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001"),
     persist_directory=str(args.persist_dir)
 )
 

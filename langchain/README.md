@@ -37,6 +37,10 @@ langchain/
     ├── text_splitters_parte1.py    # Carga un PDF completo y lo resume de una sola vez con el LLM
     ├── text_splitters_parte2.py    # RecursiveCharacterTextSplitter: divide el PDF en chunks y resume por partes
     └── embeddings_langchain.py     # OpenAIEmbeddings + similitud coseno entre dos frases
+└── vector_store/
+    ├── vector_stores.py            # Indexa PDFs de contratos en Chroma y hace una búsqueda semántica de ejemplo
+    ├── contratos/                  # PDFs de ejemplo (contratos de arrendamiento) a indexar
+    └── chroma_db/                  # Base de datos Chroma persistida (se genera al ejecutar el script, NO se sube a git)
 ```
 
 ### Tema1
@@ -67,6 +71,17 @@ langchain/
 - **`Tema3/text_splitters_parte1.py`**: carga `quijote.pdf` completo, concatena todas las páginas en un único string y se lo pasa entero al LLM (`ChatGoogleGenerativeAI`) para pedirle un resumen. Útil como punto de comparación frente a `text_splitters_parte2.py`, ya que enviar el documento completo de una sola vez puede superar los límites de tokens del modelo.
 - **`Tema3/text_splitters_parte2.py`**: mismo PDF, pero usando `RecursiveCharacterTextSplitter` para dividirlo en chunks de 10000 caracteres (con 200 de overlap) antes de resumir. Resume los primeros 11 chunks uno por uno y luego combina esos resúmenes parciales en un resumen final con una última llamada al LLM.
 - **`Tema3/embeddings_langchain.py`**: genera embeddings de dos frases con `OpenAIEmbeddings` (`text-embedding-3-large`) y calcula la similitud coseno entre ambos vectores usando `numpy`, para ilustrar cómo el significado semántico se refleja en la cercanía de los vectores.
+
+### vector_store
+
+- **`vector_store/vector_stores.py`**: carga todos los PDF de un directorio con `PyPDFDirectoryLoader`, los divide en chunks con `RecursiveCharacterTextSplitter` (5000 caracteres, 1000 de overlap) y los indexa en una base de datos vectorial `Chroma` usando `GoogleGenerativeAIEmbeddings` (`models/gemini-embedding-001`). Termina con una búsqueda semántica de ejemplo (`similarity_search`) sobre los documentos indexados.
+  - Por defecto lee los PDF desde `vector_store/contratos/` (contratos de arrendamiento de ejemplo) y persiste la base de datos en `vector_store/chroma_db/`. Ambas rutas se resuelven relativas al script, no están hardcodeadas.
+  - Ambas rutas son configurables por línea de comandos:
+    ```bash
+    python vector_store/vector_stores.py --contratos-dir /ruta/a/tus/contratos --persist-dir /ruta/a/chroma_db
+    ```
+  - Requiere `GOOGLE_API_KEY` configurada en `.env` (usa `load_dotenv()`), y el paquete `chromadb` instalado (ver [Dependencias principales](#dependencias-principales)).
+  - `vector_store/chroma_db/` es un directorio generado (contiene la base de datos vectorial persistida): no es necesario ni se debe subir a git, está incluido en `.gitignore`. Se regenera solo con volver a ejecutar el script.
 
 ### cv_analyzer
 
@@ -169,6 +184,7 @@ Los ejemplos que usan `GoogleDriveLoader` (ver `Tema3/google_drive_loader.py`) n
 | `beautifulsoup4` | Parseo de HTML, usado por `WebBaseLoader` (`bs4.SoupStrainer`) |
 | `pypdf` | Backend de extracción de texto usado por `PyPDFLoader` |
 | `numpy` | Operaciones vectoriales (similitud coseno entre embeddings) |
+| `chromadb` | Base de datos vectorial usada por `Chroma` en `vector_store/vector_stores.py` |
 
 ## Uso
 
@@ -191,6 +207,7 @@ python Tema3/google_drive_loader.py
 python Tema3/text_splitters_parte1.py
 python Tema3/text_splitters_parte2.py
 python Tema3/embeddings_langchain.py
+python vector_store/vector_stores.py
 ```
 
 El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:

@@ -30,3 +30,6 @@ dist/
 # Local tooling state
 .claude/
 .full-review/
+
+# Generated vector store output (regenerable al ejecutar vector_stores.py)
+vector_store/chroma_db/
