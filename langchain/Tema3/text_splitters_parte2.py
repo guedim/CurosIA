@@ -7,6 +7,17 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 load_dotenv()
 
+
+def extract_text(content):
+    """Normaliza el content de la respuesta (str en OpenAI, list de partes en Gemini)"""
+    if isinstance(content, list):
+        return "".join(
+            part.get("text", "") if isinstance(part, dict) else str(part)
+            for part in content
+        )
+    return content
+
+
 # 1. Cargar el documento PDF
 pdf_path = os.path.join(os.path.dirname(__file__), "quijote.pdf")
 loader = PyPDFLoader(pdf_path)
@@ -29,10 +40,10 @@ for chunk in chunks:
     if i > 10:
         break
     response = llm.invoke(f"Haz un resumen de los puntos mas importantes del siguiente texto: {chunk.page_content}")
-    summaries.append(response.content)
+    summaries.append(extract_text(response.content))
     i += 1
 
 print(summaries)
 
-final_summary = llm.invoke(f"Combina y sintetiza estos resumenes en un resumen coherente y completo: {" ".join(summaries)}")
-print(final_summary.content)
+final_summary = llm.invoke(f"Combina y sintetiza estos resumenes en un resumen coherente y completo: {' '.join(summaries)}")
+print(extract_text(final_summary.content))

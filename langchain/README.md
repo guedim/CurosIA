@@ -31,6 +31,12 @@ langchain/
     ├── rol_prompt_templates.py     # SystemMessagePromptTemplate + HumanMessagePromptTemplate con varias variables
     ├── output_parsers_parte1.py    # Modelo Pydantic como base para parsear salidas estructuradas
     └── output_parsers_parte2.py    # with_structured_output con Gemini y un Enum para restringir valores
+└── Tema3/
+    ├── document_loaders.py         # PyPDFLoader + WebBaseLoader (con bs4.SoupStrainer)
+    ├── google_drive_loader.py      # GoogleDriveLoader (langchain-google-community) sobre una carpeta de Drive
+    ├── text_splitters_parte1.py    # Carga un PDF completo y lo resume de una sola vez con el LLM
+    ├── text_splitters_parte2.py    # RecursiveCharacterTextSplitter: divide el PDF en chunks y resume por partes
+    └── embeddings_langchain.py     # OpenAIEmbeddings + similitud coseno entre dos frases
 ```
 
 ### Tema1
@@ -53,6 +59,14 @@ langchain/
 - **`Tema2/rol_prompt_templates.py`**: combina `SystemMessagePromptTemplate` y `HumanMessagePromptTemplate` (cada uno con varias variables) dentro de un `ChatPromptTemplate`, simulando un asistente con rol, especialidad y tono configurables.
 - **`Tema2/output_parsers_parte1.py`**: primer paso hacia los *output parsers* de LangChain: define un modelo `Usuario` con Pydantic (`BaseModel`) y muestra cómo valida y castea datos crudos (por ejemplo, castea el `id` de string a int) al construir la instancia.
 - **`Tema2/output_parsers_parte2.py`**: usa `with_structured_output` sobre `ChatGoogleGenerativeAI` para forzar que el modelo devuelva un objeto `AnalisisTexto` (resumen + sentimiento) validado con Pydantic. El campo `sentimiento` es un `Enum` (`Positivo`, `Negativo`, `Neutro`), por lo que el modelo solo puede devolver uno de esos tres valores.
+
+### Tema3
+
+- **`Tema3/document_loaders.py`**: dos ejemplos de carga de documentos. Primero usa `PyPDFLoader` para extraer texto de `Profile.pdf` página por página. Después usa `WebBaseLoader` sobre varias URLs de la documentación de LangChain, filtrando el HTML con `bs4.SoupStrainer` para quedarse solo con los `div` de clase `main-content`/`article-content`.
+- **`Tema3/google_drive_loader.py`**: usa `GoogleDriveLoader` (paquete `langchain-google-community`) para cargar todos los documentos de una carpeta de Google Drive de forma recursiva. Requiere `credentials.json` y genera `token.json` tras la autorización (ver sección [Google Drive](#google-drive-credentialsjson) más abajo).
+- **`Tema3/text_splitters_parte1.py`**: carga `quijote.pdf` completo, concatena todas las páginas en un único string y se lo pasa entero al LLM (`ChatGoogleGenerativeAI`) para pedirle un resumen. Útil como punto de comparación frente a `text_splitters_parte2.py`, ya que enviar el documento completo de una sola vez puede superar los límites de tokens del modelo.
+- **`Tema3/text_splitters_parte2.py`**: mismo PDF, pero usando `RecursiveCharacterTextSplitter` para dividirlo en chunks de 10000 caracteres (con 200 de overlap) antes de resumir. Resume los primeros 11 chunks uno por uno y luego combina esos resúmenes parciales en un resumen final con una última llamada al LLM.
+- **`Tema3/embeddings_langchain.py`**: genera embeddings de dos frases con `OpenAIEmbeddings` (`text-embedding-3-large`) y calcula la similitud coseno entre ambos vectores usando `numpy`, para ilustrar cómo el significado semántico se refleja en la cercanía de los vectores.
 
 ### cv_analyzer
 
@@ -151,6 +165,10 @@ Los ejemplos que usan `GoogleDriveLoader` (ver `Tema3/google_drive_loader.py`) n
 | `google-api-python-client` | Cliente oficial para consumir APIs de Google (Drive, Docs, etc.) |
 | `google-auth-httplib2` | Adaptador de autenticación de Google para `httplib2` |
 | `google-auth-oauthlib` | Flujo de autenticación OAuth 2.0 de Google |
+| `langchain-google-community` | `GoogleDriveLoader` mantenido (reemplaza al deprecado de `langchain-community`) |
+| `beautifulsoup4` | Parseo de HTML, usado por `WebBaseLoader` (`bs4.SoupStrainer`) |
+| `pypdf` | Backend de extracción de texto usado por `PyPDFLoader` |
+| `numpy` | Operaciones vectoriales (similitud coseno entre embeddings) |
 
 ## Uso
 
@@ -168,6 +186,11 @@ python Tema2/message_placeholders.py
 python Tema2/rol_prompt_templates.py
 python Tema2/output_parsers_parte1.py
 python Tema2/output_parsers_parte2.py
+python Tema3/document_loaders.py
+python Tema3/google_drive_loader.py
+python Tema3/text_splitters_parte1.py
+python Tema3/text_splitters_parte2.py
+python Tema3/embeddings_langchain.py
 ```
 
 El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
