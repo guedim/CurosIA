@@ -39,6 +39,7 @@ langchain/
     └── embeddings_langchain.py     # OpenAIEmbeddings + similitud coseno entre dos frases
 └── vector_store/
     ├── vector_stores.py            # Indexa PDFs de contratos en Chroma y hace una búsqueda semántica de ejemplo
+    ├── retrievers_langchain.py     # Abre el Chroma ya indexado y consulta con un retriever (as_retriever)
     ├── contratos/                  # PDFs de ejemplo (contratos de arrendamiento) a indexar
     └── chroma_db/                  # Base de datos Chroma persistida (se genera al ejecutar el script, NO se sube a git)
 ```
@@ -82,6 +83,8 @@ langchain/
     ```
   - Requiere `GOOGLE_API_KEY` configurada en `.env` (usa `load_dotenv()`), y el paquete `chromadb` instalado (ver [Dependencias principales](#dependencias-principales)).
   - `vector_store/chroma_db/` es un directorio generado (contiene la base de datos vectorial persistida): no es necesario ni se debe subir a git, está incluido en `.gitignore`. Se regenera solo con volver a ejecutar el script.
+- **`vector_store/retrievers_langchain.py`**: abre la base de datos `Chroma` ya persistida en `vector_store/chroma_db/` (misma ruta resuelta relativa al script) usando el mismo modelo de embeddings `GoogleGenerativeAIEmbeddings` (`models/gemini-embedding-001`), y consulta con un `retriever` (`as_retriever`, `search_type="similarity"`, `k=2`) en lugar de `similarity_search` directo.
+  - Requiere haber ejecutado antes `vector_store/vector_stores.py` (o tener ya un `chroma_db/` generado), y `GOOGLE_API_KEY` configurada en `.env`.
 
 ### cv_analyzer
 
@@ -208,6 +211,7 @@ python Tema3/text_splitters_parte1.py
 python Tema3/text_splitters_parte2.py
 python Tema3/embeddings_langchain.py
 python vector_store/vector_stores.py
+python vector_store/retrievers_langchain.py
 ```
 
 El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
