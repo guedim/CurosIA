@@ -7,7 +7,8 @@ load_dotenv()
 embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
 
 texto1 = "La capital de Francia es París."
-texto2 = "París es un nombre común para mascotas."
+##texto2 = "París es un nombre común para mascotas."
+texto2 = "París es la capital de Francia."
 
 vec1 = embeddings.embed_query(texto1)
 vec2 = embeddings.embed_query(texto2)
