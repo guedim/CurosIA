@@ -33,3 +33,4 @@ dist/
 
 # Generated vector store output (regenerable al ejecutar vector_stores.py)
 vector_store/chroma_db/
+rag/chroma_db/

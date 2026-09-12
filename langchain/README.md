@@ -43,6 +43,12 @@ langchain/
     ├── multi_query_retriever.py    # Igual, pero usando MultiQueryRetriever (genera varias variantes de la consulta con un LLM)
     ├── contratos/                  # PDFs de ejemplo (contratos de arrendamiento) a indexar
     └── chroma_db/                  # Base de datos Chroma persistida (se genera al ejecutar el script, NO se sube a git)
+└── rag/
+    ├── app.py                      # Interfaz Streamlit del asistente legal (chat + panel de documentos relevantes)
+    ├── config.py                   # Configuración del sistema (modelos, ruta de Chroma, parámetros del retriever) leída de variables de entorno
+    ├── prompts.py                  # Prompts: respuesta RAG, generación de variantes de consulta (MultiQuery), relevancia y extracción de entidades
+    ├── rag_system.py               # Construye la cadena RAG (Ensemble de MMR+MultiQuery y similarity) con modelos de Google Gemini
+    └── contratos/                  # PDFs de ejemplo (contratos de arrendamiento) a indexar
 ```
 
 ### Tema1
@@ -88,6 +94,10 @@ langchain/
   - Requiere haber ejecutado antes `vector_store/vector_stores.py` (o tener ya un `chroma_db/` generado), y `GOOGLE_API_KEY` configurada en `.env`.
 - **`vector_store/multi_query_retriever.py`**: misma base (`Chroma` en `vector_store/chroma_db/` + `GoogleGenerativeAIEmbeddings`), pero envuelve el retriever base con `MultiQueryRetriever.from_llm`, que usa un LLM (`ChatGoogleGenerativeAI`, `gemini-3.6-flash`) para generar varias variantes de la consulta original y ampliar así los documentos recuperados.
   - Requiere `GOOGLE_API_KEY` configurada en `.env` (se usa tanto para los embeddings como para el LLM).
+
+### rag
+
+Mini-proyecto independiente (con su propia app Streamlit) que implementa un asistente legal RAG sobre contratos de arrendamiento, combinando un `EnsembleRetriever` (MMR + MultiQuery, y similarity) con modelos de Google Gemini. Ver [`rag/README.md`](rag/README.md) para el detalle completo (arquitectura, variables de entorno y cómo ejecutarlo).
 
 ### cv_analyzer
 
@@ -191,6 +201,7 @@ Los ejemplos que usan `GoogleDriveLoader` (ver `Tema3/google_drive_loader.py`) n
 | `pypdf` | Backend de extracción de texto usado por `PyPDFLoader` |
 | `numpy` | Operaciones vectoriales (similitud coseno entre embeddings) |
 | `chromadb` | Base de datos vectorial usada por `Chroma` en `vector_store/vector_stores.py` |
+| `langchain-chroma` | Integración mantenida de `Chroma` como vector store de LangChain (usada en `rag/rag_system.py`, sustituye a la clase deprecada de `langchain-community`) |
 
 ## Uso
 
@@ -218,10 +229,11 @@ python vector_store/retrievers_langchain.py
 python vector_store/multi_query_retriever.py
 ```
 
-El chatbot con interfaz web (`streamlit_chatbot.py`) es distinto: al usar Streamlit, **no se ejecuta con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
+Los chatbots con interfaz web (`streamlit_chatbot.py`, `rag/app.py`) son distintos: al usar Streamlit, **no se ejecutan con `python`**, sino con el comando `streamlit run`, que levanta un servidor local y abre la app en el navegador:
 
 ```bash
 streamlit run Tema1/streamlit_chatbot.py
+streamlit run rag/app.py
 ```
 
 Si no tienes `streamlit` en el PATH (por ejemplo, con el entorno virtual desactivado), puedes invocarlo directamente desde el venv:
