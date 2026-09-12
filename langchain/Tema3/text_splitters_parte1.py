@@ -1,7 +1,10 @@
 import os
 
+from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+load_dotenv()
 
 # 1. Cargar el documento PDF
 pdf_path = os.path.join(os.path.dirname(__file__), "quijote.pdf")
@@ -14,7 +17,7 @@ for page in pages:
     full_text += page.page_content + "\n"
 
 # 3. Pasar el texto al LLM
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0.2)
 response = llm.invoke(f"Haz un resumen de los puntos mas importantes del siguiente documento: {full_text}")
 
 print(response)
