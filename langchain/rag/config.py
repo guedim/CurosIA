@@ -16,10 +16,10 @@ GENERATION_MODEL = os.getenv("RAG_GENERATION_MODEL", "gpt-4o-mini")
 CHROMA_DB_PATH = os.getenv("RAG_CHROMA_DB_PATH", str(BASE_DIR / "chroma_db"))
 
 # Configuración del retriever
-SEARCH_TYPE = "mmr"
-MMR_DIVERSITY_LAMBDA = 0.7
-MMR_FETCH_K = 20
-SEARCH_K = 2
+SEARCH_TYPE = "mmr"             # Hay otros modelos como similitud (p.e. similarity, MMR (Maximal Margin Relevance), etc.) 
+MMR_DIVERSITY_LAMBDA = 0.7      # El balance entre relevancia (1) o diversidad (0). Entre más relevancia más documentos exactos.
+MMR_FETCH_K = 20                # Documentos iniciales relevantes a evaluar
+SEARCH_K = 2                    # Número de documentos finales con los cuales nos vamos a quedar después de aplicar MMR
 
 # Configuracion alternativa para retriever hibrido
 ENABLE_HYBRID_SEARCH = True

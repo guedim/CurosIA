@@ -1,3 +1,5 @@
+import os
+
 from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import PromptTemplate
@@ -9,6 +11,9 @@ import streamlit as st
 
 from config import *
 from prompts import *
+
+# Separador de rutas del sistema operativo actual ("\\" en Windows, "/" en Linux/Mac)
+PATH_SEPARATOR = os.sep
 
 @st.cache_resource
 def initialize_rag_system():
@@ -70,7 +75,7 @@ def initialize_rag_system():
             
             if doc.metadata:
                 if 'source' in doc.metadata:
-                    source = doc.metadata['source'].split("\\")[-1] if '\\' in doc.metadata['source'] else doc.metadata['source']
+                    source = doc.metadata['source'].split(PATH_SEPARATOR)[-1] if PATH_SEPARATOR in doc.metadata['source'] else doc.metadata['source']
                     header += f" - Fuente: {source}"
                 if 'page' in doc.metadata:
                     header += f" - Pagina: {doc.metadata['page']}"
@@ -109,7 +114,7 @@ def query_rag(question):
             doc_info = {
                 "fragmento": i,
                 "contenido": doc.page_content[:1000] + "..." if len(doc.page_content) > 1000 else doc.page_content,
-                "fuente": doc.metadata.get('source', 'No especificada').split("\\")[-1],
+                "fuente": doc.metadata.get('source', 'No especificada').split(PATH_SEPARATOR)[-1],
                 "pagina": doc.metadata.get('page', 'No especificada')
             }
             docs_info.append(doc_info)
