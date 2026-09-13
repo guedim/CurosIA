@@ -1,5 +1,5 @@
 from langchain_chroma import Chroma
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
@@ -15,13 +15,13 @@ def initialize_rag_system():
 
     # Vector Store
     vectorestore = Chroma(
-        embedding_function=GoogleGenerativeAIEmbeddings(model=EMBEDDING_MODEL),
+        embedding_function=OpenAIEmbeddings(model=EMBEDDING_MODEL),
         persist_directory=CHROMA_DB_PATH
     )
 
     # Modelos
-    llm_queries = ChatGoogleGenerativeAI(model=QUERY_MODEL, temperature=0)
-    llm_generation = ChatGoogleGenerativeAI(model=GENERATION_MODEL, temperature=0)
+    llm_queries = ChatOpenAI(model=QUERY_MODEL, temperature=0)
+    llm_generation = ChatOpenAI(model=GENERATION_MODEL, temperature=0)
 
     # Retriever MMR (Maximal Margin Relevance)
     base_retriever = vectorestore.as_retriever(
