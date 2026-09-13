@@ -1,4 +1,5 @@
 import os
+from operator import itemgetter
 
 from langchain_chroma import Chroma
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
@@ -19,7 +20,7 @@ PATH_SEPARATOR = os.sep
 def initialize_rag_system():
 
     # Vector Store
-    vectorestore = Chroma(
+    vectorstore = Chroma(
         embedding_function=OpenAIEmbeddings(model=EMBEDDING_MODEL),
         persist_directory=CHROMA_DB_PATH
     )
@@ -29,7 +30,7 @@ def initialize_rag_system():
     llm_generation = ChatOpenAI(model=GENERATION_MODEL, temperature=0)
 
     # Retriever MMR (Maximal Margin Relevance)
-    base_retriever = vectorestore.as_retriever(
+    base_retriever = vectorstore.as_retriever(
         search_type=SEARCH_TYPE,
         search_kwargs={
             "k": SEARCH_K,
@@ -39,7 +40,7 @@ def initialize_rag_system():
     )
 
     # Retriever adicional con similarity para comparar
-    similarity_retriever = vectorestore.as_retriever(
+    similarity_retriever = vectorstore.as_retriever(
         search_type="similarity",
         search_kwargs={"k": SEARCH_K}
     )
@@ -58,7 +59,7 @@ def initialize_rag_system():
     if ENABLE_HYBRID_SEARCH:
         ensemble_retriever = EnsembleRetriever(
             retrievers=[mmr_multi_retriever, similarity_retriever],
-            weights=[0.7, 0.3] # mayor peso a MMR
+            weights=[0.7, 0.3], # mayor peso a MMR
         )
         final_retriever = ensemble_retriever
     else:
@@ -86,27 +87,22 @@ def initialize_rag_system():
         return "\n\n".join(formatted)
 
     rag_chain = (
-        {
-            "context": final_retriever | format_docs,
-            "question": RunnablePassthrough()
-        }
-        | prompt
-        | llm_generation
-        | StrOutputParser()
+        RunnablePassthrough.assign(docs=itemgetter("question") | final_retriever)
+        | RunnablePassthrough.assign(context=lambda x: format_docs(x["docs"]))
+        | RunnablePassthrough.assign(answer=prompt | llm_generation | StrOutputParser())
     )
 
-    return rag_chain, mmr_multi_retriever
+    return rag_chain
 
 
 def query_rag(question):
     try:
-        rag_chain, retriever = initialize_rag_system()
+        rag_chain = initialize_rag_system()
 
-        # Obtener respuesta
-        response = rag_chain.invoke(question)
-
-        # Obtener documentos para mostrarlos
-        docs = retriever.invoke(question)
+        # Obtener respuesta y documentos en una sola invocación
+        result = rag_chain.invoke({"question": question})
+        response = result["answer"]
+        docs = result["docs"]
 
         # Formatear los documentos para mostrar
         docs_info = []
@@ -118,11 +114,11 @@ def query_rag(question):
                 "pagina": doc.metadata.get('page', 'No especificada')
             }
             docs_info.append(doc_info)
-        
+
         return response, docs_info
-    
+
     except Exception as e:
-        error_msg = f"Error al procesar la cosulta: {str(e)}"
+        error_msg = f"Error al procesar la consulta: {str(e)}"
         return error_msg, []
     
 def get_retriever_info():
@@ -132,5 +128,4 @@ def get_retriever_info():
         "documentos": SEARCH_K,
         "diversidad": MMR_DIVERSITY_LAMBDA,
         "candidatos": MMR_FETCH_K,
-        "umbral": SIMILARITY_THRESHOLD if ENABLE_HYBRID_SEARCH else "N/A"
     }

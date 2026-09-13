@@ -35,35 +35,3 @@ Al generar variaciones de la consulta, considera:
 Consulta original: {question}
 
 Genera exactamente 3 versiones alternativas de esta consulta, una por línea, sin numeración ni viñetas:"""
-
-# Prompt para análisis de relevancia de documentos
-RELEVANCE_PROMPT = """Analiza si el siguiente fragmento de documento es relevante para responder la consulta del usuario.
-
-FRAGMENTO:
-{document}
-
-CONSULTA: {question}
-
-¿Es este fragmento relevante para responder la consulta? Responde solo con "SÍ" o "NO" y una breve justificación."""
-
-# Prompt para extracción de entidades clave
-ENTITY_EXTRACTION_PROMPT = """Extrae las entidades clave del siguiente texto de contrato de arrendamiento:
-
-TEXTO:
-{text}
-
-Identifica y extrae:
-- Nombres de personas (arrendador, arrendatario, avalistas)
-- Direcciones de propiedades
-- Importes monetarios
-- Fechas importantes
-- Duración del contrato
-- Tipo de propiedad
-
-Formato de respuesta:
-PERSONAS: [lista de nombres]
-DIRECCIONES: [lista de direcciones]
-IMPORTES: [lista de cantidades]
-FECHAS: [lista de fechas]
-DURACIÓN: [periodo del contrato]
-TIPO: [tipo de propiedad]"""

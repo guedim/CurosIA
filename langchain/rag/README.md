@@ -11,7 +11,7 @@ rag/
 ├── app.py           # Interfaz Streamlit: chat + panel de documentos relevantes
 ├── config.py        # Configuración (modelos, ruta de Chroma, parámetros del retriever) leída de variables de entorno
 ├── ingest.py        # Indexa los PDFs de contratos/ en chroma_db/ usando embeddings de OpenAI
-├── prompts.py       # Prompts: respuesta RAG, generación de variantes de consulta, relevancia, extracción de entidades
+├── prompts.py       # Prompts: respuesta RAG, generación de variantes de consulta
 ├── rag_system.py    # Construye la cadena RAG y el retriever híbrido
 └── contratos/       # PDFs de ejemplo (contratos de arrendamiento) a indexar
 ```
@@ -24,7 +24,7 @@ rag/
    - `similarity_retriever`: búsqueda por similitud simple.
 3. **`MultiQueryRetriever`**: envuelve `base_retriever` y usa un LLM (`ChatOpenAI`) con un prompt propio (`MULTI_QUERY_PROMPT`) para generar variantes de la consulta original y ampliar la recuperación.
 4. **`EnsembleRetriever`** (si `ENABLE_HYBRID_SEARCH=True` en `config.py`): combina `MultiQueryRetriever` (peso 0.7) y `similarity_retriever` (peso 0.3) en un único retriever híbrido.
-5. **Cadena RAG**: `retriever | format_docs` → `prompt (RAG_TEMPLATE)` → `llm_generation` → `StrOutputParser`.
+5. **Cadena RAG**: encadenada con `RunnablePassthrough.assign` en una sola invocación (`{question} → {question, docs} → {..., context} → {..., answer}`), evitando recuperar documentos dos veces. `docs` (para el panel de la UI) y `answer` (`prompt RAG_TEMPLATE` → `llm_generation` → `StrOutputParser`) salen del mismo `rag_chain.invoke(...)`.
 
 `app.py` solo consume `query_rag()` y `get_retriever_info()` de `rag_system.py`; no tiene lógica de LangChain propia.
 

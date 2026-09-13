@@ -23,4 +23,3 @@ SEARCH_K = 2                    # Número de documentos finales con los cuales n
 
 # Configuracion alternativa para retriever hibrido
 ENABLE_HYBRID_SEARCH = True
-SIMILARITY_THRESHOLD = 0.70
